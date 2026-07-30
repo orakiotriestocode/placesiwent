@@ -1,34 +1,394 @@
-<h1>Angela's Cinnamon Roll Recipe</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
 
-<h2>Ingredients</h2>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<h3>For the dough:</h3>
-<ul>
-    <li>¾ cup warm milk</li>
-    <li>2 ¼ teaspoons yeast </li>
-    <li>¼ cup granulated sugar</li>
-    <li>1 egg plus 1 egg yolk</li>
-    <li>¼ cup butter</li>
-    <li>3 cups bread flour</li>
-</ul>
+    <meta
+        name="description"
+        content="Travel Ramblings helps you discover hotels, restaurants, landmarks, airlines and interesting places nearby."
+    >
 
-<H3>For the filling</H3>
+    <title>Travel Ramblings</title>
+</head>
 
-<ul>
-    <li>2/3 cup dark brown sugar </li>
-    <li>1 ½ tablespoons ground cinnamon</li>
-    <li>¼ cup butter</li>
-</ul>
+<body>
 
-<h3>Instructions</h3>
+    <header>
+        <h1>Travel Ramblings</h1>
 
-<ol><li>Mix the milk with the yeast, sugar, eggs.</ol>li>
-Melt the butter and add to the mixture.
-Add in the flour and mix until combined into a dough.
-Knead the dough for 10 minuites. 
-Transfer the dough into a large bowl and cover with plastic wrap. Leave it somewhere to rise for 2 hours.
-After the dough has doubled in size, roll it out into a large rectangle. 
-Melt the butter for the filling and mix in the sugar and cinnamon.
-Spread the filling onto the dough then roll the dough into a swiss roll. 
-Cut the roll into 3cm sections and place flat into a baking tray.
-Pre-heat the oven to 350F or 180C, then bake the rolls for 20-25min until lightly brown.</ol>
+        <p>
+            Hotels, restaurants, landmarks and little discoveries
+            worth remembering.
+        </p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="#discover">Discover</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#featured">Featured places</a></li>
+                <li><a href="#recent">Recent ramblings</a></li>
+                <li><a href="#about">About the app</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="discover">
+            <h2>Discover what is around you</h2>
+
+            <p>
+                Travel Ramblings is being built as a personal travel guide
+                and growing collection of places, experiences and useful
+                travel information.
+            </p>
+
+            <p>
+                In the future, the app will be able to use your location to
+                suggest nearby landmarks, restaurants, hotels, cafés and
+                other places worth visiting.
+            </p>
+
+            <button type="button">
+                Find places near me
+            </button>
+
+            <p>
+                Location-based suggestions are not available yet.
+            </p>
+        </section>
+
+        <section id="search">
+            <h2>Search Travel Ramblings</h2>
+
+            <form>
+                <div>
+                    <label for="search-term">
+                        What are you looking for?
+                    </label>
+
+                    <input
+                        type="search"
+                        id="search-term"
+                        name="search-term"
+                        placeholder="Hotel, restaurant, city or landmark"
+                    >
+                </div>
+
+                <div>
+                    <label for="destination">
+                        Destination
+                    </label>
+
+                    <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        placeholder="For example: Paris"
+                    >
+                </div>
+
+                <button type="submit">
+                    Search
+                </button>
+            </form>
+        </section>
+
+        <section id="categories">
+            <h2>Explore by category</h2>
+
+            <article>
+                <h3>Hotels</h3>
+
+                <p>
+                    Practical hotel notes, family-friendly stays,
+                    room reviews and places with good transport connections.
+                </p>
+
+                <a href="#">View hotels</a>
+            </article>
+
+            <article>
+                <h3>Restaurants and cafés</h3>
+
+                <p>
+                    Memorable meals, breakfast spots, food halls,
+                    bakeries and places worth returning to.
+                </p>
+
+                <a href="#">View restaurants</a>
+            </article>
+
+            <article>
+                <h3>Places of interest</h3>
+
+                <p>
+                    Museums, historic buildings, parks, monuments,
+                    neighbourhoods and unexpected discoveries.
+                </p>
+
+                <a href="#">View places of interest</a>
+            </article>
+
+            <article>
+                <h3>Airlines and transport</h3>
+
+                <p>
+                    Flight experiences, airports, trains, boats,
+                    local transport and useful travel routes.
+                </p>
+
+                <a href="#">View transport guides</a>
+            </article>
+
+            <article>
+                <h3>Travelling with children</h3>
+
+                <p>
+                    Stroller-friendly places, family rooms,
+                    easy transport and relaxed places to stop with a baby.
+                </p>
+
+                <a href="#">View family travel</a>
+            </article>
+
+            <article>
+                <h3>Travel tips</h3>
+
+                <p>
+                    Practical lessons, suggested itineraries,
+                    packing notes and things we wish we had known earlier.
+                </p>
+
+                <a href="#">View travel tips</a>
+            </article>
+        </section>
+
+        <section id="featured">
+            <h2>Featured places</h2>
+
+            <article>
+                <header>
+                    <p>Paris, France</p>
+                    <h3>Musée Carnavalet</h3>
+                </header>
+
+                <p>
+                    A museum about the history of Paris, located in the
+                    Marais. A useful stop for anyone interested in how the
+                    city developed over time.
+                </p>
+
+                <dl>
+                    <dt>Category</dt>
+                    <dd>Museum</dd>
+
+                    <dt>Good for</dt>
+                    <dd>History, architecture and a relaxed museum visit</dd>
+
+                    <dt>Family note</dt>
+                    <dd>Suitable for visiting with a stroller</dd>
+                </dl>
+
+                <a href="#">Read the full entry</a>
+            </article>
+
+            <article>
+                <header>
+                    <p>Paris, France</p>
+                    <h3>La Felicità</h3>
+                </header>
+
+                <p>
+                    A large and lively Italian food hall with several food
+                    options, plenty of seating and a memorable pistachio
+                    tiramisu.
+                </p>
+
+                <dl>
+                    <dt>Category</dt>
+                    <dd>Restaurant and food hall</dd>
+
+                    <dt>Good for</dt>
+                    <dd>Informal meals and groups</dd>
+
+                    <dt>Favourite discovery</dt>
+                    <dd>Pistachio tiramisu</dd>
+                </dl>
+
+                <a href="#">Read the full entry</a>
+            </article>
+
+            <article>
+                <header>
+                    <p>Paris, France</p>
+                    <h3>Batobus</h3>
+                </header>
+
+                <p>
+                    A hop-on, hop-off boat service along the Seine.
+                    It can be both transport and sightseeing, especially
+                    when you want a break from the metro.
+                </p>
+
+                <dl>
+                    <dt>Category</dt>
+                    <dd>Local transport</dd>
+
+                    <dt>Good for</dt>
+                    <dd>River views and relaxed travel through central Paris</dd>
+
+                    <dt>Travel note</dt>
+                    <dd>Useful when travelling with a stroller</dd>
+                </dl>
+
+                <a href="#">Read the full entry</a>
+            </article>
+        </section>
+
+        <section id="recent">
+            <h2>Recent travel ramblings</h2>
+
+            <article>
+                <h3>
+                    <a href="#">
+                        A family weekend in Paris
+                    </a>
+                </h3>
+
+                <p>
+                    Travelling from Gare du Nord to Bercy, exploring the
+                    Seine by boat and finding easy places to visit with a baby.
+                </p>
+
+                <p>
+                    <time datetime="2026-07-20">
+                        20 July 2026
+                    </time>
+                </p>
+            </article>
+
+            <article>
+                <h3>
+                    <a href="#">
+                        Finding a great breakfast near Bercy
+                    </a>
+                </h3>
+
+                <p>
+                    Notes about local breakfast options, bakeries
+                    and starting a day of sightseeing without hotel breakfast.
+                </p>
+
+                <p>
+                    <time datetime="2026-07-18">
+                        18 July 2026
+                    </time>
+                </p>
+            </article>
+
+            <article>
+                <h3>
+                    <a href="#">
+                        Travelling through Paris without the metro
+                    </a>
+                </h3>
+
+                <p>
+                    Boats, buses and walking routes for days when underground
+                    transport becomes tiring.
+                </p>
+
+                <p>
+                    <time datetime="2026-07-17">
+                        17 July 2026
+                    </time>
+                </p>
+            </article>
+        </section>
+
+        <section id="destinations">
+            <h2>Browse destinations</h2>
+
+            <ul>
+                <li><a href="#">Paris</a></li>
+                <li><a href="#">Antwerp</a></li>
+                <li><a href="#">Brussels</a></li>
+                <li><a href="#">Amsterdam</a></li>
+                <li><a href="#">Dubai</a></li>
+                <li><a href="#">Rome</a></li>
+            </ul>
+        </section>
+
+        <section id="about">
+            <h2>About Travel Ramblings</h2>
+
+            <p>
+                Travel Ramblings starts as a collection of personal travel
+                notes, recommendations and discoveries.
+            </p>
+
+            <p>
+                Over time, it may grow into a travel wiki containing detailed
+                pages about hotels, restaurants, landmarks, airlines,
+                transport options and destinations.
+            </p>
+
+            <p>
+                The longer-term goal is to combine these articles with
+                geolocation. A visitor could open the app, allow access to
+                their location and discover interesting places nearby,
+                including their history, practical information and personal
+                recommendations.
+            </p>
+        </section>
+
+        <section id="newsletter">
+            <h2>Follow future discoveries</h2>
+
+            <p>
+                Receive occasional updates when new destinations and
+                travel notes are added.
+            </p>
+
+            <form>
+                <label for="email">
+                    Email address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="name@example.com"
+                >
+
+                <button type="submit">
+                    Subscribe
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            &copy; 2026 Travel Ramblings
+        </p>
+
+        <nav aria-label="Footer navigation">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+</body>
+</html>
