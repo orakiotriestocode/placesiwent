@@ -25,7 +25,7 @@ def collect(osm_type, osm_id, lat, lon, tags):
     if not name or tags.get("amenity") != "restaurant":
         return
     key = f"{math.floor(lat*10)}_{math.floor(lon*10)}.json"
-    allowed = ("name", "cuisine", "addr:street", "addr:housenumber", "addr:full", "addr:city", "website", "contact:website")
+    allowed = ("name", "cuisine", "opening_hours", "addr:street", "addr:housenumber", "addr:full", "addr:city", "website", "contact:website")
     item = {"type": osm_type, "id": osm_id, "lat": round(lat, 7), "lon": round(lon, 7),
             "tags": {k: tags[k] for k in allowed if k in tags}}
     tiles.setdefault(key, {})[(osm_type, osm_id)] = item
