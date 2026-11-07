@@ -1,0 +1,250 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101a25">
+<meta name="description" content="Discover interesting places near you with Places I Went and Wikipedia.">
+<title>Nearby Explorer DEV · Places I Went</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0c131c;color:#eff3e7}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 3%,#203c42 0,transparent 34rem),#0c131c}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #81e2b3;outline-offset:3px}
+.wrap{max-width:1130px;margin:auto;padding:26px 22px 65px}
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid #30404a;padding-bottom:23px}
+.brand{display:flex;gap:12px;align-items:center;font-size:.9rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+.brand-mark{display:grid;place-items:center;background:#73d9ad;color:#112822;width:36px;height:36px;border-radius:8px;font-size:1.1rem}
+nav{display:flex;align-items:center;gap:20px;font-size:.84rem;color:#afc0c6;flex-wrap:wrap}nav a:hover{color:#86e4b7}
+nav .active{color:#b6eed2;border:1px solid #456958;border-radius:8px;padding:10px 13px}
+.hero{padding:75px 0 35px;display:grid;grid-template-columns:1.3fr .7fr;gap:34px;align-items:center}
+.eyebrow{color:#83dfb4;text-transform:uppercase;letter-spacing:.22em;font-size:.73rem;font-weight:800}
+h1{font-size:clamp(2.9rem,6vw,5.4rem);line-height:1.02;letter-spacing:-.065em;margin:20px 0}
+h1 em{color:#81e1b3;font-style:normal}
+.intro{font-size:1.05rem;line-height:1.75;color:#b6c8cc;max-width:670px}
+.orbit{min-height:245px;display:grid;place-items:center;position:relative}
+.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #436d6a;border-radius:50%;width:205px;height:205px}
+.orbit:after{width:285px;height:285px;border-style:dashed;opacity:.5}
+.pin{z-index:1;background:#81e1b3;color:#112e2a;width:100px;height:100px;display:grid;place-items:center;border-radius:50%;box-shadow:0 0 0 18px #81e1b315;font-size:3.3rem}
+.scan-panel{border:1px solid #3b555d;background:linear-gradient(115deg,#173638,#162533 72%);border-radius:18px;padding:27px;margin-top:10px}
+.controls{display:flex;align-items:end;gap:15px;flex-wrap:wrap}
+.scan{border:0;background:#7fe0b3;color:#102e26;border-radius:10px;min-height:53px;padding:13px 23px;font-size:1rem;font-weight:800}
+.scan:hover{background:#a1efcc}.scan:disabled{opacity:.6;cursor:wait}
+.field{display:flex;flex-direction:column;gap:8px;color:#a9bdc3;font-size:.79rem;font-weight:750}
+select{border:1px solid #49626a;background:#0f202c;color:#e4eee9;border-radius:9px;padding:14px;min-height:53px}
+.note{font-size:.83rem;color:#9eb4ba;line-height:1.6;margin:17px 0 0}
+.status{min-height:24px;color:#b6d2ce;margin:19px 0 5px;line-height:1.5}
+.status.error{color:#ffb7a9}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:27px 0 18px;flex-wrap:wrap}
+.toolbar h2{font-size:1.5rem;letter-spacing:-.035em;margin:0}
+.meta{font-size:.85rem;color:#a4b8bd}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{border:1px solid #344955;border-radius:16px;overflow:hidden;background:#15222d;display:flex;flex-direction:column}
+.visual{height:173px;background:linear-gradient(135deg,#21465c,#31645b);display:grid;place-items:center;overflow:hidden}
+.visual img{width:100%;height:100%;object-fit:cover}
+.placeholder{font-size:3.4rem;color:#92d5bf;opacity:.8}
+.body{padding:20px;display:flex;flex:1;flex-direction:column}
+.kicker{font-size:.69rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#85ddb5}
+.card h3{margin:10px 0;font-size:1.3rem;letter-spacing:-.035em;line-height:1.2}
+.card p{color:#b9cbd0;font-size:.88rem;line-height:1.6;flex:1;margin:0 0 22px}
+.card a{color:#a5ecc9;font-size:.87rem;font-weight:800;align-self:flex-start}
+.card a:hover{text-decoration:underline}
+.empty{border:1px dashed #42616a;border-radius:14px;text-align:center;padding:35px 18px;color:#a9bec3}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-top:75px;padding-top:22px;border-top:1px solid #30404a;color:#8da3aa;font-size:.8rem}
+footer a:hover{color:#86e4b7}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.orbit{display:none}}
+@media(max-width:600px){.site-head{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{padding-top:48px}.grid{grid-template-columns:1fr}.scan-panel{padding:20px}.scan{width:100%}.controls{align-items:stretch}.field{flex:1}}
+
+.dev-banner{border:1px solid #c69748;background:#43351e;color:#ffe1a9;padding:14px 18px;border-radius:12px;margin:20px 0 0;display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;font-size:.9rem}.dev-banner strong{letter-spacing:.1em}.dev-banner a{color:#ffe1a9;text-decoration:underline;font-weight:750}
+</style>
+</head>
+<body><div class="wrap">
+<header class="site-head">
+<a href="/" class="brand"><span class="brand-mark">✦</span> Places I Went</a>
+<nav aria-label="Main navigation"><a href="/blog/">Travel blog</a><a class="active" aria-current="page" href="/explore/">Nearby Explorer</a><a href="/arcade/">✦ Retro Lab →</a></nav>
+</header>
+<div class="dev-banner" role="note"><span><strong>⚒ DEV / SANDBOX</strong> · Experimental Nearby Explorer. Features here may change or break.</span><a href="/explore/">← Return to stable explorer</a></div>
+<main>
+<section class="hero">
+<div><div class="eyebrow">The webapp · Discovery mode / 01</div>
+<h1>What's <em>near me?</em></h1>
+<p class="intro">Every place has a story. Discover landmarks, historic buildings, neighbourhoods and surprising points of interest around your current location — powered by Wikipedia in the local language and English.</p></div>
+<div class="orbit" aria-hidden="true"><div class="pin">⌖</div></div>
+</section>
+<section class="scan-panel" aria-label="Location scanner">
+<div class="controls">
+<button class="scan" id="scan" type="button">⌖ &nbsp; Scan — what's near?</button>
+<label class="field">Search radius<select id="radius"><option value="1000">1 km · Walking distance</option><option value="3000">3 km · Around me</option><option value="5000" selected>5 km · Nearby</option><option value="10000">10 km · Explore further</option></select></label>
+<label class="field">Display language<select id="language"><option value="en" selected>English</option><option value="nl">Nederlands</option><option value="local">Local language (auto-detect)</option></select></label>
+</div>
+<p class="note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries in the local language and English; your location is not saved on Places I Went. Wikipedia and OpenStreetMap's Nominatim service receive coordinates to provide the results.</p>
+<div id="status" class="status" role="status" aria-live="polite">Ready to discover? Press scan and allow location access.</div>
+</section>
+<section aria-label="Nearby results">
+<div class="toolbar"><h2>Nearby discoveries</h2><span id="meta" class="meta">Waiting for your first scan</span></div>
+<div id="results" class="grid"><div class="empty" style="grid-column:1/-1">📍 Your nearby places will appear here.</div></div>
+</section>
+</main>
+<footer><span>© 2026 Places I Went · Explore nearby</span><span>Data from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="/">Homepage</a></span></footer>
+</div>
+<script>
+(function(){
+"use strict";
+const scan=document.getElementById("scan"),radius=document.getElementById("radius"),language=document.getElementById("language");
+const status=document.getElementById("status"),results=document.getElementById("results"),meta=document.getElementById("meta");
+const countryLanguages={be:"nl",nl:"nl",fr:"fr",de:"de",at:"de",ch:"de",lu:"fr",es:"es",pt:"pt",it:"it",gb:"en",ie:"en",us:"en",ca:"en",au:"en",nz:"en",jp:"ja",cn:"zh",tw:"zh",kr:"ko",in:"hi",br:"pt",mx:"es",ar:"es",cl:"es",co:"es",pe:"es",gr:"el",tr:"tr",pl:"pl",cz:"cs",sk:"sk",hu:"hu",ro:"ro",bg:"bg",rs:"sr",hr:"hr",si:"sl",ua:"uk",ru:"ru",se:"sv",no:"no",dk:"da",fi:"fi",ee:"et",lv:"lv",lt:"lt",is:"is",il:"he",sa:"ar",ae:"ar",eg:"ar",ma:"ar",th:"th",vn:"vi",id:"id",my:"ms",ph:"tl",za:"en"};
+const labelFor={en:"English",nl:"Dutch",fr:"French",de:"German",es:"Spanish",it:"Italian",pt:"Portuguese",ja:"Japanese",zh:"Chinese",ko:"Korean",hi:"Hindi"};
+let lastScan=null,scanId=0;
+function message(text,error=false){status.textContent=text;status.classList.toggle("error",error)}
+function clear(){results.replaceChildren()}
+function empty(text){clear();const el=document.createElement("div");el.className="empty";el.style.gridColumn="1/-1";el.textContent=text;results.append(el)}
+function wiki(params,lang="en"){
+const q=new URLSearchParams({action:"query",format:"json",origin:"*",...params});
+return fetch("https://"+encodeURIComponent(lang)+".wikipedia.org/w/api.php?"+q.toString()).then(async r=>{if(!r.ok)throw Error("Wikipedia HTTP "+r.status);const data=await r.json();if(data.error)throw Error(data.error.info||"Wikipedia error");return data});
+}
+function getPosition(){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:false,timeout:15000,maximumAge:60000}))}
+function nameOf(lang){return labelFor[lang]||lang.toUpperCase()}
+async function localLanguage(lat,lon){
+try{
+const url="https://nominatim.openstreetmap.org/reverse?"+new URLSearchParams({lat:String(lat),lon:String(lon),format:"jsonv2",zoom:"5",addressdetails:"1",accept_language:"en"});
+const response=await fetch(url,{headers:{Accept:"application/json"}});if(!response.ok)throw Error("Nominatim "+response.status);
+const address=(await response.json()).address||{},country=(address.country_code||"").toLowerCase();
+if(country==="be"){
+const state=(address.state||"").toLowerCase(),county=(address.county||"").toLowerCase();
+if(state.includes("wallon")||state.includes("walloon")||state.includes("liège")||state.includes("namur")||state.includes("hainaut")||state.includes("luxembourg")||county.includes("liège"))return {lang:"fr",country};
+if(state.includes("brussels")||state.includes("bruxelles")||state.includes("brussel"))return {lang:"fr",country};
+return {lang:"nl",country};
+}
+if(country==="ch"){return {lang:"de",country}}
+return {lang:countryLanguages[country]||"en",country};
+}catch(e){console.warn("Local language detection unavailable",e);return {lang:(navigator.language||"en").split("-")[0].toLowerCase(),country:null}}
+}
+function makeCard(p,displayLang){
+const info=p.view||{},sourceLang=p.lang,translated=!!p.translated;
+const card=document.createElement("article");card.className="card";
+const visual=document.createElement("div");visual.className="visual";
+const thumbnail=info.thumbnail||p.sourceInfo&&p.sourceInfo.thumbnail;
+if(thumbnail&&/^https:\/\//.test(thumbnail.source)){const img=document.createElement("img");img.src=thumbnail.source;img.loading="lazy";img.alt="Photo of "+(info.title||p.title);visual.append(img)}
+else{const placeholder=document.createElement("span");placeholder.className="placeholder";placeholder.textContent="✧";visual.append(placeholder)}
+const body=document.createElement("div");body.className="body";
+const tag=document.createElement("span");tag.className="kicker";tag.textContent=(p.dist<1000?Math.round(p.dist)+" m":(p.dist/1000).toFixed(1)+" km")+" away"+(translated?"":" · "+nameOf(sourceLang)+" only");
+const heading=document.createElement("h3");heading.textContent=translated?info.title:p.title;
+const description=document.createElement("p");
+description.textContent=translated?(info.extract||"Explore this place and its history on Wikipedia.").slice(0,300):"No "+nameOf(displayLang)+" Wikipedia article is available for this place yet. Open the original "+nameOf(sourceLang)+" article to learn more.";
+const link=document.createElement("a"),linkLang=translated?displayLang:sourceLang,linkId=translated?info.pageid:p.pageid;
+link.href="https://"+linkLang+".wikipedia.org/?curid="+encodeURIComponent(linkId);link.target="_blank";link.rel="noopener noreferrer";link.textContent="Explore on Wikipedia ↗";
+body.append(tag,heading,description,link);card.append(visual,body);return card;
+}
+async function getSourceDetails(places,langs){
+const byId=new Map();
+await Promise.allSettled(langs.map(async lang=>{
+const selected=places.filter(p=>p.lang===lang);
+for(let i=0;i<selected.length;i+=40){
+const subset=selected.slice(i,i+40);
+const data=await wiki({prop:"pageprops|langlinks|pageimages",pageids:subset.map(p=>p.pageid).join("|"),ppprop:"wikibase_item",lllimit:"max",pithumbsize:"480",pilimit:"max"},lang);
+for(const page of Object.values(data.query&&data.query.pages||{}))byId.set(lang+":"+page.pageid,page);
+}
+}));
+return byId;
+}
+async function getTranslations(places,sourceDetails,displayLang){
+const translations=new Map(),titles=[];
+for(const p of places){
+const source=sourceDetails.get(p.lang+":"+p.pageid)||{};
+p.sourceInfo=source;
+if(p.lang===displayLang){
+p.view={pageid:p.pageid,title:p.title,thumbnail:source.thumbnail};p.translated=true;
+}else{
+const match=(source.langlinks||[]).find(x=>x.lang===displayLang);
+if(match){p.targetTitle=match["*"];titles.push(match["*"])}
+}
+}
+const wanted=[...new Set(titles)];
+for(let i=0;i<wanted.length;i+=35){
+try{
+const subset=wanted.slice(i,i+35);
+const data=await wiki({prop:"pageimages|extracts",titles:subset.join("|"),pithumbsize:"480",pilimit:"max",exintro:"1",explaintext:"1",exsentences:"2",redirects:"1"},displayLang);
+const alias=new Map();
+for(const value of data.query&&data.query.normalized||[])alias.set(value.from,value.to);
+for(const value of data.query&&data.query.redirects||[])alias.set(value.from,value.to);
+const pages=Object.values(data.query&&data.query.pages||{});
+for(const title of subset){
+let resolved=title;
+for(let k=0;k<3&&alias.has(resolved);k++)resolved=alias.get(resolved);
+const page=pages.find(p=>p.title===resolved&&!p.missing);
+if(page)translations.set(title,page);
+}
+}catch(e){console.warn("Translation lookup unavailable",e)}
+}
+for(const p of places){
+if(p.lang!==displayLang&&p.targetTitle&&translations.has(p.targetTitle)){p.view=translations.get(p.targetTitle);p.translated=true}
+else if(p.lang!==displayLang){p.translated=false}
+}
+const native=places.filter(p=>p.lang===displayLang);
+for(let i=0;i<native.length;i+=40){
+try{
+const subset=native.slice(i,i+40),data=await wiki({prop:"pageimages|extracts",pageids:subset.map(p=>p.pageid).join("|"),pithumbsize:"480",pilimit:"max",exintro:"1",explaintext:"1",exsentences:"2"},displayLang);
+const pages=data.query&&data.query.pages||{};
+for(const p of subset)if(pages[p.pageid])p.view=pages[p.pageid];
+}catch(e){console.warn("Native-language descriptions unavailable",e)}
+}
+return places;
+}
+async function present(data){
+const displayLang=language.value==="local"?data.localLang:language.value;
+message("Harmonizing results into "+nameOf(displayLang)+"…");
+const places=data.places.map(p=>({...p})),sources=await getSourceDetails(places,data.sourceLangs);
+await getTranslations(places,sources,displayLang);
+const normalized=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+places.sort((a,b)=>a.dist-b.dist);
+const deduped=[],seenIds=new Set(),seenNames=new Set();
+for(const p of places){
+const id=(sources.get(p.lang+":"+p.pageid)||{}).pageprops?.wikibase_item;
+const name=normalized((p.view&&p.view.title)||p.title);
+if(id&&seenIds.has(id))continue;
+if(seenNames.has(name))continue;
+if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
+}
+clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
+const unavailable=deduped.filter(p=>!p.translated).length;
+meta.textContent=deduped.length+" places · within "+(data.radius/1000)+" km · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
+message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLang)+" where Wikipedia has an article."+(unavailable?" "+unavailable+" have no "+nameOf(displayLang)+" article and are marked as original language.":""));
+}
+async function run(){
+if(!navigator.geolocation){message("Your browser does not support location services.",true);return}
+if(!window.isSecureContext){message("Location requires a secure HTTPS connection.",true);return}
+const id=++scanId;scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
+try{
+const position=await getPosition(),lat=position.coords.latitude,lon=position.coords.longitude;
+const accuracy=Math.round(position.coords.accuracy||0);
+message("Location found"+(accuracy?" (±"+accuracy+" m).":"") +" Detecting local language…");
+const local=await localLanguage(lat,lon);
+const sourceLangs=[...new Set([local.lang,"en"])];const radiusMeters=Number(radius.value);
+message("Searching "+sourceLangs.map(nameOf).join(" and ")+" Wikipedia…");
+const scans=await Promise.allSettled(sourceLangs.map(async lang=>{
+const response=await wiki({list:"geosearch",gscoord:lat+"|"+lon,gsradius:String(radiusMeters),gslimit:"150",gsnamespace:"0"},lang);
+return ((response.query&&response.query.geosearch)||[]).map(p=>({...p,lang}));
+}));
+const available=scans.map((x,i)=>({result:x,lang:sourceLangs[i]})).filter(x=>x.result.status==="fulfilled");
+if(!available.length)throw Error("Wikipedia search is unavailable");
+const places=available.flatMap(x=>x.result.value);
+if(!places.length){empty("No Wikipedia places found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No places found in this area.");return}
+lastScan={places,sourceLangs:available.map(x=>x.lang),localLang:local.lang,radius:radiusMeters};
+if(id===scanId)await present(lastScan);
+}catch(err){
+if(err.code===1)message("Location permission was denied. Enable it in your browser settings.",true);
+else if(err.code===2)message("Your location could not be determined.",true);
+else if(err.code===3)message("Location lookup timed out. Please try again.",true);
+else message("Couldn't load nearby places: "+(err.message||"Unknown error"),true);
+empty("No discoveries to show yet.");meta.textContent="Scan unavailable";
+}finally{scan.disabled=false;scan.textContent="⌖  Scan — what's near?"}
+}
+scan.addEventListener("click",run);
+language.addEventListener("change",()=>{if(lastScan)present(lastScan).catch(e=>message("Couldn't change display language: "+e.message,true))});
+})();
+</script>
+</body>
+</html>
