@@ -167,24 +167,33 @@ for(const p of subset)if(pages[p.pageid])p.view=pages[p.pageid];
 return places;
 }
 const mapPanel=document.getElementById("map-panel");
+const mapElement=document.getElementById("poi-map"),mapStatus=document.getElementById("map-status");
 let poiMap,poiLayer,mappedScan;
 function resetPoiMap(){
-mapPanel.hidden=true;
 mappedScan=null;
 if(poiLayer)poiLayer.clearLayers();
 }
-function showPoiMap(data,places,displayLang){
+function initializePoiMap(){
+if(poiMap)return;
 const L=window.L;
-if(!L)return;
-try{
-mapPanel.hidden=false;
-if(!poiMap){
-poiMap=L.map("poi-map",{scrollWheelZoom:false});
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
-maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(poiMap);
-poiLayer=L.layerGroup().addTo(poiMap);
+if(!L){
+mapStatus.textContent="The map could not load. You can still scan and browse the list below.";
+return;
 }
+mapElement.hidden=false;
+poiMap=L.map(mapElement,{scrollWheelZoom:false}).setView([20,0],2);
+const tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+tiles.on("tileerror",()=>{mapStatus.textContent="Some map tiles could not load. Your location and place pins can still appear.";});
+tiles.addTo(poiMap);
+poiLayer=L.layerGroup().addTo(poiMap);
+mapStatus.textContent="Tap Scan to center the map on your location.";
+}
+function showPoiMap(data,places,displayLang){
+if(!poiLayer)return;
+const L=window.L;
+try{
 poiMap.invalidateSize();
 poiLayer.clearLayers();
 const center=[data.lat,data.lon];
@@ -212,6 +221,7 @@ mappedScan=data;
 }
 }catch(error){
 resetPoiMap();
+mapStatus.textContent="Could not show this scan on the map. The results list is still available.";
 console.warn("Nearby map unavailable",error);
 }
 }
@@ -233,6 +243,7 @@ if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
 if(activeMode!=="poi"||data!==lastScan||displayLang!==(language.value==="local"?data.localLang:language.value))return;
 clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
 showPoiMap(data,deduped,displayLang);
+if(mappedScan===data)mapStatus.textContent="Tap a pin to see the place and open its Wikipedia article.";
 const unavailable=deduped.filter(p=>!p.translated).length;
 meta.textContent=deduped.length+" places · within "+(data.radius<1000?data.radius+" m":(data.radius/1000)+" km")+" · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
 message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLang)+" where Wikipedia has an article."+(unavailable?" "+unavailable+" have no "+nameOf(displayLang)+" article and are marked as original language.":""));
@@ -243,10 +254,15 @@ if(!window.isSecureContext){message("Location requires a secure HTTPS connection
 const id=++scanId;lastScan=null;resetPoiMap();scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
 try{
 const position=await getPosition(),lat=position.coords.latitude,lon=position.coords.longitude;
+if(id!==scanId)return;
+const radiusMeters=Number(radius.value);
+const mapScan={lat,lon,radius:radiusMeters};
+showPoiMap(mapScan,[]);
+if(poiLayer)mapStatus.textContent="Searching for nearby places to pin on the map…";
 const accuracy=Math.round(position.coords.accuracy||0);
 message("Location found"+(accuracy?" (±"+accuracy+" m).":"") +" Detecting local language…");
 const local=await localLanguage(lat,lon);
-const sourceLangs=[...new Set([local.lang,"en"])];const radiusMeters=Number(radius.value);
+const sourceLangs=[...new Set([local.lang,"en"])];
 message("Searching "+sourceLangs.map(nameOf).join(" and ")+" Wikipedia…");
 const scans=await Promise.allSettled(sourceLangs.map(async lang=>{
 const response=await wiki({list:"geosearch",gscoord:lat+"|"+lon,gsradius:String(radiusMeters),gslimit:"150",gsnamespace:"0"},lang);
@@ -256,7 +272,7 @@ const available=scans.map((x,i)=>({result:x,lang:sourceLangs[i]})).filter(x=>x.r
 if(!available.length)throw Error("Wikipedia search is unavailable");
 const places=available.flatMap(x=>x.result.value);
 if(id!==scanId)return;
-if(!places.length){showPoiMap({lat,lon,radius:radiusMeters},[]);empty("No Wikipedia places found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No places found in this area.");return}
+if(!places.length){if(poiLayer)mapStatus.textContent="No Wikipedia places found in this radius.";empty("No Wikipedia places found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No places found in this area.");return}
 lastScan={lat,lon,places,sourceLangs:available.map(x=>x.lang),localLang:local.lang,radius:radiusMeters};
 if(id===scanId)await present(lastScan);
 }catch(err){
@@ -264,6 +280,7 @@ if(err.code===1)message("Location permission was denied. Enable it in your brows
 else if(err.code===2)message("Your location could not be determined.",true);
 else if(err.code===3)message("Location lookup timed out. Please try again.",true);
 else message("Couldn't load nearby places: "+(err.message||"Unknown error"),true);
+if(poiLayer)mapStatus.textContent="Scan unavailable. Tap Scan to try again.";
 empty("No discoveries to show yet.");meta.textContent="Scan unavailable";
 }finally{scan.disabled=false;scan.textContent="⌖  Scan — what's near?"}
 }
@@ -276,6 +293,11 @@ let activeMode="poi",restaurantCache=null,restaurantRequest=0;
 function setMode(mode){
 resetPoiMap();
 activeMode=mode;
+mapPanel.hidden=mode!=="poi";
+if(mode==="poi"&&poiMap){
+poiMap.invalidateSize();
+mapStatus.textContent="Tap Scan to center the map on your location.";
+}
 modePoi.classList.toggle("is-active",mode==="poi");modeRestaurants.classList.toggle("is-active",mode==="restaurants");
 modePoi.setAttribute("aria-pressed",String(mode==="poi"));modeRestaurants.setAttribute("aria-pressed",String(mode==="restaurants"));
 languageField.hidden=mode==="restaurants";
@@ -449,6 +471,11 @@ meta.textContent="Search unavailable";
 }
 
 
+try{initializePoiMap()}catch(error){
+mapElement.hidden=true;
+mapStatus.textContent="The map could not load. You can still scan and browse the list below.";
+console.warn("Nearby map unavailable",error);
+}
 scan.addEventListener("click",()=>{if(activeMode==="restaurants")return scanRestaurants().catch(e=>message("Restaurant error: "+e.message,true));message("Starting location scan…");return run().catch(e=>message("Scan error: "+(e.message||e),true))});
 language.addEventListener("change",()=>{if(lastScan)present(lastScan).catch(e=>message("Couldn't change display language: "+e.message,true))});
 })();
