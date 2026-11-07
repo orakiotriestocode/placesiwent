@@ -257,7 +257,7 @@ return {label:"See opening hours",state:"unknown"};
 const days=["Su","Mo","Tu","We","Th","Fr","Sa"],today=now.getDay(),minute=now.getHours()*60+now.getMinutes();
 const parsed=[];
 for(const part of rule.split(";")){
-const match=part.trim().match(/^(?:(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?(?:,\s*(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?)?\s+)?((?:\d\d?:\d\d-\d\d?:\d\d)(?:\s*,\s*\d\d?:\d\d-\d\d?:\d\d)*)$/);
+const match=part.trim().match(/^(?:(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?(?:,\s*(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?)?\s+)?(off|closed|(?:\d\d?:\d\d-\d\d?:\d\d)(?:\s*,\s*\d\d?:\d\d-\d\d?:\d\d)*)$/);
 if(!match)return {label:"See opening hours",state:"unknown"};
 const dayMask=new Set();
 const addRange=(a,b)=>{let x=days.indexOf(a),end=days.indexOf(b||a);if(x<0||end<0)return;for(let k=0;k<7;k++){dayMask.add(x);if(x===end)break;x=(x+1)%7}};
