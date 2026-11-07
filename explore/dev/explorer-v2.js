@@ -252,7 +252,7 @@ function openingStatus(raw,now=new Date()){
 if(!raw)return {label:"Opening hours not listed",state:"unknown"};
 const rule=raw.trim();
 if(rule==="24/7")return {label:"Open now",state:"open"};
-if(/PH|SH|week|sunrise|sunset|dawn|dusk|\[|\]|\+|\/|\{|\}|\"|open|unknown|off|closed|easter|school|summer|winter|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/i.test(rule))
+if(/PH|SH|week|sunrise|sunset|dawn|dusk|\[|\]|\+|\/|\{|\}|\"|open|unknown|easter|school|summer|winter|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/i.test(rule))
 return {label:"See opening hours",state:"unknown"};
 const days=["Su","Mo","Tu","We","Th","Fr","Sa"],today=now.getDay(),minute=now.getHours()*60+now.getMinutes();
 const parsed=[];
@@ -263,6 +263,7 @@ const dayMask=new Set();
 const addRange=(a,b)=>{let x=days.indexOf(a),end=days.indexOf(b||a);if(x<0||end<0)return;for(let k=0;k<7;k++){dayMask.add(x);if(x===end)break;x=(x+1)%7}};
 if(match[1]){addRange(match[1],match[2]);if(match[3])addRange(match[3],match[4]);}
 else for(let i=0;i<7;i++)dayMask.add(i);
+if(match[5]==="off"||match[5]==="closed")continue;
 for(const times of match[5].split(",")){
 const m=times.trim().match(/^(\d{1,2}):(\d\d)-(\d{1,2}):(\d\d)$/);
 if(!m)return {label:"See opening hours",state:"unknown"};
