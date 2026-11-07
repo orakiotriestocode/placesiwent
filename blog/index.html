@@ -1,0 +1,52 @@
+---
+title: Travel blog
+---
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Travel stories, hotel reviews, restaurant discoveries and practical travel tips from Places I Went.">
+<meta name="theme-color" content="#101a25">
+<title>Travel blog · Places I Went</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0c131c;color:#edf4ed}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 82% 0,#1c3d42,transparent 38rem),#0c131c}
+a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid #81e2b3;outline-offset:3px}a:hover{color:#8ce8c0}
+.wrap{max-width:1130px;margin:auto;padding:25px 22px 70px}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:23px;border-bottom:1px solid #30404a}
+.brand{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800;white-space:nowrap}.brand b{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:8px;background:#7cdeb1;color:#102d25;margin-right:10px}
+nav{display:flex;align-items:center;gap:20px;color:#bacccf;font-size:.85rem;flex-wrap:wrap}nav .arcade{border:1px solid #446658;border-radius:8px;padding:10px 13px}
+.hero{padding:85px 0 60px;max-width:870px}.eyebrow{color:#83dfb4;text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;font-weight:800}
+h1{font-size:clamp(3.25rem,8vw,6.5rem);letter-spacing:-.07em;line-height:.99;margin:21px 0}h1 em{font-style:normal;color:#84dfb5}
+.intro{font-size:1.13rem;line-height:1.78;color:#b6c8cc;max-width:680px}
+.toolbar{border-top:1px solid #344b50;padding:28px 0;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.toolbar h2{font-size:1.5rem;letter-spacing:-.04em;margin:0}
+.filters{display:flex;flex-wrap:wrap;gap:8px}.filter{background:transparent;border:1px solid #476069;border-radius:100px;padding:9px 14px;color:#cbd9d8;cursor:pointer;font:inherit;font-size:.83rem}
+.filter[aria-pressed=true],.filter:hover{background:#7fe0b3;border-color:#7fe0b3;color:#0e2b23}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.story{background:#14242d;border:1px solid #334b56;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.story:hover{transform:translateY(-3px);border-color:#679b8e;color:inherit}
+.visual{aspect-ratio:1.58;background:linear-gradient(145deg,#275466,#4b6157 65%,#9f8765);position:relative;overflow:hidden}
+.visual img{width:100%;height:100%;object-fit:cover}.visual:has(img){background:#294a54}
+.placeholder{display:flex;justify-content:center;align-items:center;height:100%;font-size:3rem;opacity:.6}
+.story-body{padding:23px;display:flex;flex-direction:column;flex:1}
+.meta{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:#8de1b8}
+.story h3{font-size:1.46rem;line-height:1.2;letter-spacing:-.04em;margin:12px 0}
+.story p{line-height:1.65;color:#bacbd0;font-size:.91rem;flex:1}
+.read{font-size:.86rem;color:#a6edcb;font-weight:750;margin-top:15px}
+.empty{border:1px dashed #4c6870;border-radius:15px;padding:35px;color:#b6c9ca;line-height:1.7}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-top:80px;padding-top:20px;border-top:1px solid #30404a;color:#8ca3a9;font-size:.8rem}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){header{flex-direction:column;align-items:flex-start}nav{gap:14px}.hero{padding:52px 0 38px}.grid{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+<header><a href="/" class="brand"><b>✦</b> Places I Went</a><nav><a href="/">Home</a><a href="/blog/" aria-current="page">Travel blog</a><a href="/#about">About</a><a class="arcade" href="/arcade/">✦ Retro Lab ↗</a></nav></header>
+<main><section class="hero"><div class="eyebrow">The travel journal · Places I Went</div><h1>Stories from<br><em>the road.</em></h1><p class="intro">Places worth sharing, hotels worth remembering, the meals we still talk about, and the little practical tips that make a journey better. Written from experience, one story at a time.</p></section>
+<section aria-label="Articles"><div class="toolbar"><h2>Latest stories</h2><div class="filters" aria-label="Filter stories"><button class="filter" aria-pressed="true" data-filter="All">All</button><button class="filter" aria-pressed="false" data-filter="Destinations">Destinations</button><button class="filter" aria-pressed="false" data-filter="Hotels">Hotels</button><button class="filter" aria-pressed="false" data-filter="Restaurants">Restaurants</button><button class="filter" aria-pressed="false" data-filter="Travel tips">Travel tips</button><button class="filter" aria-pressed="false" data-filter="Personal">Personal</button></div></div>
+<div class="grid" id="stories">
+{% assign visible_posts = site.posts | where_exp: "post", "post.published != false" %}
+{% for post in visible_posts %}
+<a class="story" href="{{ post.url | relative_url }}" data-category="{{ post.category | default: 'Personal' | escape }}">
+<div class="visual">{% if post.image %}<img loading="lazy" src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}">{% else %}<div class="placeholder" aria-hidden="true">✧</div>{% endif %}</div>
+<div class="story-body"><div class="meta">{{ post.category | default: "Travel journal" | escape }} · {{ post.date | date: "%d %b %Y" }}</div><h3>{{ post.title | escape }}</h3><p>{{ post.description | default: post.excerpt | strip_html | truncate: 150 | escape }}</p><span class="read">Read the story →</span></div></a>
+{% endfor %}</div>
+{% if visible_posts.size == 0 %}<div class="empty">The travel journal is being prepared. The first destination stories, hotel reviews and recommendations will appear here soon.</div>{% endif %}
+<p id="no-results" class="empty" hidden>No stories in this category yet. Try another filter.</p>
+</section></main><footer><span>© {{ 'now' | date: "%Y" }} Places I Went · Travel journal</span><span><a href="/">Home</a> · <a href="/arcade/">Retro Lab</a></span></footer></div>
+<script>const buttons=document.querySelectorAll('[data-filter]'),stories=document.querySelectorAll('.story'),none=document.getElementById('no-results');buttons.forEach(button=>button.addEventListener('click',()=>{const category=button.dataset.filter;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));let shown=0;stories.forEach(story=>{const visible=category==='All'||story.dataset.category===category;story.hidden=!visible;if(visible)shown++});none.hidden=shown!==0}));</script></body></html>
