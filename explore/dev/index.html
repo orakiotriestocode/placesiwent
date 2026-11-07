@@ -89,6 +89,11 @@ body.reader-open{overflow:hidden}
 .rating-line{font-weight:750;color:#b6ebce;font-size:.85rem;margin-bottom:10px}
 .rating-line.unrated{font-weight:500;color:#91a9b0}
 @media(max-width:600px){.mode-toggle{width:100%}.mode-button{flex:1;padding:12px 9px;font-size:.8rem}}
+.hours-status{display:inline-flex;align-self:flex-start;margin:12px 0 8px;padding:5px 10px;border-radius:7px;background:#293946;color:#c1d0d4;font-size:.78rem;font-weight:750}
+.hours-status.open{background:#174d39;color:#9cf0c5}.hours-status.closed{background:#4b3034;color:#f2b4b6}
+.hours-panel{border-top:1px solid #304751;padding:11px 0;margin:5px 0 12px;color:#c0d0d4;font-size:.86rem}
+.hours-panel summary{cursor:pointer;color:#a5ecc9;font-weight:700;list-style-position:inside}
+.hours-panel p{margin:9px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
 </style>
 </head>
 <body><div class="wrap">
@@ -128,6 +133,6 @@ body.reader-open{overflow:hidden}
 </div></div>
 <footer><span>© 2026 Places I Went · Explore nearby</span><span>Data from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="/">Homepage</a></span></footer>
 </div>
-<script src="/explore/dev/explorer-v2.js?build=static-directory-1" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
+<script src="/explore/dev/explorer-v2.js?build=cuisine-hours-1" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
 </body>
 </html>
