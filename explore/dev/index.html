@@ -127,7 +127,7 @@ reader.addEventListener("click",event=>{if(event.target===reader)closeReader()})
 document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!reader.hidden)closeReader()});
 function readerDocument(article,lang){
 const base="https://"+lang+".wikipedia.org/";
-const css=\`
+const css=`
 :root{color-scheme:dark;--bg:#101c27;--panel:#182a34;--panel2:#213840;--text:#eff3e7;--muted:#b6c8cc;--border:#3b555d;--accent:#81e1b3}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
@@ -165,7 +165,7 @@ ul,ol{padding-left:24px}
 li{margin:5px 0}
 hr{border:0;border-top:1px solid var(--border)}
 @media(max-width:650px){body{padding:22px 18px 55px;font-size:15.5px}.infobox{float:none!important;width:100%!important;margin:18px 0!important}h2{font-size:1.4rem}.thumb img,figure img{max-height:340px}}
-\`;
+`;
 return '<!doctype html><html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src https: data:; style-src \'unsafe-inline\'; font-src \'none\';"><base href="'+base+'" target="_blank"><style>'+css+'</style></head><body>'+article+'</body></html>';
 }
 async function openReader(pageId,lang,title,trigger){
