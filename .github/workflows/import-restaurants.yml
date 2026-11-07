@@ -1,0 +1,39 @@
+name: Import OSM restaurant directory region
+on:
+  workflow_dispatch:
+    inputs:
+      extract_url:
+        description: 'HTTPS URL of a regional .osm.pbf extract (e.g. https://download.geofabrik.de/europe/belgium-latest.osm.pbf)'
+        required: true
+        type: string
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install osmium
+      - name: Download regional extract
+        env:
+          EXTRACT_URL: ${{ inputs.extract_url }}
+        run: |
+          python - <<'PY'
+          import os, urllib.parse
+          url = os.environ["EXTRACT_URL"]
+          parsed = urllib.parse.urlparse(url)
+          if parsed.scheme != "https" or parsed.hostname != "download.geofabrik.de" or not parsed.path.endswith(".osm.pbf"):
+              raise SystemExit("Only HTTPS Geofabrik .osm.pbf extracts are accepted")
+          PY
+          curl --fail --location --retry 2 --max-time 900 "$EXTRACT_URL" -o region.osm.pbf
+      - name: Generate static tiles
+        run: python tools/build_restaurant_tiles.py region.osm.pbf
+      - name: Commit generated tiles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add explore/data/restaurants/
+          git diff --cached --quiet || (git commit -m "Import OSM restaurant directory region" && git push)
