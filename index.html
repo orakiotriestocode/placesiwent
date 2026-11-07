@@ -4,122 +4,69 @@ layout: null
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101a25">
-<meta name="description" content="Places I Went — a personal collection of travel discoveries, places worth remembering, and creative experiments.">
-<title>Places I Went — Discover, Remember, Create</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c131c">
+<meta name="description" content="Places I Went — explore nearby places, read travel stories and reviews, or play retro browser games.">
+<title>Places I Went</title>
 <style>
-:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0c131c;color:#eff3e7}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 73% 2%,#203c42 0,transparent 34rem),#0c131c}
-a{color:inherit;text-decoration:none;transition:border-color .18s,background .18s,transform .18s}a:focus-visible,button:focus-visible{outline:3px solid #81e2b3;outline-offset:4px}
-.wrap{max-width:1130px;margin:auto;padding:26px 22px 65px}
-.site-head{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid #30404a;padding-bottom:23px}
-.brand{display:flex;gap:12px;align-items:center;font-size:.9rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
-.brand-mark{display:grid;place-items:center;background:#73d9ad;color:#112822;width:36px;height:36px;border-radius:8px;font-size:1.1rem}
-nav{display:flex;align-items:center;gap:20px;font-size:.84rem;color:#afc0c6;flex-wrap:wrap}
-nav a:hover,.text-link:hover{color:#86e4b7}
-nav .nav-arcade{color:#b6eed2;border:1px solid #456958;border-radius:8px;padding:10px 13px}
-nav .nav-arcade:hover{background:#23463a}
-.eyebrow{color:#83dfb4;text-transform:uppercase;letter-spacing:.22em;font-size:.73rem;font-weight:800}
-.hero{padding:82px 0 65px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:45px}
-h1{font-size:clamp(3.1rem,6.8vw,5.8rem);line-height:.99;letter-spacing:-.065em;margin:20px 0 25px}
-h1 em{color:#81e1b3;font-style:normal}
-.intro{font-size:1.1rem;line-height:1.74;color:#b6c8cc;max-width:610px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:9px;padding:13px 19px;font-size:.88rem;font-weight:800}
-.primary{background:#7fe0b3;color:#102e26}.primary:hover{background:#a1efcc;transform:translateY(-2px)}
-.secondary{border:1px solid #4d626c;color:#d1dcdf}.secondary:hover{border-color:#82e2b3}
-.hero-art{aspect-ratio:1.06;position:relative;overflow:hidden;border:1px solid #3c5660;border-radius:20px;background:#1b3343;box-shadow:0 28px 70px #050b1250}
-.hero-art svg{width:100%;height:100%;display:block}
-.art-label{position:absolute;bottom:20px;left:22px;padding:10px 13px;background:#0d1b25db;border:1px solid #44606a;border-radius:8px;font-size:.75rem;color:#c2d2d6;letter-spacing:.1em}
-.rule{border:0;border-top:1px solid #30404a;margin:12px 0 42px}
-.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin-bottom:20px}
-.section-title h2{font-size:1.5rem;letter-spacing:-.035em;margin:0}.section-title span{color:#9db2b9;font-size:.81rem}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
-.card{background:#15222d;border:1px solid #344955;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.card-visual{height:180px;position:relative;display:grid;place-items:center;overflow:hidden}
-.card-visual svg{width:100%;height:100%}
-.card-body{padding:23px;display:flex;flex:1;flex-direction:column}
-.kicker{font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#83dcb1;margin-bottom:10px}
-.card h3{font-size:1.45rem;letter-spacing:-.04em;margin:0 0 10px}.card p{color:#bbcad0;line-height:1.65;font-size:.9rem;margin:0 0 23px;flex:1}
-.text-link{color:#a5ecc9;font-weight:750;font-size:.85rem;align-self:flex-start}
-.feature{margin-top:60px;border:1px solid #3b555d;background:linear-gradient(115deg,#173638,#162533 72%);border-radius:18px;padding:30px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:28px}
-.feature h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.055em;margin:13px 0}.feature p{color:#bdd0d1;line-height:1.7;max-width:570px}.feature-art{min-height:230px;border-radius:12px;background:#192d3c;overflow:hidden;border:1px solid #3f5961}.feature-art svg{width:100%;height:100%;display:block}
-.notes{margin-top:70px;display:grid;grid-template-columns:1fr 1fr;gap:34px}
-.notes h2{font-size:1.5rem;letter-spacing:-.035em;margin:12px 0}.notes p{color:#adbec5;line-height:1.72}
-.mini-list{padding:0;margin:15px 0;list-style:none}.mini-list li{padding:13px 0;border-bottom:1px solid #334550;color:#d1dcde;font-size:.9rem;display:flex;justify-content:space-between;gap:12px}.mini-list small{color:#9bafb5;white-space:nowrap}
-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;margin-top:75px;padding-top:22px;border-top:1px solid #30404a;color:#8da3aa;font-size:.8rem}
-@media(max-width:900px){.hero{gap:20px}.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.site-head{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{grid-template-columns:1fr;padding:56px 0 50px}.hero-art{max-height:330px}.grid{grid-template-columns:1fr}.feature,.notes{grid-template-columns:1fr}.feature{padding:22px}.feature-art{min-height:180px}.card-visual{height:205px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}a{transition:none}}
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eff3e7;background:#0c131c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% 0%,#193138 0,transparent 36rem),#0c131c}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:3px solid #81e2b3;outline-offset:5px}
+.shell{width:min(1050px,100%);margin:0 auto;padding:28px 24px 25px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:23px;border-bottom:1px solid #30404a}
+.brand{display:inline-flex;align-items:center;gap:12px;font-size:.91rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.brand-mark{width:36px;height:36px;border-radius:9px;background:#7fe0b3;color:#112822;display:grid;place-items:center;font-size:1.15rem}
+header span.note{color:#91a9b0;font-size:.8rem}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:65px 0 90px}
+h1{font-size:clamp(2.9rem,6vw,5rem);letter-spacing:-.065em;line-height:1.05;margin:0 0 16px}
+.intro{color:#b5c6ca;line-height:1.6;font-size:1.06rem;margin:0 0 43px;max-width:630px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tile{display:flex;flex-direction:column;min-height:270px;background:#15232e;border:1px solid #344955;border-radius:16px;padding:28px 25px 25px;transition:background .2s,border-color .2s,transform .2s}
+.tile:hover{border-color:#7fe0b3;background:#1a3038;transform:translateY(-3px)}
+.symbol{display:grid;place-items:center;width:47px;height:47px;background:#244338;color:#99edc4;border-radius:11px;font-size:1.6rem;margin-bottom:34px}
+h2{font-size:1.55rem;letter-spacing:-.04em;margin:0 0 11px}
+.tile p{color:#b5c6ca;font-size:.92rem;line-height:1.65;margin:0 0 27px}
+.go{margin-top:auto;color:#a2ebc6;font-size:.88rem;font-weight:750}
+footer{border-top:1px solid #30404a;color:#829ba3;font-size:.78rem;padding-top:21px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer a:hover{color:#a2ebc6}
+@media(max-width:750px){main{padding:62px 0 70px}.grid{grid-template-columns:1fr}.tile{min-height:0;padding:23px}.symbol{margin-bottom:20px}.tile p{margin-bottom:22px}header span.note{display:none}}
+@media(prefers-reduced-motion:reduce){.tile{transition:none}}
 </style>
 </head>
-<body><div class="wrap">
-<header class="site-head">
-<a href="/" class="brand" aria-label="Places I Went homepage"><span class="brand-mark">✦</span> Places I Went</a>
-<nav aria-label="Main navigation"><a href="#explore">Explore</a><a href="/blog/">Travel blog</a><a href="/explore/">Nearby Explorer</a><a href="#about">About</a><a class="nav-arcade" href="/arcade/">✦ Retro Lab →</a></nav>
+<body>
+<div class="shell">
+<header>
+<a href="/" class="brand" aria-label="Places I Went home"><span class="brand-mark">✦</span> Places I Went</a>
+<span class="note">A personal corner of the web</span>
 </header>
 <main>
-<section class="hero" aria-labelledby="intro-title">
-<div><div class="eyebrow">Destinations · hotels · restaurants · stories</div>
-<h1 id="intro-title">Go places.<br><em>Keep stories.</em></h1>
-<p class="intro">A personal travel journal with destination guides, honest hotel and restaurant reviews, photographs, and practical tips from the places I’ve explored.</p>
-<div class="actions"><a class="primary" href="/blog/">Read the travel blog ↗</a><a class="secondary" href="/explore/">⌖ Discover what’s near →</a><a class="secondary" href="/arcade/">Visit the Retro Lab →</a></div></div>
-<div class="hero-art">
-<svg viewBox="0 0 470 440" role="img" aria-label="Original illustrated coastline, city and travel route" preserveAspectRatio="xMidYMid slice">
-<defs><pattern id="water" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M5 20h18m13-14h12" stroke="#41768a" stroke-width="2" fill="none"/></pattern><linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#29566c"/><stop offset="1" stop-color="#183e52"/></linearGradient></defs>
-<rect width="470" height="440" fill="url(#ocean)"/><rect width="470" height="440" fill="url(#water)" opacity=".7"/>
-<path d="M-20 0H274l-28 38 30 34-19 33 21 33-39 22 22 47-38 36 14 39-53 22 8 37-55 33L86 440H-20z" fill="#d0b17c"/>
-<path d="M-20 0H258l-32 39 31 34-23 35 22 33-42 23 19 40-38 36 12 38-48 19 7 36-55 32-53 75H-20z" fill="#6f9167"/>
-<path d="M-20 300q60-35 115 7l67-4 11 137H-20z" fill="#4d724f"/>
-<g fill="#315d48"><path d="M40 91l17-38 19 38zM65 115l20-40 19 40zM119 67l21-48 24 48zM147 159l20-46 22 46zM70 222l17-38 20 38zM131 257l20-42 20 42z"/></g>
-<g transform="translate(58 168)"><rect x="0" y="37" width="114" height="71" rx="2" fill="#d7bf95"/><path d="M-10 37l67-47 67 47z" fill="#a86752"/><rect x="23" y="55" width="23" height="23" fill="#457c82"/><rect x="72" y="54" width="22" height="54" fill="#87634a"/><rect x="0" y="97" width="114" height="11" fill="#a68a68"/></g>
-<path d="M341 33q-80 37-20 96t-22 83 6 112" fill="none" stroke="#e9d8a9" stroke-width="4" stroke-dasharray="7 12" opacity=".85"/>
-<g transform="translate(305 324)"><circle r="25" fill="#82e3b7" opacity=".2"/><path d="M0-29c-18 0-29 13-29 28 0 19 29 46 29 46S29 18 29-1C29-16 17-29 0-29z" fill="#84dfb3"/><circle cy="-2" r="10" fill="#193d40"/></g>
-<g transform="translate(349 104)"><path d="M-38 40h90l-17 20h-58z" fill="#d5af77"/><path d="M4-51v92" stroke="#d9cfae" stroke-width="5"/><path d="M2-47L-29 29H2z" fill="#eee0bd"/><path d="M9-24l32 56H9z" fill="#b5d5c2"/></g>
-<circle cx="389" cy="347" r="52" fill="none" stroke="#a1c4b9" stroke-width="2" opacity=".5"/><path d="M389 309v76m-38-38h76" stroke="#a1c4b9" stroke-width="2" opacity=".5"/>
-</svg><span class="art-label">THE JOURNEY IS THE COLLECTION ↗</span>
-</div></section>
-<hr class="rule">
-<section id="explore" aria-labelledby="explore-title"><div class="section-title"><h2 id="explore-title">Choose a direction</h2><span>A growing collection</span></div>
+<h1>Places I Went<span style="color:#7fe0b3">.</span></h1>
+<p class="intro">Three things I enjoy: discovering places, sharing travel experiences, and bringing old games back to life.</p>
 <div class="grid">
-<article class="card"><div class="card-visual" style="background:#254a60">
-<svg viewBox="0 0 350 190" role="img" aria-label="Illustration of a European city">
-<rect width="350" height="190" fill="#315a6a"/><circle cx="283" cy="35" r="20" fill="#e1c893"/><path d="M0 151l75-43 67 35 71-58 137 59v46H0z" fill="#3c6b61"/>
-<path d="M33 145V72h55v73M42 72V49h38v23M125 157V90h73v67M137 90V65h47v25M225 154V60h84v94" fill="#ccad84" stroke="#a08266" stroke-width="3"/><path d="M214 60l52-34 54 34" fill="#a66852"/><path d="M48 89h23v25H48zM149 109h26v29h-26zM245 79h20v28h-20z" fill="#3c7581"/><path d="M0 165h350v25H0z" fill="#1f4153"/></svg></div>
-<div class="card-body"><span class="kicker">Destinations</span><h3>Places & cities</h3><p>City walks, interesting neighborhoods, historical sites and small discoveries that make a trip memorable.</p><a class="text-link" href="/blog/">Browse destinations →</a></div></article>
-<article class="card"><div class="card-visual" style="background:#3c534f">
-<svg viewBox="0 0 350 190" role="img" aria-label="Illustration of a hotel room with an outside view">
-<rect width="350" height="190" fill="#385b59"/><rect x="42" y="21" width="142" height="112" rx="3" fill="#e2c398"/><rect x="53" y="32" width="120" height="90" fill="#5e929c"/><path d="M53 104l38-27 29 14 53-44v75H53z" fill="#789776"/><path d="M111 32v90" stroke="#e2c398" stroke-width="7"/><rect x="175" y="109" width="144" height="54" rx="6" fill="#caaa85"/><rect x="171" y="102" width="149" height="25" rx="7" fill="#eadcc4"/><rect x="0" y="163" width="350" height="27" fill="#263d42"/></svg></div>
-<div class="card-body"><span class="kicker">Stays & experiences</span><h3>Hotels & escapes</h3><p>Places to stay, what makes a great location, thoughtful comforts and practical lessons from the road.</p><a class="text-link" href="/blog/">Read hotel reviews →</a></div></article>
-<article class="card"><div class="card-visual" style="background:#4b4134">
-<svg viewBox="0 0 350 190" role="img" aria-label="Illustration of coffee and a breakfast plate">
-<rect width="350" height="190" fill="#79644e"/><path d="M0 150l350-42v82H0z" fill="#b38c61"/><ellipse cx="173" cy="125" rx="90" ry="39" fill="#d9ccaa"/><ellipse cx="173" cy="125" rx="68" ry="29" fill="#efe3c4"/><ellipse cx="171" cy="120" rx="42" ry="18" fill="#ad7144"/><path d="M129 116q40-26 83 2" stroke="#e5be70" stroke-width="12" fill="none"/><ellipse cx="69" cy="68" rx="43" ry="16" fill="#e4d9bb"/><path d="M27 68v44q41 29 84 0V68" fill="#e4d9bb"/><ellipse cx="69" cy="69" rx="32" ry="10" fill="#644632"/><path d="M109 83q40-13 22 20-8 11-24 4" stroke="#e4d9bb" stroke-width="9" fill="none"/><path d="M56 39q-12-16 2-24m20 21q-12-16 2-24" stroke="#d4bba1" stroke-width="4" fill="none"/></svg></div>
-<div class="card-body"><span class="kicker">Food & everyday discoveries</span><h3>Eat, wander, repeat</h3><p>Breakfast cafés, memorable meals, markets and the unexpected stops that become favorite stories.</p><a class="text-link" href="/blog/">Find food stories →</a></div></article>
-</div></section>
-<section class="feature" id="nearby"><div><div class="eyebrow">The webapp · Nearby Explorer</div><h2>Find the stories<br>around you.</h2><p>Wherever you are, tap one button and discover nearby landmarks, towns and places of interest through Wikipedia. Your location is requested only when you scan.</p><div class="actions"><a class="primary" href="/explore/">⌖ Scan — what’s near? →</a></div></div><div class="feature-art" style="display:grid;place-items:center;min-height:230px;background:radial-gradient(circle,#326d63,#192d3c 66%)"><div style="width:155px;height:155px;border-radius:50%;border:2px dashed #7fe0b3;display:grid;place-items:center;color:#7fe0b3;font-size:5rem">⌖</div></div></section>
-<section class="feature" id="arcade"><div><div class="eyebrow">Something different · Retro Lab</div>
-<h2>Old games.<br>New life.</h2><p>There is more to explore than geography. Our Retro Lab is where classic strategy and simulation ideas return as playable browser games — built and improved in public.</p>
-<div class="actions"><a class="primary" href="/arcade/">Enter the Retro Lab →</a><a class="secondary" href="/arcade/colonization/">Play New World v0.2 ↗</a></div></div>
-<div class="feature-art"><svg viewBox="0 0 400 245" role="img" aria-label="Retro strategy map with sailing ship">
-<rect width="400" height="245" fill="#24566a"/><g stroke="#34778a" stroke-width="2"><path d="M0 30h400M0 90h400M0 150h400M0 210h400M50 0v245M110 0v245M170 0v245M230 0v245M290 0v245M350 0v245"/></g>
-<path d="M0 0h240l-18 36 22 24-25 39 17 36-42 36-14 74H0z" fill="#bfa77a"/><path d="M0 0h228l-21 34 21 23-28 40 19 37-40 28-19 83H0z" fill="#64855d"/>
-<g fill="#325846"><path d="M26 60l18-31 17 31zM93 86l18-37 19 37zM48 159l17-35 18 35z"/></g>
-<g transform="translate(82 99)"><rect width="70" height="42" y="18" fill="#d8ba8b"/><path d="M-8 18l42-29 46 29z" fill="#915e4d"/><rect x="26" y="35" width="17" height="25" fill="#6c5445"/></g>
-<g transform="translate(313 92)"><path d="M-38 66h92l-17 20h-58z" fill="#614536"/><path d="M4-52v118" stroke="#e2d0ad" stroke-width="5"/><path d="M0-50l-35 91H0z" fill="#f5e7c6"/><path d="M10-24l36 72H10z" fill="#aec5b5"/></g></svg></div></section>
-<section id="journal" style="margin-top:72px">
-<div class="section-title"><h2>Latest from the travel journal</h2><a class="text-link" href="/blog/">All articles →</a></div>
-<div class="grid">
-{% for post in site.posts limit:3 %}
-<a class="card" href="{{ post.url | relative_url }}">
-<div class="card-visual" style="background:linear-gradient(145deg,#245369,#587661)">{% if post.image %}<img loading="lazy" src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" style="height:100%;width:100%;object-fit:cover">{% else %}<span style="font-size:3.5rem;color:#a2dbc5">✧</span>{% endif %}</div>
-<div class="card-body"><span class="kicker">{{ post.category | default: "Travel journal" | escape }} · {{ post.date | date: "%d %b %Y" }}</span><h3>{{ post.title | escape }}</h3><p>{{ post.description | default: post.excerpt | strip_html | truncate: 120 | escape }}</p><span class="text-link">Read the article →</span></div></a>
-{% endfor %}</div>
-</section>
-<section class="notes" id="about">
-<div><div class="eyebrow">About the journal</div><h2>Real places. Personal stories.</h2><p>Places I Went is my growing collection of travel memories, practical tips and candid reviews. Hotels, restaurants, city breaks, unforgettable corners, and the details you wish someone had told you before you booked.</p><a class="text-link" href="/blog/">Explore the travel journal →</a></div>
-<div><div class="eyebrow">The creative corner</div><h2>There's a Retro Lab, too.</h2><p>Travel is the heart of this site. But I also build things for fun — including playable browser games inspired by the classics. That playground has its own space.</p><a class="text-link" href="/arcade/">Visit the Retro Lab →</a></div>
-</section>
+<a class="tile" href="/explore/">
+<span class="symbol" aria-hidden="true">⌖</span>
+<h2>Explore</h2>
+<p>See what's near you. Find towns, landmarks and interesting places using your location.</p>
+<span class="go">Open Explore →</span>
+</a>
+<a class="tile" href="/blog/">
+<span class="symbol" aria-hidden="true">✎</span>
+<h2>Travel Blog &amp; Reviews</h2>
+<p>Travel stories, destination tips, and personal reviews of hotels, restaurants and places I've visited.</p>
+<span class="go">Read the blog →</span>
+</a>
+<a class="tile" href="/arcade/">
+<span class="symbol" aria-hidden="true">▦</span>
+<h2>Retro Arcade</h2>
+<p>Classic-inspired browser games, playable experiments and projects in progress.</p>
+<span class="go">Enter the arcade →</span>
+</a>
+</div>
 </main>
-<footer><span>© 2026 Places I Went · The travel journal</span><span><a href="/arcade/">Retro Lab</a> · <a href="https://github.com/orakiotriestocode/placesiwent">GitHub</a></span></footer>
-</div></body></html>
+<footer><span>© 2026 Places I Went</span><a href="https://github.com/orakiotriestocode/placesiwent" rel="noopener noreferrer">GitHub</a></footer>
+</div>
+</body>
+</html>
