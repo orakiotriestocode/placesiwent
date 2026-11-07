@@ -1,0 +1,51 @@
+---
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101a25">
+<meta name="description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | escape }}">
+<title>{{ page.title | escape }} · Places I Went</title>
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#edf3ed;background:#0c131c;color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 80% 0,#1b393b,transparent 38rem),#0c131c}
+a{color:inherit;text-decoration:none}a:hover{color:#8ce9bf}a:focus-visible{outline:2px solid #83dfb4;outline-offset:4px}
+.wrap{max-width:1080px;margin:auto;padding:25px 23px 72px}
+header{display:flex;justify-content:space-between;align-items:center;padding-bottom:24px;border-bottom:1px solid #30404a;gap:20px}
+.brand{font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
+.brand b{display:inline-grid;place-items:center;background:#80dfb5;color:#102d25;width:35px;height:35px;border-radius:8px;margin-right:9px}
+nav{display:flex;gap:20px;flex-wrap:wrap;font-size:.87rem;color:#bdd0ce}
+nav .arcade{border:1px solid #446658;border-radius:8px;padding:9px 13px}
+.back{display:inline-block;margin:39px 0 30px;color:#9de5c3;font-size:.89rem}
+article{max-width:780px;margin:auto}
+.meta{font-size:.77rem;color:#92dfb5;text-transform:uppercase;letter-spacing:.16em;font-weight:750}
+h1{font-size:clamp(2.7rem,6.4vw,5rem);line-height:1.06;letter-spacing:-.06em;margin:18px 0}
+.lead{font-size:1.23rem;line-height:1.72;color:#bfd1d2;margin:18px 0 32px}
+.cover{display:block;width:100%;max-height:550px;object-fit:cover;border-radius:17px;border:1px solid #3c5058;margin:32px 0 42px}
+.prose{font-size:1.075rem;line-height:1.91;color:#d7e0dc;overflow-wrap:anywhere}
+.prose h2,.prose h3{color:#f5f7ef;line-height:1.18;letter-spacing:-.035em;margin-top:2em}
+.prose h2{font-size:2rem}.prose h3{font-size:1.4rem}
+.prose a{color:#8ce9bf;text-decoration:underline;text-underline-offset:3px}
+.prose img{max-width:100%;height:auto;border-radius:13px;display:block;margin:27px auto}
+.prose blockquote{border-left:3px solid #81dfb3;margin:30px 0;padding:4px 24px;color:#b4c8c7;font-style:italic}
+.prose li{margin:.45em 0}.prose hr{border:0;border-top:1px solid #3c5058;margin:38px 0}
+.prose table{width:100%;border-collapse:collapse;display:block;overflow-x:auto}.prose th,.prose td{padding:10px 14px;border:1px solid #3d5157}
+.more{border-top:1px solid #314950;margin-top:60px;padding-top:28px}
+.more a{color:#8ce9bf;font-weight:700}footer{margin-top:80px;padding-top:20px;border-top:1px solid #30404a;color:#90a5ab;font-size:.8rem;display:flex;justify-content:space-between;gap:20px}
+@media(max-width:650px){header{align-items:flex-start;flex-direction:column}nav{gap:13px}.wrap{padding:19px 18px 46px}.prose{font-size:1rem}}
+</style></head>
+<body><div class="wrap">
+<header><a href="/" class="brand"><b>✦</b> Places I Went</a><nav><a href="/blog/">Travel blog</a><a href="/#explore">Explore</a><a href="/#about">About</a><a class="arcade" href="/arcade/">Retro Lab ↗</a></nav></header>
+<main><a class="back" href="/blog/">← Back to all stories</a>
+<article>
+<div class="meta">{{ page.category | default: "Travel journal" | escape }}{% if page.location %} · {{ page.location | escape }}{% endif %} · {{ page.date | date: "%d %B %Y" }}</div>
+<h1>{{ page.title | escape }}</h1>
+{% if page.description %}<p class="lead">{{ page.description | escape }}</p>{% endif %}
+{% if page.image %}<img class="cover" src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" loading="eager">{% endif %}
+<div class="prose">{{ content }}</div>
+<div class="more"><a href="/blog/">← Explore more travel stories</a></div>
+</article></main>
+<footer><span>© {{ 'now' | date: "%Y" }} Places I Went</span><span><a href="/arcade/">Retro Lab</a> · <a href="/">Home</a></span></footer>
+</div></body></html>
