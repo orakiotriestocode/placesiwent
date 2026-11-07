@@ -332,6 +332,6 @@ meta.textContent="Search unavailable";
 }
 sort.addEventListener("change",renderRestaurants);
 
-scan.addEventListener("click",()=>{if(activeMode==="restaurants"){scanRestaurants().catch(e=>message("Restaurant error: "+e.message,true));return}message("Starting location scan…");run().catch(e=>message("Scan error: "+(e.message||e),true))});
+scan.addEventListener("click",()=>{if(activeMode==="restaurants")return scanRestaurants().catch(e=>message("Restaurant error: "+e.message,true));message("Starting location scan…");return run().catch(e=>message("Scan error: "+(e.message||e),true))});
 language.addEventListener("change",()=>{if(lastScan)present(lastScan).catch(e=>message("Couldn't change display language: "+e.message,true))});
 })();
