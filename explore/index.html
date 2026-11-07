@@ -67,15 +67,15 @@ footer a:hover{color:#86e4b7}
 <section class="hero">
 <div><div class="eyebrow">The webapp · Discovery mode / 01</div>
 <h1>What's <em>near me?</em></h1>
-<p class="intro">Every place has a story. Discover landmarks, historic buildings, neighbourhoods and surprising points of interest around your current location — powered by Wikipedia.</p></div>
+<p class="intro">Every place has a story. Discover landmarks, historic buildings, neighbourhoods and surprising points of interest around your current location — powered by Dutch and English Wikipedia.</p></div>
 <div class="orbit" aria-hidden="true"><div class="pin">⌖</div></div>
 </section>
 <section class="scan-panel" aria-label="Location scanner">
 <div class="controls">
 <button class="scan" id="scan" type="button">⌖ &nbsp; Scan — what's near?</button>
-<label class="field">Search radius<select id="radius"><option value="1000">1 km · Walking distance</option><option value="3000" selected>3 km · Around me</option><option value="5000">5 km · Nearby</option><option value="10000">10 km · Explore further</option></select></label>
+<label class="field">Search radius<select id="radius"><option value="1000">1 km · Walking distance</option><option value="3000">3 km · Around me</option><option value="5000" selected>5 km · Nearby</option><option value="10000">10 km · Explore further</option></select></label>
 </div>
-<p class="note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries; your location is not saved on Places I Went. Wikipedia receives the search coordinates.</p>
+<p class="note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries on the Dutch and English editions; your location is not saved on Places I Went. Wikipedia receives the search coordinates.</p>
 <div id="status" class="status" role="status" aria-live="polite">Ready to discover? Press scan and allow location access.</div>
 </section>
 <section aria-label="Nearby results">
@@ -96,20 +96,20 @@ const meta=document.getElementById("meta");
 function message(text,error=false){status.textContent=text;status.classList.toggle("error",error)}
 function clear(){results.replaceChildren()}
 function empty(text){clear();const el=document.createElement("div");el.className="empty";el.style.gridColumn="1/-1";el.textContent=text;results.append(el)}
-function wiki(params){const q=new URLSearchParams({action:"query",format:"json",origin:"*",...params});return fetch("https://en.wikipedia.org/w/api.php?"+q.toString(),{headers:{"Accept":"application/json"}}).then(r=>{if(!r.ok)throw Error("Wikipedia returned HTTP "+r.status);return r.json()})}
+function wiki(params,lang="en"){const q=new URLSearchParams({action:"query",format:"json",origin:"*",...params});return fetch("https://"+lang+".wikipedia.org/w/api.php?"+q.toString(),{headers:{"Accept":"application/json"}}).then(r=>{if(!r.ok)throw Error("Wikipedia returned HTTP "+r.status);return r.json()})}
 function coords(pos){return {lat:pos.coords.latitude,lon:pos.coords.longitude}}
 function getPosition(){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:false,timeout:15000,maximumAge:60000}))}
 function makeCard(place,details){
 const card=document.createElement("article");card.className="card";
 const visual=document.createElement("div");visual.className="visual";
-const info=details[place.pageid]||{};
+const info=details[place.lang+":"+place.pageid]||{};
 if(info.thumbnail&&/^https:\/\//.test(info.thumbnail.source)){const img=document.createElement("img");img.src=info.thumbnail.source;img.loading="lazy";img.alt="Photo of "+place.title;visual.append(img)}
 else{const p=document.createElement("span");p.className="placeholder";p.textContent="✧";visual.append(p)}
 const body=document.createElement("div");body.className="body";
 const tag=document.createElement("span");tag.className="kicker";tag.textContent=place.dist<1000?Math.round(place.dist)+" m away":(place.dist/1000).toFixed(1)+" km away";
 const heading=document.createElement("h3");heading.textContent=place.title;
 const description=document.createElement("p");description.textContent=(info.extract||"A nearby place with a Wikipedia article. Explore its history and details.").slice(0,300);
-const link=document.createElement("a");link.href="https://en.wikipedia.org/?curid="+encodeURIComponent(place.pageid);link.target="_blank";link.rel="noopener noreferrer";link.textContent="Explore on Wikipedia ↗";
+const link=document.createElement("a");link.href="https://"+place.lang+".wikipedia.org/?curid="+encodeURIComponent(place.pageid);link.target="_blank";link.rel="noopener noreferrer";link.textContent="Explore on Wikipedia ↗";
 body.append(tag,heading,description,link);card.append(visual,body);return card
 }
 async function run(){
@@ -120,16 +120,36 @@ try{
 const position=await getPosition();const {lat,lon}=coords(position);
 const accuracy=Math.round(position.coords.accuracy||0);
 message("Location found"+(accuracy?" (approximately ±"+accuracy+" m).":"") +" Looking for nearby Wikipedia articles…");
-const data=await wiki({list:"geosearch",gscoord:lat+"|"+lon,gsradius:radius.value,gslimit:"36",gsnamespace:"0"});
+const radiusMeters=Number(radius.value);
+const scans=await Promise.allSettled(["nl","en"].map(async lang=>{
+const data=await wiki({list:"geosearch",gscoord:lat+"|"+lon,gsradius:String(radiusMeters),gslimit:"150",gsnamespace:"0"},lang);
 if(data.error)throw Error(data.error.info||"Wikipedia API error");
-const places=(data.query&&data.query.geosearch)||[];
+return ((data.query&&data.query.geosearch)||[]).map(p=>({...p,lang}));
+}));
+const available=scans.filter(x=>x.status==="fulfilled");
+if(!available.length)throw Error("Both Wikipedia editions are unavailable");
+let places=available.flatMap(x=>x.value);
+const normalized=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+places.sort((a,b)=>a.dist-b.dist);
+const unique=[];
+for(const p of places){
+const same=unique.find(q=>normalized(q.title)===normalized(p.title) || (Math.abs(q.lat-p.lat)<0.00035&&Math.abs(q.lon-p.lon)<0.00055&&normalized(q.title).includes(normalized(p.title))));
+if(!same)unique.push(p);
+}
+places=unique;
 if(!places.length){empty("No Wikipedia articles found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No results this time. Try expanding the search area.");return}
-const ids=places.map(p=>p.pageid).join("|");
-let details={};
-try{const extra=await wiki({prop:"pageimages|extracts",pageids:ids,pithumbsize:"480",pilimit:"max",exintro:"1",explaintext:"1",exsentences:"2",redirects:"1"});details=extra.query&&extra.query.pages||{}}catch(e){console.warn("Wikipedia details unavailable",e)}
-clear();places.sort((a,b)=>a.dist-b.dist).forEach(p=>results.append(makeCard(p,details)));
-meta.textContent=places.length+" places · within "+(Number(radius.value)/1000)+" km";
-message("Found "+places.length+" nearby places. Ordered from closest to furthest.");
+const details={};
+await Promise.allSettled(["nl","en"].map(async lang=>{
+const selected=places.filter(p=>p.lang===lang);
+for(let i=0;i<selected.length;i+=40){
+const ids=selected.slice(i,i+40).map(p=>p.pageid).join("|");
+const extra=await wiki({prop:"pageimages|extracts",pageids:ids,pithumbsize:"480",pilimit:"max",exintro:"1",explaintext:"1",exsentences:"2",redirects:"1"},lang);
+for(const [id,value] of Object.entries((extra.query&&extra.query.pages)||{}))details[lang+":"+id]=value;
+}
+}));
+clear();places.forEach(p=>results.append(makeCard(p,details)));
+meta.textContent=places.length+" places · within "+(radiusMeters/1000)+" km · NL + EN";
+message("Found "+places.length+" nearby Wikipedia places (Dutch and English). Ordered from closest to furthest."+(available.length<2?" One Wikipedia edition was unavailable.":""));
 }catch(err){
 if(err.code===1)message("Location permission was denied. Enable location access in your browser settings and try again.",true);
 else if(err.code===2)message("Your location could not be determined. Check your device location settings and try again.",true);
