@@ -217,7 +217,7 @@ empty("No discoveries to show yet.");meta.textContent="Scan unavailable";
 }
 
 const modePoi=document.getElementById("mode-poi"),modeRestaurants=document.getElementById("mode-restaurants");
-const sort=document.getElementById("sort"),sortField=document.getElementById("sort-field");
+const sortField=document.getElementById("sort-field");
 const languageField=document.getElementById("language-field"),sourceNote=document.getElementById("source-note");
 const resultsHeading=document.getElementById("results-heading");
 let activeMode="poi",restaurantCache=null,restaurantRequest=0;
@@ -225,10 +225,10 @@ function setMode(mode){
 activeMode=mode;
 modePoi.classList.toggle("is-active",mode==="poi");modeRestaurants.classList.toggle("is-active",mode==="restaurants");
 modePoi.setAttribute("aria-pressed",String(mode==="poi"));modeRestaurants.setAttribute("aria-pressed",String(mode==="restaurants"));
-languageField.hidden=mode==="restaurants";sortField.hidden=mode!=="restaurants";
+languageField.hidden=mode==="restaurants";sortField.hidden=true;
 resultsHeading.textContent=mode==="restaurants"?"Restaurants around you":"Nearby discoveries";
 sourceNote.textContent=mode==="restaurants"
-?"Restaurants come from OpenStreetMap contributors (ODbL). Locations are shared with the Overpass API when you scan. Customer ratings are generally not included in this free dataset, so unrated places are clearly identified."
+?"Restaurants are read from our own OpenStreetMap-derived directory (ODbL), with no per-search API calls or credits. Coverage depends on which geographic tiles have been published."
 :"Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries in the local language and English; your location is not saved on Places I Went. Wikipedia and OpenStreetMap's Nominatim service receive coordinates to provide the results.";
 clear();restaurantRequest++;scanId++;restaurantCache=null;lastScan=null;
 meta.textContent="Waiting for your first scan";
@@ -248,8 +248,7 @@ tags["addr:full"]||tags["addr:city"]||"Address not listed";
 function renderRestaurants(){
 if(!restaurantCache||activeMode!=="restaurants")return;
 const list=[...restaurantCache.places];
-if(sort.value==="rating")list.sort((a,b)=>((b.rating??-1)-(a.rating??-1))||(a.distance-b.distance));
-else list.sort((a,b)=>a.distance-b.distance);
+list.sort((a,b)=>a.distance-b.distance);
 clear();
 for(const restaurant of list){
 const tags=restaurant.tags,card=document.createElement("article");card.className="card";
@@ -259,50 +258,65 @@ const body=document.createElement("div");body.className="body";
 const kicker=document.createElement("span");kicker.className="kicker";
 kicker.textContent=restaurant.distance<1000?Math.round(restaurant.distance)+" m away":(restaurant.distance/1000).toFixed(1)+" km away";
 const title=document.createElement("h3");title.textContent=tags.name;
-const rating=document.createElement("div");rating.className="rating-line"+(restaurant.rating===null?" unrated":"");
-rating.textContent=restaurant.rating===null?"★ No verified customer rating":"★ "+restaurant.rating.toFixed(1)+" / 5 · Open data (unverified)";
+
 const details=document.createElement("div");details.className="restaurant-detail";
 details.textContent=[tags.cuisine&&tags.cuisine.replace(/;/g,", "),restaurantAddress(tags)].filter(Boolean).join(" · ");
 const link=document.createElement("a");
 const osmUrl="https://www.openstreetmap.org/"+encodeURIComponent(restaurant.type)+"/"+encodeURIComponent(restaurant.id);
 link.href=osmUrl;link.target="_blank";link.rel="noopener noreferrer";link.textContent="View on OpenStreetMap ↗";
-body.append(kicker,title,rating,details,link);
+body.append(kicker,title,details,link);
 if(tags.website||tags["contact:website"]){
 const site=tags.website||tags["contact:website"];try{const url=new URL(/^https?:\/\//i.test(site)?site:"https://"+site);if(["https:","http:"].includes(url.protocol)){const a=document.createElement("a");a.href=url.href;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Restaurant website ↗";a.style.marginTop="9px";body.append(a)}}catch(e){}
 }
 card.append(visual,body);results.append(card);
 }
-const rated=list.filter(x=>x.rating!==null).length;
-meta.textContent=list.length+" restaurants · within "+restaurantCache.radius/1000+" km · "+(sort.value==="rating"?"Rating order":"Distance order");
-message("Found "+list.length+" restaurants. "+(rated?rated+" have unverified rating tags. ":"")+"Most OpenStreetMap restaurants have no customer ratings; "+(sort.value==="rating"?"unrated results are ordered by distance.":"sort by distance for the most useful view."));
+meta.textContent=list.length+" restaurants · within "+restaurantCache.radius/1000+" km · nearest first";
+message("Found "+list.length+" restaurants in the published local directory. Sorted by distance.");
+}
+
+// Restaurant directory uses 0.1-degree latitude/longitude tiles published with the site.
+// Requests are same-origin static JSON, not public Overpass or paid APIs.
+const TILE_STEP=10; // tenths of a degree
+const tileCache=new Map();
+function tileIndex(value){return Math.floor(value*TILE_STEP)}
+function tileName(y,x){return String(y)+"_"+String(x)+".json"}
+function tilesForCircle(lat,lon,radius){
+const latMargin=radius/111000,lonMargin=radius/(111000*Math.max(.05,Math.cos(lat*Math.PI/180)));
+const keys=[];
+for(let y=tileIndex(Math.max(-90,lat-latMargin));y<=tileIndex(Math.min(89.999999,lat+latMargin));y++){
+for(let x=tileIndex(Math.max(-180,lon-lonMargin));x<=tileIndex(Math.min(179.999999,lon+lonMargin));x++){
+keys.push(tileName(y,x));
+}}
+return keys;
+}
+async function getRestaurantTile(key){
+if(tileCache.has(key))return tileCache.get(key);
+const promise=(async()=>{
+const response=await fetch("/explore/data/restaurants/"+key,{cache:"force-cache"});
+if(response.status===404)return null;
+if(!response.ok)throw Error("Directory tile HTTP "+response.status);
+const data=await response.json();
+if(!Array.isArray(data))throw Error("Invalid restaurant tile");
+return data;
+})();
+tileCache.set(key,promise);
+try{return await promise}catch(err){tileCache.delete(key);throw err}
 }
 async function queryRestaurants(lat,lon,radiusMeters){
-const q='[out:json][timeout:12];(nwr["amenity"="restaurant"](around:'+radiusMeters+','+lat+','+lon+'););out center tags;';
-const endpoints=[
-"https://overpass.private.coffee/api/interpreter",
-"https://maps.mail.ru/osm/tools/overpass/api/interpreter",
-"https://overpass-api.de/api/interpreter"
-];
-let lastError=null;
-for(let i=0;i<endpoints.length;i++){
-const endpoint=endpoints[i];
-message("Looking up restaurants…"+(i?" trying another map server ("+(i+1)+"/"+endpoints.length+").":""));
-const controller=new AbortController();
-const abort=setTimeout(()=>controller.abort(),8500);
-try{
-// A simple GET avoids the preflight OPTIONS request caused by cross-origin form POST.
-const url=endpoint+"?"+new URLSearchParams({data:q});
-const response=await fetch(url,{method:"GET",signal:controller.signal,headers:{Accept:"application/json"}});
-if(!response.ok)throw Error("HTTP "+response.status);
-const data=await response.json();
-if(!Array.isArray(data.elements))throw Error("Invalid response");
-return data.elements;
-}catch(err){
-lastError=err;
-console.warn("Restaurant source unavailable",endpoint,err);
-}finally{clearTimeout(abort)}
+const keys=tilesForCircle(lat,lon,radiusMeters);
+if(keys.length>350)throw Error("Search area exceeds tile safety limit");
+message("Reading "+keys.length+" nearby directory tiles…");
+const found=await Promise.allSettled(keys.map(getRestaurantTile));
+const available=found.filter(v=>v.status==="fulfilled"&&Array.isArray(v.value));
+const failed=found.filter(v=>v.status==="rejected");
+const missing=found.filter(v=>v.status==="fulfilled"&&v.value===null);
+if(!available.length){
+if(failed.length)throw Error("Restaurant directory could not be loaded. Check your connection.");
+throw Error("Restaurant directory has not been published for this area yet. This is a coverage gap, not a failed GPS scan.");
 }
-throw Error("Public restaurant map services are busy or inaccessible. Please try again shortly."+(lastError&&lastError.name==="TypeError"?" (Network or cross-origin restriction.)":""));
+const combined=available.flatMap(v=>v.value);
+if(missing.length)message("Partial directory coverage: "+missing.length+" nearby tiles have not been published.");
+return {elements:combined,missing:missing.length,failed:failed.length};
 }
 async function scanRestaurants(){
 if(!navigator.geolocation)throw Error("Location not available in this browser");
@@ -315,7 +329,8 @@ const position=await getPosition();
 if(activeMode!=="restaurants"||request!==restaurantRequest)return;
 const lat=position.coords.latitude,lon=position.coords.longitude,radiusMeters=Number(radius.value);
 message("Searching OpenStreetMap for restaurants…");
-const elements=await queryRestaurants(lat,lon,radiusMeters);
+const directory=await queryRestaurants(lat,lon,radiusMeters);
+const elements=directory.elements;
 if(activeMode!=="restaurants"||request!==restaurantRequest)return;
 const dedup=new Map();
 for(const place of elements){
@@ -324,9 +339,7 @@ if(!tags.name||!Number.isFinite(point.lat)||!Number.isFinite(point.lon))continue
 const distance=haversine(lat,lon,point.lat,point.lon);
 if(distance>radiusMeters+100)continue;
 const key=tags.name.toLocaleLowerCase()+"|"+Math.round(point.lat*10000)+"|"+Math.round(point.lon*10000);
-const value=Number(tags.rating);
-const rating=tags.rating!==undefined&&Number.isFinite(value)&&value>=0&&value<=5?value:null;
-if(!dedup.has(key))dedup.set(key,{...place,tags,distance,rating});
+if(!dedup.has(key))dedup.set(key,{...place,tags,distance});
 }
 restaurantCache={places:[...dedup.values()],radius:radiusMeters};
 if(!restaurantCache.places.length){empty("No mapped restaurants found here. Try a wider radius.");meta.textContent="0 restaurants";message("No restaurants found within the chosen radius.");return}
@@ -341,7 +354,7 @@ empty("Restaurant search unavailable. Please try again later.");
 meta.textContent="Search unavailable";
 }finally{scan.disabled=false;scan.textContent="⌖  Scan — what's near?"}
 }
-sort.addEventListener("change",renderRestaurants);
+
 
 scan.addEventListener("click",()=>{if(activeMode==="restaurants")return scanRestaurants().catch(e=>message("Restaurant error: "+e.message,true));message("Starting location scan…");return run().catch(e=>message("Scan error: "+(e.message||e),true))});
 language.addEventListener("change",()=>{if(lastScan)present(lastScan).catch(e=>message("Couldn't change display language: "+e.message,true))});
