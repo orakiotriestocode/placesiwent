@@ -1,10 +1,13 @@
 name: Import OSM restaurant directory region
 on:
+  push:
+    paths:
+      - '.github/workflows/import-restaurants.yml'
   workflow_dispatch:
     inputs:
       extract_url:
         description: 'HTTPS URL of a regional .osm.pbf extract (e.g. https://download.geofabrik.de/europe/belgium-latest.osm.pbf)'
-        required: true
+        required: false
         type: string
 jobs:
   import:
@@ -19,7 +22,7 @@ jobs:
       - run: pip install osmium
       - name: Download regional extract
         env:
-          EXTRACT_URL: ${{ inputs.extract_url }}
+          EXTRACT_URL: ${{ inputs.extract_url || 'https://download.geofabrik.de/europe/belgium-latest.osm.pbf' }}
         run: |
           python - <<'PY'
           import os, urllib.parse
