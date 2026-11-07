@@ -79,6 +79,16 @@ body.reader-open{overflow:hidden}
 
 
 .environment-switch{display:inline-flex;align-items:center;border:1px solid #41555d;border-radius:7px;padding:7px 10px;color:#9aaeb3;font-size:.72rem;font-weight:750;letter-spacing:.05em;white-space:nowrap}.environment-switch:hover{color:#82e2b3;border-color:#82e2b3;background:#1a3636}
+
+.mode-toggle{display:flex;gap:5px;width:fit-content;max-width:100%;background:#0e202a;border:1px solid #3c5960;border-radius:12px;padding:5px;margin-bottom:20px}
+.mode-button{border:0;border-radius:8px;background:transparent;color:#b0c3c7;padding:12px 19px;font-weight:760;font-size:.87rem}
+.mode-button.is-active{background:#7fe0b3;color:#102e26;box-shadow:0 3px 12px #0002}
+.mode-button:not(.is-active):hover{background:#28433f;color:#def7ea}
+.field[hidden]{display:none}
+.restaurant-detail{color:#abc6c8;font-size:.82rem;line-height:1.6;margin-bottom:13px}
+.rating-line{font-weight:750;color:#b6ebce;font-size:.85rem;margin-bottom:10px}
+.rating-line.unrated{font-weight:500;color:#91a9b0}
+@media(max-width:600px){.mode-toggle{width:100%}.mode-button{flex:1;padding:12px 9px;font-size:.8rem}}
 </style>
 </head>
 <body><div class="wrap">
@@ -95,16 +105,18 @@ body.reader-open{overflow:hidden}
 <div class="orbit" aria-hidden="true"><div class="pin">⌖</div></div>
 </section>
 <section class="scan-panel" aria-label="Location scanner">
+<div class="mode-toggle" role="group" aria-label="Discovery mode"><button id="mode-poi" type="button" aria-pressed="true" class="mode-button is-active">⌖ Places of interest</button><button id="mode-restaurants" type="button" aria-pressed="false" class="mode-button">🍴 Restaurants</button></div>
 <div class="controls">
 <button class="scan" id="scan" type="button">⌖ &nbsp; Scan — what's near?</button>
 <label class="field">Search radius<select id="radius"><option value="1000" selected>1 km · Walking distance</option><option value="3000">3 km · Around me</option><option value="5000">5 km · Nearby</option><option value="10000">10 km · Explore further</option></select></label>
-<label class="field">Display language<select id="language"><option value="en" selected>English</option><option value="nl">Nederlands</option><option value="local">Local language (auto-detect)</option></select></label>
+<label class="field" id="language-field">Display language<select id="language"><option value="en" selected>English</option><option value="nl">Nederlands</option><option value="local">Local language (auto-detect)</option></select></label>
+<label class="field" id="sort-field" hidden>Sort restaurants<select id="sort"><option value="distance" selected>Nearest first</option><option value="rating">Highest rated first</option></select></label>
 </div>
-<p class="note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries in the local language and English; your location is not saved on Places I Went. Wikipedia and OpenStreetMap's Nominatim service receive coordinates to provide the results.</p>
+<p class="note" id="source-note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries in the local language and English; your location is not saved on Places I Went. Wikipedia and OpenStreetMap's Nominatim service receive coordinates to provide the results.</p>
 <div id="status" class="status" role="status" aria-live="polite">Ready to discover? Press scan and allow location access.</div>
 </section>
 <section aria-label="Nearby results">
-<div class="toolbar"><h2>Nearby discoveries</h2><span id="meta" class="meta">Waiting for your first scan</span></div>
+<div class="toolbar"><h2 id="results-heading">Nearby discoveries</h2><span id="meta" class="meta">Waiting for your first scan</span></div>
 <div id="results" class="grid"><div class="empty" style="grid-column:1/-1">📍 Your nearby places will appear here.</div></div>
 </section>
 </main>
