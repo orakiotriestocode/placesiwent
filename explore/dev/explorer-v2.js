@@ -217,7 +217,7 @@ empty("No discoveries to show yet.");meta.textContent="Scan unavailable";
 }
 
 const modePoi=document.getElementById("mode-poi"),modeRestaurants=document.getElementById("mode-restaurants");
-const sortField=document.getElementById("sort-field");
+
 const languageField=document.getElementById("language-field"),sourceNote=document.getElementById("source-note");
 const resultsHeading=document.getElementById("results-heading");
 let activeMode="poi",restaurantCache=null,restaurantRequest=0;
@@ -225,7 +225,7 @@ function setMode(mode){
 activeMode=mode;
 modePoi.classList.toggle("is-active",mode==="poi");modeRestaurants.classList.toggle("is-active",mode==="restaurants");
 modePoi.setAttribute("aria-pressed",String(mode==="poi"));modeRestaurants.setAttribute("aria-pressed",String(mode==="restaurants"));
-languageField.hidden=mode==="restaurants";sortField.hidden=true;
+languageField.hidden=mode==="restaurants";
 resultsHeading.textContent=mode==="restaurants"?"Restaurants around you":"Nearby discoveries";
 sourceNote.textContent=mode==="restaurants"
 ?"Restaurants are read from our own OpenStreetMap-derived directory (ODbL), with no per-search API calls or credits. Coverage depends on which geographic tiles have been published."
