@@ -166,6 +166,55 @@ for(const p of subset)if(pages[p.pageid])p.view=pages[p.pageid];
 }
 return places;
 }
+const mapPanel=document.getElementById("map-panel");
+let poiMap,poiLayer,mappedScan;
+function resetPoiMap(){
+mapPanel.hidden=true;
+mappedScan=null;
+if(poiLayer)poiLayer.clearLayers();
+}
+function showPoiMap(data,places,displayLang){
+const L=window.L;
+if(!L)return;
+try{
+mapPanel.hidden=false;
+if(!poiMap){
+poiMap=L.map("poi-map",{scrollWheelZoom:false});
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(poiMap);
+poiLayer=L.layerGroup().addTo(poiMap);
+}
+poiMap.invalidateSize();
+poiLayer.clearLayers();
+const center=[data.lat,data.lon];
+const circle=L.circle(center,{radius:data.radius,color:"#2475d0",fillOpacity:.12,interactive:false}).addTo(poiLayer);
+L.circleMarker(center,{radius:7,color:"#fff",weight:2,fillColor:"#2475d0",fillOpacity:1})
+.addTo(poiLayer).bindPopup("You are here");
+for(const place of places){
+if(!Number.isFinite(place.lat)||!Number.isFinite(place.lon))continue;
+const title=place.translated?place.view?.title||place.title:place.title;
+const popup=document.createElement("div");
+const button=document.createElement("button");
+button.type="button";
+button.textContent="Read Wikipedia article";
+button.addEventListener("click",()=>openReader(
+place.translated?place.view?.pageid||place.pageid:place.pageid,
+place.translated?displayLang:place.lang,title,button));
+const heading=document.createElement("p");
+heading.textContent=title;
+popup.append(heading,button);
+L.marker([place.lat,place.lon],{title,alt:title}).addTo(poiLayer).bindPopup(popup);
+}
+if(mappedScan!==data){
+poiMap.fitBounds(circle.getBounds(),{padding:[16,16],maxZoom:18});
+mappedScan=data;
+}
+}catch(error){
+resetPoiMap();
+console.warn("Nearby map unavailable",error);
+}
+}
 async function present(data){
 const displayLang=language.value==="local"?data.localLang:language.value;
 message("Harmonizing results into "+nameOf(displayLang)+"…");
@@ -181,7 +230,9 @@ if(id&&seenIds.has(id))continue;
 if(seenNames.has(name))continue;
 if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
 }
+if(activeMode!=="poi"||data!==lastScan||displayLang!==(language.value==="local"?data.localLang:language.value))return;
 clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
+showPoiMap(data,deduped,displayLang);
 const unavailable=deduped.filter(p=>!p.translated).length;
 meta.textContent=deduped.length+" places · within "+(data.radius<1000?data.radius+" m":(data.radius/1000)+" km")+" · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
 message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLang)+" where Wikipedia has an article."+(unavailable?" "+unavailable+" have no "+nameOf(displayLang)+" article and are marked as original language.":""));
@@ -189,7 +240,7 @@ message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLa
 async function run(){
 if(!navigator.geolocation){message("Your browser does not support location services.",true);return}
 if(!window.isSecureContext){message("Location requires a secure HTTPS connection.",true);return}
-const id=++scanId;scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
+const id=++scanId;lastScan=null;resetPoiMap();scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
 try{
 const position=await getPosition(),lat=position.coords.latitude,lon=position.coords.longitude;
 const accuracy=Math.round(position.coords.accuracy||0);
@@ -204,8 +255,9 @@ return ((response.query&&response.query.geosearch)||[]).map(p=>({...p,lang}));
 const available=scans.map((x,i)=>({result:x,lang:sourceLangs[i]})).filter(x=>x.result.status==="fulfilled");
 if(!available.length)throw Error("Wikipedia search is unavailable");
 const places=available.flatMap(x=>x.result.value);
-if(!places.length){empty("No Wikipedia places found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No places found in this area.");return}
-lastScan={places,sourceLangs:available.map(x=>x.lang),localLang:local.lang,radius:radiusMeters};
+if(id!==scanId)return;
+if(!places.length){showPoiMap({lat,lon,radius:radiusMeters},[]);empty("No Wikipedia places found in this radius. Try a larger radius.");meta.textContent="0 nearby places";message("No places found in this area.");return}
+lastScan={lat,lon,places,sourceLangs:available.map(x=>x.lang),localLang:local.lang,radius:radiusMeters};
 if(id===scanId)await present(lastScan);
 }catch(err){
 if(err.code===1)message("Location permission was denied. Enable it in your browser settings.",true);
@@ -222,6 +274,7 @@ const languageField=document.getElementById("language-field"),sourceNote=documen
 const resultsHeading=document.getElementById("results-heading");
 let activeMode="poi",restaurantCache=null,restaurantRequest=0;
 function setMode(mode){
+resetPoiMap();
 activeMode=mode;
 modePoi.classList.toggle("is-active",mode==="poi");modeRestaurants.classList.toggle("is-active",mode==="restaurants");
 modePoi.setAttribute("aria-pressed",String(mode==="poi"));modeRestaurants.setAttribute("aria-pressed",String(mode==="restaurants"));
