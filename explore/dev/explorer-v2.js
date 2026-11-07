@@ -245,6 +245,39 @@ function restaurantAddress(tags){
 return [tags["addr:street"],tags["addr:housenumber"]].filter(Boolean).join(" ")||
 tags["addr:full"]||tags["addr:city"]||"Address not listed";
 }
+// Conservative offline evaluator: only mark open/closed for simple weekly schedules.
+// Complex OSM rules (holidays, exceptions, seasons, comments) remain "Hours available"
+// rather than risking an incorrect open/closed claim.
+function openingStatus(raw,now=new Date()){
+if(!raw)return {label:"Opening hours not listed",state:"unknown"};
+const rule=raw.trim();
+if(rule==="24/7")return {label:"Open now",state:"open"};
+if(/PH|SH|week|sunrise|sunset|dawn|dusk|\[|\]|\+|\/|\{|\}|\"|open|unknown|off|closed|easter|school|summer|winter|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/i.test(rule))
+return {label:"See opening hours",state:"unknown"};
+const days=["Su","Mo","Tu","We","Th","Fr","Sa"],today=now.getDay(),minute=now.getHours()*60+now.getMinutes();
+const parsed=[];
+for(const part of rule.split(";")){
+const match=part.trim().match(/^(?:(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?(?:,\s*(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?)?\s+)?((?:\d\d?:\d\d-\d\d?:\d\d)(?:\s*,\s*\d\d?:\d\d-\d\d?:\d\d)*)$/);
+if(!match)return {label:"See opening hours",state:"unknown"};
+const dayMask=new Set();
+const addRange=(a,b)=>{let x=days.indexOf(a),end=days.indexOf(b||a);if(x<0||end<0)return;for(let k=0;k<7;k++){dayMask.add(x);if(x===end)break;x=(x+1)%7}};
+if(match[1]){addRange(match[1],match[2]);if(match[3])addRange(match[3],match[4]);}
+else for(let i=0;i<7;i++)dayMask.add(i);
+for(const times of match[5].split(",")){
+const m=times.trim().match(/^(\d{1,2}):(\d\d)-(\d{1,2}):(\d\d)$/);
+if(!m)return {label:"See opening hours",state:"unknown"};
+const start=Number(m[1])*60+Number(m[2]),end=Number(m[3])*60+Number(m[4]);
+if(start>=1440||end>1440||start===end||Number(m[2])>59||Number(m[4])>59)return {label:"See opening hours",state:"unknown"};
+parsed.push({dayMask,start,end});
+}
+}
+const isOpen=parsed.some(p=>(p.dayMask.has(today)&&minute>=p.start&&(p.end>p.start?minute<p.end:true))||(p.end<=p.start&&p.dayMask.has((today+6)%7)&&minute<p.end));
+return {label:isOpen?"Open now":"Closed now",state:isOpen?"open":"closed"};
+}
+function cuisineLabel(raw){
+if(!raw)return "Cuisine not specified";
+return raw.split(";").map(s=>s.trim().replace(/_/g," ")).filter(Boolean).map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(" · ");
+}
 function renderRestaurants(){
 if(!restaurantCache||activeMode!=="restaurants")return;
 const list=[...restaurantCache.places];
@@ -260,11 +293,17 @@ kicker.textContent=restaurant.distance<1000?Math.round(restaurant.distance)+" m 
 const title=document.createElement("h3");title.textContent=tags.name;
 
 const details=document.createElement("div");details.className="restaurant-detail";
-details.textContent=[tags.cuisine&&tags.cuisine.replace(/;/g,", "),restaurantAddress(tags)].filter(Boolean).join(" · ");
+details.textContent=cuisineLabel(tags.cuisine)+" · "+restaurantAddress(tags);
+const hours=openingStatus(tags.opening_hours);
+const hoursBadge=document.createElement("div");hoursBadge.className="hours-status "+hours.state;hoursBadge.textContent=hours.label;
+const hoursPanel=document.createElement("details");hoursPanel.className="hours-panel";
+const hoursSummary=document.createElement("summary");hoursSummary.textContent="Opening times";
+const hoursValue=document.createElement("p");hoursValue.textContent=tags.opening_hours||"Not listed in OpenStreetMap";
+hoursPanel.append(hoursSummary,hoursValue);
 const link=document.createElement("a");
 const osmUrl="https://www.openstreetmap.org/"+encodeURIComponent(restaurant.type)+"/"+encodeURIComponent(restaurant.id);
 link.href=osmUrl;link.target="_blank";link.rel="noopener noreferrer";link.textContent="View on OpenStreetMap ↗";
-body.append(kicker,title,details,link);
+body.append(kicker,title,details,hoursBadge,hoursPanel,link);
 if(tags.website||tags["contact:website"]){
 const site=tags.website||tags["contact:website"];try{const url=new URL(/^https?:\/\//i.test(site)?site:"https://"+site);if(["https:","http:"].includes(url.protocol)){const a=document.createElement("a");a.href=url.href;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Restaurant website ↗";a.style.marginTop="9px";body.append(a)}}catch(e){}
 }
@@ -292,7 +331,7 @@ return keys;
 async function getRestaurantTile(key){
 if(tileCache.has(key))return tileCache.get(key);
 const promise=(async()=>{
-const response=await fetch("/explore/data/restaurants/"+key,{cache:"force-cache"});
+const response=await fetch("/explore/data/restaurants/"+key+"?v=hours-1",{cache:"force-cache"});
 if(response.status===404)return null;
 if(!response.ok)throw Error("Directory tile HTTP "+response.status);
 const data=await response.json();
@@ -328,7 +367,7 @@ try{
 const position=await getPosition();
 if(activeMode!=="restaurants"||request!==restaurantRequest)return;
 const lat=position.coords.latitude,lon=position.coords.longitude,radiusMeters=Number(radius.value);
-message("Searching OpenStreetMap for restaurants…");
+message("Reading the local restaurant directory…");
 const directory=await queryRestaurants(lat,lon,radiusMeters);
 const elements=directory.elements;
 if(activeMode!=="restaurants"||request!==restaurantRequest)return;
