@@ -183,7 +183,7 @@ if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
 }
 clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
 const unavailable=deduped.filter(p=>!p.translated).length;
-meta.textContent=deduped.length+" places · within "+(data.radius/1000)+" km · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
+meta.textContent=deduped.length+" places · within "+(data.radius<1000?data.radius+" m":(data.radius/1000)+" km")+" · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
 message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLang)+" where Wikipedia has an article."+(unavailable?" "+unavailable+" have no "+nameOf(displayLang)+" article and are marked as original language.":""));
 }
 async function run(){
@@ -310,7 +310,7 @@ const site=tags.website||tags["contact:website"];try{const url=new URL(/^https?:
 }
 card.append(visual,body);results.append(card);
 }
-meta.textContent=list.length+" restaurants · within "+restaurantCache.radius/1000+" km · nearest first";
+meta.textContent=list.length+" restaurants · within "+(restaurantCache.radius<1000?restaurantCache.radius+" m":(restaurantCache.radius/1000)+" km")+" · nearest first";
 message("Found "+list.length+" restaurants in the published local directory. Sorted by distance.");
 }
 
@@ -377,7 +377,7 @@ for(const place of elements){
 const tags=place.tags||{},point=place.center||place;
 if(!tags.name||!Number.isFinite(point.lat)||!Number.isFinite(point.lon))continue;
 const distance=haversine(lat,lon,point.lat,point.lon);
-if(distance>radiusMeters+100)continue;
+if(distance>radiusMeters+(radiusMeters>=1000?100:0))continue;
 const key=tags.name.toLocaleLowerCase()+"|"+Math.round(point.lat*10000)+"|"+Math.round(point.lon*10000);
 if(!dedup.has(key))dedup.set(key,{...place,tags,distance});
 }

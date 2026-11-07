@@ -183,7 +183,7 @@ if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
 }
 clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
 const unavailable=deduped.filter(p=>!p.translated).length;
-meta.textContent=deduped.length+" places · within "+(data.radius/1000)+" km · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
+meta.textContent=deduped.length+" places · within "+(data.radius<1000?data.radius+" m":(data.radius/1000)+" km")+" · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
 message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLang)+" where Wikipedia has an article."+(unavailable?" "+unavailable+" have no "+nameOf(displayLang)+" article and are marked as original language.":""));
 }
 async function run(){
