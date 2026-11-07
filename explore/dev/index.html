@@ -69,7 +69,7 @@ footer a:hover{color:#86e4b7}
 .reader-label{font-size:.68rem;letter-spacing:.18em;color:#83dfb4;text-transform:uppercase;font-weight:800}
 .reader-close{background:#29424a;color:#e3f5e9;border:1px solid #4d6e70;border-radius:9px;padding:11px 14px;font-weight:700;white-space:nowrap}
 .reader-close:hover{background:#345862}
-.reader-frame{width:100%;flex:1;border:0;background:#f9f8f4;color:#151515}
+.reader-frame{width:100%;flex:1;border:0;background:#101c27;color:#eff3e7}
 .reader-footer{padding:13px 22px;border-top:1px solid #34515a;display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:.78rem;color:#bdd0d1;flex-wrap:wrap}
 .reader-footer a{color:#a5ecc9;text-decoration:underline}
 .reader-trigger{background:transparent;color:#a5ecc9;font-size:.87rem;font-weight:800;border:0;padding:0;text-align:left}
@@ -127,7 +127,45 @@ reader.addEventListener("click",event=>{if(event.target===reader)closeReader()})
 document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!reader.hidden)closeReader()});
 function readerDocument(article,lang){
 const base="https://"+lang+".wikipedia.org/";
-const css=`*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75;margin:0 auto;padding:25px clamp(16px,5vw,56px) 75px;max-width:960px;background:#fcfbf7;color:#202b30;font-size:16px}h2,h3,h4{font-family:Georgia,serif;line-height:1.3;margin:1.4em 0 .4em;color:#152b34}h2{font-size:1.55rem;border-bottom:1px solid #d8e0db;padding-bottom:7px}h3{font-size:1.25rem}a{color:#176e66;overflow-wrap:anywhere}a:hover{text-decoration:underline}img{max-width:100%;height:auto}figure{margin:20px auto;max-width:100%}figcaption{font-size:.8rem;color:#5c6b6d}.thumb,.thumbinner,.tright,.tleft{max-width:100%;float:none!important;margin:18px auto!important}.infobox{float:right;max-width:300px;width:100%;margin:5px 0 20px 25px;background:#f0f4f2;border:1px solid #c8d6d1;border-radius:8px;padding:10px;font-size:.85rem}table{max-width:100%;display:block;overflow:auto;border-collapse:collapse}td,th{padding:6px;border:1px solid #d3ddd9}.mw-editsection,.navbox,.vertical-navbox,.metadata,.noprint,.ambox,.hatnote,.authority-control,.mw-empty-elt,.reflist{display:none!important}sup.reference{font-size:.7rem}.toc{border:1px solid #d5e2dc;padding:12px;border-radius:10px}blockquote{border-left:3px solid #82b69b;padding-left:16px}p{margin:.8em 0}ul,ol{padding-left:24px}@media(max-width:650px){.infobox{float:none;width:100%;margin:12px auto}.mw-parser-output{overflow-wrap:anywhere}}`;
+const css=\`
+:root{color-scheme:dark;--bg:#101c27;--panel:#182a34;--panel2:#213840;--text:#eff3e7;--muted:#b6c8cc;--border:#3b555d;--accent:#81e1b3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.78;margin:0 auto;padding:34px clamp(20px,5vw,62px) 75px;max-width:960px;background:var(--bg);color:var(--text);font-size:16px}
+body::selection{background:#286452;color:white}
+.mw-parser-output{color:var(--text);overflow-wrap:anywhere}
+p,li,dd,dt,td,th{color:var(--text)}
+p{margin:1.05em 0}
+h1,h2,h3,h4,h5,h6{font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important;color:var(--text)!important;line-height:1.3;letter-spacing:-.035em;font-weight:750}
+h2{font-size:1.65rem;margin:1.85em 0 .7em;border-bottom:1px solid var(--border);padding-bottom:11px}
+h3{font-size:1.25rem;margin:1.45em 0 .55em}
+h4{font-size:1.08rem}
+a,a:link,a:visited{color:var(--accent)!important;text-decoration-color:#76bd9a;text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{text-decoration-thickness:2px}
+img{max-width:100%;height:auto;border-radius:10px}
+figure,.thumb,.thumbinner,.tright,.tleft{float:none!important;margin:20px auto!important;max-width:100%!important}
+figure img,.thumbimage{max-height:480px;object-fit:contain;display:block}
+figcaption,.thumbcaption{font-size:.83rem;line-height:1.55;color:var(--muted)!important;margin-top:8px}
+.mw-parser-output>figure:first-child,.mw-parser-output>.thumb:first-child{margin-top:0!important}
+.mw-parser-output>figure:first-child img,.mw-parser-output>.thumb:first-child img{box-shadow:0 14px 38px #050b1270}
+.infobox,.wikitable,.toc,.vertical-navbox{background:var(--panel)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:12px!important;padding:12px!important}
+.infobox{float:right!important;width:min(310px,100%)!important;max-width:100%!important;margin:0 0 25px 25px!important;font-size:.86rem;line-height:1.5}
+.infobox th,.infobox td,.wikitable th,.wikitable td{background:transparent!important;color:var(--text)!important}
+.infobox img{max-width:100%}
+table{max-width:100%;border-collapse:collapse}
+.wikitable{display:block;overflow-x:auto}
+td,th{padding:8px;border:1px solid var(--border)}
+table[style*="background"],div[style*="background"]{background-color:transparent!important}
+.mw-editsection,.navbox,.metadata,.noprint,.ambox,.hatnote,.authority-control,.mw-empty-elt,.reflist,.shortdescription{display:none!important}
+sup.reference{font-size:.7rem}
+.toc{padding:18px!important}
+.toc ul{list-style:none;padding-left:15px}
+blockquote{border-left:3px solid var(--accent);background:var(--panel);border-radius:0 9px 9px 0;padding:12px 18px;margin:22px 0}
+ul,ol{padding-left:24px}
+li{margin:5px 0}
+hr{border:0;border-top:1px solid var(--border)}
+@media(max-width:650px){body{padding:22px 18px 55px;font-size:15.5px}.infobox{float:none!important;width:100%!important;margin:18px 0!important}h2{font-size:1.4rem}.thumb img,figure img{max-height:340px}}
+\`;
 return '<!doctype html><html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src https: data:; style-src \'unsafe-inline\'; font-src \'none\';"><base href="'+base+'" target="_blank"><style>'+css+'</style></head><body>'+article+'</body></html>';
 }
 async function openReader(pageId,lang,title,trigger){
