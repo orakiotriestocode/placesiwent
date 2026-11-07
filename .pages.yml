@@ -1,0 +1,60 @@
+media:
+  - name: travel_images
+    label: Travel photos
+    input: images/blog
+    output: /images/blog
+    categories: [image]
+    rename: safe
+
+content:
+  - name: posts
+    label: Travel articles
+    type: collection
+    path: _posts
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, date, category, published]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Article title
+        type: string
+        required: true
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Destinations, Hotels, Restaurants, Travel tips, Personal]
+      - name: location
+        label: Location
+        type: string
+      - name: description
+        label: Short introduction
+        type: text
+      - name: image
+        label: Cover photo
+        type: image
+        options:
+          media: travel_images
+      - name: published
+        label: Published (turn off to save as draft)
+        type: boolean
+        default: false
+      - name: layout
+        type: string
+        default: post
+        hidden: true
+      - name: body
+        label: Article
+        type: rich-text
+        options:
+          media: travel_images
+          path: images/blog
+          switcher: true
