@@ -277,21 +277,32 @@ meta.textContent=list.length+" restaurants · within "+restaurantCache.radius/10
 message("Found "+list.length+" restaurants. "+(rated?rated+" have unverified rating tags. ":"")+"Most OpenStreetMap restaurants have no customer ratings; "+(sort.value==="rating"?"unrated results are ordered by distance.":"sort by distance for the most useful view."));
 }
 async function queryRestaurants(lat,lon,radiusMeters){
-const q='[out:json][timeout:25];(node["amenity"="restaurant"](around:'+radiusMeters+','+lat+','+lon+');way["amenity"="restaurant"](around:'+radiusMeters+','+lat+','+lon+');relation["amenity"="restaurant"](around:'+radiusMeters+','+lat+','+lon+'););out center tags;';
-const endpoints=["https://overpass.kumi.systems/api/interpreter","https://overpass-api.de/api/interpreter"];
+const q='[out:json][timeout:12];(nwr["amenity"="restaurant"](around:'+radiusMeters+','+lat+','+lon+'););out center tags;';
+const endpoints=[
+"https://overpass.private.coffee/api/interpreter",
+"https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+"https://overpass-api.de/api/interpreter"
+];
 let lastError=null;
-for(const endpoint of endpoints){
+for(let i=0;i<endpoints.length;i++){
+const endpoint=endpoints[i];
+message("Looking up restaurants…"+(i?" trying another map server ("+(i+1)+"/"+endpoints.length+").":""));
+const controller=new AbortController();
+const abort=setTimeout(()=>controller.abort(),8500);
 try{
-const controller=new AbortController(),abort=setTimeout(()=>controller.abort(),18000);
-try{const response=await fetch(endpoint,{method:"POST",body:new URLSearchParams({data:q}),signal:controller.signal});
-if(!response.ok)throw Error("Overpass HTTP "+response.status);
+// A simple GET avoids the preflight OPTIONS request caused by cross-origin form POST.
+const url=endpoint+"?"+new URLSearchParams({data:q});
+const response=await fetch(url,{method:"GET",signal:controller.signal,headers:{Accept:"application/json"}});
+if(!response.ok)throw Error("HTTP "+response.status);
 const data=await response.json();
-if(!Array.isArray(data.elements))throw Error("Unexpected restaurant data");
+if(!Array.isArray(data.elements))throw Error("Invalid response");
 return data.elements;
+}catch(err){
+lastError=err;
+console.warn("Restaurant source unavailable",endpoint,err);
 }finally{clearTimeout(abort)}
-}catch(err){lastError=err;console.warn("Restaurant source unavailable",endpoint,err)}
 }
-throw lastError||Error("Restaurant data unavailable");
+throw Error("Public restaurant map services are busy or inaccessible. Please try again shortly."+(lastError&&lastError.name==="TypeError"?" (Network or cross-origin restriction.)":""));
 }
 async function scanRestaurants(){
 if(!navigator.geolocation)throw Error("Location not available in this browser");
