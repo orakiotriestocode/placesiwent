@@ -1,0 +1,9 @@
+title: Places I Went
+description: "Travel stories, hotel reviews, restaurant notes and useful discoveries."
+url: "https://placesiwent.eu"
+baseurl: ""
+timezone: Europe/Brussels
+permalink: /blog/:title/
+markdown: kramdown
+exclude:
+  - README.md
