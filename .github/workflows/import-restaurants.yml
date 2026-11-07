@@ -1,4 +1,5 @@
 name: Import OSM restaurant directory region
+# Refresh Belgium tiles to include opening_hours fields.
 on:
   push:
     paths:
