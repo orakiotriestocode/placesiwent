@@ -79,20 +79,20 @@ return fetch("https://"+encodeURIComponent(lang)+".wikipedia.org/w/api.php?"+q.t
 }
 function getPosition(){return new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(resolve,reject,{enableHighAccuracy:false,timeout:15000,maximumAge:60000}))}
 function nameOf(lang){return labelFor[lang]||lang.toUpperCase()}
-async function localLanguage(lat,lon){
+async function lookupArea(lat,lon){
 try{
-const url="https://nominatim.openstreetmap.org/reverse?"+new URLSearchParams({lat:String(lat),lon:String(lon),format:"jsonv2",zoom:"5",addressdetails:"1",accept_language:"en"});
-const response=await fetch(url,{headers:{Accept:"application/json"}});if(!response.ok)throw Error("Nominatim "+response.status);
+const url="https://nominatim.openstreetmap.org/reverse?"+new URLSearchParams({lat:String(lat),lon:String(lon),format:"jsonv2",zoom:"14",addressdetails:"1",accept_language:"en"});
+const response=await fetch(url,{headers:{Accept:"application/json"},signal:AbortSignal.timeout(6000)});if(!response.ok)throw Error("Nominatim "+response.status);
 const address=(await response.json()).address||{},country=(address.country_code||"").toLowerCase();
 if(country==="be"){
 const state=(address.state||"").toLowerCase(),county=(address.county||"").toLowerCase();
-if(state.includes("wallon")||state.includes("walloon")||state.includes("liège")||state.includes("namur")||state.includes("hainaut")||state.includes("luxembourg")||county.includes("liège"))return {lang:"fr",country};
-if(state.includes("brussels")||state.includes("bruxelles")||state.includes("brussel"))return {lang:"fr",country};
-return {lang:"nl",country};
+if(state.includes("wallon")||state.includes("walloon")||state.includes("liège")||state.includes("namur")||state.includes("hainaut")||state.includes("luxembourg")||county.includes("liège"))return {lang:"fr",address};
+if(state.includes("brussels")||state.includes("bruxelles")||state.includes("brussel"))return {lang:"fr",address};
+return {lang:"nl",address};
 }
-if(country==="ch"){return {lang:"de",country}}
-return {lang:countryLanguages[country]||"en",country};
-}catch(e){console.warn("Local language detection unavailable",e);return {lang:(navigator.language||"en").split("-")[0].toLowerCase(),country:null}}
+if(country==="ch"){return {lang:"de",address}}
+return {lang:countryLanguages[country]||"en",address};
+}catch(e){console.warn("Local language detection unavailable",e);return {lang:(navigator.language||"en").split("-")[0].toLowerCase(),address:{}}}
 }
 function makeCard(p,displayLang){
 const info=p.view||{},sourceLang=p.lang,translated=!!p.translated;
@@ -168,6 +168,66 @@ return places;
 }
 const mapPanel=document.getElementById("map-panel"),mapStatus=document.getElementById("map-status");
 const explorerMap=window.createExplorerMap(openReader);
+const areaCard=document.getElementById("where-am-i"),areaName=document.getElementById("area-name");
+const areaIntro=document.getElementById("area-intro"),areaSource=document.getElementById("area-source");
+const areaPlaces=document.getElementById("area-places");
+function resetArea(){
+areaCard.hidden=true;
+areaPlaces.replaceChildren();
+areaSource.hidden=true;
+}
+async function showArea(local,lat,lon,id){
+const address=local.address;
+const city=address.city||address.town||address.village||address.municipality;
+const district=address.neighbourhood||address.suburb||address.city_district||address.borough;
+const names=[...new Set([district,city].filter(Boolean))];
+areaCard.hidden=false;
+areaName.textContent=names.join(", ")||"Your current location";
+areaIntro.textContent=names.length?"Looking up an introduction…":"Your position is on the map. An area name wasn’t available.";
+if(!names.length)return;
+const selected=language.value==="local"?local.lang:language.value;
+for(const lang of new Set([selected,local.lang,"en"])){
+try{
+const data=await wiki({titles:names.join("|"),redirects:"1",prop:"extracts|coordinates|pageprops",ppprop:"disambiguation",coprimary:"primary",exintro:"1",explaintext:"1",exsentences:"2",exlimit:"max"},lang);
+if(id!==scanId)return;
+const query=data.query||{};
+const pages=Object.values(query.pages||{});
+for(const name of names){
+const normalized=query.normalized?.find(entry=>entry.from===name)?.to||name;
+const title=query.redirects?.find(entry=>entry.from===normalized)?.to||normalized;
+const page=pages.find(entry=>entry.title===title);
+const point=page?.coordinates?.[0];
+const maxDistance=name===city?35_000:6_000;
+if(!page?.extract?.trim()||!point||page.pageprops?.disambiguation!==undefined||
+!Number.isFinite(point.lat)||!Number.isFinite(point.lon)||haversine(lat,lon,point.lat,point.lon)>maxDistance)continue;
+areaIntro.textContent=page.extract.trim();
+areaIntro.lang=lang;
+areaSource.href="https://"+lang+".wikipedia.org/?curid="+page.pageid;
+areaSource.textContent="Wikipedia · "+page.title;
+areaSource.hidden=false;
+return;
+}
+}catch(error){console.warn("Area introduction unavailable",error)}
+if(id!==scanId)return;
+}
+areaIntro.textContent="A sourced introduction for this area wasn’t available.";
+}
+function showAreaPlaces(places){
+areaPlaces.replaceChildren();
+for(const place of places.filter(p=>Number.isFinite(p.lat)&&Number.isFinite(p.lon)).slice(0,3)){
+const item=document.createElement("li");
+const button=document.createElement("button");
+button.type="button";
+const distance=place.dist<1000?Math.round(place.dist)+" m":(place.dist/1000).toFixed(1)+" km";
+button.textContent=(place.translated?place.view?.title||place.title:place.title)+" · "+distance;
+button.addEventListener("click",()=>{
+if(explorerMap.focusPlace?.(place))mapPanel.scrollIntoView({block:"nearest"});
+else place.card.scrollIntoView({block:"nearest"});
+});
+item.append(button);
+areaPlaces.append(item);
+}
+}
 async function present(data){
 const displayLang=language.value==="local"?data.localLang:language.value;
 message("Harmonizing results into "+nameOf(displayLang)+"…");
@@ -184,8 +244,9 @@ if(seenNames.has(name))continue;
 if(id)seenIds.add(id);seenNames.add(name);deduped.push(p);
 }
 if(activeMode!=="poi"||data!==lastScan||displayLang!==(language.value==="local"?data.localLang:language.value))return;
-clear();deduped.forEach(p=>results.append(makeCard(p,displayLang)));
+clear();deduped.forEach(p=>{p.card=makeCard(p,displayLang);results.append(p.card)});
 explorerMap.showPoiMap(data,deduped,displayLang);
+showAreaPlaces(deduped);
 if(explorerMap.mappedScan===data)mapStatus.textContent="Tap a pin to see the place and open its Wikipedia article.";
 const unavailable=deduped.filter(p=>!p.translated).length;
 meta.textContent=deduped.length+" places · within "+(data.radius<1000?data.radius+" m":(data.radius/1000)+" km")+" · "+data.sourceLangs.join(" + ").toUpperCase()+" → "+nameOf(displayLang);
@@ -194,7 +255,7 @@ message("Found "+deduped.length+" nearby places, displayed in "+nameOf(displayLa
 async function run(){
 if(!navigator.geolocation){message("Your browser does not support location services.",true);return}
 if(!window.isSecureContext){message("Location requires a secure HTTPS connection.",true);return}
-const id=++scanId;lastScan=null;explorerMap.resetPoiMap();scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
+const id=++scanId;lastScan=null;resetArea();explorerMap.resetPoiMap();scan.disabled=true;scan.textContent="⌖  Scanning…";clear();meta.textContent="Finding your location";message("Requesting your location…");
 try{
 const position=await getPosition(),lat=position.coords.latitude,lon=position.coords.longitude;
 if(id!==scanId)return;
@@ -204,7 +265,9 @@ explorerMap.showPoiMap(mapScan,[]);
 if(explorerMap.poiLayer)mapStatus.textContent="Searching for nearby places to pin on the map…";
 const accuracy=Math.round(position.coords.accuracy||0);
 message("Location found"+(accuracy?" (±"+accuracy+" m).":"") +" Detecting local language…");
-const local=await localLanguage(lat,lon);
+const local=await lookupArea(lat,lon);
+if(id!==scanId)return;
+void showArea(local,lat,lon,id);
 const sourceLangs=[...new Set([local.lang,"en"])];
 message("Searching "+sourceLangs.map(nameOf).join(" and ")+" Wikipedia…");
 const scans=await Promise.allSettled(sourceLangs.map(async lang=>{
@@ -234,6 +297,7 @@ const languageField=document.getElementById("language-field"),sourceNote=documen
 const resultsHeading=document.getElementById("results-heading");
 let activeMode="poi",restaurantCache=null,restaurantRequest=0;
 function setMode(mode){
+resetArea();
 explorerMap.resetPoiMap();
 activeMode=mode;
 mapPanel.hidden=mode!=="poi";

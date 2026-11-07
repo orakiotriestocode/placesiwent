@@ -2,8 +2,10 @@ window.createExplorerMap=function(openReader){
 "use strict";
 const mapElement=document.getElementById("poi-map"),mapStatus=document.getElementById("map-status");
 let poiMap,poiLayer,mappedScan;
+const markers=new Map();
 function resetPoiMap(){
 mappedScan=null;
+markers.clear();
 if(poiLayer)poiLayer.clearLayers();
 }
 function initializePoiMap(){
@@ -28,6 +30,7 @@ if(!poiLayer)return;
 const L=window.L;
 try{
 poiMap.invalidateSize();
+markers.clear();
 poiLayer.clearLayers();
 const center=[data.lat,data.lon];
 const circle=L.circle(center,{radius:data.radius,color:"#2475d0",fillOpacity:.12,interactive:false}).addTo(poiLayer);
@@ -46,7 +49,7 @@ place.translated?displayLang:place.lang,title,button));
 const heading=document.createElement("p");
 heading.textContent=title;
 popup.append(heading,button);
-L.marker([place.lat,place.lon],{title,alt:title}).addTo(poiLayer).bindPopup(popup);
+markers.set(place,L.marker([place.lat,place.lon],{title,alt:title}).addTo(poiLayer).bindPopup(popup));
 }
 if(mappedScan!==data){
 poiMap.fitBounds(circle.getBounds(),{padding:[16,16],maxZoom:18});
@@ -63,5 +66,11 @@ mapElement.hidden=true;
 mapStatus.textContent="The map could not load. You can still scan and browse the list below.";
 console.warn("Nearby map unavailable",error);
 }
-return {resetPoiMap,showPoiMap,resize:()=>poiMap?.invalidateSize(),get poiLayer(){return poiLayer},get mappedScan(){return mappedScan}};
+function focusPlace(place){
+const marker=markers.get(place);
+if(!marker)return false;
+marker.openPopup();
+return true;
+}
+return {focusPlace,resetPoiMap,showPoiMap,resize:()=>poiMap?.invalidateSize(),get poiLayer(){return poiLayer},get mappedScan(){return mappedScan}};
 };

@@ -95,6 +95,11 @@ body.reader-open{overflow:hidden}
 .hours-panel{border-top:1px solid #304751;padding:11px 0;margin:5px 0 12px;color:#c0d0d4;font-size:.86rem}
 .hours-panel summary{cursor:pointer;color:#a5ecc9;font-weight:700;list-style-position:inside}
 .hours-panel p{margin:9px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
+#where-am-i{margin-bottom:16px;padding:16px 18px;border:1px solid #49626a;border-radius:12px;background:#162a35}
+#where-am-i h3{margin:5px 0}
+#area-intro{margin:8px 0}
+#area-places{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:12px 0 0}
+#area-places button{font:inherit;font-size:.85rem;color:#d6f6e5;background:#24424a;border:1px solid #49626a;border-radius:8px;padding:9px 12px;text-align:left}
 #map-panel{margin-bottom:18px}
 #poi-map{height:clamp(260px,48vh,430px);border:1px solid #49626a;border-radius:12px;background:#253946;isolation:isolate;color-scheme:light}
 .map-legend{margin:8px 0;color:#b6c8cc;font-size:.85rem}
@@ -126,6 +131,13 @@ body.reader-open{overflow:hidden}
 </section>
 <section aria-label="Nearby results">
 <div class="toolbar"><h2 id="results-heading">Nearby discoveries</h2><span id="meta" class="meta">Waiting for your first scan</span></div>
+<section id="where-am-i" aria-labelledby="area-name" hidden>
+<div class="eyebrow">Where am I?</div>
+<h3 id="area-name"></h3>
+<p id="area-intro"></p>
+<a id="area-source" hidden target="_blank" rel="noopener noreferrer"></a>
+<ul id="area-places" aria-label="Nearest places on this scan"></ul>
+</section>
 <div id="map-panel">
 <div id="poi-map" role="region" aria-label="Map of nearby Wikipedia places" hidden></div>
 <p id="map-status" class="map-legend" role="status">Loading the map…</p>
@@ -143,7 +155,7 @@ body.reader-open{overflow:hidden}
 <footer><span>© 2026 Places I Went · Explore nearby</span><span>Data from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="/">Homepage</a></span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
-<script src="/explore/poi-map.js?build=shared-map" defer></script>
-<script src="/explore/dev/explorer-v2.js?build=shared-map" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
+<script src="/explore/poi-map.js?build=where-am-i" defer></script>
+<script src="/explore/dev/explorer-v2.js?build=where-am-i" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
 </body>
 </html>
