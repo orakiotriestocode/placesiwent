@@ -59,6 +59,24 @@ footer a:hover{color:#86e4b7}
 @media(max-width:600px){.site-head{align-items:flex-start;flex-direction:column}nav{gap:14px}.hero{padding-top:48px}.grid{grid-template-columns:1fr}.scan-panel{padding:20px}.scan{width:100%}.controls{align-items:stretch}.field{flex:1}}
 
 .dev-banner{border:1px solid #c69748;background:#43351e;color:#ffe1a9;padding:14px 18px;border-radius:12px;margin:20px 0 0;display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;font-size:.9rem}.dev-banner strong{letter-spacing:.1em}.dev-banner a{color:#ffe1a9;text-decoration:underline;font-weight:750}
+
+/* DEV article reader */
+.reader[hidden]{display:none!important}
+.reader{position:fixed;inset:0;z-index:100;background:#071017e8;display:grid;place-items:center;padding:18px}
+.reader-shell{width:min(1050px,100%);height:min(92vh,1000px);background:#14232e;border:1px solid #52716f;border-radius:17px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 90px #0009}
+.reader-top{padding:18px 22px;border-bottom:1px solid #34515a;display:flex;gap:16px;align-items:center;justify-content:space-between}
+.reader-top h2{font-size:1.18rem;margin:4px 0 0;line-height:1.3}
+.reader-label{font-size:.68rem;letter-spacing:.18em;color:#83dfb4;text-transform:uppercase;font-weight:800}
+.reader-close{background:#29424a;color:#e3f5e9;border:1px solid #4d6e70;border-radius:9px;padding:11px 14px;font-weight:700;white-space:nowrap}
+.reader-close:hover{background:#345862}
+.reader-frame{width:100%;flex:1;border:0;background:#f9f8f4;color:#151515}
+.reader-footer{padding:13px 22px;border-top:1px solid #34515a;display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:.78rem;color:#bdd0d1;flex-wrap:wrap}
+.reader-footer a{color:#a5ecc9;text-decoration:underline}
+.reader-trigger{background:transparent;color:#a5ecc9;font-size:.87rem;font-weight:800;border:0;padding:0;text-align:left}
+.reader-trigger:hover{text-decoration:underline}
+body.reader-open{overflow:hidden}
+@media(max-width:600px){.reader{padding:0}.reader-shell{height:100dvh;width:100%;border:0;border-radius:0}.reader-top{padding:12px 15px}.reader-footer{padding:10px 15px}}
+
 </style>
 </head>
 <body><div class="wrap">
@@ -88,6 +106,12 @@ footer a:hover{color:#86e4b7}
 <div id="results" class="grid"><div class="empty" style="grid-column:1/-1">📍 Your nearby places will appear here.</div></div>
 </section>
 </main>
+<div id="article-reader" class="reader" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
+<div class="reader-shell">
+<div class="reader-top"><div><span class="reader-label">Wikipedia · In-app reader / DEV</span><h2 id="reader-title">Article</h2></div><button type="button" id="reader-close" class="reader-close">✕ Close</button></div>
+<iframe id="reader-frame" class="reader-frame" title="Wikipedia article content" sandbox="allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+<div class="reader-footer"><span>Wikipedia contributors · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> (article-specific exceptions may apply)</span><a id="reader-original" href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">View original / history ↗</a></div>
+</div></div>
 <footer><span>© 2026 Places I Went · Explore nearby</span><span>Data from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="/">Homepage</a></span></footer>
 </div>
 <script>
@@ -95,6 +119,32 @@ footer a:hover{color:#86e4b7}
 "use strict";
 const scan=document.getElementById("scan"),radius=document.getElementById("radius"),language=document.getElementById("language");
 const status=document.getElementById("status"),results=document.getElementById("results"),meta=document.getElementById("meta");
+const reader=document.getElementById("article-reader"),readerFrame=document.getElementById("reader-frame"),readerTitle=document.getElementById("reader-title"),readerOriginal=document.getElementById("reader-original"),readerClose=document.getElementById("reader-close");
+let lastReaderTrigger=null,readerSequence=0;
+function closeReader(){readerSequence++;reader.hidden=true;document.body.classList.remove("reader-open");readerFrame.removeAttribute("srcdoc");if(lastReaderTrigger)lastReaderTrigger.focus()}
+readerClose.addEventListener("click",closeReader);
+reader.addEventListener("click",event=>{if(event.target===reader)closeReader()});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!reader.hidden)closeReader()});
+function readerDocument(article,lang){
+const base="https://"+lang+".wikipedia.org/";
+const css=`*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75;margin:0 auto;padding:25px clamp(16px,5vw,56px) 75px;max-width:960px;background:#fcfbf7;color:#202b30;font-size:16px}h2,h3,h4{font-family:Georgia,serif;line-height:1.3;margin:1.4em 0 .4em;color:#152b34}h2{font-size:1.55rem;border-bottom:1px solid #d8e0db;padding-bottom:7px}h3{font-size:1.25rem}a{color:#176e66;overflow-wrap:anywhere}a:hover{text-decoration:underline}img{max-width:100%;height:auto}figure{margin:20px auto;max-width:100%}figcaption{font-size:.8rem;color:#5c6b6d}.thumb,.thumbinner,.tright,.tleft{max-width:100%;float:none!important;margin:18px auto!important}.infobox{float:right;max-width:300px;width:100%;margin:5px 0 20px 25px;background:#f0f4f2;border:1px solid #c8d6d1;border-radius:8px;padding:10px;font-size:.85rem}table{max-width:100%;display:block;overflow:auto;border-collapse:collapse}td,th{padding:6px;border:1px solid #d3ddd9}.mw-editsection,.navbox,.vertical-navbox,.metadata,.noprint,.ambox,.hatnote,.authority-control,.mw-empty-elt,.reflist{display:none!important}sup.reference{font-size:.7rem}.toc{border:1px solid #d5e2dc;padding:12px;border-radius:10px}blockquote{border-left:3px solid #82b69b;padding-left:16px}p{margin:.8em 0}ul,ol{padding-left:24px}@media(max-width:650px){.infobox{float:none;width:100%;margin:12px auto}.mw-parser-output{overflow-wrap:anywhere}}`;
+return '<!doctype html><html lang="'+lang+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; img-src https: data:; style-src \'unsafe-inline\'; font-src \'none\';"><base href="'+base+'" target="_blank"><style>'+css+'</style></head><body>'+article+'</body></html>';
+}
+async function openReader(pageId,lang,title,trigger){
+lastReaderTrigger=trigger;const seq=++readerSequence;
+readerTitle.textContent=title;readerOriginal.href="https://"+lang+".wikipedia.org/?curid="+encodeURIComponent(pageId);
+reader.hidden=false;document.body.classList.add("reader-open");readerClose.focus();
+readerFrame.srcdoc=readerDocument('<p>Loading Wikipedia article…</p>',lang);
+try{
+const data=await wiki({action:"parse",pageid:String(pageId),prop:"text",disableeditsection:"1",disabletoc:"0",redirects:"1",formatversion:"2"},lang);
+if(seq!==readerSequence)return;
+const html=data.parse&&data.parse.text;
+if(!html)throw Error("No readable article content returned");
+readerTitle.textContent=data.parse.title||title;
+readerFrame.srcdoc=readerDocument(html,lang);
+}catch(err){if(seq!==readerSequence)return;readerFrame.srcdoc=readerDocument('<h2>Could not open this article</h2><p>Please use the original Wikipedia link below.</p>',lang);console.warn(err)}
+}
+
 const countryLanguages={be:"nl",nl:"nl",fr:"fr",de:"de",at:"de",ch:"de",lu:"fr",es:"es",pt:"pt",it:"it",gb:"en",ie:"en",us:"en",ca:"en",au:"en",nz:"en",jp:"ja",cn:"zh",tw:"zh",kr:"ko",in:"hi",br:"pt",mx:"es",ar:"es",cl:"es",co:"es",pe:"es",gr:"el",tr:"tr",pl:"pl",cz:"cs",sk:"sk",hu:"hu",ro:"ro",bg:"bg",rs:"sr",hr:"hr",si:"sl",ua:"uk",ru:"ru",se:"sv",no:"no",dk:"da",fi:"fi",ee:"et",lv:"lv",lt:"lt",is:"is",il:"he",sa:"ar",ae:"ar",eg:"ar",ma:"ar",th:"th",vn:"vi",id:"id",my:"ms",ph:"tl",za:"en"};
 const labelFor={en:"English",nl:"Dutch",fr:"French",de:"German",es:"Spanish",it:"Italian",pt:"Portuguese",ja:"Japanese",zh:"Chinese",ko:"Korean",hi:"Hindi"};
 let lastScan=null,scanId=0;
@@ -134,8 +184,9 @@ const tag=document.createElement("span");tag.className="kicker";tag.textContent=
 const heading=document.createElement("h3");heading.textContent=translated?info.title:p.title;
 const description=document.createElement("p");
 description.textContent=translated?(info.extract||"Explore this place and its history on Wikipedia.").slice(0,300):"No "+nameOf(displayLang)+" Wikipedia article is available for this place yet. Open the original "+nameOf(sourceLang)+" article to learn more.";
-const link=document.createElement("a"),linkLang=translated?displayLang:sourceLang,linkId=translated?info.pageid:p.pageid;
-link.href="https://"+linkLang+".wikipedia.org/?curid="+encodeURIComponent(linkId);link.target="_blank";link.rel="noopener noreferrer";link.textContent="Explore on Wikipedia ↗";
+const linkLang=translated?displayLang:sourceLang,linkId=translated?info.pageid:p.pageid;
+const link=document.createElement("button");link.type="button";link.className="reader-trigger";link.textContent="Read article here ↗";
+link.addEventListener("click",()=>openReader(linkId,linkLang,heading.textContent,link));
 body.append(tag,heading,description,link);card.append(visual,body);return card;
 }
 async function getSourceDetails(places,langs){
