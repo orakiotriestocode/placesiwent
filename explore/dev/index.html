@@ -110,7 +110,7 @@ body.reader-open{overflow:hidden}
 <button class="scan" id="scan" type="button">⌖ &nbsp; Scan — what's near?</button>
 <label class="field">Search radius<select id="radius"><option value="1000" selected>1 km · Walking distance</option><option value="3000">3 km · Around me</option><option value="5000">5 km · Nearby</option><option value="10000">10 km · Explore further</option></select></label>
 <label class="field" id="language-field">Display language<select id="language"><option value="en" selected>English</option><option value="nl">Nederlands</option><option value="local">Local language (auto-detect)</option></select></label>
-<label class="field" id="sort-field" hidden>Sort restaurants<select id="sort"><option value="distance" selected>Nearest first</option><option value="rating">Highest rated first</option></select></label>
+
 </div>
 <p class="note" id="source-note">Your browser will ask for location permission. We use your coordinates only to request nearby Wikipedia entries in the local language and English; your location is not saved on Places I Went. Wikipedia and OpenStreetMap's Nominatim service receive coordinates to provide the results.</p>
 <div id="status" class="status" role="status" aria-live="polite">Ready to discover? Press scan and allow location access.</div>
@@ -128,6 +128,6 @@ body.reader-open{overflow:hidden}
 </div></div>
 <footer><span>© 2026 Places I Went · Explore nearby</span><span>Data from <a href="https://www.wikipedia.org/" target="_blank" rel="noopener noreferrer">Wikipedia</a> · <a href="/">Homepage</a></span></footer>
 </div>
-<script src="/explore/dev/explorer-v2.js?build=restaurants-2" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
+<script src="/explore/dev/explorer-v2.js?build=static-directory-1" defer onerror="document.getElementById('status').textContent='DEV script failed to load. Please hard-refresh and retry.'"></script>
 </body>
 </html>
