@@ -1,0 +1,510 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>MESH Collective DEV — Inspectorate</title><style>:root{font-family:Inter,Segoe UI,Arial,sans-serif;color-scheme:dark;--bg:#0d1a24;--fg:#e4eded;--muted:#a5bfc5;--orange:#ef9631}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-size:14px}header{display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center;gap:12px;padding:20px 24px;border-bottom:1px solid #2c4450}h1{margin:0;color:var(--orange);font-size:19px}header p{margin:5px 0 0;color:var(--muted);font-size:12px}.logo{font-size:25px;font-weight:800}.logo i{color:#09894c;font-style:normal}.top{position:sticky;top:0;z-index:10;background:#122631;padding:14px 24px;border-bottom:1px solid #334a55;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.views,.env{display:flex;gap:5px;flex-wrap:wrap}button,a.switch{font:inherit;cursor:pointer;border:1px solid #45616b;border-radius:8px;background:#1b3541;color:var(--fg);padding:9px 12px;text-decoration:none}button:hover,a.switch:hover{background:#31515f}.active{background:#176754!important;border-color:#3fac8e!important}.env{margin-left:auto}.env .switch{font-weight:700}.env .dev{border-color:#eea348}.label{color:var(--muted);font-size:12px}input{background:#0b1e29;border:1px solid #45616b;color:var(--fg);padding:10px;border-radius:8px;min-width:160px}main{padding:24px;min-height:70vh}.intro{max-width:850px;color:var(--muted);line-height:1.6;margin:0 0 18px}.stats{font-size:12px;color:#a5c5cb;margin-bottom:16px}.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start;gap:14px}.group{background:#112632;border:1px solid #344c59;border-radius:12px;overflow:hidden}.group h2{font-size:14px;background:#1b3441;padding:14px;margin:0;display:flex;justify-content:space-between;gap:8px}.group h2 small{color:var(--muted);font-weight:400}.cards{display:grid;gap:9px;padding:10px;min-height:18px}.person{display:block;width:100%;text-align:left;min-height:63px;padding:11px 14px;border:1px solid #ffffff40;border-radius:7px;background:#658272;color:white;box-shadow:0 2px 5px #0003}.person strong{display:block;font-size:13px}.person span{display:block;font-size:11px;line-height:1.45;margin-top:4px;color:#e4ebed}.person.engagement,.person.delivery,.person.vacancy{background:#6d9dab}.person.existing{background:#927008}.person.executive{background:#124532}.person.vacancy{outline:1px dashed #fff6}.dim{opacity:.2}footer{padding:20px;color:#729a96;font-size:11px;border-top:1px solid #253e49}dialog{background:#172d38;color:var(--fg);border:1px solid #587782;border-radius:12px;width:min(480px,95vw);box-shadow:0 12px 60px #000a}dialog::backdrop{background:#000a}dialog h2{margin-top:0}form label{display:block;margin:12px 0 5px;font-size:12px;color:#b1cdd2}form input,form select{display:block;width:100%}form .actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}.notice{color:#b5c9c9;font-size:12px}.mode{padding:5px 9px;border-radius:6px;background:#2d5260;font-weight:800}.mode.dev{background:#775015}#file{display:none}@media(max-width:700px){header,.top{padding:13px}main{padding:13px}.env{margin-left:0}.groups{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}.env{position:absolute;right:22px;top:70px;margin:0;z-index:20}.single-switch{display:inline-flex;gap:7px;align-items:center;padding:6px 10px;font-size:11px;letter-spacing:.08em;background:#1c3540;border-color:#47626a;opacity:.82}.single-switch:hover{opacity:1}@media(max-width:700px){.env{right:12px;top:66px}.single-switch{padding:6px 8px}}.top{padding-right:110px}@media(max-width:700px){.top{padding-right:75px}}.classic-scroll{overflow:auto;max-width:100%;border:1px solid #34515e;border-radius:12px;background:#0b1822;min-height:430px}.classic-stage{position:relative;min-width:max-content;padding:28px 36px 65px}.classic-levels{display:flex;align-items:flex-start;gap:105px;position:relative;z-index:2}.classic-column{width:220px;display:flex;flex-direction:column;gap:14px;flex-shrink:0}.classic-column .person{min-height:66px}.classic-column h3{margin:0 0 5px;font-size:11px;color:#8faeb7;text-transform:uppercase;letter-spacing:.08em}.classic-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}.classic-help{margin:10px 0 18px;color:#abc1c8;font-size:12px}.legend-solid,.legend-dotted{display:inline-block;width:27px;border-top:2px solid #8cbdb3;vertical-align:middle;margin:0 5px 0 15px}.legend-dotted{border-top-style:dotted;border-color:#edb55d}.classic-column .person:focus{outline:3px solid #f0b759}@media(max-width:700px){.classic-column{width:185px}.classic-levels{gap:75px}}.classic-controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 14px}.classic-control{display:flex;align-items:center;gap:5px;flex-wrap:wrap}.classic-control span{font-size:12px;color:#abc1c8;margin-right:4px}.classic-control button{padding:7px 10px;font-size:12px}.classic-stage-tree{position:relative;min-width:100%;min-height:420px}.classic-node{position:absolute;z-index:2;overflow:hidden;padding:9px 11px;transition:box-shadow .2s}.classic-node strong{font-size:12px}.classic-node span{font-size:10px}.classic-node:hover{box-shadow:0 0 0 2px #e7b357}.classic-lines{z-index:1}.classic-help{margin:7px 0 14px}.release-meta{display:inline-block;margin-left:14px;color:#9dbec4;font-size:12px;font-weight:500;vertical-align:middle;letter-spacing:0}.data-actions{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap}.data-actions label{color:#a5bfc5;font-size:12px}.data-actions select{background:#1b3541;border:1px solid #45616b;color:var(--fg);padding:9px 6px;border-radius:7px;font:inherit;font-size:12px;cursor:pointer}.data-actions button{font-size:12px}.data-divider{height:24px;border-left:1px solid #47616d;margin:0 7px}@media(max-width:750px){.release-meta{display:block;margin:4px 0 0;font-size:11px}.data-actions{margin-left:0;width:100%;justify-content:flex-start}}.org-link{transition:opacity .16s,stroke-width .16s}.org-muted{opacity:.12!important}.org-emphasis{stroke-width:3.3!important}.classic-node{transition:opacity .16s,box-shadow .16s}.classic-node.org-muted{opacity:.2!important}.arrangement-control{margin-left:10px;border-left:1px solid #46606b;padding-left:12px}.rearrange-node{cursor:grab;touch-action:none;user-select:none}.rearrange-node.dragging{z-index:5!important;cursor:grabbing;box-shadow:0 0 0 3px #f4b35e,0 10px 28px #000a!important}.rearrange-node strong,.rearrange-node span{pointer-events:none}.rearrange-node{overscroll-behavior:contain;-webkit-user-select:none}.classic-scroll{overscroll-behavior:contain}.dragging-branch{box-shadow:0 0 0 2px #cfac63!important;z-index:4!important}.dragging-branch.dragging{box-shadow:0 0 0 3px #f4b35e,0 10px 28px #000a!important;z-index:5!important}.manager-hint{font-size:11px;color:#8fb2bd;margin:4px 0 8px}#form input[list]{width:100%}.person.former-person{background:#53606b!important;border-color:#8c9399!important;color:#c0c7ce!important;opacity:.66}.person.former-person strong,.person.former-person span:not(.tenure-card-detail){text-decoration:line-through}.person.former-person:hover{opacity:.95}.tenure-card-detail{font-size:10px!important;color:#d3e1de!important;margin-top:4px}.classic-node .tenure-card-detail{font-size:9px!important}.seniority-view{display:block;max-width:1150px;margin:0 auto}.seniority-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.seniority-heading{font-weight:750;font-size:19px;color:#eac385}.seniority-sort{display:flex;gap:6px}.seniority-caption{font-size:12px;color:#a5bfc5;margin-bottom:22px}.seniority-section{background:#112631;border:1px solid #354c58;border-radius:13px;padding:16px;margin-bottom:20px}.seniority-section h2{font-size:14px;margin:0 0 14px;color:#b5d7d0}.seniority-entry{display:grid;grid-template-columns:105px minmax(175px,310px) minmax(120px,1fr);gap:13px;align-items:center;padding:7px 0;border-bottom:1px solid #2e4550}.seniority-entry:last-child{border:0}.seniority-number{font-weight:800;text-align:right;color:#e9b565;font-size:13px;white-space:nowrap}.seniority-person{width:100%;min-height:67px}.tenure-track{background:#203744;height:12px;border-radius:12px;overflow:hidden}.tenure-fill{height:100%;background:linear-gradient(90deg,#296c6c,#e6ad59);border-radius:12px;transition:width .55s ease}@media(max-width:700px){.seniority-entry{grid-template-columns:75px minmax(150px,1fr);gap:8px}.seniority-number{font-size:11px}.tenure-track{grid-column:2;margin-top:-3px}.seniority-section{padding:9px}}.person:not(.classic-node){position:relative}.classic-node{position:absolute}.person-flag{position:absolute;right:7px;top:6px;margin:0!important;font-size:16px!important;line-height:1!important;color:inherit!important;pointer-events:none;filter:drop-shadow(0 1px 1px #0006);text-decoration:none!important}.person:has(.person-flag) strong{padding-right:22px}#form select{display:block;width:100%;border-radius:8px;background:#0b1e29;border:1px solid #45616b;color:var(--fg);padding:9px;font:inherit}.classic-node .person-flag{font-size:14px!important}.image-export-control{border-left:1px solid #46606b;padding-left:12px}.image-export-control select{font:inherit;font-size:12px;background:#0c2631;color:#e4eded;border:1px solid #45616b;border-radius:7px;padding:7px 8px}.image-export-control button:disabled{opacity:.55;cursor:wait}</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.19.1" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></nav><main><p class="intro">One team, multiple views. Switch between pillars, regions, countries, products, and reporting lines: each card animates into its new position. Click a person to edit their details. Missing geographic and product assignments remain unassigned until entered.</p><div id="stats" class="stats"></div><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Changes are saved in this browser only. MESH and MESH DEV have separate local data. Export JSON to keep or transfer a copy.</p><form id="form" method="dialog"></form></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
+const fields=['name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+const base=RAW.split('\n').map((r,i)=>{const a=r.split('|');return Object.fromEntries([['id','p'+i],...fields.map((k,j)=>[k,(k==='functionalManager'||k==='hierarchyLevel'||k==='startDate'||k==='endDate')?'':a[j>8?j-2:j]||''])])});
+const storage='mesh-team-'+MODE+'-v2';let people;try{people=JSON.parse(localStorage.getItem(storage))||base}catch(e){people=base}if(!Array.isArray(people))people=base;
+const areas=['North America','South America','Western Europe','Africa','Middle East','Asia Pacific'],pillars=['Executive','Business Transformation','Engagement','Delivery','Assurance','Architecture','Data & AI','Product','Engineering'];
+const viewStorageKey='mesh-selected-view-'+MODE;
+const availableViews=new Set(['pillar','region','country','product','hierarchy','classic','seniority']);
+let savedView;try{savedView=localStorage.getItem(viewStorageKey)}catch(e){}
+let view=availableViews.has(savedView)?savedView:'classic',filter='',editing=null;
+let seniorityOrder=localStorage.getItem('mesh-seniority-order-'+MODE)==='asc'?'asc':'desc';const root=document.getElementById('groups'),cache=new Map(),dialog=document.getElementById('editor');
+let lastRenderedView=null;
+function prepareView(next){if(lastRenderedView!==next){cache.clear();lastRenderedView=next}}
+function persist(){localStorage.setItem(storage,JSON.stringify(people))}
+const COUNTRY_CODES='AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW'.split(' ');
+const countryDisplay=typeof Intl.DisplayNames==='function'?new Intl.DisplayNames(['en'],{type:'region'}):null;
+const countryAliases={'UK':'GB','GREAT BRITAIN':'GB','ENGLAND':'GB','UNITED KINGDOM':'GB','USA':'US','UNITED STATES OF AMERICA':'US','UNITED STATES':'US','UAE':'AE','UNITED ARAB EMIRATES':'AE','SOUTH KOREA':'KR','NORTH KOREA':'KP','CZECH REPUBLIC':'CZ','THE NETHERLANDS':'NL','HOLLAND':'NL','VIET NAM':'VN','RUSSIA':'RU','TURKEY':'TR','TAIWAN':'TW','HONG KONG':'HK','MACAU':'MO'};
+const countryLabel=code=>{if(!code)return '';try{return countryDisplay?.of(code)||code}catch(e){return code}};
+const countryCode=value=>{const raw=String(value||'').trim();if(!raw)return '';const upper=raw.toUpperCase();if(COUNTRY_CODES.includes(upper))return upper;if(countryAliases[upper])return countryAliases[upper];return COUNTRY_CODES.find(code=>countryLabel(code).toUpperCase()===upper)||''};
+const countryText=value=>countryLabel(countryCode(value))||String(value||'').trim();
+const flagEmoji=code=>{if(!/^[A-Z]{2}$/.test(code))return '';return String.fromCodePoint(...[...code].map(c=>127397+c.charCodeAt(0)))};
+const countryOptions=COUNTRY_CODES.map(code=>({code,name:countryLabel(code)})).sort((a,b)=>a.name.localeCompare(b.name));
+function key(p){return view==='pillar'?(p.pillar||'Unassigned pillar'):view==='region'?(p.region||'Unassigned region'):view==='country'?(countryText(p.country)||'Unassigned country'):view==='product'?(p.product||'').split(',')[0].trim()||'Unassigned product':p.manager||'Top level / unassigned manager'}
+
+function parseISODate(value){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value||'').trim());if(!m)return null;const d=new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));return d.getUTCFullYear()===+m[1]&&d.getUTCMonth()===+m[2]-1&&d.getUTCDate()===+m[3]?d:null}
+function todayUTC(){const now=new Date();const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now);const take=t=>parts.find(x=>x.type===t).value;return new Date(Date.UTC(+take('year'),+take('month')-1,+take('day')))}
+function ended(p){const end=parseISODate(p.endDate);return !!end&&end<=todayUTC()}
+function tenure(p){const from=parseISODate(p.startDate);if(!from)return null;const end=parseISODate(p.endDate);const until=end&&end<todayUTC()?end:todayUTC();if(from>until)return {years:0,months:0,total:0,future:true};
+ let months=(until.getUTCFullYear()-from.getUTCFullYear())*12+until.getUTCMonth()-from.getUTCMonth();if(until.getUTCDate()<from.getUTCDate())months--;months=Math.max(0,months);
+ return {years:Math.floor(months/12),months:months%12,total:months,future:false};
+}
+function tenureText(p){const t=tenure(p);if(!t)return 'Start date unknown';if(t.future)return 'Starts in the future';return t.years+' yr'+(t.years===1?'':'s')+(t.months?' '+t.months+' mo':'')}
+function card(p,showSeniority=true){let el=cache.get(p.id);if(!el){el=document.createElement('button');el.type='button';el.className='person';el.addEventListener('click',()=>edit(p.id));cache.set(p.id,el)}
+ el.className='person '+(p.type||'engineering');
+ // Cached cards must never inherit absolute positions or dimensions from Classic.
+ for(const prop of ['left','top','width','height','right','bottom'])el.style.removeProperty(prop);
+ el.removeAttribute('data-person-id');el.dataset.justDragged='no';
+ el.classList.toggle('former-person',ended(p));
+ el.replaceChildren();const code=countryCode(p.country);if(code){const flag=document.createElement('span');flag.className='person-flag';flag.textContent=flagEmoji(code);flag.setAttribute('aria-label',countryLabel(code));flag.title=countryLabel(code);el.append(flag)}const n=document.createElement('strong');n.textContent=p.name;const r=document.createElement('span');r.textContent=p.role;el.append(n,r);
+ if(showSeniority&&(p.startDate||p.endDate)){const status=document.createElement('span');status.className='tenure-card-detail';status.textContent=(p.startDate?tenureText(p):'')+(p.startDate&&p.endDate?' · ':'')+(p.endDate?'End: '+p.endDate:'');el.append(status)}
+ el.title=p.name+(p.country?' · '+countryText(p.country):'')+(p.startDate?' · Started '+p.startDate:'')+(p.endDate?' · End '+p.endDate:'');
+ el.classList.toggle('dim',!!filter&&![p.name,p.role,p.pillar,p.region,p.country,p.product,p.startDate,p.endDate].join(' ').toLowerCase().includes(filter));return el
+}
+
+
+const classicDirection='down'; // Classic org chart uses the top-down layout only.
+let classicAlign=localStorage.getItem('mesh-classic-align')||'center';
+let rearrangeEnabled=true;
+
+async function exportClassicImage(stage,format){
+ if(!stage)throw Error('No org chart is visible');
+ const svgNS='http://www.w3.org/2000/svg';
+ const make=(tag,attrs={},value)=>{const node=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,String(v));if(value!==undefined)node.textContent=value;return node};
+ const width=Math.ceil(Math.max(stage.scrollWidth,stage.offsetWidth));
+ const height=Math.ceil(Math.max(stage.scrollHeight,stage.offsetHeight));
+ if(width<1||height<1)throw Error('The chart has invalid dimensions');
+ // Canvas limits differ between browsers. SVG can always represent the whole chart.
+ if(format!=='svg'&&(width>14000||height>14000||width*height>55000000))throw Error('This chart is too large for a browser bitmap. Please choose SVG instead.');
+ const chart=make('svg',{xmlns:svgNS,version:'1.1',width,height,viewBox:'0 0 '+width+' '+height});
+ chart.append(make('rect',{x:0,y:0,width,height,fill:'#0b1822'}));
+ // Clone the exact paths of the on-screen solid and dotted reporting lines.
+ const onScreenLines=stage.querySelector('.classic-lines');
+ if(onScreenLines){
+  const originalView=onScreenLines.getAttribute('viewBox');
+  const pathContainer=make('svg',{x:0,y:0,width,height,viewBox:originalView||('0 0 '+width+' '+height),overflow:'visible'});
+  for(const line of onScreenLines.querySelectorAll('path')){
+   const attributes={d:line.getAttribute('d'),fill:'none',stroke:line.getAttribute('stroke')||'#89c5b5','stroke-width':line.getAttribute('stroke-width')||'2','stroke-linecap':'round','stroke-linejoin':'round'};
+   if(line.getAttribute('stroke-dasharray'))attributes['stroke-dasharray']=line.getAttribute('stroke-dasharray');
+   pathContainer.append(make('path',attributes));
+  }
+  chart.append(pathContainer);
+ }
+ const ctx=document.createElement('canvas').getContext('2d');
+ const splitLines=(value,maxPixel,font,limit)=>{ctx.font=font;const lines=[];let current='';
+  for(const word of String(value||'').split(/\s+/)){const joined=current?current+' '+word:word;
+   if(ctx.measureText(joined).width<=maxPixel||!current)current=joined;
+   else{lines.push(current);current=word}
+  }
+  if(current)lines.push(current);
+  if(lines.length>limit){const kept=lines.slice(0,limit);let last=kept[limit-1];while(last.length&&ctx.measureText(last+'…').width>maxPixel)last=last.slice(0,-1);kept[limit-1]=last+'…';return kept}
+  return lines;
+ };
+ function drawText(parent,text,x,y,fill,size,weight,maxWidth,lineLimit,lineHeight){
+  const font=weight+' '+size+'px Arial, sans-serif';
+  const lines=splitLines(text,maxWidth,font,lineLimit);
+  lines.forEach((value,i)=>parent.append(make('text',{x,y:y+i*lineHeight,fill,'font-family':'Arial, sans-serif','font-size':size,'font-weight':weight},value)));
+  return lines.length;
+ }
+ const point=(node,property)=>parseFloat(node.style[property])||0;
+ for(const el of stage.querySelectorAll('.classic-node')){
+  const x=point(el,'left'),y=point(el,'top'),w=point(el,'width')||190,h=point(el,'height')||62;
+  const style=getComputedStyle(el);
+  const isFormer=el.classList.contains('former-person');
+  const fill=isFormer?'#53606b':style.backgroundColor||'#658272';
+  const group=make('g',{opacity:isFormer?'.68':'1'});
+  group.append(make('rect',{x,y,width:w,height:h,rx:7,ry:7,fill,stroke:'#ffffff55','stroke-width':1}));
+  if(el.classList.contains('vacancy'))group.append(make('rect',{x:x+1,y:y+1,width:w-2,height:h-2,rx:6,ry:6,fill:'none',stroke:'#f0f4f4','stroke-dasharray':'3 4',opacity:'.5'}));
+  const name=el.querySelector('strong')?.textContent||'',role=el.querySelector('span:not(.person-flag):not(.tenure-card-detail)')?.textContent||'';
+  const tenure=el.querySelector('.tenure-card-detail')?.textContent||'';
+  const flag=el.querySelector('.person-flag')?.textContent||'';
+  const available=w-(flag?46:23);
+  const nameCount=drawText(group,name,x+11,y+18,isFormer?'#d5dce1':'#ffffff',12,700,available,2,13);
+  const roleY=y+18+nameCount*13;
+  const roleCount=drawText(group,role,x+11,roleY,isFormer?'#d1d9dc':'#e4ebed',9,400,w-22,tenure?1:2,11);
+  if(tenure&&roleY+roleCount*11+10<y+h)drawText(group,tenure,x+11,roleY+roleCount*11+2,'#d8e1e1',8,400,w-22,1,10);
+  if(flag)group.append(make('text',{x:x+w-8,y:y+19,'font-size':16,'text-anchor':'end','font-family':'Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji, sans-serif'},flag));
+  if(isFormer){group.append(make('line',{x1:x+10,y1:y+14,x2:x+Math.min(w-20,10+name.length*7),y2:y+14,stroke:'#d6dce0','stroke-width':1}));}
+  chart.append(group);
+ }
+ const serialized=new XMLSerializer().serializeToString(chart);
+ const blobSvg=new Blob([serialized],{type:'image/svg+xml;charset=utf-8'});
+ const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ const filename='org-chart-'+date;
+ function save(blob,extension){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'.'+extension;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000)}
+ if(format==='svg'){save(blobSvg,'svg');return}
+ const url=URL.createObjectURL(blobSvg);
+ try{
+  const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('Could not render chart for '+format.toUpperCase()));img.src=url});
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const draw=canvas.getContext('2d');if(!draw)throw Error('Canvas graphics are unavailable');
+  draw.fillStyle='#0b1822';draw.fillRect(0,0,width,height);draw.drawImage(img,0,0,width,height);
+  const mime=format==='jpeg'?'image/jpeg':'image/png';
+  const imageBlob=await new Promise(resolve=>canvas.toBlob(resolve,mime,format==='jpeg'?0.92:undefined));
+  if(!imageBlob)throw Error('The browser could not encode the exported image');
+  save(imageBlob,format==='jpeg'?'jpg':'png');
+ }finally{URL.revokeObjectURL(url)}
+}
+
+function renderClassic(){
+ prepareView('classic');
+ // New DOM nodes avoid accumulating drag handlers and stale pointer capture.
+ cache.clear();
+ root.className='classic-scroll';root.replaceChildren();
+ let controls=document.getElementById('classic-controls');
+ if(!controls){controls=document.createElement('div');controls.id='classic-controls';controls.className='classic-controls';root.before(controls)}
+ controls.replaceChildren();
+ function control(label,options,selected,change){
+  const wrap=document.createElement('div');wrap.className='classic-control';
+  const t=document.createElement('span');t.textContent=label;wrap.append(t);
+  for(const [value,caption] of options){const b=document.createElement('button');b.type='button';b.textContent=caption;b.className=value===selected?'active':'';b.setAttribute('aria-pressed',value===selected?'true':'false');b.onclick=()=>{change(value);renderClassic()};wrap.append(b)}
+  controls.append(wrap);
+ }
+ control('Leader alignment',[['top','Top'],['center','Center'],['bottom','Bottom']],classicAlign,v=>{classicAlign=v;localStorage.setItem('mesh-classic-align',v)});
+ const layoutControls=document.createElement('div');layoutControls.className='classic-control arrangement-control';
+ const toggle=document.createElement('button');toggle.type='button';toggle.className=rearrangeEnabled?'active':'';toggle.setAttribute('aria-pressed',String(rearrangeEnabled));toggle.textContent=rearrangeEnabled?'✓ Dragging enabled':'↔ Enable dragging';
+ toggle.onclick=()=>{rearrangeEnabled=!rearrangeEnabled;renderClassic()};layoutControls.append(toggle);
+ const reset=document.createElement('button');reset.textContent='Reset positions';reset.type='button';
+ reset.onclick=()=>{if(!confirm('Reset your manual card positions for the top-down chart?'))return;const key='layoutOffsetDown';for(const p of people)delete p[key];persist();renderClassic()};layoutControls.append(reset);controls.append(layoutControls);
+ const imageControls=document.createElement('div');imageControls.className='classic-control image-export-control';
+ const imageLabel=document.createElement('span');imageLabel.textContent='Export chart';imageControls.append(imageLabel);
+ const imageFormat=document.createElement('select');imageFormat.id='classic-image-format';imageFormat.setAttribute('aria-label','Image export format');
+ for(const [format,label] of [['png','PNG'],['jpeg','JPEG'],['svg','SVG']]){const option=document.createElement('option');option.value=format;option.textContent=label;imageFormat.append(option)}
+ imageControls.append(imageFormat);
+ const imageButton=document.createElement('button');imageButton.type='button';imageButton.textContent='Download image';imageButton.onclick=async()=>{imageButton.disabled=true;imageButton.textContent='Exporting…';try{await exportClassicImage(stage,imageFormat.value)}catch(error){alert('Image export failed: '+error.message)}finally{imageButton.disabled=false;imageButton.textContent='Download image'}};
+ imageControls.append(imageButton);controls.append(imageControls);
+ let help=document.getElementById('classic-help');if(!help){help=document.createElement('div');help.id='classic-help';help.className='classic-help';root.before(help)}
+ help.innerHTML='<span class="legend-solid"></span> People / hierarchical <span class="legend-dotted"></span> Functional · '+(rearrangeEnabled?'Drag normally to move a leader and all reports. Hold Ctrl before dragging to move only the leader. Click to edit. Hierarchy levels and reporting relationships stay unchanged.':'Click a person to edit · Drag is disabled. Enable dragging to reposition cards.')+' · Top-down positions are saved';
+ const byName=new Map(people.map(p=>[p.name.trim().toLowerCase(),p]));
+ const children=new Map(people.map(p=>[p.id,[]]));
+ const parentIds=new Map();
+ for(const p of people){const par=byName.get((p.manager||'').trim().toLowerCase());if(par&&par.id!==p.id){parentIds.set(p.id,par.id);children.get(par.id).push(p)}}
+ for(const arr of children.values())arr.sort((a,b)=>a.name.localeCompare(b.name));
+
+ const roots=people.filter(p=>!parentIds.has(p.id)).sort((a,b)=>a.name.localeCompare(b.name));
+ const visited=new Set(),pos=new Map(),levelCache=new Map(),warnings=[];
+ function requestedLevel(p){const raw=String(p.hierarchyLevel??'').trim();return raw&&/^[1-9]\d*$/.test(raw)?Math.min(30,Number(raw)):null}
+ function levelOf(p,trail=new Set()){
+  if(levelCache.has(p.id))return levelCache.get(p.id);
+  if(trail.has(p.id))return 1;
+  trail.add(p.id);
+  const parent=byName.get((p.manager||'').trim().toLowerCase());
+  const natural=parent&&parent.id!==p.id?Math.min(30,levelOf(parent,trail)+1):1;
+  const assigned=requestedLevel(p),result=assigned??natural;
+  if(parent&&parent.id!==p.id&&result<=levelOf(parent,trail))warnings.push(p.name+' has level '+result+' while its people manager is at level '+levelOf(parent,trail));
+  levelCache.set(p.id,result);trail.delete(p.id);return result
+ }
+ // Ordered subtree positions: a manager stays inside the span of its own descendants.
+ // Horizontal/vertical levels come from the explicit field, not from equal child depth.
+ let slot=0,maxDepth=0;
+ function visit(p,ancestors){
+  if(visited.has(p.id)||ancestors.has(p.id))return null;
+  ancestors.add(p.id);visited.add(p.id);
+  const positions=[];
+  for(const ch of children.get(p.id)||[]){const point=visit(ch,ancestors);if(point!==null)positions.push(point)}
+  ancestors.delete(p.id);
+  const mySlot=!positions.length?slot++:classicAlign==='top'?positions[0]:classicAlign==='bottom'?positions.at(-1):(positions[0]+positions.at(-1))/2;
+  const depth=levelOf(p)-1;maxDepth=Math.max(maxDepth,depth);
+  pos.set(p.id,{depth,slot:mySlot});return mySlot;
+ }
+ for(const p of roots){visit(p,new Set());slot+=.9}
+ for(const p of people)if(!visited.has(p.id)){visit(p,new Set());slot+=.9}
+ const vertical=classicDirection==='down',w=190,h=62,depthGap=vertical?116:112,slotGap=vertical?218:88,pad=125;
+ const offsetKey=vertical?'layoutOffsetDown':'layoutOffsetRight';
+ const offsetOf=p=>{const n=Number(p[offsetKey]);return Number.isFinite(n)?n:0};
+ const maxSlot=Math.max(slot,1);
+ const maxOffset=Math.max(0,...people.map(p=>offsetOf(p)));
+ const width=Math.ceil(vertical?pad*2+maxSlot*slotGap+maxOffset:pad*2+(maxDepth+1)*(w+depthGap));
+ const height=Math.ceil(vertical?pad*2+(maxDepth+1)*(h+depthGap):pad*2+maxSlot*slotGap+maxOffset);
+ const stage=document.createElement('div');stage.className='classic-stage-tree';stage.style.width=width+'px';stage.style.height=height+'px';
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.classList.add('classic-lines');stage.append(svg);
+ const coords=new Map();
+ for(const p of people){const point=pos.get(p.id);if(!point)continue;const cross=offsetOf(p);const x=vertical?pad+point.slot*slotGap-w/2+cross:pad+point.depth*(w+depthGap),y=vertical?pad+point.depth*(h+depthGap):pad+point.slot*slotGap-h/2+cross;coords.set(p.id,{x,y});const el=card(p,false);el.classList.add('classic-node');el.title=p.name+' · Hierarchy level '+(point.depth+1)+(requestedLevel(p)?' (manual)':' (auto)');el.style.left=x+'px';el.style.top=y+'px';el.style.width=w+'px';el.style.height=h+'px';el.dataset.personId=p.id;el.classList.toggle('rearrange-node',rearrangeEnabled);stage.append(el)}
+
+ const ns='http://www.w3.org/2000/svg';
+ function drawLinks(){svg.replaceChildren();
+ const makePath=(d,dotted=false,owner='')=>{
+  const el=document.createElementNS(ns,'path');el.setAttribute('d',d);
+  el.setAttribute('fill','none');el.setAttribute('stroke',dotted?'#eeb75b':'#89c5b5');
+  el.setAttribute('stroke-width',dotted?'1.7':'2');el.setAttribute('stroke-linecap','round');el.setAttribute('stroke-linejoin','round');
+  if(dotted)el.setAttribute('stroke-dasharray','4 7');
+  el.dataset.owner=owner;el.classList.add('org-link');if(dotted)el.classList.add('functional-link');
+  svg.append(el);return el;
+ };
+
+ // Every relationship is an explicit edge. Reports on different hierarchy levels
+ // get their own routing lane, instead of one bus incorrectly spanning all levels.
+ const leaderGroups=new Map();
+ for(const p of people){const manager=byName.get((p.manager||'').trim().toLowerCase());if(!manager||manager.id===p.id||!coords.has(manager.id)||!coords.has(p.id))continue;
+  const groupKey=manager.id+'::'+pos.get(p.id).depth;
+  if(!leaderGroups.has(groupKey))leaderGroups.set(groupKey,{manager,reports:[]});
+  leaderGroups.get(groupKey).reports.push(p)
+ }
+ for(const {manager,reports} of leaderGroups.values()){
+  const a=coords.get(manager.id),target=reports.map(p=>({person:p,point:coords.get(p.id)})).filter(x=>x.point);
+  if(!a||!target.length)continue;
+  if(vertical){
+   const x0=a.x+w/2,y0=a.y+h;const entry=Math.min(...target.map(t=>t.point.y));
+   const normal=entry>y0+14;
+   const bus=normal?y0+Math.min(45,(entry-y0)*.45):y0+17;
+   const xs=target.map(t=>t.point.x+w/2);
+   makePath('M'+x0+' '+y0+' V'+bus,false,manager.id);
+   makePath('M'+Math.min(x0,...xs)+' '+bus+' H'+Math.max(x0,...xs),false,manager.id);
+   for(let i=0;i<target.length;i++)makePath('M'+xs[i]+' '+bus+' V'+target[i].point.y,false,target[i].person.id);
+  }else{
+   const x0=a.x+w,y0=a.y+h/2;const entry=Math.min(...target.map(t=>t.point.x));
+   const normal=entry>x0+14;
+   const bus=normal?x0+Math.min(48,(entry-x0)*.45):x0+18;
+   const ys=target.map(t=>t.point.y+h/2);
+   makePath('M'+x0+' '+y0+' H'+bus,false,manager.id);
+   makePath('M'+bus+' '+Math.min(y0,...ys)+' V'+Math.max(y0,...ys),false,manager.id);
+   for(let i=0;i<target.length;i++)makePath('M'+bus+' '+ys[i]+' H'+target[i].point.x,false,target[i].person.id);
+  }
+ }
+ // Distinct dashed arcs for cross-functional connections. Use the opposite
+ // port offsets to make them distinguishable from the solid reporting trunks.
+ for(const p of people){
+  const manager=byName.get((p.functionalManager||'').trim().toLowerCase());
+  const a=manager&&coords.get(manager.id),b=coords.get(p.id);
+  if(!a||!b||manager.id===p.id||manager.id===(byName.get((p.manager||'').trim().toLowerCase())||{}).id)continue;
+  if(vertical){
+   const x1=a.x+w-12,y1=a.y+h,x2=b.x+w-12,y2=b.y;
+   const bend=y1+(y2-y1)*.48;
+   makePath('M'+x1+' '+y1+' C'+x1+' '+bend+' '+x2+' '+bend+' '+x2+' '+y2,true,p.id);
+  }else{
+   const x1=a.x+w,y1=a.y+h-13,x2=b.x,y2=b.y+h-13;
+   const bend=x1+(x2-x1)*.48;
+   makePath('M'+x1+' '+y1+' C'+bend+' '+y1+' '+bend+' '+y2+' '+x2+' '+y2,true,p.id);
+  }
+ }
+ }
+ drawLinks();
+ // Interactive tracing: one branch at a time becomes prominent on hover or focus.
+ const directRelationIds=id=>{
+  const related=new Set([id]);const p=people.find(p=>p.id===id);
+  if(p){for(const key of ['manager','functionalManager']){const boss=byName.get((p[key]||'').trim().toLowerCase());if(boss)related.add(boss.id)}}
+  for(const q of people){for(const key of ['manager','functionalManager'])if(byName.get((q[key]||'').trim().toLowerCase())?.id===id)related.add(q.id)}
+  return related;
+ };
+ const focus=id=>{
+  const related=id?directRelationIds(id):null;
+  for(const [key,el] of nodeMapForClassic)el.classList.toggle('org-muted',!!related&&!related.has(key));
+  for(const path of svg.querySelectorAll('path')){
+   const keep=!related||related.has(path.dataset.owner);
+   path.classList.toggle('org-muted',!keep);path.classList.toggle('org-emphasis',!!related&&keep);
+  }
+ };
+ const nodeMapForClassic=new Map();
+ for(const p of people){const el=stage.querySelector('[data-person-id="'+p.id+'"]');if(el)nodeMapForClassic.set(p.id,el)}
+ for(const [id,el] of nodeMapForClassic){
+  el.addEventListener('mouseenter',()=>focus(id));el.addEventListener('mouseleave',()=>focus(null));
+  el.addEventListener('focus',()=>focus(id));el.addEventListener('blur',()=>focus(null));
+ }
+
+
+
+ if(rearrangeEnabled){
+  const elById=new Map([...stage.querySelectorAll('.classic-node')].map(el=>[el.dataset.personId,el]));
+  function reportingBranch(leader){
+   const found=[],seen=new Set();
+   function walk(p){if(seen.has(p.id))return;seen.add(p.id);found.push(p);for(const report of children.get(p.id)||[])walk(report)}
+   walk(leader);return found;
+  }
+  for(const person of people){
+   const el=elById.get(person.id);if(!el)continue;
+   el.addEventListener('click',event=>{
+    if(el.dataset.justDragged==='yes'){event.preventDefault();event.stopImmediatePropagation();el.dataset.justDragged='no'}
+   },true);
+   el.addEventListener('pointerdown',event=>{
+    if(event.pointerType==='mouse'&&event.button!==0)return;
+    // Ctrl is sampled at pointer-down: Ctrl+drag moves only this card; normal drag moves its entire reporting branch.
+    const branch=(event.ctrlKey?[person]:reportingBranch(person)).map(p=>({person:p,el:elById.get(p.id),coord:coords.get(p.id)})).filter(x=>x.el&&x.coord);
+    if(!branch.length)return;
+    event.preventDefault();
+    const original=branch.map(x=>({...x,start:vertical?x.coord.x:x.coord.y,offset:offsetOf(x.person)}));
+    const pointerStart=vertical?event.clientX:event.clientY;
+    const minStart=Math.min(...original.map(x=>x.start));
+    let delta=0,wasDragged=false,done=false;
+    for(const x of original)x.el.classList.add('dragging-branch');
+    el.classList.add('dragging');
+    try{el.setPointerCapture(event.pointerId)}catch(e){}
+    function move(e){
+     if(done||e.pointerId!==event.pointerId)return;
+     const raw=(vertical?e.clientX:e.clientY)-pointerStart;
+     if(Math.abs(raw)>3)wasDragged=true;
+     if(!wasDragged)return;
+     e.preventDefault();
+     delta=Math.max(8-minStart,raw);
+     let maximum=0;
+     for(const x of original){
+      const next=x.start+delta;
+      if(vertical)x.coord.x=next;else x.coord.y=next;
+      x.el.style[vertical?'left':'top']=next+'px';
+      maximum=Math.max(maximum,next+(vertical?w:h)+125);
+     }
+     if(vertical&&maximum>stage.clientWidth)stage.style.width=Math.ceil(maximum)+'px';
+     if(!vertical&&maximum>stage.clientHeight)stage.style.height=Math.ceil(maximum)+'px';
+     svg.setAttribute('viewBox','0 0 '+stage.clientWidth+' '+stage.clientHeight);
+     drawLinks();
+    }
+    function cleanup(){
+     el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',finish);el.removeEventListener('pointercancel',cancel);
+     window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',finish);window.removeEventListener('pointercancel',cancel);
+     el.classList.remove('dragging');
+     for(const x of original)x.el.classList.remove('dragging-branch');
+     try{if(el.hasPointerCapture(event.pointerId))el.releasePointerCapture(event.pointerId)}catch(e){}
+    }
+    function finish(e){
+     if(done||e.pointerId!==event.pointerId)return;
+     done=true;cleanup();
+     if(!wasDragged)return;
+     for(const x of original)x.person[offsetKey]=Math.round(x.offset+delta);
+     el.dataset.justDragged='yes';
+     persist();
+    }
+    function cancel(e){
+     if(done||e.pointerId!==event.pointerId)return;
+     done=true;cleanup();
+     for(const x of original){if(vertical)x.coord.x=x.start;else x.coord.y=x.start;x.el.style[vertical?'left':'top']=x.start+'px'}
+     drawLinks();
+    }
+    el.addEventListener('pointermove',move);
+    el.addEventListener('pointerup',finish);
+    el.addEventListener('pointercancel',cancel);
+    window.addEventListener('pointermove',move);
+    window.addEventListener('pointerup',finish);
+    window.addEventListener('pointercancel',cancel);
+   });
+  }
+ }
+ root.append(stage);
+ document.getElementById('stats').textContent=people.length+' positions · '+(maxDepth+1)+' hierarchy levels · '+(vertical?'Top-down':'Left-to-right')+' · '+classicAlign+'-aligned leaders'+(warnings.length?' · '+warnings.length+' level conflict(s)':'');
+}
+
+function renderSeniority(){
+ prepareView('seniority');
+ root.className='seniority-view';root.replaceChildren();
+ const bar=document.createElement('div');bar.className='seniority-toolbar';
+ const headline=document.createElement('div');headline.className='seniority-heading';headline.textContent='Time with Inspectorate · years of service';
+ bar.append(headline);
+ const controls=document.createElement('div');controls.className='seniority-sort';
+ for(const [direction,label] of [['desc','Longest first ↓'],['asc','Shortest first ↑']]){
+  const b=document.createElement('button');b.type='button';b.textContent=label;
+  b.className=direction===seniorityOrder?'active':'';b.setAttribute('aria-pressed',String(direction===seniorityOrder));
+  b.onclick=()=>{seniorityOrder=direction;localStorage.setItem('mesh-seniority-order-'+MODE,direction);renderSeniority()};
+  controls.append(b)
+ }
+ bar.append(controls);root.append(bar);
+ const known=people.filter(p=>tenure(p)&&!tenure(p).future);
+ const upcoming=people.filter(p=>tenure(p)?.future);
+ const unknown=people.filter(p=>!tenure(p));
+ known.sort((a,b)=>{const delta=tenure(a).total-tenure(b).total;return (seniorityOrder==='desc'?-delta:delta)||a.name.localeCompare(b.name)});
+ const longest=Math.max(1,...known.map(p=>tenure(p).total));
+ const intro=document.createElement('p');intro.className='seniority-caption';
+ intro.textContent=known.length+' with known tenure · '+unknown.length+' without a start date · '+upcoming.length+' future starts. Former employees retain their tenure until their end date.';
+ root.append(intro);
+ function group(title,records,isKnown){
+  if(!records.length)return;
+  const section=document.createElement('section');section.className='seniority-section';
+  const h=document.createElement('h2');h.textContent=title+' ('+records.length+')';section.append(h);
+  for(const p of records){
+   const wrapper=document.createElement('div');wrapper.className='seniority-entry';
+   const badge=document.createElement('div');badge.className='seniority-number';
+   const t=tenure(p);badge.textContent=t&&!t.future?tenureText(p):'—';
+   const cardEl=card(p);cardEl.classList.add('seniority-person');
+   const barTrack=document.createElement('div');barTrack.className='tenure-track';
+   const barFill=document.createElement('div');barFill.className='tenure-fill';
+   barFill.style.width=t&&!t.future?(Math.max(1,Math.round(100*t.total/longest)))+'%':'0%';
+   barTrack.append(barFill);
+   wrapper.append(badge,cardEl,barTrack);
+   section.append(wrapper)
+  }
+  root.append(section)
+ }
+ group('Recorded seniority',known,true);
+ group('Start date not recorded',unknown,false);
+ group('Future start dates',upcoming,false);
+ document.getElementById('stats').textContent=people.length+' positions · '+known.length+' tenure records · '+people.filter(ended).length+' ended';
+}
+function render(animate=true){if(view==='classic'){document.getElementById('seniority-help')?.remove();renderClassic();return;}if(view==='seniority'){document.getElementById('classic-help')?.remove();document.getElementById('classic-controls')?.remove();renderSeniority();return;}prepareView(view);root.className='groups';document.getElementById('classic-help')?.remove();document.getElementById('classic-controls')?.remove();const before=new Map();if(animate)for(const [id,el] of cache)if(el.isConnected)before.set(id,el.getBoundingClientRect());const groups=new Map();for(const p of people){let k=key(p);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)}const order=view==='pillar'?pillars:view==='region'?areas:[];const sorted=[...groups].sort((a,b)=>{let x=order.indexOf(a[0]),y=order.indexOf(b[0]);return (x<0?999:x)-(y<0?999:y)||a[0].localeCompare(b[0])});const frag=document.createDocumentFragment();for(const [name,items] of sorted){const section=document.createElement('section');section.className='group';const h=document.createElement('h2');const label=document.createElement('span');label.textContent=name;const count=document.createElement('small');count.textContent=items.length+' positions';h.append(label,count);const list=document.createElement('div');list.className='cards';items.forEach(p=>list.append(card(p)));section.append(h,list);frag.append(section)}root.replaceChildren(frag);document.getElementById('stats').textContent=people.length+' positions · '+people.filter(p=>p.type!=='vacancy').length+' named / existing · '+groups.size+' groups';if(!animate||matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(const [id,el] of cache){const a=before.get(id);if(!a||!el.isConnected)continue;const b=el.getBoundingClientRect(),dx=a.x-b.x,dy=a.y-b.y;if(Math.abs(dx)+Math.abs(dy)>2)el.animate([{transform:'translate('+dx+'px,'+dy+'px)',opacity:.7},{transform:'translate(0,0)',opacity:1}],{duration:800,easing:'cubic-bezier(.2,1,.3,1)'})}}
+document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view));b.addEventListener('click',()=>{view=b.dataset.view;try{localStorage.setItem(viewStorageKey,view)}catch(e){}document.querySelectorAll('[data-view]').forEach(c=>{c.classList.toggle('active',c.dataset.view===view);c.setAttribute('aria-pressed',String(c.dataset.view===view))});render()})});
+document.getElementById('search').addEventListener('input',e=>{filter=e.target.value.trim().toLowerCase();people.forEach(card)});
+const form=document.getElementById('form');
+function edit(id){editing=id;const p=people.find(p=>p.id===id)||{};document.getElementById('editTitle').textContent=id==='new'?'Add person':'Edit person';form.replaceChildren();for(const f of fields){const l=document.createElement('label');l.textContent=f==='product'?'Products (comma separated)':f==='manager'?'People manager (solid line)':f==='functionalManager'?'Functional manager (dotted line)':f==='hierarchyLevel'?'Hierarchy level (1 = top; blank = automatic)':f==='startDate'?'Start date (optional)':f==='endDate'?'End date (optional)':f[0].toUpperCase()+f.slice(1);l.htmlFor='f_'+f;let el;if(f==='country'){el=document.createElement('input');el.type='text';el.value=countryText(p.country);el.setAttribute('list','country-suggestions');el.setAttribute('autocomplete','off');el.placeholder='Type a country or choose from the list…'}
+
+else if(['pillar','region','type'].includes(f)){el=document.createElement('select');const vals=f==='pillar'?['',...pillars]:f==='region'?['',...areas]:['executive','engagement','delivery','assurance','architecture','product','engineering','existing','vacancy'];if(p[f]&&!vals.includes(p[f]))vals.push(p[f]);for(const v of vals){const opt=document.createElement('option');opt.value=v;opt.textContent=v||'Unassigned';el.append(opt)}}else{el=document.createElement('input');el.type=f==='hierarchyLevel'?'number':(f==='startDate'||f==='endDate')?'date':'text';if(f==='hierarchyLevel'){el.min='1';el.max='30';el.step='1';el.placeholder='Auto from people manager'}}el.id='f_'+f;if(f!=='country')el.value=p[f]||'';form.append(l,el);
+if(f==='country'){
+ const list=document.createElement('datalist');list.id='country-suggestions';
+ for(const item of countryOptions){const option=document.createElement('option');option.value=item.name;option.label=flagEmoji(item.code)+' '+item.name+' ('+item.code+')';list.append(option)}
+ form.append(list);
+ const hint=document.createElement('div');hint.className='manager-hint';hint.textContent='Type a country name or ISO code, or choose from matching suggestions.';form.append(hint);
+ el.addEventListener('change',()=>{const code=countryCode(el.value);if(code)el.value=countryLabel(code)});
+}
+if(f==='manager'||f==='functionalManager'){
+ const list=document.createElement('datalist');list.id='names_'+f;
+ const names=[...new Set(people.filter(person=>person.id!==id).map(person=>String(person.name||'').trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+ for(const name of names){const option=document.createElement('option');option.value=name;list.append(option)}
+ el.setAttribute('list',list.id);el.setAttribute('autocomplete','off');el.placeholder='Start typing a name…';
+ form.append(list);
+ const hint=document.createElement('div');hint.className='manager-hint';hint.textContent='Type to search existing names, or select from the suggestions.';form.append(hint);
+ el.addEventListener('change',()=>{const match=names.find(name=>name.toLocaleLowerCase()===el.value.trim().toLocaleLowerCase());if(match)el.value=match});
+ }
+}const actions=document.createElement('div');actions.className='actions';const save=document.createElement('button');save.type='submit';save.textContent='Save changes';save.className='active';const close=document.createElement('button');close.type='button';close.textContent='Cancel';close.onclick=()=>dialog.close();actions.append(save,close);if(id!=='new'){const rm=document.createElement('button');rm.textContent='Remove';rm.type='button';rm.onclick=()=>{if(confirm('Remove this position?')){people=people.filter(p=>p.id!==id);cache.delete(id);persist();dialog.close();render(false)}};actions.append(rm)}form.append(actions);dialog.showModal()}
+form.addEventListener('submit',e=>{e.preventDefault();const v={};fields.forEach(f=>v[f]=document.getElementById('f_'+f).value.trim());if(v.country){const code=countryCode(v.country);if(code)v.country=code}if(!v.name)return;if(v.startDate&&!parseISODate(v.startDate)){alert('Enter a valid start date');return}if(v.endDate&&!parseISODate(v.endDate)){alert('Enter a valid end date');return}if(v.startDate&&v.endDate&&v.endDate<v.startDate){alert('End date cannot precede start date');return}if(editing==='new'){v.id='p'+Date.now();people.push(v)}else Object.assign(people.find(p=>p.id===editing),v);persist();dialog.close();render()});
+document.getElementById('add').onclick=()=>edit('new');
+
+const DATA_COLUMNS=['id','name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate','layoutOffsetDown','layoutOffsetRight'];
+function csvEscape(value){const v=String(value??'');return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function createCSV(rows){return '\uFEFF'+[DATA_COLUMNS.join(','),...rows.map(p=>DATA_COLUMNS.map(key=>csvEscape(p[key])).join(','))].join('\r\n')+'\r\n'}
+function parseCSV(text){
+ text=text.replace(/^\uFEFF/,'');const rows=[];let row=[],field='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i];
+  if(quoted){if(c==='"'&&text[i+1]==='"'){field+='"';i++}else if(c==='"'){quoted=false}else field+=c}
+  else if(c==='"'&&field===''){quoted=true}
+  else if(c===','){row.push(field);field=''}
+  else if(c==='\r'||c==='\n'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);field='';if(row.some(v=>v!==''))rows.push(row);row=[]}
+  else field+=c
+ }
+ if(quoted)throw Error('CSV contains an unclosed quoted field');
+ if(field!==''||row.length){row.push(field);if(row.some(v=>v!==''))rows.push(row)}
+ if(!rows.length)throw Error('The CSV is empty');
+ const headers=rows.shift().map(v=>v.trim());if(!headers.includes('name'))throw Error('CSV needs a name column');
+ if(new Set(headers).size!==headers.length)throw Error('CSV contains duplicate column names');
+ return rows.map((r,i)=>{const p={};headers.forEach((h,j)=>{if(DATA_COLUMNS.includes(h))p[h]=r[j]??''});if(!p.id)p.id='import-'+i+'-'+Date.now();return p});
+}
+function normalizeImport(rows){
+ if(!Array.isArray(rows)||!rows.length)throw Error('No people found in the imported file');
+ const ids=new Set();
+ return rows.map((r,i)=>{if(!r||typeof r!=='object'||!String(r.name??'').trim())throw Error('Missing name on record '+(i+1));
+  const p={};DATA_COLUMNS.forEach(k=>p[k]=String(r[k]??''));p.id=p.id||'import-'+i+'-'+Date.now();
+  if(ids.has(p.id))throw Error('Duplicate record ID: '+p.id);ids.add(p.id);return p
+ });
+}
+function downloadData(){
+ const format=document.getElementById('exportFormat').value;
+ const data=format==='csv'?createCSV(people):JSON.stringify({format:'mesh-v2',environment:MODE,people},null,2);
+ const blob=new Blob([data],{type:format==='csv'?'text/csv;charset=utf-8':'application/json;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mesh-'+MODE+'-team.'+format;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
+document.getElementById('export').onclick=downloadData;
+const file=document.getElementById('file');
+document.getElementById('import').onclick=()=>{const format=document.getElementById('importFormat').value;file.accept=format==='csv'?'.csv,text/csv':'.json,application/json';file.click()};
+file.onchange=async()=>{
+ try{
+  if(!file.files||!file.files[0])return;
+  const selected=file.files[0],format=document.getElementById('importFormat').value;
+  const text=await selected.text();let data;
+  if(format==='csv')data=parseCSV(text);
+  else{const obj=JSON.parse(text);data=Array.isArray(obj)?obj:(obj.people||obj.persons)}
+  const incoming=normalizeImport(data);
+  if(confirm('Replace all '+MODE.toUpperCase()+' team data with '+incoming.length+' imported records? This will overwrite browser-local changes in this environment.')){
+   people=incoming;cache.clear();persist();render(false);
+  }
+ }catch(e){alert('Import failed: '+e.message)}finally{file.value=''}
+};
+
+render(false);
+(async function showReleaseTime(){
+ const marker=document.getElementById('release-meta');
+ if(!marker)return;
+ const version=marker.dataset.version,environment=marker.dataset.environment;
+ const footerVersion=document.getElementById('footer-version');
+ const footerDate=document.getElementById('footer-release-date');
+ const fallback=marker.dataset.buildUtc;
+ function formatDate(utc){
+  const date=new Date(utc);if(Number.isNaN(date.valueOf()))return '';
+  const dateParts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Brussels',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(date).replace(',',' ·');
+  const z=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Brussels',timeZoneName:'short'}).formatToParts(date).find(x=>x.type==='timeZoneName')?.value||'CET';
+  return dateParts+' '+z;
+ }
+ function show(utc){const when=formatDate(utc);marker.textContent='v'+version+(when?' · '+when:'');if(footerVersion)footerVersion.textContent='v'+version+' ('+environment.toUpperCase()+')';if(footerDate)footerDate.textContent=when}
+ show(fallback);
+ try{
+  const response=await fetch('/inspector/versions/history.json',{cache:'no-store'});
+  if(!response.ok)return;
+  const manifest=await response.json();
+  const release=(manifest.environments?.[environment]||[]).find(x=>x.version===version);
+  if(release?.releasedAt)show(release.releasedAt);
+ }catch(e){/* Fallback is baked into this release. */}
+})();
+</script></body></html>
