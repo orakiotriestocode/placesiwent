@@ -192,6 +192,13 @@
         "releasedAt": "2026-11-08T16:26:31Z",
         "commit": "02a258164c8a9b8fdaab3375549d6f4326690e4f",
         "description": "Country input changed from static select to editable datalist combobox, searchable by name or ISO code; country badges preserved"
+      },
+      {
+        "version": "1.18.1",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:31:33Z",
+        "commit": "426556c011f65f39828ee5b16d8976ed22fb4f25",
+        "description": "Correct card reuse across Classic, grouped and Seniority views; reset inline coordinates and stale drag event handlers without modifying saved data"
       }
     ]
   }
