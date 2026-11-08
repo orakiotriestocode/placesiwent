@@ -29,7 +29,7 @@ h1{font-size:clamp(2.8rem,6vw,5rem);letter-spacing:-.065em;line-height:1.05;marg
 .tile{background:#15232e;border:1px solid #344955;border-radius:16px;padding:26px;min-height:190px}
 .symbol{display:grid;place-items:center;width:47px;height:47px;background:#244338;color:#99edc4;border-radius:11px;font-size:1.5rem;margin-bottom:21px}
 h2{font-size:1.45rem;letter-spacing:-.04em;margin:0 0 10px}
-.tile p{margin:0;color:#b5c6ca;font-size:.94rem;line-height:1.65}
+.tile:hover{border-color:#7fe0b3;background:#1a3038}.tile p{margin:0;color:#b5c6ca;font-size:.94rem;line-height:1.65}
 .tag{display:inline-block;margin-top:19px;color:#a2ebc6;font-size:.78rem;font-weight:700}
 footer{border-top:1px solid #30404a;color:#829ba3;font-size:.78rem;padding-top:21px;display:flex;justify-content:space-between;gap:12px}
 footer a:hover{color:#a2ebc6}
@@ -48,12 +48,12 @@ footer a:hover{color:#a2ebc6}
 <p class="intro">A growing home for web applications I create with a little help from AI — practical tools for everyday life, professional work, and whatever interesting idea comes next.</p>
 <h2 class="section-title">The collection</h2>
 <div class="grid">
-<article class="tile">
-<span class="symbol" aria-hidden="true">⌘</span>
-<h2>First app coming soon</h2>
-<p>This is where the next experiment will live. Each app will get its own space and a direct link from this collection.</p>
-<span class="tag">In the making</span>
-</article>
+<a class="tile" href="/web-apps/speed-check/" style="display:block;transition:border-color .2s,background .2s">
+<span class="symbol" aria-hidden="true">↯</span>
+<h2>Speed Check</h2>
+<p>A simple, dark-mode internet speed test. Measure download, upload, ping and jitter directly from your browser.</p>
+<span class="tag">Open Speed Check →</span>
+</a>
 </div>
 </main>
 <footer><span>© 2026 Places I Went</span><a href="https://github.com/orakiotriestocode/placesiwent" rel="noopener noreferrer">GitHub</a></footer>
