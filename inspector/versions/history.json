@@ -206,6 +206,13 @@
         "releasedAt": "2026-11-08T16:50:20Z",
         "commit": "164444056706fb95150042896382c5bc2c5424bc",
         "description": "Classic Org Chart appears first and is the first-visit default; export the complete chart with connectors as PNG, JPEG or SVG using generic org-chart filename"
+      },
+      {
+        "version": "1.19.1",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:53:33Z",
+        "commit": "f1c7b593c4705528d00242ee638b0fd460912433",
+        "description": "Hide seniority and employment dates on Classic Org Chart cards and image exports; retain dates in records and other views"
       }
     ]
   }
