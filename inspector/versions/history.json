@@ -129,6 +129,13 @@
         "releasedAt": "2026-11-08T14:44:45Z",
         "commit": "e0615b47f70720c140915b1e4a73fe3b9d11f854",
         "description": "Hold Ctrl during drag to move only leader; drag normally to move leader with all hierarchical reports"
+      },
+      {
+        "version": "1.13.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T14:50:55Z",
+        "commit": "03bf1fbc8682ca46151b28199bae1882c81cd953",
+        "description": "Autocomplete existing people by name in people-manager and functional-manager fields"
       }
     ]
   }
