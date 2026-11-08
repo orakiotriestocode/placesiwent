@@ -213,6 +213,13 @@
         "releasedAt": "2026-11-08T16:53:33Z",
         "commit": "f1c7b593c4705528d00242ee638b0fd460912433",
         "description": "Hide seniority and employment dates on Classic Org Chart cards and image exports; retain dates in records and other views"
+      },
+      {
+        "version": "1.19.2",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T19:47:43Z",
+        "commit": "3630253a6e29cb5d62d42cc70682aeb43c0e42a3",
+        "description": "Automatically update every people-manager and functional-manager name reference when a person is renamed; block ambiguous duplicate names"
       }
     ]
   }
