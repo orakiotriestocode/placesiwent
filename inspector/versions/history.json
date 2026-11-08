@@ -101,6 +101,13 @@
         "date": "2026-11-08",
         "commit": "552530e716cd1da8ebcfe14d26562cd0ec05221d",
         "description": "Use one canonical version field to synchronise header, footer and release-time lookup"
+      },
+      {
+        "version": "1.9.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T14:31:19Z",
+        "commit": "eb23ff321cf0dd87aa5b98500221c11839a75ece",
+        "description": "Drag and drop cards within hierarchy levels; saved per direction with JSON/CSV layout offsets"
       }
     ]
   }
