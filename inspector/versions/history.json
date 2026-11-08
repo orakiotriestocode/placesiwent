@@ -227,6 +227,13 @@
         "releasedAt": "2026-11-08T19:50:57Z",
         "commit": "9fe4305817770c5349cb611fe59656c2d4b795e2",
         "description": "Manage type names and colours from a shared legend. Add/remove types, assign in person editor, preserve type palette in JSON export/import; no changes to people or positions."
+      },
+      {
+        "version": "1.21.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T20:44:01Z",
+        "commit": "a6a699c9e091257c499f8e7b3b670aae4b252891",
+        "description": "Classic Org Chart zoom only (25–250%) with +/- controls and slider, browser-persisted zoom, full-size image export and zoom-adjusted dragging"
       }
     ]
   }
