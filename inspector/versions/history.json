@@ -45,6 +45,11 @@
         "date": "2026-11-08",
         "time": "14:54 CET",
         "description": "Version and timestamp in header; JSON/CSV import and export"
+      },
+      {
+        "version": "1.5.0",
+        "date": "2026-11-08",
+        "description": "Shared manager connector trunks, functional arcs and interactive relationship highlighting"
       }
     ]
   }
