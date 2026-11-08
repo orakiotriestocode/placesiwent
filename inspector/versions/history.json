@@ -23,6 +23,11 @@
         "version": "1.1.0",
         "date": "2026-11-08",
         "description": "Compact environment switcher and version history"
+      },
+      {
+        "version": "1.2.0",
+        "date": "2026-11-08",
+        "description": "Classic org chart with hierarchical and functional reporting lines"
       }
     ]
   }
