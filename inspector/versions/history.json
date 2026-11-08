@@ -57,6 +57,13 @@
         "releasedAt": "2026-11-08T21:16:33Z",
         "commit": "037e4f8239dc3ecd1f39a78a233f0cf78a7478c2",
         "description": "Full DEV v1.22.1 release with zoom, bidirectional pan, people types, country flags, dates, exports; browser-local promotion of people, positions, types, preferences and backup of prior LIVE data"
+      },
+      {
+        "version": "1.23.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T21:27:27Z",
+        "commit": "93a1aa6ce847b2425293bea9ecf6bb1435cf1982",
+        "description": "LIVE now loads authoritative shared 53-person team.json from website with 9 colour types and all saved offsets; local edits are explicitly marked unpublished drafts"
       }
     ],
     "dev": [
