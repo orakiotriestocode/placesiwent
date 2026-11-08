@@ -241,6 +241,13 @@
         "releasedAt": "2026-11-08T20:49:27Z",
         "commit": "0650a5055b75622b28ac40f10ecee11670d65e87",
         "description": "Drag empty Classic Org Chart background to pan viewport horizontally and vertically without changing card positions; retain separate card drag and Ctrl-drag interactions"
+      },
+      {
+        "version": "1.22.1",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T21:00:57Z",
+        "commit": "8075f5d0c862f35c1706fe015b6dc47ef1d58874",
+        "description": "Fix two-dimensional panning by giving Classic Org Chart its own height-constrained scroll viewport; drag empty space diagonally, horizontally or vertically"
       }
     ]
   }
