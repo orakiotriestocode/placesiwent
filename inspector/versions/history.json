@@ -43,6 +43,13 @@
         "releasedAt": "2026-11-08T15:05:14Z",
         "commit": "bb4b1e47eb503909eaf5ce34332e34d84f0447fc",
         "description": "Promoted complete DEV v1.14.0 application; first LIVE visit on same browser copies DEV people, managers, hierarchy and layout positions into LIVE (prior LIVE data backed up locally)"
+      },
+      {
+        "version": "1.15.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:06:29Z",
+        "commit": "8a6c22fd6551a162a515c1fe40b8813ea116af1e",
+        "description": "Keep top-down Classic Org Chart only; retain saved top-down positions and drag behavior"
       }
     ],
     "dev": [
@@ -150,6 +157,13 @@
         "releasedAt": "2026-11-08T15:01:35Z",
         "commit": "cea59d8ccbcc0b71823a52ab562b35cada9588a8",
         "description": "Remember selected organization view across refreshes, independently for DEV"
+      },
+      {
+        "version": "1.15.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:06:49Z",
+        "commit": "d2e633d07cd33957165f0d7045e61dfd41594067",
+        "description": "Keep top-down Classic Org Chart only; retain saved top-down positions and drag behavior"
       }
     ]
   }
