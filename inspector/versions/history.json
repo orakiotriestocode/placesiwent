@@ -136,6 +136,13 @@
         "releasedAt": "2026-11-08T14:50:55Z",
         "commit": "03bf1fbc8682ca46151b28199bae1882c81cd953",
         "description": "Autocomplete existing people by name in people-manager and functional-manager fields"
+      },
+      {
+        "version": "1.14.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T15:01:35Z",
+        "commit": "cea59d8ccbcc0b71823a52ab562b35cada9588a8",
+        "description": "Remember selected organization view across refreshes, independently for DEV"
       }
     ]
   }
