@@ -1,0 +1,189 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080c12">
+<meta name="description" content="Speed Check — a dark, simple internet speed test for download, upload, ping and jitter.">
+<title>Speed Check · Web apps deluxe</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#080c12;color:#f3f7fa}
+*{box-sizing:border-box}html{min-height:100%}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 65% 35% at 50% 38%,#132431 0,transparent 80%),#080c12}
+a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid #8ff1c4;outline-offset:5px}
+.shell{max-width:1110px;min-height:100vh;margin:auto;padding:24px 30px;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;color:#c2d1d7;font-weight:750;font-size:.85rem;letter-spacing:.04em}
+.mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#173b35;color:#87f3c1;font-size:1.35rem}
+.back{font-size:.83rem;color:#9daeb7}.back:hover{color:#8ff1c4}
+main{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:48px 0 58px}
+.eyebrow{text-align:center;color:#89e9bc;text-transform:uppercase;font-weight:750;letter-spacing:.24em;font-size:.72rem;margin:0 0 12px}
+h1{font-size:clamp(2.1rem,5vw,3.45rem);letter-spacing:-.065em;line-height:1.1;margin:0 0 42px;text-align:center}
+.speed-area{text-align:center;width:100%;position:relative}
+.phase{height:24px;font-size:.9rem;color:#a4bac5;margin-bottom:4px}
+.speed-line{display:flex;justify-content:center;align-items:baseline;gap:16px;white-space:nowrap}
+.speed-number{font-size:clamp(5.6rem,17vw,12rem);font-weight:680;letter-spacing:-.095em;line-height:1.08;font-variant-numeric:tabular-nums;min-width:2ch}
+.unit{font-size:clamp(1.2rem,2.6vw,1.95rem);font-weight:550;color:#8da6b2;letter-spacing:-.035em}
+.subline{min-height:29px;color:#8ea5b0;font-size:.9rem;margin-top:11px}
+.progress{height:3px;width:min(320px,75%);margin:29px auto 0;background:#263942;border-radius:5px;overflow:hidden}
+.progress>span{display:block;height:100%;width:0;background:#84f0bc;transition:width .2s linear}
+.actions{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px 0 0}
+button{appearance:none;border:0;cursor:pointer;font:inherit}
+.primary{padding:13px 24px;border-radius:999px;background:#8aefbd;color:#10201b;font-weight:800;min-width:146px}
+.primary:hover{background:#b3ffda}.secondary{border:1px solid #455964;background:#17242e;color:#d8e8eb;padding:12px 22px;border-radius:999px;font-weight:650}
+.secondary:hover{background:#233844}
+.stats{width:min(700px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:55px}
+.stat{background:#101c25;border:1px solid #293a43;border-radius:16px;padding:22px 14px;text-align:center;min-height:126px}
+.stat-label{text-transform:uppercase;letter-spacing:.11em;font-size:.7rem;color:#92a9b5;font-weight:750;margin:0 0 12px}
+.stat-value{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:720;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.stat-unit{font-size:.85rem;color:#92a9b5;font-weight:550}
+.details{width:min(700px,100%);margin-top:23px;color:#91a9b4;font-size:.78rem;text-align:center;line-height:1.7}
+.error{color:#ffab9e}
+footer{border-top:1px solid #25333c;padding-top:19px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:15px;font-size:.75rem;color:#82969f}
+footer a:hover{color:#90eac1}
+@media(max-width:570px){.shell{padding:18px 18px}main{padding:56px 0}h1{margin-bottom:42px}.speed-line{gap:8px}.speed-number{font-size:clamp(4.8rem,20vw,8rem)}.stats{gap:8px;margin-top:45px}.stat{padding:18px 8px;min-height:110px}.stat-label{font-size:.63rem}.stat-value{font-size:1.5rem}.stat-unit{font-size:.7rem}.back{font-size:.73rem}}
+@media(prefers-reduced-motion:reduce){.progress>span{transition:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<a class="brand" href="/web-apps/"><span class="mark">↯</span><span>WEB APPS DELUXE</span></a>
+<a class="back" href="/web-apps/">← All web apps</a>
+</header>
+<main>
+<p class="eyebrow">Internet performance</p>
+<h1>Speed Check<span style="color:#88efbb">.</span></h1>
+<section class="speed-area" aria-label="Internet speed test">
+<div class="phase" id="phase">Ready to test</div>
+<div class="speed-line"><span class="speed-number" id="speed" aria-live="off">—</span><span class="unit">Mbps</span></div>
+<div class="subline" id="subline" role="status" aria-live="polite">Measure your connection in one click.</div>
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+<div class="actions"><button class="primary" id="start">Start test</button><button class="secondary" id="stop" hidden>Stop</button></div>
+</section>
+<section class="stats" aria-label="Additional results">
+<div class="stat"><div class="stat-label">↑ Upload</div><div><span class="stat-value" id="upload">—</span> <span class="stat-unit">Mbps</span></div></div>
+<div class="stat"><div class="stat-label">↔ Ping</div><div><span class="stat-value" id="ping">—</span> <span class="stat-unit">ms</span></div></div>
+<div class="stat"><div class="stat-label">〰 Jitter</div><div><span class="stat-value" id="jitter">—</span> <span class="stat-unit">ms</span></div></div>
+</section>
+<p class="details" id="details">Tests run in your browser against Cloudflare's public speed-test endpoints. Results are estimates, not a guaranteed ISP line rate. A test transfers data and may use your mobile allowance. Cloudflare receives your network requests; this site does not store your results.</p>
+</main>
+<footer><span>© 2026 Places I Went · Speed Check v1.0</span><span>Independent tool · Not affiliated with Netflix or Cloudflare</span></footer>
+</div>
+<script>
+(() => {
+'use strict';
+const $=id=>document.getElementById(id);
+const ui={speed:$('speed'),phase:$('phase'),sub:$('subline'),bar:$('bar'),start:$('start'),stop:$('stop'),upload:$('upload'),ping:$('ping'),jitter:$('jitter'),details:$('details')};
+const base='https://speed.cloudflare.com';
+let controller=null,active=false,run=0,finishedDownload=null,allXHR=[];
+const fmt=n=>!Number.isFinite(n)?'—':n<10?n.toFixed(1):Math.round(n).toLocaleString('en-US');
+const update=(text,percent)=>{ui.phase.textContent=text;ui.bar.style.width=Math.min(100,Math.max(0,percent))+'%'};
+const median=xs=>{const a=[...xs].sort((x,y)=>x-y);return a.length?a[Math.floor(a.length/2)]:NaN};
+const abortAll=()=>{if(controller)controller.abort();allXHR.forEach(x=>x.abort());allXHR=[]};
+function reset(){ui.speed.textContent='—';ui.upload.textContent='—';ui.ping.textContent='—';ui.jitter.textContent='—';ui.sub.classList.remove('error');ui.sub.textContent='Connecting to test server…';ui.bar.style.width='0%'}
+function state(on){active=on;ui.start.hidden=on;ui.stop.hidden=!on;ui.start.textContent='Test again'}
+function timeoutSignal(ms){const c=controller;const timer=setTimeout(()=>{if(active&&controller===c)c.abort()},ms);return ()=>clearTimeout(timer)}
+async function pingTest(myRun){
+ update('Measuring latency',5);const samples=[];
+ for(let i=0;i<7;i++){if(!active||run!==myRun)throw new DOMException('Stopped','AbortError');const started=performance.now();
+ try{const r=await fetch(base+'/__down?bytes=0&t='+Math.random(),{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('Latency endpoint returned '+r.status);samples.push(performance.now()-started)}catch(e){if(e.name==='AbortError')throw e}
+ update('Measuring latency',6+i*3);
+ }
+ if(!samples.length)throw Error('Could not reach the speed-test server.');
+ const p=median(samples);
+ const gaps=samples.slice(1).map((v,i)=>Math.abs(v-samples[i]));
+ ui.ping.textContent=fmt(p);ui.jitter.textContent=fmt(median(gaps));
+}
+async function fetchBytes(bytes,myRun,progressStart,progressEnd){
+ const started=performance.now();let count=0;
+ const url=base+'/__down?bytes='+bytes+'&t='+Math.random();
+ const r=await fetch(url,{cache:'no-store',signal:controller.signal});
+ if(!r.ok||!r.body)throw Error('Download test could not start ('+r.status+').');
+ const reader=r.body.getReader();
+ while(true){const v=await reader.read();if(v.done)break;
+ count+=v.value.byteLength;
+ const seconds=(performance.now()-started)/1000;
+ if(seconds>.12&&active&&run===myRun)ui.speed.textContent=fmt(count*8/seconds/1e6);
+ update('Testing download',progressStart+(progressEnd-progressStart)*Math.min(1,count/bytes));
+ }
+ const seconds=(performance.now()-started)/1000;
+ return {bits:count*8,seconds,mbps:count*8/seconds/1e6};
+}
+async function downloadTest(myRun){
+ update('Testing download',28);
+ const sizes=[1000000,5000000,12000000,12000000];
+ const records=[];
+ for(let i=0;i<sizes.length;i++){
+  if(!active||run!==myRun)throw new DOMException('Stopped','AbortError');
+  const a=28+i*11,b=28+(i+1)*11;
+  const rec=await fetchBytes(sizes[i],myRun,a,b);
+  records.push(rec);
+ }
+ const stable=records.slice(1);
+ const mbps=stable.reduce((s,r)=>s+r.bits,0)/stable.reduce((s,r)=>s+r.seconds,0)/1e6;
+ finishedDownload=mbps;
+ ui.speed.textContent=fmt(mbps);
+ return mbps;
+}
+function uploadChunk(size,myRun,start,end){
+ return new Promise((resolve,reject)=>{
+  const xhr=new XMLHttpRequest();allXHR.push(xhr);let began=performance.now();let timedOut=false;
+  xhr.open('POST',base+'/__up?t='+Math.random(),true);
+  xhr.timeout=20000;
+  xhr.upload.onprogress=e=>{
+   if(!active||run!==myRun)return;
+   const seconds=(performance.now()-began)/1000;
+   if(seconds>.15)ui.upload.textContent=fmt(e.loaded*8/seconds/1e6);
+   update('Testing upload',start+(end-start)*(e.lengthComputable?e.loaded/e.total:0));
+  };
+  xhr.onload=()=>{allXHR=allXHR.filter(x=>x!==xhr);if(xhr.status>=200&&xhr.status<300)resolve({bits:size*8,seconds:(performance.now()-began)/1000});else reject(Error('Upload endpoint returned '+xhr.status))};
+  xhr.onerror=()=>reject(Error('Upload test is blocked or unavailable on this network.'));
+  xhr.ontimeout=()=>{timedOut=true;reject(Error('Upload test timed out.'))};
+  xhr.onabort=()=>reject(new DOMException(timedOut?'Timed out':'Stopped','AbortError'));
+  try{xhr.send(new Blob([new Uint8Array(size)],{type:'application/octet-stream'}))}catch(e){reject(e)}
+ });
+}
+async function uploadTest(myRun){
+ update('Testing upload',72);
+ const sizes=[1000000,3000000,6000000],values=[];
+ for(let i=0;i<sizes.length;i++){
+  if(!active||run!==myRun)throw new DOMException('Stopped','AbortError');
+  const r=await uploadChunk(sizes[i],myRun,72+i*9,72+(i+1)*9);values.push(r);
+ }
+ const data=values.slice(1);
+ const mbps=data.reduce((s,r)=>s+r.bits,0)/data.reduce((s,r)=>s+r.seconds,0)/1e6;
+ ui.upload.textContent=fmt(mbps);
+}
+async function start(){
+ if(active)return;
+ const myRun=++run;controller=new AbortController();finishedDownload=null;reset();state(true);
+ // Stop stalled connections rather than spinning forever.
+ const clearTimeoutSignal=timeoutSignal(65000);
+ try{
+  await pingTest(myRun);
+  await downloadTest(myRun);
+  try{await uploadTest(myRun)}catch(e){
+   if(e.name==='AbortError')throw e;
+   ui.upload.textContent='—';ui.sub.textContent='Download complete. Upload could not be measured.';
+  }
+  if(run!==myRun)return;
+  update('Test complete',100);
+  if(ui.sub.textContent!=='Download complete. Upload could not be measured.')ui.sub.textContent='Your connection test is complete.';
+ }catch(e){
+  if(run!==myRun)return;
+  if(e.name==='AbortError'){update('Test stopped',0);ui.sub.textContent='Test stopped. You can run it again.'}
+  else{update('Test unavailable',0);ui.sub.classList.add('error');ui.sub.textContent=e.message||'Unable to test this connection.'}
+ }finally{
+  clearTimeoutSignal();
+  if(run===myRun){state(false);abortAll();controller=null}
+ }
+}
+ui.start.addEventListener('click',start);
+ui.stop.addEventListener('click',()=>{if(!active)return;abortAll()});
+})();
+</script>
+</body>
+</html>
