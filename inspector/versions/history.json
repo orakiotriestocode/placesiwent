@@ -164,6 +164,13 @@
         "releasedAt": "2026-11-08T16:06:49Z",
         "commit": "d2e633d07cd33957165f0d7045e61dfd41594067",
         "description": "Keep top-down Classic Org Chart only; retain saved top-down positions and drag behavior"
+      },
+      {
+        "version": "1.16.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:13:39Z",
+        "commit": "daa35e6d4dda3d73daf41d6b8c981a6ebe4bcd14",
+        "description": "Seniority timeline view with ascending/descending sorting; editable start and end dates; ended employees greyed out in every view; CSV/JSON columns preserved"
       }
     ]
   }
