@@ -234,6 +234,13 @@
         "releasedAt": "2026-11-08T20:44:01Z",
         "commit": "a6a699c9e091257c499f8e7b3b670aae4b252891",
         "description": "Classic Org Chart zoom only (25–250%) with +/- controls and slider, browser-persisted zoom, full-size image export and zoom-adjusted dragging"
+      },
+      {
+        "version": "1.22.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T20:49:27Z",
+        "commit": "0650a5055b75622b28ac40f10ecee11670d65e87",
+        "description": "Drag empty Classic Org Chart background to pan viewport horizontally and vertically without changing card positions; retain separate card drag and Ctrl-drag interactions"
       }
     ]
   }
