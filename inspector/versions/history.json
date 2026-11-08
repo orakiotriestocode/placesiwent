@@ -29,6 +29,13 @@
         "releasedAt": "2026-11-08T14:08:36Z",
         "commit": "c7fb4aa84698dfabc8a4213f4cf99908da139920",
         "date": "2026-11-08"
+      },
+      {
+        "version": "1.4.0",
+        "releasedAt": "2026-11-08T14:19:10Z",
+        "date": "2026-11-08",
+        "commit": "961ad091fd463920c6203c2d659b83dbb4bad6a7",
+        "description": "Use one canonical version field to synchronise header, footer and release-time lookup"
       }
     ],
     "dev": [
@@ -87,6 +94,13 @@
         "releasedAt": "2026-11-08T14:13:10Z",
         "commit": "75c68b8bca1fe51f7087e62e601b51c0480e04d6",
         "description": "Manually editable hierarchy levels, with automatic fallback and connectors grouped by reporting level"
+      },
+      {
+        "version": "1.8.0",
+        "releasedAt": "2026-11-08T14:19:22Z",
+        "date": "2026-11-08",
+        "commit": "552530e716cd1da8ebcfe14d26562cd0ec05221d",
+        "description": "Use one canonical version field to synchronise header, footer and release-time lookup"
       }
     ]
   }
