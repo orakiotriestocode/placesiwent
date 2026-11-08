@@ -8,17 +8,36 @@ const base64=b=>{let s='';for(const c of b)s+=String.fromCharCode(c);return btoa
 const unbase=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4)),c=>c.charCodeAt(0));
 const cat=(...xs)=>{let n=0;for(const x of xs)n+=x.length;const b=new Uint8Array(n);let i=0;for(const x of xs){b.set(x,i);i+=x.length}return b};
 function tlv(tag,value){let n=value.length,bytes=[];while(n){bytes.unshift(n&255);n=Math.floor(n/256)}const len=value.length<128?Uint8Array.of(value.length):Uint8Array.of(0x80|bytes.length,...bytes);return cat(Uint8Array.of(tag),len,value)}
-function pkcs8(pem){
- const raw=String(pem||'').replace(/\\n/g,'\n');
- const m=raw.match(/-----BEGIN (RSA )?PRIVATE KEY-----([\s\S]+?)-----END (?:RSA )?PRIVATE KEY-----/);
- if(!m)throw Error('Invalid GitHub private key');
- const b=Uint8Array.from(atob(m[2].replace(/\s/g,'')),x=>x.charCodeAt(0));
- if(!m[1])return b;
+// Cloudflare dashboard values can contain full PEM text, literal \n
+// sequences, or only a base64 DER payload. Accept all three without logging
+// the private key or any portion of its contents.
+function keyBytes(pem){
+ let raw=String(pem||'').trim().replace(/\\r\\n|\\n|\\r/g,'\n');
+ raw=raw.replace(/^["']|["']$/g,'').trim();
+ const match=raw.match(/-----BEGIN (RSA )?PRIVATE KEY-----([\s\S]*?)-----END (?:RSA )?PRIVATE KEY-----/);
+ const body=match?match[2]:raw;
+ const compact=body.replace(/\s/g,'');
+ if(!compact||!/^[a-zA-Z0-9+/=]+$/.test(compact))throw Error('Invalid GitHub private key format. Ensure Cloudflare contains the complete PEM file.');
+ try{return Uint8Array.from(atob(compact),c=>c.charCodeAt(0))}
+ catch(e){throw Error('Invalid GitHub private key base64 encoding')}
+}
+function wrapRsaPrivateKey(pkcs1){
  const oid=Uint8Array.of(0x30,0x0d,0x06,0x09,0x2a,0x86,0x48,0x86,0xf7,0x0d,0x01,0x01,0x01,0x05,0x00);
- return tlv(0x30,cat(Uint8Array.of(2,1,0),oid,tlv(4,b)));
+ return tlv(0x30,cat(Uint8Array.of(2,1,0),oid,tlv(4,pkcs1)));
+}
+async function signingKey(env){
+ const data=keyBytes(env.GITHUB_PRIVATE_KEY);
+ const algorithm={name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};
+ // GitHub supplies RSA PKCS#1 private keys; other tools may export PKCS#8.
+ // Try PKCS#8 first, then safely wrap PKCS#1.
+ try{return await crypto.subtle.importKey('pkcs8',data,algorithm,false,['sign'])}
+ catch(e){
+  try{return await crypto.subtle.importKey('pkcs8',wrapRsaPrivateKey(data),algorithm,false,['sign'])}
+  catch(inner){throw Error('Could not import GitHub App signing key. Confirm it is the .pem private key generated for this GitHub App.')}
+ }
 }
 async function appJwt(env){
- const key=await crypto.subtle.importKey('pkcs8',pkcs8(env.GITHUB_PRIVATE_KEY),{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
+ const key=await signingKey(env);
  const time=Math.floor(Date.now()/1000),header=base64(encode.encode(JSON.stringify({alg:'RS256',typ:'JWT'}))),body=base64(encode.encode(JSON.stringify({iat:time-30,exp:time+540,iss:String(env.GITHUB_APP_ID)})));
  const msg=header+'.'+body,sig=await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,encode.encode(msg));
  return msg+'.'+base64(new Uint8Array(sig));
