@@ -80,6 +80,13 @@
         "releasedAt": "2026-11-08T14:08:46Z",
         "commit": "72977d26f0adf634a9462306eaa66361ea7fb997",
         "date": "2026-11-08"
+      },
+      {
+        "version": "1.7.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T14:13:10Z",
+        "commit": "75c68b8bca1fe51f7087e62e601b51c0480e04d6",
+        "description": "Manually editable hierarchy levels, with automatic fallback and connectors grouped by reporting level"
       }
     ]
   }
