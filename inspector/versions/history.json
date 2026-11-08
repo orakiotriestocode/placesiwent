@@ -108,6 +108,13 @@
         "releasedAt": "2026-11-08T14:31:19Z",
         "commit": "eb23ff321cf0dd87aa5b98500221c11839a75ece",
         "description": "Drag and drop cards within hierarchy levels; saved per direction with JSON/CSV layout offsets"
+      },
+      {
+        "version": "1.10.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T14:35:52Z",
+        "commit": "04590acafe70010582048400464905901ea78503",
+        "description": "Direct card dragging enabled by default, improved pointer capture and free positioning"
       }
     ]
   }
