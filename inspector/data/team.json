@@ -12,11 +12,11 @@
       "product": "",
       "manager": "",
       "functionalManager": "",
-      "type": "executive",
       "hierarchyLevel": "1",
-      "layoutOffsetDown": -1445,
+      "type": "executive",
       "startDate": "2026-11-02",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -1468
     },
     {
       "id": "p1",
@@ -24,15 +24,15 @@
       "role": "VP Digital Platforms & Connected Labs",
       "pillar": "Executive",
       "region": "",
-      "country": "",
+      "country": "BE",
       "product": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
-      "type": "executive",
       "hierarchyLevel": "2",
-      "layoutOffsetDown": -2962,
+      "type": "executive",
       "startDate": "2026-11-02",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -3097
     },
     {
       "id": "p2",
@@ -44,11 +44,11 @@
       "product": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
-      "type": "executive",
       "hierarchyLevel": "2",
-      "layoutOffsetDown": -117,
+      "type": "executive",
       "startDate": "2026-10-19",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -116
     },
     {
       "id": "p3",
@@ -60,11 +60,11 @@
       "product": "",
       "manager": "Peter van Dinter",
       "functionalManager": "Greg Bramhall",
-      "type": "engagement",
-      "layoutOffsetDown": -8067,
       "hierarchyLevel": "",
+      "type": "engagement",
       "startDate": "2027-01-01",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -8066
     },
     {
       "id": "p4",
@@ -76,11 +76,11 @@
       "product": "",
       "manager": "Peter Van DInter",
       "functionalManager": "Greg Bramhall",
-      "type": "delivery",
       "hierarchyLevel": "4",
-      "layoutOffsetDown": -3911,
+      "type": "delivery",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -3910
     },
     {
       "id": "p5",
@@ -92,8 +92,11 @@
       "product": "",
       "manager": "Felix Castonguay",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "engagement",
-      "layoutOffsetDown": -3911
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -3910
     },
     {
       "id": "p6",
@@ -105,11 +108,11 @@
       "product": "",
       "manager": "Serena Van der Sluis",
       "functionalManager": "",
-      "type": "engagement",
-      "layoutOffsetDown": -8067,
       "hierarchyLevel": "5",
+      "type": "engagement",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -8066
     },
     {
       "id": "p7",
@@ -121,11 +124,11 @@
       "product": "",
       "manager": "Serena Van der Sluis",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -8067,
       "hierarchyLevel": "5",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -8066
     },
     {
       "id": "p8",
@@ -137,11 +140,11 @@
       "product": "",
       "manager": "Peter Van Dinter",
       "functionalManager": "Greg Bramhall",
-      "type": "delivery",
       "hierarchyLevel": "4",
-      "layoutOffsetDown": -7818,
+      "type": "delivery",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -7817
     },
     {
       "id": "p9",
@@ -153,9 +156,11 @@
       "product": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
-      "type": "engagement",
       "hierarchyLevel": "",
-      "layoutOffsetDown": -7816
+      "type": "engagement",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -7815
     },
     {
       "id": "p10",
@@ -167,9 +172,11 @@
       "product": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
-      "type": "vacancy",
       "hierarchyLevel": "",
-      "layoutOffsetDown": -7818
+      "type": "vacancy",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -7817
     },
     {
       "id": "p11",
@@ -181,9 +188,11 @@
       "product": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
-      "type": "vacancy",
       "hierarchyLevel": "",
-      "layoutOffsetDown": -7819
+      "type": "vacancy",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -7818
     },
     {
       "id": "p12",
@@ -195,11 +204,11 @@
       "product": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -1874,
       "hierarchyLevel": "3",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -1873
     },
     {
       "id": "p13",
@@ -211,8 +220,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -2032
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -2031
     },
     {
       "id": "p14",
@@ -224,11 +236,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
-      "type": "existing",
-      "layoutOffsetDown": -1700,
       "hierarchyLevel": "5",
+      "type": "existing",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -1699
     },
     {
       "id": "p15",
@@ -240,8 +252,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": -2373
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -2372
     },
     {
       "id": "p16",
@@ -253,8 +268,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": -2180
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -2179
     },
     {
       "id": "p17",
@@ -266,11 +284,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -2276,
       "hierarchyLevel": "5",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -2275
     },
     {
       "id": "p18",
@@ -282,11 +300,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -1985,
       "hierarchyLevel": "4",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -1984
     },
     {
       "id": "p19",
@@ -298,11 +316,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -2082,
       "hierarchyLevel": "5",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -2081
     },
     {
       "id": "p20",
@@ -314,8 +332,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -2541
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -2540
     },
     {
       "id": "p21",
@@ -327,11 +348,11 @@
       "product": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
-      "type": "vacancy",
-      "layoutOffsetDown": -2475,
       "hierarchyLevel": "5",
+      "type": "vacancy",
       "startDate": "",
-      "endDate": ""
+      "endDate": "",
+      "layoutOffsetDown": -2474
     },
     {
       "id": "p22",
@@ -343,8 +364,11 @@
       "product": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "architecture",
-      "layoutOffsetDown": 635
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 636
     },
     {
       "id": "p23",
@@ -356,8 +380,11 @@
       "product": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 683
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 684
     },
     {
       "id": "p24",
@@ -369,9 +396,11 @@
       "product": "",
       "manager": "Aysha Kadiri",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 683,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 684
     },
     {
       "id": "p25",
@@ -383,9 +412,11 @@
       "product": "",
       "manager": "Aysha Kadiri",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 679,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 680
     },
     {
       "id": "p26",
@@ -397,9 +428,11 @@
       "product": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": 583,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 584
     },
     {
       "id": "p28",
@@ -411,8 +444,11 @@
       "product": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": 590
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 591
     },
     {
       "id": "p29",
@@ -424,8 +460,11 @@
       "product": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": 595
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 596
     },
     {
       "id": "p31",
@@ -437,9 +476,11 @@
       "product": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": 577,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 578
     },
     {
       "id": "p33",
@@ -451,9 +492,11 @@
       "product": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
-      "type": "product",
       "hierarchyLevel": "3",
-      "layoutOffsetDown": -1818
+      "type": "product",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p34",
@@ -465,9 +508,11 @@
       "product": "OneTrade",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
-      "type": "existing",
       "hierarchyLevel": "",
-      "layoutOffsetDown": -1818
+      "type": "existing",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p35",
@@ -479,8 +524,11 @@
       "product": "LIMS",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1818
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p36",
@@ -492,8 +540,11 @@
       "product": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1818
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p37",
@@ -505,8 +556,11 @@
       "product": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1818
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p38",
@@ -518,8 +572,11 @@
       "product": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1818
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p39",
@@ -531,8 +588,11 @@
       "product": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "vacancy",
-      "layoutOffsetDown": -1813
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1812
     },
     {
       "id": "p40",
@@ -544,9 +604,11 @@
       "product": "",
       "manager": "Peter Van DInter",
       "functionalManager": "Kamran Balouchestani",
-      "type": "engineering",
       "hierarchyLevel": "4",
-      "layoutOffsetDown": -449
+      "type": "engineering",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -448
     },
     {
       "id": "p41",
@@ -558,9 +620,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
-      "type": "vacancy",
       "hierarchyLevel": "",
-      "layoutOffsetDown": 67
+      "type": "vacancy",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p42",
@@ -572,9 +636,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
-      "type": "vacancy",
       "hierarchyLevel": "",
-      "layoutOffsetDown": 67
+      "type": "vacancy",
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p43",
@@ -586,8 +652,11 @@
       "product": "OneTrade",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 0
     },
     {
       "id": "p44",
@@ -599,8 +668,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p45",
@@ -612,8 +684,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p46",
@@ -625,8 +700,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p47",
@@ -638,8 +716,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p48",
@@ -651,9 +732,11 @@
       "product": "",
       "manager": "Zeeshan Zahid",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 0
     },
     {
       "id": "p49",
@@ -665,8 +748,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p50",
@@ -678,9 +764,11 @@
       "product": "",
       "manager": "Zeeshan Zahid",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 0
     },
     {
       "id": "p51",
@@ -692,8 +780,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p52",
@@ -705,8 +796,11 @@
       "product": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": 67
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": 68
     },
     {
       "id": "p53",
@@ -718,8 +812,11 @@
       "product": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
+      "hierarchyLevel": "",
       "type": "existing",
-      "layoutOffsetDown": -1818
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -1817
     },
     {
       "id": "p54",
@@ -731,9 +828,11 @@
       "product": "",
       "manager": "",
       "functionalManager": "",
+      "hierarchyLevel": "6",
       "type": "vacancy",
-      "layoutOffsetDown": -4009,
-      "hierarchyLevel": ""
+      "startDate": "",
+      "endDate": "",
+      "layoutOffsetDown": -7577
     },
     {
       "id": "p55",
@@ -745,8 +844,10 @@
       "product": "",
       "manager": "",
       "functionalManager": "",
-      "type": "vacancy",
       "hierarchyLevel": "5",
+      "type": "vacancy",
+      "startDate": "",
+      "endDate": "",
       "layoutOffsetDown": 1755
     }
   ],
