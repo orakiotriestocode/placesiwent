@@ -220,6 +220,13 @@
         "releasedAt": "2026-11-08T19:47:43Z",
         "commit": "3630253a6e29cb5d62d42cc70682aeb43c0e42a3",
         "description": "Automatically update every people-manager and functional-manager name reference when a person is renamed; block ambiguous duplicate names"
+      },
+      {
+        "version": "1.20.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T19:50:57Z",
+        "commit": "9fe4305817770c5349cb611fe59656c2d4b795e2",
+        "description": "Manage type names and colours from a shared legend. Add/remove types, assign in person editor, preserve type palette in JSON export/import; no changes to people or positions."
       }
     ]
   }
