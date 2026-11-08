@@ -171,6 +171,13 @@
         "releasedAt": "2026-11-08T16:13:39Z",
         "commit": "daa35e6d4dda3d73daf41d6b8c981a6ebe4bcd14",
         "description": "Seniority timeline view with ascending/descending sorting; editable start and end dates; ended employees greyed out in every view; CSV/JSON columns preserved"
+      },
+      {
+        "version": "1.17.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:18:57Z",
+        "commit": "d2d49929b9423f68c4c37783acd3a0fbf9acde10",
+        "description": "Country selector for all people and flag icons on cards across views; retains existing country names"
       }
     ]
   }
