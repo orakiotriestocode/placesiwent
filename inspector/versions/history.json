@@ -36,6 +36,13 @@
         "date": "2026-11-08",
         "commit": "961ad091fd463920c6203c2d659b83dbb4bad6a7",
         "description": "Use one canonical version field to synchronise header, footer and release-time lookup"
+      },
+      {
+        "version": "1.14.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T15:05:14Z",
+        "commit": "bb4b1e47eb503909eaf5ce34332e34d84f0447fc",
+        "description": "Promoted complete DEV v1.14.0 application; first LIVE visit on same browser copies DEV people, managers, hierarchy and layout positions into LIVE (prior LIVE data backed up locally)"
       }
     ],
     "dev": [
