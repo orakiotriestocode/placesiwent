@@ -199,6 +199,13 @@
         "releasedAt": "2026-11-08T16:31:33Z",
         "commit": "426556c011f65f39828ee5b16d8976ed22fb4f25",
         "description": "Correct card reuse across Classic, grouped and Seniority views; reset inline coordinates and stale drag event handlers without modifying saved data"
+      },
+      {
+        "version": "1.19.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:50:20Z",
+        "commit": "164444056706fb95150042896382c5bc2c5424bc",
+        "description": "Classic Org Chart appears first and is the first-visit default; export the complete chart with connectors as PNG, JPEG or SVG using generic org-chart filename"
       }
     ]
   }
