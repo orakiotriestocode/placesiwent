@@ -115,6 +115,13 @@
         "releasedAt": "2026-11-08T14:35:52Z",
         "commit": "04590acafe70010582048400464905901ea78503",
         "description": "Direct card dragging enabled by default, improved pointer capture and free positioning"
+      },
+      {
+        "version": "1.11.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T14:39:26Z",
+        "commit": "d2cdb2e6a7d25d11ac3259e71a91f1073f2c2167",
+        "description": "Dragging any team leader moves all directly and indirectly reporting people in sync, with connected lines updating"
       }
     ]
   }
