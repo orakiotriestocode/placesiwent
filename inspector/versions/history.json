@@ -71,6 +71,13 @@
         "releasedAt": "2026-11-08T22:28:30Z",
         "commit": "cc58cfe25c1d0f3ec68de9564e8a5b64580b3310",
         "description": "Connect LIVE editor to secure browser publishing workflow: GitHub sign-in, session verification, SHA-protected data publication, local drafts and public deployment status; Worker source prepared for Cloudflare deployment"
+      },
+      {
+        "version": "1.24.1",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T22:38:19Z",
+        "commit": "25867102e67400b4979277c7e7dccf32cd0edcff",
+        "description": "Fix Publish button remaining disabled by loading current data revision from GitHub public API with Worker fallback; support first publish from pre-existing local draft after explicit baseline confirmation"
       }
     ],
     "dev": [
