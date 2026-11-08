@@ -185,6 +185,13 @@
         "releasedAt": "2026-11-08T16:22:55Z",
         "commit": "406818ec6b86591bfe7469e9b9ca2108b735a109",
         "description": "Hotfix: restore absolute positioning to Classic Org Chart cards after country flag styling regression; preserve all team records and offsets"
+      },
+      {
+        "version": "1.18.0",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:26:31Z",
+        "commit": "02a258164c8a9b8fdaab3375549d6f4326690e4f",
+        "description": "Country input changed from static select to editable datalist combobox, searchable by name or ISO code; country badges preserved"
       }
     ]
   }
