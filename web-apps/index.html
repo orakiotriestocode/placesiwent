@@ -1,0 +1,62 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c131c">
+<meta name="description" content="Web apps deluxe — practical web app experiments for life and work, built at Places I Went.">
+<title>Web apps deluxe · Places I Went</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eff3e7;background:#0c131c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% 0%,#193138 0,transparent 36rem),#0c131c}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:3px solid #81e2b3;outline-offset:5px}
+.shell{width:min(1050px,100%);margin:0 auto;padding:28px 24px 25px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:23px;border-bottom:1px solid #30404a}
+.brand{display:inline-flex;align-items:center;gap:12px;font-size:.91rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.brand-mark{width:36px;height:36px;border-radius:9px;background:#7fe0b3;color:#112822;display:grid;place-items:center;font-size:1.15rem}
+.back{color:#a2ebc6;font-size:.88rem;font-weight:700}
+main{flex:1;padding:76px 0 90px}
+.eyebrow{color:#91a9b0;letter-spacing:.16em;text-transform:uppercase;font-weight:700;font-size:.74rem;margin:0 0 15px}
+h1{font-size:clamp(2.8rem,6vw,5rem);letter-spacing:-.065em;line-height:1.05;margin:0 0 18px}
+.intro{color:#b5c6ca;line-height:1.7;font-size:1.05rem;max-width:660px;margin:0 0 45px}
+.section-title{font-size:1.25rem;letter-spacing:-.025em;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tile{background:#15232e;border:1px solid #344955;border-radius:16px;padding:26px;min-height:190px}
+.symbol{display:grid;place-items:center;width:47px;height:47px;background:#244338;color:#99edc4;border-radius:11px;font-size:1.5rem;margin-bottom:21px}
+h2{font-size:1.45rem;letter-spacing:-.04em;margin:0 0 10px}
+.tile p{margin:0;color:#b5c6ca;font-size:.94rem;line-height:1.65}
+.tag{display:inline-block;margin-top:19px;color:#a2ebc6;font-size:.78rem;font-weight:700}
+footer{border-top:1px solid #30404a;color:#829ba3;font-size:.78rem;padding-top:21px;display:flex;justify-content:space-between;gap:12px}
+footer a:hover{color:#a2ebc6}
+@media(max-width:650px){main{padding:58px 0 70px}.grid{grid-template-columns:1fr}.tile{min-height:0}.back{font-size:.8rem}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+<a href="/" class="brand" aria-label="Places I Went home"><span class="brand-mark">✦</span> Places I Went</a>
+<a href="/" class="back">← Back to home</a>
+</header>
+<main>
+<p class="eyebrow">Ideas · Experiments · Useful tools</p>
+<h1>Web apps <span style="color:#7fe0b3">deluxe.</span></h1>
+<p class="intro">A growing home for web applications I create with a little help from AI — practical tools for everyday life, professional work, and whatever interesting idea comes next.</p>
+<h2 class="section-title">The collection</h2>
+<div class="grid">
+<article class="tile">
+<span class="symbol" aria-hidden="true">⌘</span>
+<h2>First app coming soon</h2>
+<p>This is where the next experiment will live. Each app will get its own space and a direct link from this collection.</p>
+<span class="tag">In the making</span>
+</article>
+</div>
+</main>
+<footer><span>© 2026 Places I Went</span><a href="https://github.com/orakiotriestocode/placesiwent" rel="noopener noreferrer">GitHub</a></footer>
+</div>
+</body>
+</html>
