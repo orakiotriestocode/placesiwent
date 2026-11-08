@@ -178,6 +178,13 @@
         "releasedAt": "2026-11-08T16:18:57Z",
         "commit": "d2d49929b9423f68c4c37783acd3a0fbf9acde10",
         "description": "Country selector for all people and flag icons on cards across views; retains existing country names"
+      },
+      {
+        "version": "1.17.1",
+        "date": "2026-11-08",
+        "releasedAt": "2026-11-08T16:22:55Z",
+        "commit": "406818ec6b86591bfe7469e9b9ca2108b735a109",
+        "description": "Hotfix: restore absolute positioning to Classic Org Chart cards after country flag styling regression; preserve all team records and offsets"
       }
     ]
   }
