@@ -290,6 +290,13 @@
         "releasedAt": "2026-11-09T11:46:29Z",
         "commit": "8b09338a5db8ec7d7fa98754619de6913354b29f",
         "description": "Decluttered DEV interface: compact header/navigation, data import/export menu, collapsible colour legend, condensed Classic controls, advanced options panel, short navigation instructions"
+      },
+      {
+        "version": "1.26.1",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T13:40:51Z",
+        "commit": "11bf4d943fc3ec62de0d991b5a8bfe27f3b7a536",
+        "description": "Compare normalized local chart and colour types against the published DEV JSON; clear stale pending/unpublished flags whenever contents match, preserving genuine drafts"
       }
     ]
   }
