@@ -78,6 +78,13 @@
         "releasedAt": "2026-11-08T22:38:19Z",
         "commit": "25867102e67400b4979277c7e7dccf32cd0edcff",
         "description": "Fix Publish button remaining disabled by loading current data revision from GitHub public API with Worker fallback; support first publish from pre-existing local draft after explicit baseline confirmation"
+      },
+      {
+        "version": "1.27.0",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T14:10:14Z",
+        "commit": "698f9a7011f40ffd14b1a25fec4e6d1b068929ca",
+        "description": "Promote DEV v1.26.3 UX to LIVE: compact workspace, collapsible data tools, colour legend, chart options, cursor-anchored mouse wheel zoom and local versus published draft comparison. LIVE team.json remains independent."
       }
     ],
     "dev": [
