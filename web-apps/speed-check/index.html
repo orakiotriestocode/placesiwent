@@ -183,6 +183,8 @@ async function start(){
 }
 ui.start.addEventListener('click',start);
 ui.stop.addEventListener('click',()=>{if(!active)return;abortAll()});
+// Begin measuring as soon as the page is opened.
+start();
 })();
 </script>
 </body>
