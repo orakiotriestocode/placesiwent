@@ -839,9 +839,9 @@ function showDataStatus(){
  else if(localStorage.getItem(DRAFT_MARKER)==='pending')text.textContent='Saved to GitHub. Public LIVE data has not yet matched this browser copy; review any differences before changing it.';
  else if(unpublishedDraft){
   const details=compareWithPublished();
-  text.textContent=details.fields?'Local draft differs from published DEV: '+details.fields+' differences across '+details.people+' people'+(details.types?' and '+details.types+' colour types':'')+'. Review before publishing or discarding.':'Local changes exist but the published version could not be verified.';
+  text.textContent=details.fields?'Local draft differs from published LIVE: '+details.fields+' differences across '+details.people+' people'+(details.types?' and '+details.types+' colour types':'')+'. Review before publishing or discarding.':'Local changes exist but the published version could not be verified.';
  }
- else text.textContent='Shared published LIVE chart — every visitor loads the same DEV people, relationships, colours and saved positions.';
+ else text.textContent='Shared published LIVE chart — every visitor loads the same LIVE people, relationships, colours and saved positions.';
  box.append(text);
  if(dataLoadState==='ready'&&unpublishedDraft){
   const inspect=document.createElement('button');inspect.type='button';inspect.textContent='Review differences';inspect.onclick=showDifferences;box.append(inspect);
