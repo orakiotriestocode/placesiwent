@@ -25,7 +25,7 @@ main{padding:12px 18px;min-height:70vh}.shared-data-status{padding:7px 10px;marg
 .classic-help{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;margin:5px 0 8px;color:#9fbac1}.classic-help .legend-solid,.classic-help .legend-dotted{width:19px;margin-left:7px}.classic-help details{margin-left:auto;position:relative}.classic-help details summary{cursor:pointer;color:#b8d6ce}.classic-help details p{max-width:560px;padding:10px;background:#1b3541;border:1px solid #47616d;border-radius:8px;margin:5px 0}.classic-scroll{height:clamp(480px,73vh,970px);border-radius:10px}
 @media(max-width:900px){.top{padding-right:15px}.env{position:static;order:5;margin-left:auto}.top .views{flex-basis:100%}.classic-zoom-control{margin-left:0}.chart-options-content{right:auto;left:0;max-width:85vw}}
 @media(max-width:600px){header{padding:11px 13px;min-height:66px}header h1{font-size:14px}.logo{font-size:16px}.top{padding:9px 12px}.top .views{flex-wrap:nowrap;overflow-x:auto;padding-bottom:3px}.top .views button{white-space:nowrap;flex:none}.top #search{width:100%;flex:1 1 125px}.top .publish-toolbar{border:0;padding-left:0}.tools-menu .data-actions{right:-45px}.classic-zoom-control input[type=range]{width:80px}.classic-help .help-shortcut{display:none}.chart-options-content{max-width:calc(100vw - 35px);min-width:250px}.classic-scroll{height:66vh}}
-</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.26.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.26.1" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
 const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
 const fields=['name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
 const base=RAW.split('\n').map((r,i)=>{const a=r.split('|');return Object.fromEntries([['id','p'+i],...fields.map((k,j)=>[k,(k==='functionalManager'||k==='hierarchyLevel'||k==='startDate'||k==='endDate')?'':a[j>8?j-2:j]||''])])});
@@ -45,6 +45,7 @@ if(LEGACY_DEV_DATA&&localStorage.getItem(DRAFT_MARKER)===null)localStorage.setIt
 let publishedSha='',publisherToken='',publisherLogin='',publisherExpires=0,loginPopup=null,headLoadError='';
 let dataLoadState='loading';
 let unpublishedDraft=false;
+let publishedSnapshot=null;
 
 const storage='mesh-team-'+MODE+'-v2';let people;try{people=JSON.parse(localStorage.getItem(storage))||base}catch(e){people=base}if(!Array.isArray(people))people=base;
 const areas=['North America','South America','Western Europe','Africa','Middle East','Asia Pacific'],pillars=['Executive','Business Transformation','Engagement','Delivery','Assurance','Architecture','Data & AI','Product','Engineering'];
@@ -55,7 +56,7 @@ let view=availableViews.has(savedView)?savedView:'classic',filter='',editing=nul
 let seniorityOrder=localStorage.getItem('mesh-seniority-order-'+MODE)==='asc'?'asc':'desc';const root=document.getElementById('groups'),cache=new Map(),dialog=document.getElementById('editor');
 let lastRenderedView=null;
 function prepareView(next){if(lastRenderedView!==next){cache.clear();lastRenderedView=next}}
-function persist(){localStorage.setItem(storage,JSON.stringify(people));if(publishedSha&&!localStorage.getItem(DRAFT_BASE_KEY))localStorage.setItem(DRAFT_BASE_KEY,publishedSha);localStorage.setItem(DRAFT_MARKER,'true');unpublishedDraft=true;showDataStatus();updatePublishButtons()}
+function persist(){localStorage.setItem(storage,JSON.stringify(people));refreshDraftState()}
 
 const DEFAULT_TYPES=[
  {id:'executive',name:'Executive',color:'#124532'},
@@ -83,7 +84,7 @@ let typeDefinitions;
 try{typeDefinitions=normalizedTypes(JSON.parse(localStorage.getItem(typeStorage)))}catch(e){typeDefinitions=DEFAULT_TYPES.map(t=>({...t}))}
 function ensureLegacyTypes(){let changed=false;const ids=new Set(typeDefinitions.map(t=>t.id));for(const p of people){const id=String(p.type||'').trim();if(id&&!ids.has(id)){typeDefinitions.push({id,name:id.slice(0,1).toUpperCase()+id.slice(1),color:'#658272'});ids.add(id);changed=true}}if(changed)localStorage.setItem(typeStorage,JSON.stringify(typeDefinitions))}
 ensureLegacyTypes();
-function persistTypes(){localStorage.setItem(typeStorage,JSON.stringify(typeDefinitions));if(publishedSha&&!localStorage.getItem(DRAFT_BASE_KEY))localStorage.setItem(DRAFT_BASE_KEY,publishedSha);localStorage.setItem(DRAFT_MARKER,'true');unpublishedDraft=true;showDataStatus();updatePublishButtons()}
+function persistTypes(){localStorage.setItem(typeStorage,JSON.stringify(typeDefinitions));refreshDraftState()}
 const typeDefinition=id=>typeDefinitions.find(t=>t.id===id);
 function renderTypeLegend(){
  const legend=document.getElementById('type-legend');if(!legend)return;legend.replaceChildren();
@@ -694,6 +695,38 @@ file.onchange=async()=>{
  }catch(e){alert('Import failed: '+e.message)}finally{file.value=''}
 };
 
+// Compare the actual chart data, not the existence of an old localStorage flag.
+// Normalizing strips irrelevant object-key order and reconciles missing vs blank
+// fields and numeric offsets across JSON imports, browser data, and GitHub.
+function chartFingerprint(rows,types){
+ const normalized=normalizeImport(rows).map(p=>DATA_COLUMNS.map(key=>{
+  if(key==='layoutOffsetDown'||key==='layoutOffsetRight'){
+   const number=Number(p[key]);return p[key]===''?0:(Number.isFinite(number)?number:0);
+  }
+  return String(p[key]??'');
+ }));
+ normalized.sort((a,b)=>a[0].localeCompare(b[0]));
+ const colors=normalizedTypes(types).map(t=>[t.id,t.name,t.color.toLowerCase()]);
+ colors.sort((a,b)=>a[0].localeCompare(b[0]));
+ return JSON.stringify([normalized,colors]);
+}
+function refreshDraftState(){
+ if(dataLoadState!=='ready'||!publishedSnapshot){
+  // When offline, never assume local edits have been published.
+  localStorage.setItem(DRAFT_MARKER,'true');unpublishedDraft=true;
+ }else if(chartFingerprint(people,typeDefinitions)===publishedSnapshot){
+  // Published data and local data are identical: remove stale draft flags.
+  localStorage.removeItem(DRAFT_MARKER);
+  localStorage.removeItem(DRAFT_BASE_KEY);
+  unpublishedDraft=false;
+  headLoadError='';
+ }else{
+  if(publishedSha&&!localStorage.getItem(DRAFT_BASE_KEY))localStorage.setItem(DRAFT_BASE_KEY,publishedSha);
+  localStorage.setItem(DRAFT_MARKER,'true');
+  unpublishedDraft=true;
+ }
+ showDataStatus();updatePublishButtons();
+}
 function showDataStatus(){
  const box=document.getElementById('shared-data-status');if(!box)return;
  box.replaceChildren();
@@ -712,11 +745,12 @@ function showDataStatus(){
 }
 async function loadPublishedTeam(){
  try{
-  const res=await fetch(SHARED_DATA_URL+'?v=1.25.0',{cache:'no-store'});
+  const res=await fetch(SHARED_DATA_URL+'?v=1.26.1',{cache:'no-store'});
   if(!res.ok)throw Error('HTTP '+res.status);
   const data=await res.json();
   if(!Array.isArray(data.people)||!data.people.length||!Array.isArray(data.types))throw Error('Invalid shared data file');
   const publishedPeople=normalizeImport(data.people),publishedTypes=normalizedTypes(data.types);
+  publishedSnapshot=chartFingerprint(publishedPeople,publishedTypes);
   // An explicit, post-release local draft is the only reason to override
   // the public dataset in this browser. Pre-existing DEV localStorage is retained as a draft.
   const hasDraft=['true','pending'].includes(localStorage.getItem(DRAFT_MARKER));
@@ -735,6 +769,12 @@ async function loadPublishedTeam(){
   }else{people=publishedPeople;typeDefinitions=publishedTypes;unpublishedDraft=false}
   // Avoid treating the load itself as an edit.
   dataLoadState='ready';cache.clear();ensureLegacyTypes();
+  // A successful publication may leave an obsolete 'pending' flag in the
+  // browser. Clear it as soon as the public data catches up with this draft.
+  if(chartFingerprint(people,typeDefinitions)===publishedSnapshot){
+   localStorage.removeItem(DRAFT_MARKER);localStorage.removeItem(DRAFT_BASE_KEY);
+   unpublishedDraft=false;headLoadError='';
+  }
  }catch(e){
   dataLoadState='error';
   console.error('Shared org chart data failed to load:',e);
