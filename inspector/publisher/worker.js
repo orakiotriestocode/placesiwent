@@ -1,4 +1,5 @@
 // Secure browser-to-GitHub org-chart publisher. Cloudflare Worker module.
+// Automated GitHub Actions deployment enabled for independent LIVE and DEV publishing.
 // Secrets: GITHUB_PRIVATE_KEY, GITHUB_CLIENT_SECRET, SESSION_SECRET.
 // Vars: GITHUB_APP_ID, GITHUB_INSTALLATION_ID, GITHUB_CLIENT_ID.
 const ORIGIN='https://placesiwent.eu', LOGIN='orakiotriestocode';
