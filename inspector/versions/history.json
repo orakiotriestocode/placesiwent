@@ -283,6 +283,13 @@
         "releasedAt": "2026-11-09T08:56:27Z",
         "commit": "2356d8632ef0b06b7c27e09509bb29c52b754f42",
         "description": "DEV now has complete LIVE functionality including OAuth sign-in, independent shared team-dev.json, authenticated browser publishing, and preservation of previous browser-local DEV edits"
+      },
+      {
+        "version": "1.26.0",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T11:46:29Z",
+        "commit": "8b09338a5db8ec7d7fa98754619de6913354b29f",
+        "description": "Decluttered DEV interface: compact header/navigation, data import/export menu, collapsible colour legend, condensed Classic controls, advanced options panel, short navigation instructions"
       }
     ]
   }
