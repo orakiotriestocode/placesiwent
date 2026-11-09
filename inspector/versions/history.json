@@ -276,6 +276,13 @@
         "releasedAt": "2026-11-08T21:00:57Z",
         "commit": "8075f5d0c862f35c1706fe015b6dc47ef1d58874",
         "description": "Fix two-dimensional panning by giving Classic Org Chart its own height-constrained scroll viewport; drag empty space diagonally, horizontally or vertically"
+      },
+      {
+        "version": "1.25.0",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T08:56:27Z",
+        "commit": "2356d8632ef0b06b7c27e09509bb29c52b754f42",
+        "description": "DEV now has complete LIVE functionality including OAuth sign-in, independent shared team-dev.json, authenticated browser publishing, and preservation of previous browser-local DEV edits"
       }
     ]
   }
