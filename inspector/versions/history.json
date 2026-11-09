@@ -304,6 +304,13 @@
         "releasedAt": "2026-11-09T13:58:12Z",
         "commit": "3e623c4dd68b55ab449fa46c0a5446e7d9bfa856",
         "description": "Diagnose remaining DEV draft warning by comparing local records, saved positions and types against the shared JSON; display exact differences and allow safely switching to published version with local backup"
+      },
+      {
+        "version": "1.26.3",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T14:04:25Z",
+        "commit": "33fc093b9ea4e2d9c4e3f6d1de56a18fdc687cfa",
+        "description": "Mouse wheel and trackpad zoom within Classic Org Chart only; cursor-anchored zoom keeps the pointed location stable and preserves chart-only zoom setting"
       }
     ]
   }
