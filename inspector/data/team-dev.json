@@ -16,7 +16,7 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -1468
+      "layoutOffsetDown": -2060
     },
     {
       "id": "p1",
@@ -24,7 +24,7 @@
       "role": "VP Digital Platforms & Connected Labs",
       "pillar": "Executive",
       "region": "",
-      "country": "BE",
+      "country": "",
       "product": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
@@ -32,7 +32,7 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -3097
+      "layoutOffsetDown": -2962
     },
     {
       "id": "p2",
@@ -40,7 +40,7 @@
       "role": "Global Director, Business Transformation",
       "pillar": "Executive",
       "region": "",
-      "country": "AE",
+      "country": "",
       "product": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
@@ -48,7 +48,7 @@
       "type": "executive",
       "startDate": "2026-10-19",
       "endDate": "",
-      "layoutOffsetDown": -116
+      "layoutOffsetDown": -117
     },
     {
       "id": "p3",
@@ -64,7 +64,7 @@
       "type": "engagement",
       "startDate": "2027-01-01",
       "endDate": "",
-      "layoutOffsetDown": -8066
+      "layoutOffsetDown": -8067
     },
     {
       "id": "p4",
@@ -80,7 +80,7 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3910
+      "layoutOffsetDown": -3911
     },
     {
       "id": "p5",
@@ -96,7 +96,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3910
+      "layoutOffsetDown": -3911
     },
     {
       "id": "p6",
@@ -112,7 +112,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -8066
+      "layoutOffsetDown": -8067
     },
     {
       "id": "p7",
@@ -128,7 +128,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -8066
+      "layoutOffsetDown": -8067
     },
     {
       "id": "p8",
@@ -144,7 +144,7 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7817
+      "layoutOffsetDown": -7818
     },
     {
       "id": "p9",
@@ -160,7 +160,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7815
+      "layoutOffsetDown": -7816
     },
     {
       "id": "p10",
@@ -176,7 +176,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7817
+      "layoutOffsetDown": -7818
     },
     {
       "id": "p11",
@@ -192,7 +192,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7818
+      "layoutOffsetDown": -7819
     },
     {
       "id": "p12",
@@ -208,7 +208,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1873
+      "layoutOffsetDown": -1874
     },
     {
       "id": "p13",
@@ -224,7 +224,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2031
+      "layoutOffsetDown": -2032
     },
     {
       "id": "p14",
@@ -240,7 +240,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1699
+      "layoutOffsetDown": -1700
     },
     {
       "id": "p15",
@@ -256,7 +256,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2372
+      "layoutOffsetDown": -2373
     },
     {
       "id": "p16",
@@ -272,7 +272,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2179
+      "layoutOffsetDown": -2180
     },
     {
       "id": "p17",
@@ -288,7 +288,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2275
+      "layoutOffsetDown": -2276
     },
     {
       "id": "p18",
@@ -304,7 +304,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1984
+      "layoutOffsetDown": -1985
     },
     {
       "id": "p19",
@@ -320,7 +320,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2081
+      "layoutOffsetDown": -2082
     },
     {
       "id": "p20",
@@ -336,7 +336,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2540
+      "layoutOffsetDown": -2541
     },
     {
       "id": "p21",
@@ -352,7 +352,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2474
+      "layoutOffsetDown": -2475
     },
     {
       "id": "p22",
@@ -368,7 +368,7 @@
       "type": "architecture",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 636
+      "layoutOffsetDown": 635
     },
     {
       "id": "p23",
@@ -384,7 +384,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 684
+      "layoutOffsetDown": 683
     },
     {
       "id": "p24",
@@ -400,7 +400,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 684
+      "layoutOffsetDown": 683
     },
     {
       "id": "p25",
@@ -416,7 +416,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 680
+      "layoutOffsetDown": 679
     },
     {
       "id": "p26",
@@ -432,7 +432,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 584
+      "layoutOffsetDown": 583
     },
     {
       "id": "p28",
@@ -448,7 +448,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 591
+      "layoutOffsetDown": 590
     },
     {
       "id": "p29",
@@ -464,7 +464,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 596
+      "layoutOffsetDown": 595
     },
     {
       "id": "p31",
@@ -480,7 +480,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 578
+      "layoutOffsetDown": 577
     },
     {
       "id": "p33",
@@ -496,7 +496,7 @@
       "type": "product",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p34",
@@ -512,7 +512,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p35",
@@ -528,7 +528,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p36",
@@ -544,7 +544,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p37",
@@ -560,7 +560,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p38",
@@ -576,7 +576,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p39",
@@ -592,7 +592,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1812
+      "layoutOffsetDown": -1813
     },
     {
       "id": "p40",
@@ -608,7 +608,7 @@
       "type": "engineering",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -448
+      "layoutOffsetDown": -449
     },
     {
       "id": "p41",
@@ -624,7 +624,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p42",
@@ -640,7 +640,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p43",
@@ -656,7 +656,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 0
+      "layoutOffsetDown": -1
     },
     {
       "id": "p44",
@@ -672,7 +672,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p45",
@@ -688,7 +688,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p46",
@@ -704,7 +704,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p47",
@@ -720,7 +720,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p48",
@@ -736,7 +736,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 0
+      "layoutOffsetDown": -1
     },
     {
       "id": "p49",
@@ -752,7 +752,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p50",
@@ -768,7 +768,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 0
+      "layoutOffsetDown": -1
     },
     {
       "id": "p51",
@@ -784,7 +784,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p52",
@@ -800,7 +800,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 68
+      "layoutOffsetDown": 67
     },
     {
       "id": "p53",
@@ -816,7 +816,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1817
+      "layoutOffsetDown": -1818
     },
     {
       "id": "p54",
@@ -828,11 +828,11 @@
       "product": "",
       "manager": "",
       "functionalManager": "",
-      "hierarchyLevel": "6",
+      "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7577
+      "layoutOffsetDown": -4009
     },
     {
       "id": "p55",
