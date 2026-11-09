@@ -31,6 +31,22 @@ jobs:
             echo "::error::Please add the CLOUDFLARE_API_TOKEN GitHub Actions secret."
             exit 1
           fi
+      - name: Diagnose Cloudflare token scope (no secret output)
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          verify=$(curl --fail-with-body -sS \
+            -H "Authorization: Bearer $TOKEN" \
+            https://api.cloudflare.com/client/v4/user/tokens/verify)
+          echo "$verify" | jq -c '{token_active:(.success and .result.status=="active"), errors:(.errors|map(.code))}'
+          access=$(curl -sS -H "Authorization: Bearer $TOKEN" \
+            https://api.cloudflare.com/client/v4/accounts/c06250734b831f1531ac484192bdb082/workers/services/orgchart-publisher)
+          echo "$access" | jq -c '{worker_access:.success, errors:(.errors|map(.code))}'
+          if [ "$(echo "$access" | jq -r '.success')" != "true" ]; then
+            echo "::error::Cloudflare token cannot read the orgchart-publisher service. Verify the token account scope and Workers Scripts Edit permission."
+            exit 1
+          fi
       - name: Publish existing orgchart-publisher Worker
         uses: cloudflare/wrangler-action@v4
         with:
