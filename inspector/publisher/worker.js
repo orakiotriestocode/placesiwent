@@ -2,7 +2,8 @@
 // Secrets: GITHUB_PRIVATE_KEY, GITHUB_CLIENT_SECRET, SESSION_SECRET.
 // Vars: GITHUB_APP_ID, GITHUB_INSTALLATION_ID, GITHUB_CLIENT_ID.
 const ORIGIN='https://placesiwent.eu', LOGIN='orakiotriestocode';
-const REPO='orakiotriestocode/placesiwent', FILE='inspector/data/team.json', BRANCH='main';
+const REPO='orakiotriestocode/placesiwent', BRANCH='main';
+const DATA_FILES={live:'inspector/data/team.json',dev:'inspector/data/team-dev.json'};
 const encode=new TextEncoder(),decode=new TextDecoder();
 const base64=b=>{let s='';for(const c of b)s+=String.fromCharCode(c);return btoa(s).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_')};
 const unbase=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4)),c=>c.charCodeAt(0));
@@ -47,11 +48,12 @@ async function appToken(env){
  if(!r.ok)throw Error('GitHub installation authentication failed: '+r.status);
  return (await r.json()).token;
 }
-async function github(env,method,body){
+async function github(env,method,body,environment='live'){
+ const FILE=DATA_FILES[environment];if(!FILE)throw Error('Invalid publishing environment');
  const r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+FILE+(method==='GET'?'?ref='+BRANCH:''),{method,headers:{Authorization:'Bearer '+await appToken(env),Accept:'application/vnd.github+json','Content-Type':'application/json','User-Agent':'orgchart-publisher','X-GitHub-Api-Version':'2022-11-28'},...(body?{body:JSON.stringify(body)}:{})});
  return r;
 }
-async function head(env){const r=await github(env,'GET');if(!r.ok)throw Error('GitHub data read failed: '+r.status);const j=await r.json();if(!j.sha)throw Error('GitHub did not return file SHA');return j.sha}
+async function head(env,environment='live'){const r=await github(env,'GET',null,environment);if(!r.ok)throw Error('GitHub data read failed: '+r.status);const j=await r.json();if(!j.sha)throw Error('GitHub did not return file SHA');return j.sha}
 async function hmac(env){if(!env.SESSION_SECRET||env.SESSION_SECRET.length<32)throw Error('Invalid SESSION_SECRET');return crypto.subtle.importKey('raw',encode.encode(env.SESSION_SECRET),{name:'HMAC',hash:'SHA-256'},false,['sign','verify'])}
 async function sessionIssue(env,user){
  const exp=Math.floor(Date.now()/1000)+7200,body=base64(encode.encode(JSON.stringify({sub:String(user.id),login:user.login,exp,iss:'orgchart-publisher',aud:ORIGIN})));
@@ -77,7 +79,7 @@ function cookie(req,name){return (req.headers.get('Cookie')||'').split(';').map(
 function html(text,status=200){
  return new Response(text,{status,headers:{'Content-Type':'text/html;charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none';script-src 'unsafe-inline';base-uri 'none';frame-ancestors 'none'",'X-Content-Type-Options':'nosniff'}})
 }
-function validate(doc){
+function validate(doc,environment='live'){
  if(!doc||!Array.isArray(doc.people)||!Array.isArray(doc.types)||doc.people.length<1||doc.people.length>500||doc.types.length>80)throw Error('Invalid organization data');
  const ids=new Set(),names=new Set(),kinds=new Set();
  const str=(v,max=1024)=>{if(v===undefined||v===null)return '';if(typeof v!=='string'||v.length>max)throw Error('Invalid text field');return v};
@@ -96,7 +98,7 @@ function validate(doc){
   if(!id||!name||kinds.has(id)||!/^#[a-f0-9]{6}$/i.test(color))throw Error('Invalid or duplicate type');
   kinds.add(id);return {id,name,color:color.toLowerCase()}
  });
- return {format:'mesh-published-v1',environment:'live',people,types};
+ return {format:'mesh-published-v1',environment,people,types};
 }
 function githubB64(text){const bytes=encode.encode(text);let output='';for(let i=0;i<bytes.length;i+=8192){output+=String.fromCharCode(...bytes.subarray(i,i+8192))}return btoa(output)}
 export default {
@@ -127,24 +129,25 @@ export default {
    if(path.startsWith('/api/')){
     if(req.method==='OPTIONS')return cors(new Response(null,{status:204}));
     if(req.headers.get('Origin')!==ORIGIN)return fail('Origin not permitted',403);
-    if(path==='/api/head'&&req.method==='GET')return json({ok:true,sha:await head(env)});
+    if((path==='/api/head'||path==='/api/dev/head')&&req.method==='GET'){const target=path.startsWith('/api/dev/')?'dev':'live';return json({ok:true,sha:await head(env,target),environment:target})}
     if(path==='/api/session'&&req.method==='GET'){
      const claim=await sessionCheck(env,req.headers.get('Authorization'));
      return claim?json({ok:true,login:claim.login,expiresAt:claim.exp}):fail('Not signed in',401);
     }
-    if(path==='/api/publish'&&req.method==='POST'){
+    if((path==='/api/publish'||path==='/api/dev/publish')&&req.method==='POST'){
+     const target=path.startsWith('/api/dev/')?'dev':'live';
      const claim=await sessionCheck(env,req.headers.get('Authorization'));
      if(!claim)return fail('Not authorized. Sign in with GitHub.',401);
      if(Number(req.headers.get('Content-Length')||0)>250000)return fail('Data exceeds maximum size',413);
      let input;try{input=await req.json()}catch(e){return fail('Invalid JSON',400)}
      const sha=String(input.baseSha||'');if(!/^[0-9a-f]{40}$/.test(sha))return fail('Missing original published version',400);
-     let data;try{data=validate(input)}catch(e){return fail(e.message,400)}
+     let data;try{data=validate(input,target)}catch(e){return fail(e.message,400)}
      const content=JSON.stringify(data,null,2)+'\n';if(content.length>250000)return fail('Data exceeds maximum size',413);
-     if(sha!==await head(env))return fail('Shared chart changed since you started editing. Reload the published version before trying again.',409);
-     const result=await github(env,'PUT',{message:'Publish org chart from browser by '+claim.login,branch:BRANCH,sha,content:githubB64(content)});
+     if(sha!==await head(env,target))return fail('Shared '+target.toUpperCase()+' chart changed since you started editing. Reload the published version before trying again.',409);
+     const result=await github(env,'PUT',{message:'Publish '+target.toUpperCase()+' org chart from browser by '+claim.login,branch:BRANCH,sha,content:githubB64(content)},target);
      if(result.status===409||result.status===422)return fail('Concurrent update detected. Reload the published chart.',409);
      if(!result.ok)return fail('GitHub rejected publication: HTTP '+result.status,502);
-     const saved=await result.json();return json({ok:true,commit:saved.commit?.sha,sha:saved.content?.sha,message:'Saved to GitHub. GitHub Pages deployment is separate.'});
+     const saved=await result.json();return json({ok:true,environment:target,commit:saved.commit?.sha,sha:saved.content?.sha,message:'Saved '+target.toUpperCase()+' to GitHub. GitHub Pages deployment is separate.'});
     }
     return fail('Unknown endpoint',404)
    }
