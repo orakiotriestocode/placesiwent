@@ -1,6 +1,8 @@
 # Org-chart publishing service
 
 The shared LIVE chart lives at `/inspector/Mesh/`, backed by `inspector/data/team.json`.
+The shared DEV chart lives at `/inspector/Meshdev/`, backed by `inspector/data/team-dev.json`.
+Both environments use the same authenticated GitHub App and Worker but independent datasets and browser drafts.
 
 ## One-time Cloudflare deployment
 
@@ -24,3 +26,12 @@ Required Cloudflare variables (Production):
 Github App install permission: **Contents read/write**, restricted to repo `orakiotriestocode/placesiwent`. GitHub App OAuth redirect URL: `https://orgchart-publisher.orakio.workers.dev/auth/callback`.
 
 Security model: the Worker checks signed two-hour sessions from GitHub identity `orakiotriestocode`, restricts browser CORS to placesiwent.eu, writes only `inspector/data/team.json`, and requires the original file SHA on every publish to prevent overwriting concurrent work. The website itself is public and visitors can still edit browser-local drafts and export/import data without login. Publishing is distinct from GitHub Pages deploying; changes become visible to all after deployment. Back up a local draft before discarding it. A later multi-team version should replace the fixed repository path and authorized user with audited per-organization settings.
+
+## Environment separation
+
+| Page | Published data | Worker revision endpoint | Worker publish endpoint |
+| --- | --- | --- | --- |
+| LIVE `/inspector/Mesh/` | `inspector/data/team.json` | `GET /api/head` | `POST /api/publish` |
+| DEV `/inspector/Meshdev/` | `inspector/data/team-dev.json` | `GET /api/dev/head` | `POST /api/dev/publish` |
+
+After updating Worker source, redeploy it in Cloudflare's **Edit code** interface. A `/health` success alone only confirms configuration, not the presence of new DEV routes. Older browser-only DEV edits are intentionally retained as an unpublished draft on first load; fresh visitors load the shared DEV dataset. Publish changes from DEV to update DEV only.
