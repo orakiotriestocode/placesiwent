@@ -297,6 +297,13 @@
         "releasedAt": "2026-11-09T13:40:51Z",
         "commit": "11bf4d943fc3ec62de0d991b5a8bfe27f3b7a536",
         "description": "Compare normalized local chart and colour types against the published DEV JSON; clear stale pending/unpublished flags whenever contents match, preserving genuine drafts"
+      },
+      {
+        "version": "1.26.2",
+        "date": "2026-11-09",
+        "releasedAt": "2026-11-09T13:58:12Z",
+        "commit": "3e623c4dd68b55ab449fa46c0a5446e7d9bfa856",
+        "description": "Diagnose remaining DEV draft warning by comparing local records, saved positions and types against the shared JSON; display exact differences and allow safely switching to published version with local backup"
       }
     ]
   }
