@@ -32,7 +32,12 @@
     });
     const result = await response.json();
     if (!response.ok) {
-      const e = new Error(result.error || 'Connection problem');
+      const e = new Error(
+        (result.error || 'Connection problem').replace(
+          /tablet/g,
+          'bear screen',
+        ),
+      );
       e.status = response.status;
       throw e;
     }
@@ -83,7 +88,7 @@
         if (!ok && !test) {
           blocked = m;
           notice(
-            'Tap Enable / test voice on the tablet to play the waiting message.',
+            'Tap Enable / test voice on the bear screen to play the waiting message.',
           );
         }
         resolve(ok);
@@ -96,7 +101,7 @@
       if (voice) utterance.voice = voice;
       if (!voice && !test)
         notice(
-          'No matching installed voice found. The tablet may use its default voice.',
+          'No matching installed voice found. The bear screen may use its default voice.',
         );
       $('bubble').textContent = m.text;
       $('bear').className = 'bear ' + (m.emotion || 'happy');
@@ -135,9 +140,9 @@
       if (role === 'tablet') {
         $('tablet-status').textContent = r.paired
           ? r.online
-            ? 'Phone connected · Ready for your words'
-            : 'Phone paired · Waiting for connection'
-          : 'Waiting for your phone';
+            ? 'Remote control connected · Ready for your words'
+            : 'Remote control paired · Waiting for connection'
+          : 'Waiting for the remote control';
         $('pairing').hidden = r.paired;
         for (const m of r.messages) {
           if (!seen.has(m.id)) {
@@ -148,8 +153,8 @@
         drain();
       } else {
         $('remote-status').textContent = r.online
-          ? '● Tablet connected'
-          : '○ Tablet not responding · Keep its screen open';
+          ? '● Bear screen connected'
+          : '○ Bear screen not responding · Keep its screen open';
         $('history').replaceChildren();
         for (const m of r.messages) {
           const li = document.createElement('li');
@@ -157,10 +162,10 @@
           const status = document.createElement('small');
           status.textContent =
             {
-              queued: 'Queued for tablet',
+              queued: 'Queued for bear screen',
               speaking: 'Speaking…',
               spoken: 'Spoken ✓',
-              blocked: 'Needs a voice tap on the tablet',
+              blocked: 'Needs a voice tap on the bear screen',
             }[m.status] || m.status;
           li.append(status);
           $('history').append(li);
@@ -243,7 +248,7 @@
       $('message').value = '';
       $('count').textContent = '0 / 500';
       requestId = null;
-      notice('Sent to the tablet.');
+      notice('Sent to the bear screen.');
     } catch (err) {
       notice(err.message + ' Your message is still here.');
     } finally {
@@ -359,7 +364,7 @@
           $('pair-code').textContent = saved.session.code
             ? saved.session.code.slice(0, 5) + ' ' + saved.session.code.slice(5)
             : 'Start a new session to pair';
-          notice('Tap Enable / test voice after reloading the tablet.');
+          notice('Tap Enable / test voice after reloading the bear screen.');
         }
       } else sessionStorage.removeItem('bear-talk-session');
     } catch {
