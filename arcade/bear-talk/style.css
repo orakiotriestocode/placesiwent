@@ -478,3 +478,42 @@ textarea:focus-visible {
     animation: none;
   }
 }
+
+.sound-settings {
+  border: 1px solid #78938855;
+  border-radius: 18px;
+  padding: 20px;
+  margin: 18px 0;
+  background: #223b3f;
+}
+.sound-settings summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.sound-settings p {
+  font-size: 0.85rem;
+}
+.playback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.playback button {
+  flex: 1;
+  font-size: 0.8rem;
+  padding: 12px;
+}
+input[type='range'] {
+  accent-color: #eac493;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  min-height: 40px;
+}
+output {
+  font-variant-numeric: tabular-nums;
+}
+#speech-progress {
+  color: #efd09d;
+}

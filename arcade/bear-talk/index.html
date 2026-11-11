@@ -12,12 +12,12 @@
       content="A little bear, with your words. Connect a bear screen and a remote control for a family conversation."
     />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=0.2" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a
-      ><span>BEAR & YOU <small>alpha 0.1.1</small></span>
+      ><span>BEAR & YOU <small>alpha 0.2</small></span>
     </header>
     <main>
       <section id="welcome" class="card welcome">
@@ -176,10 +176,43 @@
         </div>
         <div class="tablet-tools">
           <span id="tablet-status" role="status">Getting ready…</span
-          ><button id="sound" class="secondary">🔊 Enable / test voice</button
+          ><button id="sound" class="secondary">🔊 Test voice</button
           ><button id="fullscreen" class="secondary">⛶ Full screen</button
           ><button id="end-tablet" class="plain">End session</button>
         </div>
+        <details class="sound-settings" open>
+          <summary>Voice &amp; sound setup</summary>
+          <p id="voice-health" role="status">
+            Tap Test voice here once before playing.
+          </p>
+          <p class="fine">
+            1. Turn up this device’s media volume and check its audio output.<br />2.
+            Choose a voice and tap Test voice.<br />3. Keep this screen open. If
+            silent, check silent mode or try another voice.
+          </p>
+          <label for="local-voice">Voice on this device</label
+          ><select id="local-voice">
+            <option value="">Automatic for the message language</option>
+          </select>
+          <label for="local-rate"
+            >Speaking speed · <output id="local-rate-label">0.9×</output></label
+          ><input
+            id="local-rate"
+            type="range"
+            min="0.5"
+            max="1.5"
+            step="0.1"
+            value="0.9"
+          />
+          <div class="playback">
+            <button id="local-stop" class="secondary">
+              ■ Stop &amp; clear queue</button
+            ><button id="local-repeat" class="secondary" disabled>
+              ↻ Repeat last
+            </button>
+          </div>
+          <p id="speech-progress" role="status">Waiting for a message</p>
+        </details>
         <div id="pairing" class="pairing">
           <span
             >On another device, open this page → choose Remote control →
@@ -210,6 +243,16 @@
           </div>
         </div>
         <p id="remote-status" role="status">Connecting…</p>
+        <p id="remote-voice-health" role="status" class="fine">
+          Waiting for the bear screen’s voice list…
+        </p>
+        <div class="playback">
+          <button id="remote-stop" class="secondary">
+            ■ Stop &amp; clear queue</button
+          ><button id="remote-repeat" class="secondary" disabled>
+            ↻ Repeat last
+          </button>
+        </div>
         <form id="message-form">
           <label for="language">Voice language</label
           ><select id="language">
@@ -225,6 +268,21 @@
             Type in the chosen language. The bear reads your words exactly; it
             doesn’t translate.
           </p>
+          <label for="remote-voice">Voice from the bear screen</label
+          ><select id="remote-voice">
+            <option value="">Use bear screen’s choice</option>
+          </select>
+          <label for="remote-rate"
+            >Speaking speed ·
+            <output id="remote-rate-label">0.9×</output></label
+          ><input
+            id="remote-rate"
+            type="range"
+            min="0.5"
+            max="1.5"
+            step="0.1"
+            value="0.9"
+          />
           <label for="message">What should the bear say?</label
           ><textarea
             id="message"
@@ -256,6 +314,6 @@
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="app.js"></script>
+    <script src="app.js?v=0.2"></script>
   </body>
 </html>
