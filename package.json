@@ -9,10 +9,11 @@
     "check:syntax": "node scripts/check-syntax.cjs",
     "format:check": "prettier --check tests scripts *.cjs .prettierrc.json .github/workflows/playwright.yml .github/dependabot.yml",
     "format": "prettier --write tests scripts *.cjs .prettierrc.json .github/workflows/playwright.yml .github/dependabot.yml",
-    "check": "npm run lint && npm run check:syntax && npm run format:check",
+    "check": "npm run lint && npm run check:syntax && npm run format:check && npm run test:weather",
     "build": "node scripts/build-static.cjs",
     "test:performance": "node scripts/check-performance.cjs",
-    "test:visual:update": "playwright test --grep @visual --project chromium --update-snapshots"
+    "test:visual:update": "playwright test --grep @visual --project chromium --update-snapshots",
+    "test:weather": "node --test tests/weather-data.unit.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

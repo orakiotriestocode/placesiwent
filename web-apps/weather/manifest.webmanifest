@@ -1,0 +1,1 @@
+{"name":"Weather Window","short_name":"Weather","start_url":"/web-apps/weather/","scope":"/web-apps/weather/","display":"standalone","background_color":"#101c26","theme_color":"#101c26","icons":[{"src":"apple-touch-icon.png","sizes":"180x180","type":"image/png"}]}

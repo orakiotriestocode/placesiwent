@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Weather Window">
+<meta name="theme-color" content="#101c26">
+<meta name="description" content="A quiet, always-on weather dashboard with a two-hour radar rain forecast.">
+<title>Weather Window · Places I Went</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="weather.css">
+<script src="weather-data.js" defer></script>
+<script src="weather.js" defer></script>
+</head>
+<body>
+<div class="dashboard">
+<header><a href="/web-apps/" class="brand"><span class="brand-icon" aria-hidden="true">◒</span> WEATHER WINDOW <span class="version">ALPHA 0.1</span></a><div class="controls"><button id="refresh" title="Refresh weather" aria-label="Refresh weather">↻</button><button id="fullscreen" title="Full screen" aria-label="Full screen">⛶</button><button id="settings" aria-label="Open settings">Settings</button></div></header>
+<main>
+<section class="overview" aria-label="Clock and current weather">
+<div class="clock-block"><p class="eyebrow" id="date">YOUR DAY, AT A GLANCE</p><div id="clock" class="clock">--:--</div><div class="location"><span class="location-dot" aria-hidden="true"></span><h1 id="place">Ekeren</h1><span id="timezone">Belgium</span></div></div>
+<div class="current"><div id="weather-icon" class="weather-icon" aria-hidden="true">☁</div><div><div class="temperature" id="temperature">—<span>°C</span></div><p id="condition">Fetching the weather…</p><p class="muted" id="highlow">High — · Low —</p></div></div>
+</section>
+<div class="metrics" aria-label="Weather details"><div><span>Feels like</span><strong id="feels">—</strong></div><div><span>Wind</span><strong id="wind">—</strong></div><div><span>Humidity</span><strong id="humidity">—</strong></div><div><span>Sunrise / sunset</span><strong id="sun">— / —</strong></div></div>
+<section class="rain-panel" aria-labelledby="rain-heading"><div class="rain-heading"><div><p class="eyebrow">THE NEXT TWO HOURS</p><h2 id="rain-heading">Checking the sky…</h2><p id="rain-detail" class="muted" role="status">Connecting to the radar rain forecast.</p></div><span class="source-pill">RADAR FORECAST</span></div><div id="chart" class="chart"><p class="chart-placeholder">Waiting for rain data</p></div><div class="rain-foot"><span>Rain intensity · mm/h</span><span>Estimated timing · refreshed every 5 min</span></div></section>
+<section class="outlook" aria-label="Five day outlook"><div class="section-label"><h2>The days ahead</h2><span>Daily forecast</span></div><div id="days" class="days"><p class="muted">Waiting for the forecast…</p></div></section>
+</main>
+<footer><span id="connection" role="status">Connecting…</span><span class="credits">Weather: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · Rain: <a href="https://www.buienradar.nl/" target="_blank" rel="noopener">Buienradar.nl</a></span></footer>
+</div>
+<div id="settings-panel" class="modal" hidden><section class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title"><div class="section-label"><h2 id="settings-title">Make yourself at home</h2><button id="close-settings" aria-label="Close settings">✕</button></div><form id="search-form"><label for="city">Find a town or city</label><div class="search-row"><input id="city" type="search" placeholder="e.g. Ekeren" minlength="2" required autocomplete="off"><button type="submit">Search</button></div></form><div id="search-results" role="status"></div><button id="use-location">Use my location</button><label for="theme">Appearance</label><select id="theme"><option value="auto">Automatic · dark from 21:00 to 07:00</option><option value="dark">Always dark</option><option value="light">Always light</option></select><p class="hint">For an iPad display: Share → Add to Home Screen. Set Auto-Lock to Never to keep the screen on. Full screen availability depends on Safari.</p><p class="hint">Radar rain forecasts cover Belgium and the Netherlands. Timing is an estimate; showers can form or disappear.</p></section></div>
+<noscript>This dashboard needs JavaScript enabled to fetch the weather.</noscript>
+</body></html>
