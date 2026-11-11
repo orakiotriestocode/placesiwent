@@ -384,7 +384,7 @@ document.querySelectorAll('[data-pan]').forEach(b=>b.addEventListener('click',()
 const mobileMapFrame=$('mapframe');
 const zoomSteps=[1,1.5,2,2.5,3],mobileBaseWidth=960;let zoomIndex=1;
 function setMobileZoom(index){
- if(window.innerWidth>900)return;
+ if(window.innerWidth>900){C.style.width='';C.style.height='';return;}
  const oldWidth=C.getBoundingClientRect().width||mobileBaseWidth*zoomSteps[zoomIndex];
  const focalX=(mobileMapFrame.scrollLeft+mobileMapFrame.clientWidth/2)/oldWidth;
  const focalY=(mobileMapFrame.scrollTop+mobileMapFrame.clientHeight/2)/(oldWidth*640/1024);
@@ -405,7 +405,7 @@ function centerMobileMap(){
 $('zoomOut').onclick=()=>setMobileZoom(zoomIndex-1);
 $('zoomIn').onclick=()=>setMobileZoom(zoomIndex+1);
 $('centerUnit').onclick=centerMobileMap;
-window.addEventListener('resize',()=>{if(window.innerWidth<=900){setMobileZoom(zoomIndex);centerMobileMap()}});
+window.addEventListener('resize',()=>{setMobileZoom(zoomIndex);centerMobileMap()});
 // Native touch scrolling allows panning; pinch gesture changes the map's actual display scale.
 let pinchDistance=0;
 mobileMapFrame.addEventListener('touchstart',e=>{if(e.touches.length===2){pinchDistance=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY)}},{passive:true});
