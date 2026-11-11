@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <script src="/assets/vendor/sentry-browser-11.12.0.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
 <script src="/assets/monitoring.js"></script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.3</title><style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.4</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -127,7 +127,7 @@ function disembarkAt(sh,x,y){
  const passenger=st.units.find(a=>a.carrier===sh.id&&a.type==='colonist');
  if(!passenger)return message('No colonists aboard. Select a nearby colonist to embark.');
  passenger.carrier=null;passenger.x=x;passenger.y=y;passenger.moves=passenger.role==='scout'?2:2;
- sel=passenger.id;reveal(x,y,passenger.role==='scout'?5:3);panTo(x,y);
+ sel=passenger.id;reveal(x,y,passenger.role==='scout'?5:3);exploreDiscovery(passenger,x,y);panTo(x,y);
  note((passenger.profession||'Colonist')+' disembarked onto '+terrainAt(x,y).kind+' at '+x+', '+y+'.');
  chime(440);draw();
  const v=st.villages.find(v=>v.x===x&&v.y===y);if(v)nativeVillage(v);
@@ -147,23 +147,42 @@ function move(dx,dy){
  u.x=x;u.y=y;u.moves-=cost;
  st.units.filter(a=>a.carrier===u.id).forEach(a=>{a.x=x;a.y=y});
  reveal(x,y,u.type==='caravel'?3:u.role==='scout'?5:2);
+ exploreDiscovery(u,x,y);
  const native=st.villages.find(v=>v.x===x&&v.y===y);
  note((u.type==='caravel'?'Caravel':u.role==='scout'?'Scout':u.role==='pioneer'?'Pioneer':'Colonist')+' explores '+t.kind+(roadMove?' along the road':'')+'.');
  chime(330,.05);panTo(x,y);draw();if(native&&u.type==='colonist')nativeVillage(native);
 }
 // Native villages, scout expeditions, and pioneer improvements.
 function nativeVillage(v){
- v.relations??=0;v.visits??=0;v.contact=true;v.lastTrade??=0;v.tradeStock??=25;
+ v.relations??=0;v.visits??=0;v.contact=true;v.lastTrade??=0;v.tradeStock??=25;v.tradeGood??=nativeSpecialty(v);v.knowledgeShared??=false;
  const near=st.colonies.find(c=>Math.max(Math.abs(c.x-v.x),Math.abs(c.y-v.y))<=4);
- const tradeAvailable=st.turn>v.lastTrade&&v.tradeStock>=5;
- const goldSale=5*(4+Math.max(0,v.relations));
- const gifts=st.gold>=25,atWar=v.relations<=-3;
- dialog('Village of the '+esc(v.name),'<div class="native-encounter"><div class="native-symbol">♜</div><p>The elders of the <b>'+esc(v.name)+'</b> welcome visitors. Friendly villages provide opportunities to exchange resources and learn about the surrounding territory.</p><div class="smallrow"><span>Relations</span><b>'+(v.relations>=3?'Allied':v.relations>0?'Friendly':v.relations<0?'Wary':'Neutral')+' ('+v.relations+')</b></div><div class="smallrow"><span>Trading stock</span><b>'+v.tradeStock+' furs</b></div><div class="smallrow"><span>Next exchange</span><b>'+(tradeAvailable?'Available':(v.lastTrade===st.turn?'Next turn':'Awaiting replenishment'))+'</b></div><div class="encounter-actions"><button id="nativeGift" '+(!gifts?'disabled':'')+'>Offer gifts (25 gold)</button><button id="nativeTrade" '+(!near||!tradeAvailable||atWar||st.gold<goldSale?'disabled':'')+'>Buy 5 furs ('+goldSale+' gold)</button><button id="nativeSell" '+(!near||!tradeAvailable||v.tradeStock<10||atWar||(near.stock.tools||0)<5?'disabled':'')+'>Trade 5 tools for 10 furs</button><button id="nativeLearn">Ask about the land</button><button id="nativeLeave">Leave peacefully</button></div><p class="muted">'+(near?'Trade deliveries will go to '+esc(near.name)+'.':'For stored trading goods, establish a colony near this village.')+' Village stocks recover gradually, and trade is limited to one exchange per turn.</p></div>');
+ const available=st.turn>v.lastTrade&&v.tradeStock>=5;
+ const price=Math.max(10,5*(4+Math.max(0,v.relations)));
+ const tradeGood=v.tradeGood,atWar=v.relations<=-3;
+ const earned=near&&near.stock[tradeGood]||0;
+ dialog('Village of the '+esc(v.name),'<div class="native-encounter"><div class="native-symbol">♜</div><p>The <b>'+esc(v.name)+'</b> specialize in <b>'+esc(LABEL[tradeGood]||tradeGood)+'</b>. Relations, exchange and exploration can influence your colonial economy.</p><div class="smallrow"><span>Relations</span><b>'+(v.relations>=3?'Allied':v.relations>0?'Friendly':v.relations<0?'Wary':'Neutral')+' ('+v.relations+')</b></div><div class="smallrow"><span>Village stock</span><b>'+v.tradeStock+' '+esc(LABEL[tradeGood]||tradeGood)+'</b></div><div class="smallrow"><span>Nearby colony</span><b>'+(near?esc(near.name):'None within trading distance')+'</b></div><div class="encounter-actions"><button id="nativeGift" '+(st.gold<25?'disabled':'')+'>Offer gifts (25 gold)</button><button id="nativeTrade" '+(!near||!available||atWar||st.gold<price?'disabled':'')+'>Buy 5 '+esc(LABEL[tradeGood]||tradeGood)+' ('+price+' gold)</button><button id="nativeSell" '+(!near||!available||v.tradeStock<10||atWar||(near.stock.tools||0)<5?'disabled':'')+'>Exchange 5 tools for 10 '+esc(LABEL[tradeGood]||tradeGood)+'</button><button id="nativeLearn" '+(v.knowledgeShared?'disabled':'')+'>Learn about the land</button><button id="nativeLeave">Leave peacefully</button></div><p class="muted">'+(available?'Trade is available this turn.':'Trading resumes after the next turn and stock replenishment.')+' '+(v.knowledgeShared?'This village has already shared its map.':'First-time geographic knowledge may reveal distant territory.')+'</p></div>');
  $('nativeGift').onclick=()=>{if(st.gold<25)return;st.gold-=25;v.relations=Math.min(5,v.relations+2);v.visits++;note('Gifts strengthen relations with the '+v.name+'.');nativeVillage(v);draw()};
- $('nativeTrade').onclick=()=>{if(st.turn<=v.lastTrade||v.tradeStock<5||v.relations<=-3)return;if(st.gold<goldSale){note('You need '+goldSale+' gold for the exchange.');return nativeVillage(v)}st.gold-=goldSale;v.tradeStock-=5;v.lastTrade=st.turn;v.visits++;if(near){near.stock.furs=(near.stock.furs||0)+5;note('Purchased 5 furs from the '+v.name+' for '+goldSale+' gold; delivered to '+near.name+'.')}else{st.gold+=Math.max(0,Math.floor(goldSale*0.5));note('Your expedition bartered with the '+v.name+' (field trade, no colony warehouse available).')}v.relations=Math.min(5,v.relations+1);nativeVillage(v);draw()};
- $('nativeSell').onclick=()=>{if(!near||st.turn<=v.lastTrade||v.tradeStock<10||(near.stock.tools||0)<5)return;near.stock.tools-=5;near.stock.furs=(near.stock.furs||0)+10;v.tradeStock-=10;v.lastTrade=st.turn;v.visits++;v.relations=Math.min(5,v.relations+1);note('Traded 5 tools for 10 furs with the '+v.name+'.');nativeVillage(v);draw()};
- $('nativeLearn').onclick=()=>{reveal(v.x,v.y,6);v.visits++;v.relations=Math.min(5,v.relations+1);note('The '+v.name+' share knowledge of nearby terrain.');closeDialog();draw()};
+ $('nativeTrade').onclick=()=>{if(!near||st.turn<=v.lastTrade||v.tradeStock<5||v.relations<=-3||st.gold<price)return;st.gold-=price;v.tradeStock-=5;v.lastTrade=st.turn;v.visits++;near.stock[tradeGood]=(near.stock[tradeGood]||0)+5;v.relations=Math.min(5,v.relations+1);note('Bought 5 '+tradeGood+' from the '+v.name+' for '+price+' gold; delivered to '+near.name+'.');nativeVillage(v);draw()};
+ $('nativeSell').onclick=()=>{if(!near||st.turn<=v.lastTrade||v.tradeStock<10||(near.stock.tools||0)<5||v.relations<=-3)return;near.stock.tools-=5;near.stock[tradeGood]=(near.stock[tradeGood]||0)+10;v.tradeStock-=10;v.lastTrade=st.turn;v.visits++;v.relations=Math.min(5,v.relations+1);note('Exchanged 5 tools for 10 '+tradeGood+' with the '+v.name+'.');nativeVillage(v);draw()};
+ $('nativeLearn').onclick=()=>{if(v.knowledgeShared)return;v.knowledgeShared=true;v.visits++;v.relations=Math.min(5,v.relations+1);reveal(v.x,v.y,7);const sites=st.villages.filter(other=>other!==v&&!terrainAt(other.x,other.y)?.seen);if(sites.length){const nearest=sites.sort((a,b)=>(a.x-v.x)**2+(a.y-v.y)**2-(b.x-v.x)**2-(b.y-v.y)**2)[0];reveal(nearest.x,nearest.y,2);note('The '+v.name+' share their map and the location of a distant village.')}else note('The '+v.name+' reveal more of the surrounding territory.');closeDialog();draw()};
  $('nativeLeave').onclick=()=>{v.visits++;closeDialog();draw()};
+}
+function nativeSpecialty(v){
+ const goods=['furs','tobacco','cotton','sugar','ore','silver'];
+ const key=(v.x*7+v.y*11+v.name.length)%goods.length;
+ return goods[key];
+}
+function exploreDiscovery(u,x,y){
+ if(u.type!=='colonist'||u.carrier)return;
+ const t=terrainAt(x,y);if(!t||!land(t)||t.discovered)return;
+ // Stable map-generated discoveries, so reloads do not reroll rewards.
+ const chance=noise(x*7+13,y*11+29,st.seed+67);
+ if(chance<.965)return;
+ t.discovered=true;
+ const scout=u.role==='scout';
+ const reward=scout?125:75;
+ if(chance>.993){st.gold+=reward+100;note('Ancient ruins! '+(reward+100)+' gold recovered by your '+(scout?'scout':'expedition')+'.');}
+ else {st.gold+=reward;note('A forgotten burial ground yields '+reward+' gold in valuables.');}
 }
 function unitOrders(){
  const u=unit();
@@ -292,7 +311,7 @@ function processColony(c){
 }
 function nextTurn(){st.turn++;st.year+=st.year<1600?1:1;for(let u of st.units){if(u.europe){u.europe--;if(!u.europe){if(u.type==='caravel'){if(u.returning){u.returning=false;u.atEurope=false;note('Your caravel has returned to the New World.')}else{u.atEurope=true;note('Your caravel has arrived at the European docks.')}}else{u.atEurope=false;note('A recruited colonist has reached the New World.')}}u.moves=0}else if(!u.carrier&&!u.atEurope)u.moves=u.type==='caravel'?4:2}
  for(let c of st.colonies)processColony(c);
- for(let v of st.villages){v.tradeStock=Math.min(30,(v.tradeStock??25)+2);if(v.contact&&st.turn%12===0&&v.relations>0)v.relations--;}
+ for(let v of st.villages){v.tradeStock=Math.min(30,(v.tradeStock??25)+2);if(v.contact&&st.turn%12===0&&v.relations>0)v.relations--;if(v.contact&&v.relations>=3&&st.turn%8===0){const c=st.colonies.find(c=>Math.max(Math.abs(c.x-v.x),Math.abs(c.y-v.y))<=4);if(c){const good=v.tradeGood||nativeSpecialty(v);c.stock[good]=(c.stock[good]||0)+3;note('The '+v.name+' send 3 '+good+' to '+c.name+' as a gesture of friendship.')}}}
  if(st.turn%9===0){st.tax=Math.min(85,st.tax+1+st.turn%3);note('The Crown has raised your taxes to '+st.tax+'%.')}
  if(st.turn%6===0){st.immigration++;note('A new immigrant has arrived on the docks of Europe. Visit Europe to recruit.')}
  if(st.logs[0]?.indexOf('The Crown')!==0)note('Year '+st.year+': The colonial administration awaits your orders.');draw()}
@@ -426,7 +445,7 @@ function tileGraphics(t,x,y,px,py){let c=TERRAINS[t.kind];g.fillStyle=c;g.fillRe
  if(t.improvement==='road'&&land(t)){g.strokeStyle='#d9b88b';g.lineWidth=4;g.beginPath();g.moveTo(px,py+S/2);g.lineTo(px+S,py+S/2);g.stroke();g.lineWidth=1}
  if(t.kind==='swamp'){g.fillStyle='#223f35';for(let i=0;i<4;i++)g.fillRect(px+4+i*6,py+12+(i%2)*7,2,12)}
  if(t.river&&land(t)){g.strokeStyle='#5b9ab2';g.lineWidth=3;g.beginPath();g.moveTo(px+5,py);g.lineTo(px+16,py+16);g.lineTo(px+27,py+32);g.stroke();g.lineWidth=1}
- if(t.bonus){g.fillStyle='#ffe080';g.fillRect(px+26,py+4,3,3)}g.strokeStyle='#090f101e';g.strokeRect(px+.5,py+.5,S-1,S-1)}
+ if(t.discovered){g.fillStyle='#d4b56b';g.fillRect(px+11,py+13,10,8);g.fillStyle='#47371d';g.fillRect(px+14,py+16,4,5)}if(t.bonus){g.fillStyle='#ffe080';g.fillRect(px+26,py+4,3,3)}g.strokeStyle='#090f101e';g.strokeRect(px+.5,py+.5,S-1,S-1)}
 function unitGraphic(u,px,py){g.save();if(u.id===sel){g.strokeStyle='#ffe16b';g.lineWidth=3;g.strokeRect(px+2,py+2,28,28);g.lineWidth=1}if(u.type==='caravel'){
  g.fillStyle='#3b2419';g.fillRect(px+5,py+23,23,4);g.fillRect(px+9,py+27,17,2);g.fillStyle='#d8c5a2';g.beginPath();g.moveTo(px+17,py+4);g.lineTo(px+17,py+22);g.lineTo(px+5,py+20);g.fill();g.fillStyle='#bd885d';g.fillRect(px+17,py+4,2,19);g.fillStyle='#efe2bf';g.beginPath();g.moveTo(px+20,py+8);g.lineTo(px+27,py+21);g.lineTo(px+20,py+21);g.fill();
  }else{if(u.role==='scout'){g.fillStyle='#b59a55';g.fillRect(px+4,py+24,25,5);g.fillStyle='#754c2e';g.fillRect(px+7,py+17,19,8)}if(u.role==='pioneer'){g.fillStyle='#a6b6b7';g.fillRect(px+25,py+5,3,22);g.fillRect(px+22,py+7,9,3)}g.fillStyle='#eed8ac';g.fillRect(px+13,py+7,8,8);g.fillStyle='#432a1a';g.fillRect(px+11,py+5,12,4);g.fillStyle='#304a70';g.fillRect(px+11,py+16,12,11);g.fillStyle='#151c28';g.fillRect(px+11,py+27,4,3);g.fillRect(px+19,py+27,4,3)}if(u.moves===0){g.fillStyle='#b03525';g.fillRect(px+27,py+1,4,4)}g.restore()}
@@ -447,7 +466,7 @@ function inspectTile(x,y){
  const nearby=st.colonies.some(c=>Math.max(Math.abs(c.x-x),Math.abs(c.y-y))<3);
  const suitability=!land(t)?'Sea tile — suitable for ships, not settlements.':nearby?'Too close to an existing colony.':village?'Native settlement — explore and establish contact.':outputs[0]?.amount>=4?'Promising location for a settlement.':'A possible settlement location; examine nearby resources.';
  const tileName=t.kind.charAt(0).toUpperCase()+t.kind.slice(1);
- dialog('Explore: '+tileName,`<div class="smallrow"><span>Coordinates</span><b>${x}, ${y}</b></div><div class="smallrow"><span>Features</span><b>${[t.river?'River':null,t.bonus?'Resource bonus':null,t.improvement==='road'?'Road (reduced movement cost)':null,village?'Native village':null].filter(Boolean).join(' · ')||'None'}</b></div><h3>Potential yields per worker</h3><div class="gridgoods">${outputs.length?outputs.map(a=>`<div class="goods"><b>${a.name}</b><div>${a.amount} per turn</div></div>`).join(''):'<p>No land production.</p>'}</div><h3>Settlement advisor</h3><p>${suitability}</p><p class="muted">Yields are estimates for a free colonist on this tile, before specialization. Tap a unit to select it, or an adjacent square to move.</p>`);
+ dialog('Explore: '+tileName,`<div class="smallrow"><span>Coordinates</span><b>${x}, ${y}</b></div><div class="smallrow"><span>Features</span><b>${[t.river?'River':null,t.bonus?'Resource bonus':null,t.improvement==='road'?'Road (reduced movement cost)':null,t.discovered?'Explored ruins':null,village?'Native village':null].filter(Boolean).join(' · ')||'None'}</b></div><h3>Potential yields per worker</h3><div class="gridgoods">${outputs.length?outputs.map(a=>`<div class="goods"><b>${a.name}</b><div>${a.amount} per turn</div></div>`).join(''):'<p>No land production.</p>'}</div><h3>Settlement advisor</h3><p>${suitability}</p><p class="muted">Yields are estimates for a free colonist on this tile, before specialization. Tap a unit to select it, or an adjacent square to move.</p>`);
 }
 C.addEventListener('mousemove',e=>{let rect=C.getBoundingClientRect(),x=Math.floor((e.clientX-rect.left)*C.width/rect.width/S+camera.x),y=Math.floor((e.clientY-rect.top)*C.height/rect.height/S+camera.y);if(!hover||hover.x!==x||hover.y!==y){hover={x,y};draw()}});
 C.addEventListener('mouseleave',()=>{hover=null;draw()});C.addEventListener('click',e=>{let b=C.getBoundingClientRect(),x=Math.floor((e.clientX-b.left)*C.width/b.width/S+camera.x),y=Math.floor((e.clientY-b.top)*C.height/b.height/S+camera.y),u=unitAt(x,y);if(u)return choose(u.id);let a=unit();if(a&&Math.max(Math.abs(x-a.x),Math.abs(y-a.y))===1){if(a.type==='caravel'&&land(terrainAt(x,y)))return disembarkAt(a,x,y);if(!unitAt(x,y)&&!colonyAt(x,y))return move(x-a.x,y-a.y)}let c=colonyAt(x,y);if(c)return colonyView(c.id);let v=st.villages.find(v=>v.x===x&&v.y===y);if(v&&terrainAt(x,y)?.seen)return nativeVillage(v);if(terrainAt(x,y)?.seen)return inspectTile(x,y)});
