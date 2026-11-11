@@ -30,12 +30,14 @@ label{display:block;font-size:12px;margin:10px 0}input[type=range]{width:100%;ac
 #log li{margin-bottom:5px}footer{font-size:11px;color:#97b6bb;margin-top:16px}
 @media(max-width:1000px){main{grid-template-columns:210px minmax(280px,1fr)}aside.right{grid-column:1/-1;border-left:0;border-top:2px solid #122933;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.right h2{grid-column:1/-1}}
 @media(max-width:700px){main{display:flex;flex-direction:column}aside.left{border-right:0}.tools{grid-template-columns:repeat(4,1fr)}.tool{min-height:55px}#world{min-height:480px;height:62vh}aside.right{display:block}header{gap:8px}h1{font-size:19px}#floating{gap:4px}.stat{padding:5px 7px;font-size:10px}.stat b{font-size:13px}}
-</style></head><body>
+</style><link rel="stylesheet" href="/assets/arcade/account.css">
+<script src="/assets/arcade/account.js" defer></script>
+</head><body data-arcade-game="park-builder">
 <header><a href="../">← Retro Arcade</a><h1>🎡 PARK BUILDER</h1><span class="version">Alpha 0.3</span><span class="hint">A colorful, original 1990s-inspired park simulator</span></header>
 <main>
 <aside class="left"><h2>Build your dream park</h2><div class="tools" id="tools"></div>
 <fieldset><legend>Park controls</legend><div class="controls"><button id="pause">⏸ Pause</button><button id="speed">▶ 1×</button><button id="zoomIn">＋ Zoom</button><button id="zoomOut">－ Zoom</button><button id="center">⌖ Center</button></div></fieldset>
-<div class="controls"><button id="save">💾 Save</button><button id="load">↶ Load</button><button id="new">New park</button></div>
+<div class="controls"><button id="save">💾 Save</button><button id="load">↶ Load</button><button id="new">New park</button><button type="button" data-arcade-account>☁ Optional account &amp; saves</button></div>
 <p class="hint">Select a tool and click a tile to build. Drag to pan, use the wheel to zoom towards your cursor, or use the zoom buttons. Guests follow your connected paths. New parks start with a carousel and a food stall beside the entrance.</p><div class="controls"><button id="follow">👥 Follow guests</button><button id="effects">✨ Effects on</button></div>
 <footer>Independent game inspired by classic park simulators. Original code and drawings; not affiliated with any publisher.</footer>
 </aside>
@@ -163,6 +165,14 @@ if(followGuests&&S.peeps[0]){const p=S.peeps[0],{w,h}=size(),point=iso(p.x,p.y);
 
 function frame(now){const dt=Math.min(100,now-lastTime);lastTime=now;if(!S.paused){animationTime+=dt*S.speed;accum+=dt*S.speed;animateGuests(dt*S.speed);while(accum>=1700){simDay();accum-=1700}}if(now>toastUntil&&$('toast').textContent){$('toast').textContent=''}draw();requestAnimationFrame(frame)}
 fresh();try{const data=JSON.parse(localStorage.getItem(key));if(data?.tiles?.length===N*N){S=data;S.peeps=(S.peeps||[]).map(ensureGuest);S.litter=S.litter||[];S.cleaners=S.cleaners||0;S.seed=S.seed||42;roadsDirty=true;weather=(S.day%12===0||S.day%12===1)?'Rainy':'Sunny';info('Autosaved park restored.')}}catch(e){}
+
+window.PiwGameAdapters=window.PiwGameAdapters||{};
+window.PiwGameAdapters['park-builder']={
+ id:'park-builder',label:'Park Builder',localKey:key,
+ exportSave:()=>S,
+ validateSave:(data)=>{if(!data||!Array.isArray(data.tiles)||data.tiles.length!==N*N||!['cash','day','happy','ticket','wage','speed'].every(name=>Number.isFinite(data[name])))throw Error('This Park Builder save is not compatible with this build.');},
+ importSave:(data)=>{localStorage.setItem(key,JSON.stringify(data));load();$('ticket').value=S.ticket;$('wage').value=S.wage;}
+};
 $('ticket').value=S.ticket;$('wage').value=S.wage;renderStats();updateSelection();log('Park office opened.');window.addEventListener('resize',resize);resize();requestAnimationFrame(frame);
 })();
 </script></body></html>

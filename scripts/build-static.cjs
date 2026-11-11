@@ -7,7 +7,7 @@ const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
   .split('\0')
   .filter(Boolean);
 const excluded =
-  /^(?:\.|tests\/|scripts\/|package(?:-lock)?\.json$|playwright\.config\.cjs$|eslint\.config\.cjs$|AGENTS\.md$)/;
+  /^(?:\.|tests\/|scripts\/|supabase\/|package(?:-lock)?\.json$|playwright\.config\.cjs$|eslint\.config\.cjs$|AGENTS\.md$)/;
 for (const file of files) {
   if (excluded.test(file) && !['.nojekyll', '.pages.yml'].includes(file))
     continue;
