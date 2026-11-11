@@ -517,3 +517,27 @@ output {
 #speech-progress {
   color: #efd09d;
 }
+
+.demo-mode .stage {
+  height: 42dvh;
+  min-height: 300px;
+}
+.demo-mode .bear {
+  width: min(260px, 45vw, 32dvh);
+  bottom: 24px;
+}
+.demo-mode .scene-label {
+  bottom: 0;
+}
+.demo-mode .bubble {
+  top: 12px;
+  font-size: 1.1rem;
+  max-height: 85px;
+}
+.demo-mode #remote {
+  max-width: 760px;
+  margin: 20px auto;
+}
+.demo-mode .tablet-tools #tablet-status {
+  font-size: 0.8rem;
+}

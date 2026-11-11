@@ -12,12 +12,12 @@
       content="A little bear, with your words. Connect a bear screen and a remote control for a family conversation."
     />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.2.1" />
+    <link rel="stylesheet" href="style.css?v=0.2.2" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a
-      ><span>BEAR & YOU <small>alpha 0.2.1</small></span>
+      ><span>BEAR & YOU <small>alpha 0.2.2</small></span>
     </header>
     <main>
       <section id="welcome" class="card welcome">
@@ -261,6 +261,9 @@
           Waiting for the bear screen’s voice list…
         </p>
         <div class="playback">
+          <button id="remote-test" class="secondary" hidden>
+            🔊 Test voice
+          </button>
           <button id="remote-stop" class="secondary">
             ■ Stop &amp; clear queue</button
           ><button id="remote-repeat" class="secondary" disabled>
@@ -328,6 +331,6 @@
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="app.js?v=0.2.1"></script>
+    <script src="app.js?v=0.2.2"></script>
   </body>
 </html>
