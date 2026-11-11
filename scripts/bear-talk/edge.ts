@@ -40,10 +40,10 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
   if (req.method !== 'POST') return reply({ error: 'POST required' }, 405);
   try {
-    if (Number(req.headers.get('content-length')) > 6000)
+    if (Number(req.headers.get('content-length')) > 40000)
       return reply({ error: 'Request too large' }, 413);
     const raw = await req.text();
-    if (raw.length > 6000) return reply({ error: 'Request too large' }, 413);
+    if (raw.length > 40000) return reply({ error: 'Request too large' }, 413);
     const b = JSON.parse(raw),
       now = new Date().toISOString();
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
@@ -150,15 +150,54 @@ Deno.serve(async (req) => {
       );
       return reply({
         paired: !!s.controller_hash,
+        voiceState: s.voice_state,
+        stopId: s.stop_id,
         online:
           Date.now() - Date.parse(tablet ? s.controller_seen : s.tablet_seen) <
           20000,
         messages,
       });
     }
+    if (b.action === 'voices' && tablet) {
+      if (
+        !Array.isArray(b.voices) ||
+        b.voices.length > 150 ||
+        !['untested', 'ready', 'blocked', 'unavailable'].includes(b.ready)
+      )
+        return reply({ error: 'Invalid voice report' }, 400);
+      const voices = b.voices.map((v: any) => ({
+        uri: String(v.uri).slice(0, 200),
+        name: String(v.name).slice(0, 100),
+        lang: String(v.lang).slice(0, 30),
+      }));
+      await db('bear_sessions?id=eq.' + b.id, 'PATCH', {
+        voice_state: { voices, ready: b.ready },
+      });
+      return reply({ ok: true });
+    }
+    if (b.action === 'stop' && (parent || tablet)) {
+      await db(
+        'bear_messages?session_id=eq.' +
+          b.id +
+          '&status=in.(queued,speaking,blocked)',
+        'PATCH',
+        { status: 'stopped' },
+      );
+      await db('bear_sessions?id=eq.' + b.id, 'PATCH', {
+        stop_id: crypto.randomUUID(),
+      });
+      return reply({ ok: true });
+    }
     if (b.action === 'send' && parent) {
       if (
         !langs.includes(b.lang) ||
+        (b.voice !== undefined &&
+          (typeof b.voice !== 'string' || b.voice.length > 200)) ||
+        (b.rate !== undefined &&
+          (typeof b.rate !== 'number' ||
+            !Number.isFinite(b.rate) ||
+            b.rate < 0.5 ||
+            b.rate > 1.5)) ||
         !['happy', 'wave', 'sleepy', 'love'].includes(b.emotion) ||
         typeof b.text !== 'string' ||
         !b.text.trim() ||
@@ -178,6 +217,8 @@ Deno.serve(async (req) => {
         session_id: b.id,
         request_id: b.requestId,
         text: b.text.trim(),
+        voice: b.voice || '',
+        rate: b.rate ?? 0.88,
         lang: b.lang,
         emotion: b.emotion,
       });
@@ -186,11 +227,15 @@ Deno.serve(async (req) => {
     if (
       b.action === 'ack' &&
       tablet &&
-      ['speaking', 'spoken', 'blocked'].includes(b.status) &&
+      ['speaking', 'spoken', 'blocked', 'stopped'].includes(b.status) &&
       Number.isSafeInteger(b.messageId)
     ) {
       await db(
-        'bear_messages?session_id=eq.' + b.id + '&id=eq.' + b.messageId,
+        'bear_messages?session_id=eq.' +
+          b.id +
+          '&id=eq.' +
+          b.messageId +
+          '&status=in.(queued,speaking,blocked)',
         'PATCH',
         { status: b.status },
       );

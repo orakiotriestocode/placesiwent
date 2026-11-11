@@ -13,6 +13,15 @@
     blocked = null,
     utterance = null,
     requestId = null;
+  let playbackEpoch = 0;
+  let lastMessage = null,
+    lastRemote = null,
+    cancelSpeech = null,
+    lastStop = null,
+    ready = 'untested',
+    remoteVoices = [],
+    voiceSignature = '',
+    stopping = false;
   const demo = new URLSearchParams(location.search).has('demo');
   function notice(text = '') {
     $('notice').textContent = text;
@@ -57,7 +66,7 @@
     active = false;
     busy = false;
     blocked = null;
-    synth?.cancel();
+    abortSpeech();
     $('bear').className = 'bear';
   }
   function voiceFor(lang) {
@@ -70,63 +79,158 @@
   async function ack(m, status) {
     if (session) await api('ack', { messageId: m.id, status });
   }
+  function catalog() {
+    return (synth?.getVoices() || [])
+      .slice(0, 150)
+      .map((v) => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
+  }
+  function fillVoices(id, voices, lang) {
+    const select = $(id),
+      current = select.value;
+    const matching = lang
+      ? voices.filter((v) => v.lang.slice(0, 2) === lang.slice(0, 2))
+      : voices;
+    select.replaceChildren(
+      new Option(
+        id === 'remote-voice'
+          ? 'Use bear screen’s choice'
+          : 'Automatic for the message language',
+        '',
+      ),
+    );
+    for (const v of matching)
+      select.add(new Option(v.name + ' · ' + v.lang, v.uri));
+    if ([...select.options].some((o) => o.value === current))
+      select.value = current;
+  }
+  function reportVoices() {
+    if (session && role === 'tablet')
+      api('voices', { voices: catalog(), ready }).catch(() => {});
+  }
+  function health(value, text) {
+    ready = value;
+    $('voice-health').textContent = text;
+    reportVoices();
+  }
+  function updateVoices() {
+    fillVoices('local-voice', catalog());
+    try {
+      const selected = localStorage.getItem('bear-local-voice');
+      if (
+        selected &&
+        [...$('local-voice').options].some((o) => o.value === selected)
+      )
+        $('local-voice').value = selected;
+    } catch {}
+    reportVoices();
+  }
+  function abortSpeech() {
+    playbackEpoch++;
+    busy = false;
+    queue = [];
+    blocked = null;
+    if (cancelSpeech) cancelSpeech();
+    synth?.cancel();
+    $('bear').classList.remove('talking');
+    $('speech-progress').textContent = 'Stopped · Queue cleared';
+  }
   function speak(m, test = false) {
     if (!synth) {
-      notice(
-        'This browser has no speech support. Please try Safari or Chrome.',
+      health(
+        'unavailable',
+        'Speech is unavailable in this browser. Try Safari or Chrome.',
       );
-      return Promise.resolve(false);
+      return Promise.resolve('blocked');
     }
     return new Promise((resolve) => {
       let settled = false,
-        watchdog;
-      const finish = (ok) => {
+        watchdog,
+        startWatchdog;
+      const finish = (status) => {
         if (settled) return;
         settled = true;
         clearTimeout(watchdog);
+        clearTimeout(startWatchdog);
+        cancelSpeech = null;
         $('bear').classList.remove('talking');
-        if (!ok && !test) {
-          blocked = m;
-          notice(
-            'Tap Enable / test voice on the bear screen to play the waiting message.',
+        if (status === 'blocked') {
+          if (!test) blocked = m;
+          health(
+            'blocked',
+            'Sound needs attention. Check volume/output, choose a voice, then tap Test voice.',
           );
-        }
-        resolve(ok);
+          $('speech-progress').textContent =
+            'Could not play · Tap Test voice to retry';
+        } else if (status === 'spoken') {
+          health(
+            'ready',
+            'Voice test/playback completed ✓ If you heard nothing, check this device’s volume and audio output.',
+          );
+          $('speech-progress').textContent = 'Finished speaking ✓';
+        } else $('speech-progress').textContent = 'Stopped · Queue cleared';
+        resolve(status);
       };
+      cancelSpeech = () => finish('stopped');
       utterance = new SpeechSynthesisUtterance(m.text);
       utterance.lang = m.lang;
-      utterance.rate = 0.88;
+      utterance.rate = Number(m.rate) || Number($('local-rate').value);
       utterance.pitch = 1.08;
-      const voice = voiceFor(m.lang);
+      const uri = m.voice || $('local-voice').value;
+      const voice =
+        (synth.getVoices() || []).find((v) => v.voiceURI === uri) ||
+        voiceFor(m.lang);
       if (voice) utterance.voice = voice;
-      if (!voice && !test)
-        notice(
-          'No matching installed voice found. The bear screen may use its default voice.',
-        );
       $('bubble').textContent = m.text;
       $('bear').className = 'bear ' + (m.emotion || 'happy');
+      $('speech-progress').textContent = 'Starting voice…';
+      if (!test) {
+        lastMessage = m;
+        $('local-repeat').disabled = false;
+      }
       utterance.onstart = () => {
+        clearTimeout(startWatchdog);
         $('bear').classList.add('talking');
+        $('speech-progress').textContent = 'Speaking…';
         if (!test) ack(m, 'speaking').catch(() => {});
       };
-      utterance.onend = () => finish(true);
-      utterance.onerror = () => finish(false);
-      synth.speak(utterance);
-      watchdog = setTimeout(() => {
+      utterance.onboundary = (e) => {
+        if (e.charIndex > 0)
+          $('speech-progress').textContent =
+            'Speaking · ' +
+            Math.min(99, Math.round((e.charIndex / m.text.length) * 100)) +
+            '%';
+      };
+      utterance.onend = () => finish('spoken');
+      utterance.onerror = () => finish('blocked');
+      startWatchdog = setTimeout(() => {
+        finish('blocked');
         synth.cancel();
-        finish(false);
-      }, 90000);
+      }, 12000);
+      watchdog = setTimeout(
+        () => {
+          finish('blocked');
+          synth.cancel();
+        },
+        Math.max(90000, m.text.length * 400),
+      );
+      try {
+        synth.speak(utterance);
+      } catch {
+        finish('blocked');
+      }
     });
   }
   async function drain() {
-    if (busy || !active || blocked) return;
+    if (busy || !active || blocked || stopping) return;
     busy = true;
+    const epoch = playbackEpoch;
     while (queue.length && active && !blocked) {
       const m = queue.shift();
       const ok = await speak(m);
+      if (epoch !== playbackEpoch) return;
       if (!active) break;
       try {
-        await ack(m, ok ? 'spoken' : 'blocked');
+        await ack(m, ok);
       } catch {
         notice('Voice played, but delivery status could not be updated.');
       }
@@ -137,7 +241,12 @@
     if (!session) return;
     try {
       const r = await api('poll');
+      if (!session) return;
       if (role === 'tablet') {
+        if (r.stopId && r.stopId !== lastStop) {
+          lastStop = r.stopId;
+          abortSpeech();
+        }
         $('tablet-status').textContent = r.paired
           ? r.online
             ? 'Remote control connected · Ready for your words'
@@ -155,6 +264,24 @@
         $('remote-status').textContent = r.online
           ? '● Bear screen connected'
           : '○ Bear screen not responding · Keep its screen open';
+        lastRemote = r.messages[0] || null;
+        $('remote-repeat').disabled = !lastRemote;
+        remoteVoices = r.voiceState?.voices || [];
+        const signature = JSON.stringify(remoteVoices);
+        if (signature !== voiceSignature) {
+          voiceSignature = signature;
+          fillVoices('remote-voice', remoteVoices, $('language').value);
+        }
+        $('remote-voice-health').textContent =
+          {
+            ready: 'Voice playback tested ✓',
+            blocked: 'Sound needs attention on the bear screen',
+            unavailable: 'Speech unavailable on the bear screen',
+            untested: 'Tap Test voice on the bear screen first',
+          }[r.voiceState?.ready] || 'Waiting for the bear screen’s voice list…';
+        if (!remoteVoices.length)
+          $('remote-voice-health').textContent +=
+            ' · No installed voices reported yet';
         $('history').replaceChildren();
         for (const m of r.messages) {
           const li = document.createElement('li');
@@ -165,6 +292,7 @@
               queued: 'Queued for bear screen',
               speaking: 'Speaking…',
               spoken: 'Spoken ✓',
+              stopped: 'Stopped',
               blocked: 'Needs a voice tap on the bear screen',
             }[m.status] || m.status;
           li.append(status);
@@ -189,6 +317,7 @@
     seen = new Set();
     save();
     show(r === 'tablet' ? 'tablet' : 'remote');
+    if (r === 'tablet') updateVoices();
     poll();
   }
   $('start').onclick = async () => {
@@ -244,6 +373,8 @@
         lang: $('language').value,
         emotion: $('emotion').value,
         requestId,
+        voice: $('remote-voice').value,
+        rate: Number($('remote-rate').value),
       });
       $('message').value = '';
       $('count').textContent = '0 / 500';
@@ -257,25 +388,100 @@
   };
   $('sound').onclick = async () => {
     if (busy && !blocked) {
-      notice('The bear is speaking. Wait until it finishes.');
+      notice('Stop the current message before testing another voice.');
       return;
     }
-    synth?.cancel();
     const m = blocked;
     blocked = null;
-    if (m) {
-      busy = true;
-      const ok = await speak(m);
+    synth?.cancel();
+    busy = true;
+    const status = await speak(m || { text: 'Hallo Riva!', lang: 'nl-BE' }, !m);
+    if (m)
       try {
-        await ack(m, ok ? 'spoken' : 'blocked');
+        await ack(m, status);
       } catch {}
-      busy = false;
-      if (ok) notice();
-      drain();
-    } else {
-      await speak({ text: 'Hallo Riva!', lang: 'nl-BE' }, true);
+    busy = false;
+    if (status === 'spoken') notice();
+    drain();
+  };
+  async function stopPlayback() {
+    stopping = true;
+    abortSpeech();
+    try {
+      if (session) await api('stop');
+      notice(
+        session
+          ? 'Stop sent · The remote may take a few seconds to reach the bear screen.'
+          : 'Stopped · Queue cleared',
+      );
+    } catch {
+      notice(
+        'Could not reach the other screen. Stop directly on the bear screen.',
+      );
+    } finally {
+      stopping = false;
+    }
+  }
+  $('local-stop').onclick = stopPlayback;
+  $('remote-stop').onclick = stopPlayback;
+  $('local-repeat').onclick = async () => {
+    if (!lastMessage) return;
+    abortSpeech();
+    busy = true;
+    await speak(
+      {
+        ...lastMessage,
+        voice: $('local-voice').value,
+        rate: Number($('local-rate').value),
+      },
+      true,
+    );
+    busy = false;
+    drain();
+  };
+  $('remote-repeat').onclick = async () => {
+    if (!lastRemote) return;
+    const btn = $('remote-repeat');
+    btn.disabled = true;
+    try {
+      await api('send', {
+        text: lastRemote.text,
+        lang: lastRemote.lang,
+        emotion: lastRemote.emotion,
+        voice: $('remote-voice').value,
+        rate: Number($('remote-rate').value),
+        requestId: crypto.randomUUID(),
+      });
+      notice('Repeat queued.');
+    } catch (e) {
+      notice(e.message);
+    } finally {
+      btn.disabled = false;
     }
   };
+  $('language').onchange = () =>
+    fillVoices('remote-voice', remoteVoices, $('language').value);
+  for (const prefix of ['local', 'remote']) {
+    const range = $(prefix + '-rate');
+    try {
+      range.value = localStorage.getItem('bear-' + prefix + '-rate') || '0.9';
+    } catch {}
+    range.oninput = () => {
+      $(prefix + '-rate-label').textContent =
+        Number(range.value).toFixed(1) + '×';
+      try {
+        localStorage.setItem('bear-' + prefix + '-rate', range.value);
+      } catch {}
+    };
+    range.oninput();
+  }
+  $('local-voice').onchange = () => {
+    try {
+      localStorage.setItem('bear-local-voice', $('local-voice').value);
+    } catch {}
+  };
+  updateVoices();
+  synth?.addEventListener('voiceschanged', updateVoices);
   $('fullscreen').onclick = async () => {
     try {
       if (document.fullscreenElement) await document.exitFullscreen();
@@ -338,16 +544,18 @@
         $('message').focus();
       }),
   );
-  $('demo-speak').onclick = () => {
-    synth?.cancel();
-    speak(
-      {
-        text: $('demo-text').value,
-        lang: $('demo-lang').value,
-        emotion: 'wave',
-      },
-      true,
-    );
+  $('demo-speak').onclick = async () => {
+    abortSpeech();
+    busy = true;
+    const m = {
+      text: $('demo-text').value,
+      lang: $('demo-lang').value,
+      emotion: 'wave',
+    };
+    lastMessage = m;
+    $('local-repeat').disabled = false;
+    await speak(m, true);
+    busy = false;
   };
   if (demo) {
     show('tablet');
@@ -364,7 +572,7 @@
           $('pair-code').textContent = saved.session.code
             ? saved.session.code.slice(0, 5) + ' ' + saved.session.code.slice(5)
             : 'Start a new session to pair';
-          notice('Tap Enable / test voice after reloading the bear screen.');
+          notice('Tap Test voice after reloading the bear screen.');
         }
       } else sessionStorage.removeItem('bear-talk-session');
     } catch {
