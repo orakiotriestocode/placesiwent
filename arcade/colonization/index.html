@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <script src="https://browser.sentry-cdn.com/11.12.0/bundle.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
 <script src="/assets/monitoring.js"></script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.0</title><style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.1</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -62,7 +62,25 @@
 .workplace-detail small{font:11px/1.3 system-ui;color:#dbbf91}
 .workplace-arrow{font-size:14px}.positive{color:#a5e2a5}.negative{color:#f2aaa1}
 @media(max-width:600px){.workplace-grid{grid-template-columns:1fr}.workplace{min-height:62px}}
-</style></head><body><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Alpha 1.0 · Colony Workshops · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
+
+/* Alpha 1.1: original pixel-inspired buildings and desktop-first trade */
+.building-art{width:70px;height:55px;display:block;image-rendering:pixelated}
+.workplace-icon{min-width:72px}.workplace{min-height:83px}
+.trade-screen{font:14px/1.5 system-ui;color:#f0dfb7}
+.modal:has(.trade-screen){width:min(1120px,100%)}
+.trade-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.trade-summary>div{background:#201a14;border:2px ridge #9f7d4a;padding:10px}
+.trade-summary small,.trade-summary b{display:block}.trade-summary small{color:#bda983}.trade-summary b{font:700 20px Georgia;color:#ffe2a4}
+.trade-columns{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(275px,1fr);gap:18px}
+.market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.market-good{min-width:0}.market-good-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px}.market-good-head span{font-size:11px;color:#cdb990}
+.market-buttons{display:flex;flex-wrap:wrap;gap:3px}.market-buttons button{flex:1;font-size:12px;min-height:36px}
+.recruit-grid{display:grid;gap:8px}.recruit{border:2px ridge #856b47;padding:9px;background:#2a2117}
+.recruit-head{display:flex;gap:9px}.recruit-head>span{font-size:29px;color:#e6c47d}
+.recruit-head b,.recruit-head small{display:block}.recruit-head small{font-size:12px;color:#c6b38d}
+.recruit-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}.recruit-footer strong{color:#f7d28b}
+@media(max-width:760px){.trade-columns{grid-template-columns:1fr}.trade-summary{grid-template-columns:repeat(2,1fr)}.market-grid{grid-template-columns:1fr}.workplace-icon{min-width:64px}.building-art{width:60px}}
+</style></head><body><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Alpha 1.0 · Trade & Recruitment · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
 <script>
 'use strict';
 // All rules and state are local; no network, libraries or installation required.
@@ -206,6 +224,27 @@ function nextTurn(){st.turn++;st.year+=st.year<1600?1:1;for(let u of st.units){i
  if(st.turn%9===0){st.tax=Math.min(85,st.tax+1+st.turn%3);note('The Crown has raised your taxes to '+st.tax+'%.')}
  if(st.turn%6===0){st.immigration++;note('A new immigrant has arrived on the docks of Europe. Visit Europe to recruit.')}
  if(st.logs[0]?.indexOf('The Crown')!==0)note('Year '+st.year+': The colonial administration awaits your orders.');draw()}
+function buildingArtwork(name){
+ const styles={
+  'town hall':['#b79a69','#64371f','⚜'],
+  'carpenter shop':['#b99464','#805030','⚒'],
+  'distillery':['#bd9871','#64472e','⚗'],
+  'tobacco shop':['#bb855f','#663c23','♨'],
+  'weaver shop':['#c0ae86','#685143','▦'],
+  'fur trading post':['#99836a','#46382a','♞'],
+  'blacksmith shop':['#777e80','#444b51','⚒'],
+  'armory':['#85868a','#4e4144','⚔'],
+  'warehouse':['#af8e64','#634631','▣'],
+  'church':['#d0bea0','#71442a','✝'],
+  'schoolhouse':['#d3ac70','#855338','✎'],
+  'fort':['#aaa194','#6d5745','♜'],
+  'printing press':['#bd9a76','#584333','♛'],
+  'lumber mill':['#9b8558','#554b31','♠']
+ };
+ const [wall,roof,symbol]=styles[name]||['#bca077','#6e4730','⌂'];
+ // Inline, original pixel-styled building silhouette; no third-party game assets.
+ return '<svg class="building-art" viewBox="0 0 72 58" aria-hidden="true" shape-rendering="crispEdges"><rect x="12" y="24" width="48" height="28" fill="'+wall+'"/><path d="M7 24L21 10H51L65 24Z" fill="'+roof+'"/><rect x="27" y="36" width="18" height="16" fill="'+roof+'"/><rect x="16" y="32" width="8" height="9" fill="#eac879"/><rect x="48" y="32" width="8" height="9" fill="#eac879"/><path d="M10 52H62" stroke="#3a2b1a" stroke-width="4"/><text x="36" y="25" font-size="14" text-anchor="middle" fill="#f6dba0">'+symbol+'</text></svg>';
+}
 let colonyWorkerSelection=0;
 function colonyView(id){
  const c=st.colonies.find(c=>c.id===id)||st.colonies[0];
@@ -234,7 +273,7 @@ function colonyView(id){
  const forecastTurn=simulateColonyTurn(c);const workshopInfo=[];
  const workplaceItems=Object.keys(WORKPLACE).map(job=>{
   const place=WORKPLACE[job],ready=hasWorkshop(c,job),workers=c.people.filter(p=>p.job===job).length;
-  const icons={'distiller':'⚗','tobacconist':'♨','weaver':'▦','fur trader':'♞','blacksmith':'⚒','gunsmith':'⚔','carpenter':'🪚','statesman':'⚜'};
+  const icons={'distiller':'⚗','tobacconist':'♨','weaver':'▦','fur trader':'♞','blacksmith':'⚒','gunsmith':'⚔','carpenter':'⚒','statesman':'⚜'};
   const recipe=WORKJOB[job]?RECIPES[WORKJOB[job]]:null;
   const desc=job==='carpenter'?'Lumber → hammers':job==='statesman'?'Liberty bells':recipe?LABEL[recipe[0]]+' → '+LABEL[WORKJOB[job]]:'';
   return '<button type="button" class="workplace '+(ready?'ready':'locked')+'" data-workplace="'+esc(job)+'" '+(!ready?'disabled':'')+'><span class="workplace-icon">'+(icons[job]||'⌂')+'</span><span class="workplace-detail"><b>'+esc(place)+'</b><small>'+desc+'</small><small>'+workers+' worker'+(workers===1?'':'s')+(ready?'':' · Not built')+'</small></span><span class="workplace-arrow">'+(ready?'➜':'🔒')+'</span></button>';
@@ -265,15 +304,40 @@ function colonyView(id){
 }
 function messageColony(text){const el=document.querySelector('.colony-screen .muted');if(el){el.textContent=text;el.style.color='#ffcf80'}}
 function localGoods(shipUnit){let c=st.colonies.find(c=>Math.max(Math.abs(c.x-shipUnit.x),Math.abs(c.y-shipUnit.y))<=1);return c}
-function europe(){let sh=ship(),european=!!sh?.atEurope,atSea=!!sh?.europe;let cargo=sh?.cargo||{},c=sh&&!european&&!atSea?localGoods(sh):null;
- let goods=GOODS.map(k=>`<div class="goods"><b>${LABEL[k]}</b><div class="smallrow"><span>Bid ${PRICES[k]}</span><span>Ask ${PRICES[k]+2}</span></div><div class="muted">Cargo: ${cargo[k]||0}${c?' · Colony: '+c.stock[k]:''}</div><div><button data-sell="${k}" ${!european||!cargo[k]?'disabled':''}>Sell 10</button><button data-buy="${k}" ${!european||st.gold<(PRICES[k]+2)*10?'disabled':''}>Buy 10</button>${c?`<button data-load="${k}" ${c.stock[k]<10?'disabled':''}>Load 10</button><button data-unload="${k}" ${!cargo[k]?'disabled':''}>Unload 10</button>`:''}</div></div>`).join('');
- dialog('⚓ European Market & Docks',`<p>Royal treasury: <b>${st.gold} gold</b> · Tax: <b>${st.tax}%</b> · Caravel: <b>${atSea?'At sea ('+sh.europe+' turns)':european?'At European docks':sh?'In the New World':'Unavailable'}</b></p><p class="muted">Load goods while next to a colony; sail three turns to Europe, sell them at the docks, and sail home. Capacity: 200 cargo units. Prices are currently fixed.</p><p><button id="sailEurope" ${!sh||european||atSea?'disabled':''}>Sail to Europe (3 turns)</button><button id="sailHome" ${!european?'disabled':''}>Return to New World (3 turns)</button><button id="recruit" ${!european||st.gold<300?'disabled':''}>Recruit colonist (300 gold)</button></p><h3>Commodities</h3><div class="gridgoods">${goods}</div>`);
- $('sailEurope').onclick=()=>{sh.europe=3;sh.moves=0;note('The caravel sets sail for Europe. The voyage takes three turns.');closeDialog();draw()};$('sailHome').onclick=()=>{sh.atEurope=false;sh.europe=3;sh.returning=true;sh.moves=0;note('The caravel departs Europe, bound for the New World.');closeDialog();draw()};
- $('recruit').onclick=()=>{if(st.gold<300)return;st.gold-=300;let sh=ship(),newUnit={id:st.nextId++,type:'colonist',x:sh?.x||0,y:sh?.y||18,moves:0,profession:'free colonist'};if(sh&&st.units.filter(u=>u.carrier===sh.id).length<sh.capacity)newUnit.carrier=sh.id;else{newUnit.europe=3;newUnit.x=0;newUnit.y=0}st.units.push(newUnit);note('Recruited a new free colonist.');europe();draw()};
- document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{let k=b.dataset.load;if(!c||c.stock[k]<10||Object.values(cargo).reduce((a,b)=>a+b,0)>190)return;c.stock[k]-=10;cargo[k]=(cargo[k]||0)+10;note('Loaded 10 '+k+' aboard the caravel.');europe();draw()});
- document.querySelectorAll('[data-unload]').forEach(b=>b.onclick=()=>{let k=b.dataset.unload;if(!c||(cargo[k]||0)<10)return;cargo[k]-=10;c.stock[k]+=10;note('Unloaded 10 '+k+' into '+c.name+'.');europe();draw()});
- document.querySelectorAll('[data-sell]').forEach(b=>b.onclick=()=>{let k=b.dataset.sell;if((cargo[k]||0)<10)return;cargo[k]-=10;let gain=Math.floor(PRICES[k]*10*(100-st.tax)/100);st.gold+=gain;note('Sold 10 '+k+' in Europe for '+gain+' gold after tax.');europe();draw()});
- document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{let k=b.dataset.buy,cost=(PRICES[k]+2)*10;if(st.gold<cost||Object.values(cargo).reduce((a,b)=>a+b,0)>190)return;st.gold-=cost;cargo[k]=(cargo[k]||0)+10;note('Purchased 10 '+k+' in Europe for '+cost+' gold.');europe();draw()})}
+const RECRUITS=[
+ {name:'Free Colonist',profession:'free colonist',cost:300,job:'farmer',description:'Flexible settler for fields and workshops'},
+ {name:'Expert Farmer',profession:'expert farmer',cost:550,job:'farmer',expert:'farmer',description:'Higher food production on farms'},
+ {name:'Master Carpenter',profession:'master carpenter',cost:650,job:'carpenter',expert:'carpenter',description:'Skilled in construction'},
+ {name:'Master Blacksmith',profession:'master blacksmith',cost:700,job:'blacksmith',expert:'blacksmith',description:'Experienced tool maker'}
+];
+const cargoTotal=sh=>Object.values(sh?.cargo||{}).reduce((n,v)=>n+(Number(v)||0),0);
+function europe(){
+ const sh=ship(),european=!!sh?.atEurope,atSea=!!sh?.europe;
+ const cargo=sh?.cargo||{},c=sh&&!european&&!atSea?localGoods(sh):null;
+ const aboard=sh?st.units.filter(u=>u.carrier===sh.id).length:0;
+ const capacity=200,free=Math.max(0,capacity-cargoTotal(sh));
+ const inEuropeCount=sh&&european?Math.max(0,sh.capacity-aboard):0;
+ const goods=GOODS.map(k=>{
+  const amount=cargo[k]||0,stocked=c?.stock[k]||0;
+  const qty=10;
+  const buyCost=(PRICES[k]+2)*qty,sale=Math.floor(PRICES[k]*qty*(100-st.tax)/100);
+  return '<div class="goods market-good"><div class="market-good-head"><b>'+LABEL[k]+'</b><span>Ship '+amount+' · '+(c?'Colony '+stocked:'Europe')+'</span></div><div class="smallrow"><span>Sell 10: '+sale+' gold after tax</span><span>Buy 10: '+buyCost+' gold</span></div><div class="market-buttons">'+(european?'<button data-sell="'+k+'" '+(amount<qty?'disabled':'')+'>Sell 10</button><button data-buy="'+k+'" '+(free<qty||st.gold<buyCost?'disabled':'')+'>Buy 10</button>':'')+(c?'<button data-load="'+k+'" '+(stocked<qty||free<qty?'disabled':'')+'>Load 10</button><button data-unload="'+k+'" '+(amount<qty?'disabled':'')+'>Unload 10</button>':'')+'</div></div>';
+ }).join('');
+ const recruits=RECRUITS.map((p,i)=>'<div class="recruit"><div class="recruit-head"><span>♟</span><div><b>'+p.name+'</b><small>'+p.description+'</small></div></div><div class="recruit-footer"><strong>'+p.cost+' gold</strong><button data-hire="'+i+'" '+(!european||inEuropeCount<=0||st.gold<p.cost?'disabled':'')+'>Recruit</button></div></div>').join('');
+ const passengers=sh?st.units.filter(u=>u.carrier===sh.id).map(u=>'<span class="badge">'+esc(u.profession||'free colonist')+'</span>').join(' '):'';
+ dialog('⚓ Europe, Trade & Recruitment','<div class="trade-screen"><div class="trade-summary"><div><small>Royal treasury</small><b>'+st.gold+' gold</b></div><div><small>Royal tax</small><b>'+st.tax+'%</b></div><div><small>Ship cargo</small><b>'+cargoTotal(sh)+' / '+capacity+'</b></div><div><small>Passengers</small><b>'+aboard+' / '+(sh?.capacity||2)+'</b></div></div><p><b>Caravel:</b> '+(atSea?'At sea — '+sh.europe+' turns remaining':european?'Docked in Europe':sh?'In the New World':'Unavailable')+'</p><p><button id="sailEurope" '+(!sh||european||atSea?'disabled':'')+'>Sail to Europe (3 turns)</button> <button id="sailHome" '+(!european?'disabled':'')+'>Return to New World (3 turns)</button></p><div class="trade-columns"><section><h3>Market & cargo manifest</h3><p class="muted">Trade in lots of ten. Goods can only be bought or sold while docked in Europe. Cargo holds a maximum of 200 goods. '+(c?'You are alongside '+esc(c.name)+'.':'Bring the ship alongside a colony to load or unload.')+'</p><div class="market-grid">'+goods+'</div></section><section><h3>European recruitment</h3><p class="muted">Recruit settlers for your voyage. Specialists arrive with experience in their trade. Boarding requires an empty passenger berth.</p><div class="recruit-grid">'+recruits+'</div><p class="muted">Free immigration offers: '+(st.immigration||0)+'. Earn one every six turns. Available only at the European docks.</p><button id="freeMigrant" '+(!european||inEuropeCount<=0||!(st.immigration>0)?'disabled':'')+'>Welcome a free immigrant</button><h3>Passengers aboard</h3><p>'+(passengers||'<span class="muted">No passengers aboard.</span>')+'</p></section></div></div>');
+ $('sailEurope').onclick=()=>{if(!sh||sh.europe||sh.atEurope)return;sh.europe=3;sh.moves=0;note('The caravel sets sail for Europe. The voyage takes three turns.');closeDialog();draw()};
+ $('sailHome').onclick=()=>{if(!sh?.atEurope)return;sh.atEurope=false;sh.europe=3;sh.returning=true;sh.moves=0;note('The caravel departs Europe, bound for the New World.');closeDialog();draw()};
+ function boardRecruit(p){if(!sh?.atEurope||st.units.filter(u=>u.carrier===sh.id).length>=sh.capacity)return false;
+  st.units.push({id:st.nextId++,type:'colonist',x:sh.x,y:sh.y,moves:0,carrier:sh.id,profession:p.profession,expert:p.expert||'',job:p.job});
+  note(p.name+' has joined the expedition.');europe();draw();return true}
+ document.querySelectorAll('[data-hire]').forEach(b=>b.onclick=()=>{const p=RECRUITS[Number(b.dataset.hire)];if(!p||st.gold<p.cost||!sh?.atEurope)return;if(boardRecruit(p))st.gold-=p.cost});
+ $('freeMigrant').onclick=()=>{if((st.immigration||0)<1||!sh?.atEurope)return;if(boardRecruit(RECRUITS[0]))st.immigration--};
+ document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{const k=b.dataset.load;if(!c||c.stock[k]<10||cargoTotal(sh)>190)return;c.stock[k]-=10;cargo[k]=(cargo[k]||0)+10;note('Loaded 10 '+k+' from '+c.name+'.');europe();draw()});
+ document.querySelectorAll('[data-unload]').forEach(b=>b.onclick=()=>{const k=b.dataset.unload;if(!c||(cargo[k]||0)<10)return;cargo[k]-=10;c.stock[k]=(c.stock[k]||0)+10;note('Unloaded 10 '+k+' into '+c.name+'.');europe();draw()});
+ document.querySelectorAll('[data-sell]').forEach(b=>b.onclick=()=>{const k=b.dataset.sell;if(!sh?.atEurope||(cargo[k]||0)<10)return;cargo[k]-=10;const gain=Math.floor(PRICES[k]*10*(100-st.tax)/100);st.gold+=gain;note('Sold 10 '+k+' for '+gain+' gold after royal taxes.');europe();draw()});
+ document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>{const k=b.dataset.buy,cost=(PRICES[k]+2)*10;if(!sh?.atEurope||st.gold<cost||cargoTotal(sh)>190)return;st.gold-=cost;cargo[k]=(cargo[k]||0)+10;note('Bought 10 '+k+' for '+cost+' gold.');europe();draw()});
+}
 function dialog(title,html){$('modalTitle').textContent=title;$('modalBody').innerHTML=html;$('shade').classList.add('open')}
 function closeDialog(){$('shade').classList.remove('open')}
 function nextUnit(){let a=active(),idx=a.findIndex(u=>u.id===sel),u=a[(idx+1)%a.length];if(u)choose(u.id)}
