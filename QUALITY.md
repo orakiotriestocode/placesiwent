@@ -9,7 +9,7 @@
 - `npm test`: browser, accessibility, and visual tests.
 - `npm run test:performance`: local Lighthouse reports and budgets.
 - `npm run build`: package tracked website files into `_site`, excluding dependencies, tests, automation and reports.
-- `npm run test:visual:update`: intentionally regenerate screenshot baselines. Run on Linux with the pinned Chromium version; review the before/after images before committing. Never regenerate baselines automatically to make an unexpected change pass.
+- `npm run test:visual:update`: intentionally regenerate screenshot baselines. Run in the pinned Playwright Docker image with the matching package version; review the before/after images before committing. Never regenerate baselines automatically to make an unexpected change pass.
 
 ESLint and formatting initially cover test/automation code, shared monitoring, and root CJS configuration. Syntax checks cover active JavaScript and inline HTML scripts across the site. Vendor bundles and historical versions are excluded. Existing application HTML is not mass-reformatted.
 
