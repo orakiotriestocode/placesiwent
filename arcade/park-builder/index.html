@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142530">
+<title>Park Builder · Alpha 0.1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#142530;color:#f6f3e8;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible{outline:3px solid #f8db73;outline-offset:2px}
+header{background:#203746;border-bottom:3px solid #10232d;padding:10px 18px;display:flex;align-items:center;gap:15px;flex-wrap:wrap}
+header a{color:#b8e9e1;text-decoration:none;font-size:13px}h1{margin:0;font-size:22px;letter-spacing:-.04em;color:#ffe18b}.version{font-size:11px;background:#3a5a69;padding:4px 8px;border-radius:5px}
+main{display:grid;grid-template-columns:250px minmax(320px,1fr) 260px;min-height:calc(100vh - 64px)}
+aside{padding:14px;overflow:auto;background:#213b48}aside.right{border-left:3px solid #122933}aside.left{border-right:3px solid #122933}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.09em;color:#ffe18b;margin:8px 0 10px}
+.hint{font-size:12px;color:#b8ced0;line-height:1.5}.tools{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.tool{border:2px solid #456778;background:#2c4d5a;color:#f2f7f6;padding:10px 5px;border-radius:8px;text-align:center;min-height:66px;font-size:12px}
+.tool strong{display:block;font-size:22px;margin-bottom:2px}.tool.active{border-color:#f9dc79;background:#4a6570}.tool small{display:block;color:#b7ced2}
+.tool[disabled]{opacity:.45;cursor:not-allowed}
+fieldset{border:1px solid #476473;margin:14px 0;padding:10px;border-radius:8px}legend{font-size:12px;color:#ffe18b}
+.controls{display:flex;gap:7px;flex-wrap:wrap}.controls button,.action{border:1px solid #728b95;background:#355865;color:white;border-radius:6px;padding:8px 11px;font-size:12px}.controls button:hover,.action:hover{background:#4b7180}
+#worldWrap{position:relative;min-width:0;overflow:hidden;background:linear-gradient(#8dcde6,#c7ecf4 55%,#91c5a0);touch-action:none}
+#world{display:block;width:100%;height:100%;min-height:620px;touch-action:none;cursor:crosshair}
+#floating{position:absolute;left:12px;top:12px;display:flex;gap:7px;flex-wrap:wrap;pointer-events:none}
+.stat{background:#182f39ed;border:1px solid #6e98a4;border-radius:8px;padding:8px 11px;font-size:12px;box-shadow:0 2px 4px #0003}
+.stat b{display:block;color:#ffe18b;font-size:17px;font-variant-numeric:tabular-nums}
+#toast{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#1b303ce8;border:1px solid #e7d07c;border-radius:8px;padding:9px 14px;font-size:13px;pointer-events:none;max-width:88%;text-align:center}
+.panel{background:#2b4a57;border:1px solid #476976;border-radius:9px;padding:12px;margin-bottom:12px}
+.panel p{font-size:12px;line-height:1.5;color:#d0dfe0}.panel strong{color:#ffe18b}
+.metric{display:flex;justify-content:space-between;font-size:12px;margin:9px 0;gap:7px}.metric span:last-child{color:#ffe18b;font-weight:700}
+.bar{height:9px;border-radius:10px;background:#152f3a;overflow:hidden}.bar i{display:block;height:100%;background:#f4c955;transition:width .2s}
+label{display:block;font-size:12px;margin:10px 0}input[type=range]{width:100%;accent-color:#f6d56b}
+#log{padding-left:17px;font-size:12px;color:#d2dfe0;line-height:1.6;max-height:230px;overflow:auto}
+#log li{margin-bottom:5px}footer{font-size:11px;color:#97b6bb;margin-top:16px}
+@media(max-width:1000px){main{grid-template-columns:210px minmax(280px,1fr)}aside.right{grid-column:1/-1;border-left:0;border-top:2px solid #122933;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.right h2{grid-column:1/-1}}
+@media(max-width:700px){main{display:flex;flex-direction:column}aside.left{border-right:0}.tools{grid-template-columns:repeat(4,1fr)}.tool{min-height:55px}#world{min-height:480px;height:62vh}aside.right{display:block}header{gap:8px}h1{font-size:19px}#floating{gap:4px}.stat{padding:5px 7px;font-size:10px}.stat b{font-size:13px}}
+</style></head><body>
+<header><a href="../">← Retro Arcade</a><h1>🎡 PARK BUILDER</h1><span class="version">Alpha 0.1</span><span class="hint">A colorful, original 1990s-inspired park simulator</span></header>
+<main>
+<aside class="left"><h2>Build your dream park</h2><div class="tools" id="tools"></div>
+<fieldset><legend>Park controls</legend><div class="controls"><button id="pause">⏸ Pause</button><button id="speed">▶ 1×</button><button id="zoomIn">＋ Zoom</button><button id="zoomOut">－ Zoom</button><button id="center">⌖ Center</button></div></fieldset>
+<div class="controls"><button id="save">💾 Save</button><button id="load">↶ Load</button><button id="new">New park</button></div>
+<p class="hint">Select a tool, then click a tile. Drag empty space to pan; use the mouse wheel to zoom. Buildings must touch a connected path to receive guests. Start at the entrance in the south-west corner.</p>
+<footer>Independent game inspired by classic park simulators. Original code and drawings; not affiliated with any publisher.</footer>
+</aside>
+<section id="worldWrap" aria-label="Interactive isometric park map"><canvas id="world"></canvas>
+<div id="floating"><div class="stat">Cash<b id="cash">$25,000</b></div><div class="stat">Guests<b id="guests">0</b></div><div class="stat">Rating<b id="rating">70%</b></div><div class="stat">Day<b id="day">1</b></div></div><div id="toast">Welcome! Lay paths and build rides near the entrance.</div></section>
+<aside class="right"><h2>Park office</h2>
+<div class="panel"><div class="metric"><span>Overall happiness</span><span id="happyText">70%</span></div><div class="bar"><i id="happyBar" style="width:70%"></i></div>
+<div class="metric"><span>Park visitors</span><span id="visitors">0</span></div><div class="metric"><span>Daily income</span><span id="income">$0</span></div><div class="metric"><span>Daily expenses</span><span id="costs">$0</span></div><div class="metric"><span>Profit today</span><span id="profit">$0</span></div></div>
+<div class="panel"><h2>Management</h2>
+<label>Entrance ticket <strong id="ticketValue">$10</strong><input id="ticket" type="range" min="0" max="50" value="10"></label>
+<label>Staff wages <strong id="wageValue">100%</strong><input id="wage" type="range" min="60" max="160" step="10" value="100"></label>
+<p>Higher tickets earn more per arrival but discourage new visitors. Low wages reduce costs but hurt reliability and happiness.</p></div>
+<div class="panel"><h2>Selected tile</h2><div id="selection" class="hint">Click a tile to inspect its building.</div><div id="buildingControls"></div></div>
+<div class="panel"><h2>Park news</h2><ol id="log"><li>The gates are ready to open!</li></ol></div>
+</aside></main>
+<script>
+(function(){
+'use strict';
+const N=22, TILE_W=70,TILE_H=36, key='placesiwent-parkbuilder-alpha01';
+const defs={
+inspect:{name:'Inspect',icon:'🔎',price:0},
+path:{name:'Path',icon:'🟨',price:40},erase:{name:'Bulldoze',icon:'🚧',price:0},
+carousel:{name:'Carousel',icon:'🎠',price:1600,fee:5,capacity:20,upkeep:90,fun:12},
+wheel:{name:'Ferris wheel',icon:'🎡',price:3600,fee:9,capacity:28,upkeep:170,fun:20},
+coaster:{name:'Roller coaster',icon:'🎢',price:7000,fee:14,capacity:38,upkeep:330,fun:29},
+burger:{name:'Burger stand',icon:'🍔',price:900,fee:6,capacity:35,upkeep:50,fun:5},
+drink:{name:'Drink stand',icon:'🥤',price:650,fee:4,capacity:40,upkeep:35,fun:5},
+toilet:{name:'Toilets',icon:'🚻',price:550,fee:0,capacity:50,upkeep:30,fun:7},
+tree:{name:'Trees',icon:'🌳',price:110,fee:0,capacity:0,upkeep:3,fun:3},
+bench:{name:'Bench',icon:'🪑',price:130,fee:0,capacity:0,upkeep:4,fun:5}
+};
+const canvas=document.getElementById('world'),ctx=canvas.getContext('2d'),wrap=document.getElementById('worldWrap');
+let S,tool='path',zoom=1,panX=0,panY=0,hover=null,selected=null,drag=null,lastTime=performance.now(),accum=0,toastUntil=0;
+const $=id=>document.getElementById(id), money=n=>'$'+Math.round(n).toLocaleString('en-US'), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function fresh(){S={cash:25000,day:1,tick:0,ticket:10,wage:100,happy:70,guests:0,visitors:0,income:0,costs:0,profit:0,speed:1,paused:false,tiles:Array.from({length:N*N},()=>null),peeps:[],log:['The gates are ready to open!'],seed:42};for(let y=16;y<N;y++)S.tiles[y*N+1]={type:'path'};S.tiles[21*N+1]={type:'gate'};for(let y=16;y<21;y++)S.tiles[y*N+2]={type:'path'};S.tiles[17*N+3]={type:'carousel',condition:100,price:5,cycles:0};S.tiles[18*N+3]={type:'burger',condition:100,price:6,cycles:0};S.tiles[16*N+3]={type:'tree'};S.tiles[19*N+3]={type:'bench'};}
+function info(s){$('toast').textContent=s;toastUntil=performance.now()+3500;}
+function log(s){S.log.unshift('Day '+S.day+': '+s);S.log=S.log.slice(0,12);$('log').innerHTML=S.log.map(v=>'<li>'+v.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))+'</li>').join('');}
+function idx(x,y){return y*N+x}function inBounds(x,y){return x>=0&&y>=0&&x<N&&y<N}function tile(x,y){return inBounds(x,y)?S.tiles[idx(x,y)]:null}
+function rng(){S.seed=(Math.imul(S.seed,1664525)+1013904223)>>>0;return S.seed/4294967296}
+function isRoad(x,y){const t=tile(x,y);return t&&(t.type==='path'||t.type==='gate')}
+function connected(){const found=new Set(),q=[[1,21]];found.add(idx(1,21));for(let i=0;i<q.length;i++){const [x,y]=q[i];for(const [dx,dy] of [[0,1],[0,-1],[1,0],[-1,0]]){const a=x+dx,b=y+dy;if(inBounds(a,b)&&isRoad(a,b)&&!found.has(idx(a,b))){found.add(idx(a,b));q.push([a,b]);}}}return found}
+function nextToRoad(x,y,roads){return [[1,0],[-1,0],[0,1],[0,-1]].some(([dx,dy])=>inBounds(x+dx,y+dy)&&roads.has(idx(x+dx,y+dy)))}
+function neighbors(x,y){return [[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>[x+dx,y+dy]).filter(([a,b])=>inBounds(a,b))}
+function build(x,y){if(!inBounds(x,y))return;selected=[x,y];const at=tile(x,y),d=defs[tool];if(tool==='inspect'){updateSelection();return}
+if(tool==='erase'){if(!at||at.type==='gate'){info('You cannot demolish the entrance.');return}S.cash+=Math.round((defs[at.type]?.price||0)*.25);S.tiles[idx(x,y)]=null;info('Tile cleared.');updateSelection();renderStats();return}
+if(at){info('That tile is occupied. Choose another.');updateSelection();return}if(S.cash<d.price){info('Not enough cash!');return}
+if(tool!=='path'&&tool!=='tree'&&tool!=='bench'&&!nextToRoad(x,y,connected())){info('Build beside a path connected to the entrance.');return}
+S.cash-=d.price;S.tiles[idx(x,y)]={type:tool,condition:100,price:d.fee||0,cycles:0};if(tool==='coaster'||tool==='wheel'||tool==='carousel')log('Opened a new '+d.name+'!');info('Built '+d.name+' for '+money(d.price));updateSelection();renderStats()}
+const tools=$('tools');Object.entries(defs).forEach(([id,d])=>{const b=document.createElement('button');b.className='tool';b.dataset.tool=id;b.innerHTML='<strong>'+d.icon+'</strong>'+d.name+(d.price?'<small>'+money(d.price)+'</small>':'');b.onclick=()=>{tool=id;document.querySelectorAll('.tool').forEach(e=>e.classList.toggle('active',e.dataset.tool===tool))};tools.appendChild(b)});tools.querySelector('[data-tool=path]').click();
+function resize(){const rect=wrap.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(Math.max(480,rect.height)*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);draw()}
+function size(){return {w:canvas.width/Math.min(devicePixelRatio||1,2),h:canvas.height/Math.min(devicePixelRatio||1,2)}}
+function iso(x,y){const {w,h}=size();return {x:w/2+panX+(x-y)*TILE_W*.5*zoom,y:h*.16+panY+(x+y)*TILE_H*.5*zoom}}
+function ground(x,y,color,stroke){const p=iso(x,y),w=TILE_W*zoom/2,h=TILE_H*zoom/2;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+w,p.y+h);ctx.lineTo(p.x,p.y+2*h);ctx.lineTo(p.x-w,p.y+h);ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=.6;ctx.stroke()}
+function circle(x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
+function drawBuilding(x,y,t){const p=iso(x,y),r=zoom,k=t.type;ctx.save();ctx.translate(p.x,p.y+TILE_H*r*.48);
+if(k==='path'||k==='gate'){ctx.fillStyle=k==='gate'?'#faeab6':'#e8c78a';ctx.beginPath();ctx.moveTo(0,-TILE_H*r*.31);ctx.lineTo(TILE_W*r*.34,0);ctx.lineTo(0,TILE_H*r*.31);ctx.lineTo(-TILE_W*r*.34,0);ctx.fill();if(k==='gate'){ctx.font=(24*r)+'px serif';ctx.textAlign='center';ctx.fillText('🎟️',0,-7*r)}}else{
+const item=defs[k];if(k==='tree'){ctx.fillStyle='#76532e';ctx.fillRect(-3*r,-19*r,6*r,25*r);circle(0,-27*r,18*r,'#2d7c48');circle(-8*r,-31*r,11*r,'#48a95e');circle(9*r,-34*r,12*r,'#56b563')}
+else if(k==='bench'){ctx.fillStyle='#824e30';ctx.fillRect(-14*r,-10*r,28*r,7*r);ctx.fillRect(-11*r,-3*r,4*r,12*r);ctx.fillRect(8*r,-3*r,4*r,12*r)}
+else if(k==='wheel'){ctx.strokeStyle='#ab6384';ctx.lineWidth=5*r;ctx.beginPath();ctx.moveTo(-19*r,0);ctx.lineTo(0,-63*r);ctx.lineTo(19*r,0);ctx.stroke();ctx.strokeStyle='#f8e3b9';ctx.lineWidth=4*r;ctx.beginPath();ctx.arc(0,-45*r,25*r,0,Math.PI*2);ctx.stroke();for(let a=0;a<8;a++){const th=(a/8)*Math.PI*2+S.tick*.02;ctx.beginPath();ctx.moveTo(0,-45*r);ctx.lineTo(Math.cos(th)*25*r,-45*r+Math.sin(th)*25*r);ctx.strokeStyle='#e3cf95';ctx.lineWidth=1*r;ctx.stroke();circle(Math.cos(th)*25*r,-45*r+Math.sin(th)*25*r,5*r,['#e75d70','#f2c95f','#7fc6f2'][a%3])}}
+else if(k==='coaster'){ctx.strokeStyle='#f9c75e';ctx.lineWidth=5*r;ctx.beginPath();ctx.moveTo(-28*r,-12*r);ctx.bezierCurveTo(-15*r,-85*r,5*r,-72*r,8*r,-25*r);ctx.bezierCurveTo(15*r,15*r,35*r,-25*r,25*r,-35*r);ctx.stroke();ctx.strokeStyle='#71546f';ctx.lineWidth=3*r;for(let a=-20;a<=20;a+=14){ctx.beginPath();ctx.moveTo(a*r,2*r);ctx.lineTo(a*r,-25*r);ctx.stroke()}}
+else if(k==='carousel'){ctx.fillStyle='#e9ca83';ctx.beginPath();ctx.ellipse(0,0,27*r,13*r,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#e15d70';ctx.beginPath();ctx.moveTo(-30*r,-24*r);ctx.lineTo(0,-57*r);ctx.lineTo(30*r,-24*r);ctx.closePath();ctx.fill();ctx.fillStyle='#fbe7c3';ctx.fillRect(-2*r,-52*r,4*r,50*r);for(let a of [-18,0,18]){ctx.fillStyle='#fadf8c';ctx.fillRect(a*r,-23*r,3*r,19*r)}}
+else{ctx.fillStyle=k==='burger'?'#e8a55d':k==='drink'?'#7bb7d7':'#bc9acf';ctx.fillRect(-24*r,-29*r,48*r,30*r);ctx.fillStyle='#f2d8a7';ctx.beginPath();ctx.moveTo(-28*r,-29*r);ctx.lineTo(0,-49*r);ctx.lineTo(28*r,-29*r);ctx.fill();ctx.fillStyle='#533c38';ctx.fillRect(-7*r,-17*r,14*r,18*r);ctx.font=(19*r)+'px serif';ctx.textAlign='center';ctx.fillText(item.icon,0,-31*r)}
+if(t.condition<40){ctx.fillStyle='#ed5b57';ctx.font=(18*r)+'px sans-serif';ctx.textAlign='center';ctx.fillText('!',23*r,-30*r)}
+}ctx.restore()}
+function peep(x,y,c){const p=iso(x,y),r=zoom;circle(p.x,p.y+TILE_H*r*.6,3*r,c);circle(p.x,p.y+TILE_H*r*.6-6*r,2.4*r,'#f6d3a4')}
+function draw(){if(!ctx)return;const {w,h}=size();ctx.clearRect(0,0,w,h);ctx.fillStyle='#91c7dc';ctx.fillRect(0,0,w,h);
+for(let sum=0;sum<2*N-1;sum++){for(let x=0;x<N;x++){const y=sum-x;if(!inBounds(x,y))continue;const v=((x*17+y*23)%11),t=tile(x,y);ground(x,y,v<3?'#75b96a':v<7?'#82c471':'#8ecb79','#70ad6c');if(hover&&hover[0]===x&&hover[1]===y){ground(x,y,'#f8e79080','#ffee8c')}if(selected&&selected[0]===x&&selected[1]===y){ground(x,y,'#ffffff22','#ffffff')}if(t)drawBuilding(x,y,t);}}
+S.peeps.forEach(p=>peep(p.x,p.y,p.color));
+ctx.textAlign='center';ctx.font='bold '+(15*zoom)+'px sans-serif';const gate=iso(1,21);ctx.fillStyle='#223f51';ctx.fillText('PARK ENTRANCE',gate.x,gate.y+34*zoom)}
+function pointerTile(px,py){const {w,h}=size(),a=(px-w/2-panX)/(TILE_W*.5*zoom),b=(py-h*.16-panY)/(TILE_H*.5*zoom);const x=Math.floor((a+b)/2),y=Math.floor((b-a)/2);return [x,y]}
+function local(e){const r=canvas.getBoundingClientRect();return [(e.clientX-r.left)*(size().w/r.width),(e.clientY-r.top)*(size().h/r.height)]}
+canvas.addEventListener('pointerdown',e=>{const [x,y]=local(e);drag={x,y,px:panX,py:panY,moved:false};canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{const [x,y]=local(e);if(drag){if(Math.hypot(x-drag.x,y-drag.y)>5)drag.moved=true;if(drag.moved){panX=drag.px+x-drag.x;panY=drag.py+y-drag.y}}hover=pointerTile(x,y)});
+canvas.addEventListener('pointerup',e=>{if(!drag)return;const [x,y]=local(e);if(!drag.moved){const [tx,ty]=pointerTile(x,y);build(tx,ty)}drag=null});
+canvas.addEventListener('pointercancel',()=>drag=null);
+canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=clamp(zoom*(e.deltaY<0?1.12:.89),.45,2.4)},{passive:false});
+function updateSelection(){const t=selected&&tile(...selected),el=$('selection'),panel=$('buildingControls');panel.innerHTML='';if(!selected){el.textContent='Click a tile to inspect its building.';return}
+el.textContent='Tile '+(selected[0]+1)+', '+(selected[1]+1)+(t?' · '+(defs[t.type]?.name||'Park entrance'):' · Empty');
+if(!t||!defs[t.type]||['path','tree','bench'].includes(t.type))return;
+if(t.type==='gate')return;
+const condition=document.createElement('p');condition.textContent='Condition: '+Math.round(t.condition)+'%';panel.appendChild(condition);
+const status=document.createElement('p');status.textContent='Visits served: '+t.cycles;panel.appendChild(status);
+if(t.price!==undefined){const label=document.createElement('label');label.textContent='Price: '+money(t.price);const input=document.createElement('input');input.type='range';input.min='0';input.max='30';input.value=t.price;input.oninput=()=>{t.price=+input.value;label.firstChild.textContent='Price: '+money(t.price)};label.appendChild(input);panel.appendChild(label)}
+const repair=document.createElement('button');repair.className='action';const price=Math.ceil((100-t.condition)*12);repair.textContent='🔧 Repair ('+money(price)+')';repair.disabled=price===0;repair.onclick=()=>{const cost=Math.ceil((100-t.condition)*12);if(S.cash<cost)return info('Not enough cash to repair.');S.cash-=cost;t.condition=100;info('Building repaired.');updateSelection();renderStats()};panel.appendChild(repair)}
+function simDay(){S.day++;S.income=0;S.costs=0;const roads=connected(),buildings=[];for(let y=0;y<N;y++)for(let x=0;x<N;x++){const t=tile(x,y);if(!t||!defs[t.type]||['path','tree','bench'].includes(t.type))continue;if(nextToRoad(x,y,roads))buildings.push({x,y,t,d:defs[t.type]})}
+const rideCount=buildings.filter(b=>['carousel','wheel','coaster'].includes(b.t.type)).length;
+const attraction=rideCount*17+buildings.length*3;const pull=clamp(7+attraction-S.ticket*1.15,0,160);
+let arrivals=Math.floor(pull*(.5+S.happy/140));arrivals=Math.max(0,arrivals);S.visitors+=arrivals;S.guests=clamp(Math.round(S.guests*.78)+arrivals,0,1200);S.income+=arrivals*S.ticket;
+let satisfaction=65+rideCount*5-Math.max(0,S.ticket-12)*1.7+(S.wage-100)*.06;let shortages=0;
+for(const b of buildings){const {t,d}=b;const demand= Math.min(d.capacity,Math.round(S.guests/(Math.max(1,buildings.length))*(.6+rng())));const served=t.condition>20?demand:Math.round(demand*.2);const pricePenalty=Math.max(0,(t.price||0)-(d.fee||0))*1.4;satisfaction-=pricePenalty*.6;S.income+=served*(t.price||0);S.costs+=d.upkeep*S.wage/100;t.cycles+=served;t.condition=clamp(t.condition-(d.upkeep>70?2.0:.8),0,100);satisfaction+=d.fun*.12*clamp(t.condition/100,0,1);if(t.condition<45){satisfaction-=3;shortages++}}
+S.costs+=S.guests*.13;S.cash+=S.income-S.costs;S.profit=S.income-S.costs;
+const comfort=buildings.filter(b=>['toilet','burger','drink'].includes(b.t.type)).length;
+if(S.guests>80&&comfort===0)satisfaction-=16;
+S.happy=Math.round(clamp(S.happy*.68+satisfaction*.32,5,100));
+if(S.cash<0){S.happy=clamp(S.happy-5,5,100);if(S.day%3===0)log('The park is in debt. Build carefully!')}
+if(shortages&&S.day%4===0)log('Some attractions need urgent repairs.');
+if(S.day%7===0)log('Weekly report: '+money(S.profit)+' profit, '+S.happy+'% guest happiness.');
+if(S.day%10===0)save(false);
+const paths=[...roads].filter(i=>i!==idx(1,21));S.peeps=Array.from({length:Math.min(120,Math.round(S.guests/6))},(_,i)=>{const id=paths[Math.floor(rng()*paths.length)]??idx(1,20);return {x:id%N,y:Math.floor(id/N),color:['#ed5d65','#3869bd','#ffce48','#9b66d5'][i%4]}});renderStats();updateSelection()}
+function renderStats(){$('cash').textContent=money(S.cash);$('guests').textContent=S.guests.toLocaleString();$('rating').textContent=S.happy+'%';$('day').textContent=S.day;$('happyText').textContent=S.happy+'%';$('happyBar').style.width=S.happy+'%';$('visitors').textContent=S.visitors.toLocaleString();$('income').textContent=money(S.income);$('costs').textContent=money(S.costs);$('profit').textContent=money(S.profit);$('ticketValue').textContent=money(S.ticket);$('wageValue').textContent=S.wage+'%';$('pause').textContent=S.paused?'▶ Resume':'⏸ Pause';$('speed').textContent='▶ '+S.speed+'×'}
+function save(show=true){try{localStorage.setItem(key,JSON.stringify(S));if(show)info('Park saved to this browser.')}catch(e){info('Browser storage is unavailable.')}}function load(){try{const data=JSON.parse(localStorage.getItem(key));if(!data||!Array.isArray(data.tiles)||data.tiles.length!==N*N)throw Error();S=data;S.peeps=S.peeps||[];S.seed=S.seed||42;renderStats();updateSelection();log('Save loaded.');info('Park restored!')}catch(e){info('No compatible park save found.')}} 
+$('save').onclick=()=>save();$('load').onclick=load;$('new').onclick=()=>{if(confirm('Start a fresh park? Your current park will remain saved only if you saved it manually.')){fresh();selected=null;renderStats();updateSelection();log('A new park was founded.')}}; 
+$('pause').onclick=()=>{S.paused=!S.paused;renderStats()};$('speed').onclick=()=>{S.speed=S.speed===1?2:S.speed===2?4:1;renderStats()};
+$('zoomIn').onclick=()=>zoom=clamp(zoom*1.2,.45,2.4);$('zoomOut').onclick=()=>zoom=clamp(zoom/1.2,.45,2.4);$('center').onclick=()=>{panX=0;panY=0;zoom=1};
+$('ticket').oninput=e=>{S.ticket=+e.target.value;renderStats()};$('wage').oninput=e=>{S.wage=+e.target.value;renderStats()};
+function frame(now){const dt=Math.min(200,now-lastTime);lastTime=now;if(!S.paused){accum+=dt*S.speed;while(accum>=1700){simDay();accum-=1700}}if(now>toastUntil&&$('toast').textContent){$('toast').textContent=''}draw();requestAnimationFrame(frame)}
+fresh();try{const data=JSON.parse(localStorage.getItem(key));if(data?.tiles?.length===N*N){S=data;S.peeps=S.peeps||[];S.seed=S.seed||42;info('Autosaved park restored.')}}catch(e){}
+$('ticket').value=S.ticket;$('wage').value=S.wage;renderStats();updateSelection();log('Park office opened.');window.addEventListener('resize',resize);resize();requestAnimationFrame(frame);
+})();
+</script></body></html>
