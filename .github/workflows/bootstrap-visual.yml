@@ -1,0 +1,26 @@
+name: Bootstrap visual baselines
+on:
+  push:
+    branches: [quality-automation-ci]
+    paths: ['tests/quality.spec.cjs', '.github/workflows/bootstrap-visual.yml']
+permissions:
+  contents: write
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:visual:update
+      - name: Save initial Linux visual baselines
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tests/quality.spec.cjs-snapshots/*.png
+          git commit -m 'Add initial Chromium visual baselines'
+          git push

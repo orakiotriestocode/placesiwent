@@ -4,10 +4,25 @@
   "scripts": {
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "lint": "eslint tests scripts *.cjs assets/monitoring.js",
+    "check:syntax": "node scripts/check-syntax.cjs",
+    "format:check": "prettier --check tests scripts *.cjs .prettierrc.json .github/workflows/playwright.yml .github/dependabot.yml",
+    "format": "prettier --write tests scripts *.cjs .prettierrc.json .github/workflows/playwright.yml .github/dependabot.yml",
+    "check": "npm run lint && npm run check:syntax && npm run format:check",
+    "build": "node scripts/build-static.cjs",
+    "test:performance": "lhci autorun --config=.lighthouserc.cjs",
+    "test:visual:update": "playwright test --grep @visual --project chromium --update-snapshots"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@eslint/js": "10.0.1",
+    "@lhci/cli": "0.16.0",
     "@playwright/test": "1.65.0",
-    "leaflet": "1.9.4"
+    "acorn": "8.19.0",
+    "eslint": "10.14.0",
+    "globals": "17.14.0",
+    "leaflet": "1.9.4",
+    "prettier": "3.10.0"
   }
 }

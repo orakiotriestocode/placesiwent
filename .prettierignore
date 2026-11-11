@@ -1,0 +1,8 @@
+node_modules/
+assets/vendor/
+inspector/versions/
+playwright-report/
+test-results/
+.lighthouseci/
+performance-report/
+_site/
