@@ -49,9 +49,12 @@ test('Colonization advances a turn, zooms, opens trade and restores a save', asy
   await page.goto('/arcade/colonization/');
   await expect(page.locator('#map')).toBeVisible();
   await expect(page.locator('#stats')).toContainText('1492');
+  // Zoom controls are intentionally available only in the compact layout.
+  await page.setViewportSize({ width: 800, height: 900 });
   const before = await page.locator('#zoomLabel').textContent();
   await page.locator('#zoomIn').click();
   await expect(page.locator('#zoomLabel')).not.toHaveText(before);
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.locator('#save').click();
   await page.locator('#end').click();
   await expect(page.locator('#stats')).toContainText('1493');
