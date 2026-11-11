@@ -11,6 +11,8 @@
 - `npm run build`: package tracked website files into `_site`, excluding dependencies, tests, automation and reports.
 - `npm run test:visual:update`: intentionally regenerate screenshot baselines. Run in the pinned Playwright Docker image with the matching package version; review the before/after images before committing. Never regenerate baselines automatically to make an unexpected change pass.
 
+The test package and Playwright container version must be updated together. Patched minimatch overrides are applied to ESLint tooling until its declared dependency range includes the fixed major version; review these overrides during dependency updates.
+
 ESLint and formatting initially cover test/automation code, shared monitoring, and root CJS configuration. Syntax checks cover active JavaScript and inline HTML scripts across the site. Vendor bundles and historical versions are excluded. Existing application HTML is not mass-reformatted.
 
 Lighthouse currently enforces a performance score of 60, LCP under six seconds, CLS under 0.15, and page transfer weight under 1.5 MB on the homepage and arcade. These are initial coarse regression budgets, not a claim that all pages have been optimized. Accessibility automation supplements manual review; it cannot establish complete WCAG compliance.

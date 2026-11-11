@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
-      options: --ipc=host
+      options: --ipc=host --user 1001:1001
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
@@ -27,7 +27,7 @@ jobs:
       - run: npm run check
       - run: npm test
       - name: Lighthouse performance budgets
-        run: CHROME_PATH="$(node -e "process.stdout.write(require('playwright').chromium.executablePath())")" npm run test:performance
+        run: npm run test:performance
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:
