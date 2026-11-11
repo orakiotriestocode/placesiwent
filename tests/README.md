@@ -1,6 +1,6 @@
 # Browser checks
 
-GitHub Actions runs `Browser checks` for relevant pushes and pull requests into main. It can also be started from the Actions tab with Run workflow. It tests the checked-out source on localhost in desktop Chromium and Firefox; it does not test or alter saved visitor games.
+GitHub Actions runs `Quality checks and publishing` for relevant pushes and pull requests into main. It can also be started from the Actions tab with Run workflow. It tests the checked-out source on localhost in desktop Chromium and Firefox; it does not test or alter saved visitor games.
 
 Coverage: homepage navigation; live and DEV Explore map visibility and radius selectors; Colonization zoom, turns, save/restore and trade dialog; Park Builder pause, speed and save/restore; Sentry initialization, automatic error capture and URL sanitization. Unhandled JavaScript errors fail ordinary tests.
 
@@ -20,6 +20,6 @@ npm test
 
 ## Diagnose a failure
 
-Open the failed Browser checks run in GitHub Actions. Annotations identify the failed assertion. Download `browser-test-report` for the HTML report, screenshots, videos and traces. Reports expire after seven days. A report can be opened with `npx playwright show-report <path-to-playwright-report>`; traces can be opened with `npx playwright show-trace <trace.zip>`.
+Open the failed Quality checks and publishing run in GitHub Actions. Annotations identify the failed assertion. Download `quality-reports` for the HTML report, screenshots, videos and traces. Reports expire after seven days. A report can be opened with `npx playwright show-report <path-to-playwright-report>`; traces can be opened with `npx playwright show-trace <trace.zip>`.
 
-Tests run independently of the existing GitHub Pages deployment. A failed check reports a problem but does not currently block publishing. Add a deployment gate separately if that becomes the desired workflow. No API tokens or paid testing services are required for this setup.
+Publishing now has a quality → package → deploy workflow. It becomes the publishing gate after the repository Pages source is switched to GitHub Actions. Until that one-time setting change, the old branch publisher remains independent. See [QUALITY.md](../QUALITY.md) for activation, coverage, screenshot baselines, accessibility and performance budgets.
