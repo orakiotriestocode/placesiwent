@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/assets/vendor/sentry-browser-11.12.0.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
+<script src="/assets/monitoring.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#151733">
+<meta name="description" content="Tiny Arcade — gentle, colourful browser games for little hands, made with love.">
+<title>Tiny Arcade — Places I Went</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#f5f4ff;background:#11142b}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 65% -10%,#34325e 0,transparent 34rem),#11142b}
+a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #ffd77b;outline-offset:4px}
+.wrap{width:min(1050px,100%);margin:auto;padding:26px 24px 50px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:21px;border-bottom:1px solid #434166}
+.brand{font-size:.92rem;font-weight:850;letter-spacing:.09em}.brand span{color:#ffd581}.back{border:1px solid #565277;border-radius:10px;padding:10px 13px;font-size:.85rem;color:#cfcbe8}
+.hero{padding:70px 0 44px;max-width:780px}.eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:#ffbece;font-weight:900}
+h1{font-size:clamp(3.2rem,8vw,6rem);line-height:1.01;letter-spacing:-.06em;margin:16px 0 20px}h1 em{font-style:normal;color:#ffd581}
+.hero p{font-size:1.1rem;color:#cbc9e4;line-height:1.7;max-width:640px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 19px}.section-head h2{font-size:1.35rem;margin:0}.section-head span{font-size:.83rem;color:#afabd2}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.game{background:#202346;border:1px solid #4a4d78;border-radius:19px;overflow:hidden}
+.cover{height:245px;background:#151a38;position:relative;overflow:hidden}.cover svg{width:100%;height:100%;display:block}.tag{position:absolute;left:18px;top:16px;background:#ffdd80;color:#3b3042;border-radius:6px;padding:8px 11px;font-size:.67rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.details{padding:27px}.details h3{font-size:1.7rem;letter-spacing:-.04em;margin:0 0 7px}.meta{font-size:.84rem;color:#bcb7dc}.details p{color:#d4d1e7;line-height:1.7;margin:19px 0 24px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}.play,.secondary{display:inline-flex;align-items:center;justify-content:center;padding:13px 19px;border-radius:10px;font-weight:800;font-size:.9rem}.play{background:#ffcf79;color:#322343}.play:hover{background:#ffe6ab}.secondary{border:1px solid #68628c;color:#e3def4}
+.note{margin-top:37px;max-width:700px;color:#bcb9d7;line-height:1.6;font-size:.92rem}
+footer{margin-top:70px;padding-top:19px;border-top:1px solid #434166;color:#a8a4c7;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;font-size:.8rem}
+@media(max-width:700px){.hero{padding:54px 0 35px}.grid{grid-template-columns:1fr}.cover{height:210px}.back{white-space:nowrap}.details{padding:22px}}
+</style></head>
+<body><div class="wrap">
+<header><a class="brand" href="/"><span>✦</span> Places I Went / Tiny Arcade</a><a class="back" href="/">← Main site</a></header>
+<main>
+<section class="hero"><div class="eyebrow">A little world of playful discovery</div><h1>Little hands.<br><em>Big smiles.</em></h1><p>Simple, colourful games made for curious little explorers. No pressure, no complicated rules — just a moment of discovery together.</p></section>
+<div class="section-head"><h2>Play something tiny</h2><span>1 playable alpha</span></div>
+<section class="grid" aria-label="Tiny Arcade games">
+<article class="game">
+<div class="cover">
+<svg viewBox="0 0 600 280" role="img" aria-label="Colourful floating shapes in Riva's Shapes" preserveAspectRatio="xMidYMid slice"><rect width="600" height="280" fill="#141934"/><g fill="#414a7d"><circle cx="47" cy="45" r="3"/><circle cx="236" cy="39" r="2"/><circle cx="396" cy="53" r="3"/><circle cx="562" cy="202" r="3"/></g><circle cx="142" cy="137" r="68" fill="#ff6989" stroke="#ffb5c6" stroke-width="5"/><rect x="277" y="73" width="126" height="126" rx="21" transform="rotate(11 340 136)" fill="#ffd36c" stroke="#fff2c1" stroke-width="5"/><path d="M489 59l18 47 49 4-38 31 12 48-41-27-42 27 13-48-39-31 50-4z" fill="#67ddc8" stroke="#cbfff3" stroke-width="5"/><path d="M137 238l46-76 47 76z" fill="#79b9ff" stroke="#d7f2ff" stroke-width="5"/><circle cx="439" cy="230" r="22" fill="#c69bff"/><text x="30" y="39" fill="#fff" font-family="sans-serif" font-size="23" font-weight="900">★ RIVA'S SHAPES</text></svg>
+<span class="tag">Playable Alpha 0.2.2</span></div>
+<div class="details"><h3>Riva's Shapes</h3><div class="meta">Touch &amp; pop · Gentle movement · Optional sounds and faces</div>
+<p>Tap the floating shapes to make them pop and collect stars. Bigger touch targets and Baby Mode make it easy for little hands to join the fun.</p>
+<div class="actions"><a class="play" href="/arcade/rivas-shapes/">▶ Play Riva's Shapes</a><a class="secondary" href="https://github.com/orakiotriestocode/placesiwent/tree/main/arcade/rivas-shapes">View source</a></div></div>
+</article></section>
+<p class="note">Designed for shared, supervised play. Sounds are optional, and there are no timers, penalties or flashing effects. More little games will join Tiny Arcade in future releases.</p>
+</main><footer><span>Places I Went · Tiny Arcade</span><a href="/arcade/">Looking for strategy and simulation? Visit Retro Arcade →</a></footer>
+</div></body></html>
