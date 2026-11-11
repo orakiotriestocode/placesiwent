@@ -26,7 +26,7 @@
       autoSessionTracking: false,
       maxBreadcrumbs: 0,
       defaultIntegrations: false,
-      integrations: [window.Sentry.globalHandlersIntegration(), window.Sentry.inboundFiltersIntegration(), window.Sentry.dedupeIntegration()],
+      integrations: [window.Sentry.globalHandlersIntegration(), window.Sentry.eventFiltersIntegration(), window.Sentry.dedupeIntegration()],
       dataCollection: {
         userInfo: false, cookies: false, httpHeaders: false, httpBodies: [],
         urlQueryParams: false, graphQL: { document: false, variables: false },
