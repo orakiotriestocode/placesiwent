@@ -331,8 +331,8 @@ function europe(){
  function boardRecruit(p){if(!sh?.atEurope||st.units.filter(u=>u.carrier===sh.id).length>=sh.capacity)return false;
   st.units.push({id:st.nextId++,type:'colonist',x:sh.x,y:sh.y,moves:0,carrier:sh.id,profession:p.profession,expert:p.expert||'',job:p.job});
   note(p.name+' has joined the expedition.');europe();draw();return true}
- document.querySelectorAll('[data-hire]').forEach(b=>b.onclick=()=>{const p=RECRUITS[Number(b.dataset.hire)];if(!p||st.gold<p.cost||!sh?.atEurope)return;if(boardRecruit(p))st.gold-=p.cost});
- $('freeMigrant').onclick=()=>{if((st.immigration||0)<1||!sh?.atEurope)return;if(boardRecruit(RECRUITS[0]))st.immigration--};
+ document.querySelectorAll('[data-hire]').forEach(b=>b.onclick=()=>{const p=RECRUITS[Number(b.dataset.hire)];if(!p||st.gold<p.cost||!sh?.atEurope)return;st.gold-=p.cost;if(!boardRecruit(p))st.gold+=p.cost});
+ $('freeMigrant').onclick=()=>{if((st.immigration||0)<1||!sh?.atEurope)return;st.immigration--;if(!boardRecruit(RECRUITS[0]))st.immigration++};
  document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{const k=b.dataset.load;if(!c||c.stock[k]<10||cargoTotal(sh)>190)return;c.stock[k]-=10;cargo[k]=(cargo[k]||0)+10;note('Loaded 10 '+k+' from '+c.name+'.');europe();draw()});
  document.querySelectorAll('[data-unload]').forEach(b=>b.onclick=()=>{const k=b.dataset.unload;if(!c||(cargo[k]||0)<10)return;cargo[k]-=10;c.stock[k]=(c.stock[k]||0)+10;note('Unloaded 10 '+k+' into '+c.name+'.');europe();draw()});
  document.querySelectorAll('[data-sell]').forEach(b=>b.onclick=()=>{const k=b.dataset.sell;if(!sh?.atEurope||(cargo[k]||0)<10)return;cargo[k]-=10;const gain=Math.floor(PRICES[k]*10*(100-st.tax)/100);st.gold+=gain;note('Sold 10 '+k+' for '+gain+' gold after royal taxes.');europe();draw()});
