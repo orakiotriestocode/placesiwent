@@ -16,11 +16,15 @@ function el(id) {
       classList: { add() {}, remove() {} },
       replaceChildren(...o) {
         this.options = o;
+        this.children = [];
       },
       add(o) {
         this.options.push(o);
       },
       focus() {},
+      append(node) {
+        (this.children ||= []).push(node);
+      },
     });
   return elements.get(id);
 }
@@ -47,7 +51,26 @@ const synth = {
 };
 const ctx = {
   window: { speechSynthesis: synth },
-  document: { getElementById: el, querySelectorAll: () => [] },
+  document: {
+    getElementById: el,
+    querySelectorAll: () =>
+      ['hello', 'love', 'sleep'].map((key) => {
+        const b = el('phrase-' + key);
+        b.dataset = { phrase: key };
+        return b;
+      }),
+    querySelector: () => el('settings'),
+    body: el('body'),
+    createElement: () => ({
+      textContent: '',
+      append(node) {
+        (this.children ||= []).push(node);
+      },
+    }),
+  },
+  fetch() {
+    throw Error('Demo must not use the network');
+  },
   URLSearchParams,
   location: { search: '?demo=1' },
   Option: function (text, value) {
@@ -104,7 +127,28 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   current.onerror();
   await failed;
   assert.match(el('voice-health').textContent, /attention/);
+  assert.equal(el('remote').hidden, false);
+  el('language').value = 'fr-FR';
+  el('language').onchange();
+  el('phrase-love').onclick();
+  assert.match(el('message').value, /Je t’aime/);
+  el('emotion').value = 'love';
+  el('remote-voice').value = 'french';
+  el('remote-rate').value = '0.7';
+  await el('message-form').onsubmit({ preventDefault() {} });
+  assert.equal(current.text, 'Je t’aime, Riva !');
+  assert.equal(current.voice.voiceURI, 'french');
+  assert.equal(current.rate, 0.7);
+  assert.equal(el('bear').className, 'bear love');
+  current.onend();
+  await new Promise(setImmediate);
+  assert.match(el('history').children[0].children[0].textContent, /Spoken/);
+  await el('remote-repeat').onclick();
+  assert.equal(current.text, 'Je t’aime, Riva !');
+  await el('remote-stop').onclick();
+  await new Promise(setImmediate);
+  assert.match(el('history').children[0].children[0].textContent, /Stopped/);
   console.log(
-    'PASS: language filtering, regional ordering, deduplication, language switching and empty fallback; actual app handlers select voice/speed, show speaking, stop without blocked error, repeat exact text, and report failed playback.',
+    'PASS: full single-device remote composer, language-specific phrases, expression, selected voice and speed, history, repeat and stop; no network calls. Existing voice filtering/playback checks passed.',
   );
 })();

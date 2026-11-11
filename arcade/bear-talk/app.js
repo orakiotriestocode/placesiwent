@@ -22,6 +22,7 @@
     remoteVoices = [],
     voiceSignature = '',
     stopping = false;
+  let demoMessages = [];
   const demo = new URLSearchParams(location.search).has('demo');
   function notice(text = '') {
     $('notice').textContent = text;
@@ -33,6 +34,21 @@
     notice();
   }
   async function api(action, data = {}) {
+    if (demo) {
+      if (action === 'send') {
+        const m = { ...data, id: Date.now() + Math.random(), status: 'queued' };
+        demoMessages.unshift(m);
+        demoMessages = demoMessages.slice(0, 15);
+        lastRemote = m;
+        $('remote-repeat').disabled = false;
+        queue.push(m);
+        renderHistory(demoMessages);
+        drain();
+        return { ok: true };
+      }
+      throw new Error('Pairing is not needed in the single-device demo.');
+    }
+
     const response = await fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -77,6 +93,11 @@
     );
   }
   async function ack(m, status) {
+    if (demo) {
+      m.status = status;
+      renderHistory(demoMessages);
+      return;
+    }
     if (session) await api('ack', { messageId: m.id, status });
   }
   function catalog() {
@@ -117,6 +138,18 @@
       select.value = current;
   }
   function reportVoices() {
+    if (demo) {
+      remoteVoices = catalog();
+      fillVoices('remote-voice', remoteVoices, $('language').value);
+      $('remote-voice-health').textContent = {
+        ready: 'Voice playback tested ✓',
+        blocked: 'Sound needs attention · Tap Test voice',
+        unavailable: 'Speech unavailable in this browser',
+        untested: 'Tap Test voice here before playing',
+      }[ready];
+      return;
+    }
+
     if (session && role === 'tablet')
       api('voices', { voices: catalog(), ready }).catch(() => {});
   }
@@ -138,6 +171,12 @@
     reportVoices();
   }
   function abortSpeech() {
+    if (demo) {
+      for (const m of demoMessages)
+        if (['queued', 'speaking', 'blocked'].includes(m.status))
+          m.status = 'stopped';
+      renderHistory(demoMessages);
+    }
     playbackEpoch++;
     busy = false;
     queue = [];
@@ -256,6 +295,24 @@
     }
     busy = false;
   }
+  function renderHistory(messages) {
+    $('history').replaceChildren();
+    for (const m of messages) {
+      const li = document.createElement('li');
+      li.textContent = m.text;
+      const status = document.createElement('small');
+      status.textContent =
+        {
+          queued: 'Queued for bear screen',
+          speaking: 'Speaking…',
+          spoken: 'Spoken ✓',
+          stopped: 'Stopped',
+          blocked: 'Needs a voice tap on the bear screen',
+        }[m.status] || m.status;
+      li.append(status);
+      $('history').append(li);
+    }
+  }
   async function poll() {
     if (!session) return;
     try {
@@ -301,22 +358,7 @@
         if (!remoteVoices.length)
           $('remote-voice-health').textContent +=
             ' · No installed voices reported yet';
-        $('history').replaceChildren();
-        for (const m of r.messages) {
-          const li = document.createElement('li');
-          li.textContent = m.text;
-          const status = document.createElement('small');
-          status.textContent =
-            {
-              queued: 'Queued for bear screen',
-              speaking: 'Speaking…',
-              spoken: 'Spoken ✓',
-              stopped: 'Stopped',
-              blocked: 'Needs a voice tap on the bear screen',
-            }[m.status] || m.status;
-          li.append(status);
-          $('history').append(li);
-        }
+        renderHistory(r.messages);
       }
     } catch (e) {
       if ([403, 410].includes(e.status)) {
@@ -448,6 +490,7 @@
       stopping = false;
     }
   }
+  $('remote-test').onclick = () => $('sound').onclick();
   $('local-stop').onclick = stopPlayback;
   $('remote-stop').onclick = stopPlayback;
   $('local-repeat').onclick = async () => {
@@ -486,6 +529,10 @@
     }
   };
   $('local-language').onchange = () => {
+    if (demo) {
+      $('language').value = $('local-language').value;
+      fillVoices('remote-voice', remoteVoices, $('language').value);
+    }
     updateVoices();
     if (demo) $('demo-lang').value = $('local-language').value;
   };
@@ -493,8 +540,13 @@
     $('local-language').value = $('demo-lang').value;
     updateVoices();
   };
-  $('language').onchange = () =>
+  $('language').onchange = () => {
     fillVoices('remote-voice', remoteVoices, $('language').value);
+    if (demo) {
+      $('local-language').value = $('language').value;
+      updateVoices();
+    }
+  };
   for (const prefix of ['local', 'remote']) {
     const range = $(prefix + '-rate');
     try {
@@ -594,7 +646,17 @@
   if (demo) {
     show('tablet');
     $('pairing').hidden = true;
-    $('demo-controls').hidden = false;
+    $('remote').hidden = false;
+    active = true;
+    role = 'tablet';
+    document.body.classList.add('demo-mode');
+    document.querySelector('.sound-settings').open = false;
+    $('remote-status').textContent =
+      '● Local demo · Remote and bear are on this device';
+    $('remote-test').hidden = false;
+    $('end-remote').textContent = 'Exit demo';
+    $('end-remote').onclick = () => location.assign('./');
+    updateVoices();
     $('end-tablet').hidden = true;
     $('tablet-status').textContent = 'Single-device demo · No pairing';
   } else {
