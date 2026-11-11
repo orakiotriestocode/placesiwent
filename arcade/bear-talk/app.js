@@ -84,17 +84,30 @@
       .slice(0, 150)
       .map((v) => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
   }
+  const baseLanguage = (lang) =>
+    String(lang || '')
+      .toLowerCase()
+      .replace(/_/g, '-')
+      .split('-')[0];
   function fillVoices(id, voices, lang) {
     const select = $(id),
       current = select.value;
-    const matching = lang
-      ? voices.filter((v) => v.lang.slice(0, 2) === lang.slice(0, 2))
-      : voices;
+    const unique = new Map();
+    for (const v of voices)
+      if (baseLanguage(v.lang) === baseLanguage(lang) && !unique.has(v.uri))
+        unique.set(v.uri, v);
+    const matching = [...unique.values()].sort(
+      (a, b) =>
+        Number(b.lang.toLowerCase() === lang.toLowerCase()) -
+          Number(a.lang.toLowerCase() === lang.toLowerCase()) ||
+        a.name.localeCompare(b.name),
+    );
+    select.value = '';
     select.replaceChildren(
       new Option(
-        id === 'remote-voice'
-          ? 'Use bear screen’s choice'
-          : 'Automatic for the message language',
+        matching.length
+          ? 'Automatic · selected language'
+          : 'Automatic · no matching voices reported',
         '',
       ),
     );
@@ -113,7 +126,7 @@
     reportVoices();
   }
   function updateVoices() {
-    fillVoices('local-voice', catalog());
+    fillVoices('local-voice', catalog(), $('local-language').value);
     try {
       const selected = localStorage.getItem('bear-local-voice');
       if (
@@ -175,10 +188,16 @@
       utterance.lang = m.lang;
       utterance.rate = Number(m.rate) || Number($('local-rate').value);
       utterance.pitch = 1.08;
+      if (!test && $('local-language').value !== m.lang) {
+        $('local-language').value = m.lang;
+        updateVoices();
+      }
       const uri = m.voice || $('local-voice').value;
       const voice =
-        (synth.getVoices() || []).find((v) => v.voiceURI === uri) ||
-        voiceFor(m.lang);
+        (synth.getVoices() || []).find(
+          (v) =>
+            v.voiceURI === uri && baseLanguage(v.lang) === baseLanguage(m.lang),
+        ) || voiceFor(m.lang);
       if (voice) utterance.voice = voice;
       $('bubble').textContent = m.text;
       $('bear').className = 'bear ' + (m.emotion || 'happy');
@@ -395,7 +414,14 @@
     blocked = null;
     synth?.cancel();
     busy = true;
-    const status = await speak(m || { text: 'Hallo Riva!', lang: 'nl-BE' }, !m);
+    const status = await speak(
+      m || {
+        text: (phrases[baseLanguage($('local-language').value)] ||
+          phrases.en)[0],
+        lang: $('local-language').value,
+      },
+      !m,
+    );
     if (m)
       try {
         await ack(m, status);
@@ -458,6 +484,14 @@
     } finally {
       btn.disabled = false;
     }
+  };
+  $('local-language').onchange = () => {
+    updateVoices();
+    if (demo) $('demo-lang').value = $('local-language').value;
+  };
+  $('demo-lang').onchange = () => {
+    $('local-language').value = $('demo-lang').value;
+    updateVoices();
   };
   $('language').onchange = () =>
     fillVoices('remote-voice', remoteVoices, $('language').value);

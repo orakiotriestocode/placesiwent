@@ -12,12 +12,12 @@
       content="A little bear, with your words. Connect a bear screen and a remote control for a family conversation."
     />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.2" />
+    <link rel="stylesheet" href="style.css?v=0.2.1" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a
-      ><span>BEAR & YOU <small>alpha 0.2</small></span>
+      ><span>BEAR & YOU <small>alpha 0.2.1</small></span>
     </header>
     <main>
       <section id="welcome" class="card welcome">
@@ -190,6 +190,16 @@
             Choose a voice and tap Test voice.<br />3. Keep this screen open. If
             silent, check silent mode or try another voice.
           </p>
+          <label for="local-language">Voice language</label
+          ><select id="local-language">
+            <option value="nl-BE">Nederlands · België</option>
+            <option value="nl-NL">Nederlands · Nederland</option>
+            <option value="en-GB">English · UK</option>
+            <option value="en-US">English · US</option>
+            <option value="fr-FR">Français</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="es-ES">Español</option>
+          </select>
           <label for="local-voice">Voice on this device</label
           ><select id="local-voice">
             <option value="">Automatic for the message language</option>
@@ -228,9 +238,13 @@
             id="demo-text"
             value="Hallo Riva! Zullen we samen spelen?"
           /><select id="demo-lang" aria-label="Demo voice language">
-            <option value="nl-BE">Nederlands (België)</option>
-            <option value="en-GB">English</option>
-            <option value="fr-FR">Français</option></select
+            <option value="nl-BE">Nederlands · België</option>
+            <option value="nl-NL">Nederlands · Nederland</option>
+            <option value="en-GB">English · UK</option>
+            <option value="en-US">English · US</option>
+            <option value="fr-FR">Français</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="es-ES">Español</option></select
           ><button id="demo-speak">Let bear speak</button>
         </div>
       </section>
@@ -314,6 +328,6 @@
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="app.js?v=0.2"></script>
+    <script src="app.js?v=0.2.1"></script>
   </body>
 </html>

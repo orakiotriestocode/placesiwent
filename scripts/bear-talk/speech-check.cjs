@@ -6,7 +6,11 @@ function el(id) {
   if (!elements.has(id))
     elements.set(id, {
       id,
-      value: id.endsWith('rate') ? '0.9' : id.endsWith('lang') ? 'nl-BE' : '',
+      value: id.endsWith('rate')
+        ? '0.9'
+        : id.endsWith('lang') || id.endsWith('language')
+          ? 'nl-BE'
+          : '',
       textContent: '',
       options: [],
       classList: { add() {}, remove() {} },
@@ -22,7 +26,13 @@ function el(id) {
 }
 let current,
   cancelCount = 0;
-const voices = [{ voiceURI: 'dutch', name: 'Dutch test voice', lang: 'nl-BE' }];
+const voices = [
+  { voiceURI: 'dutch', name: 'Dutch test voice', lang: 'nl-BE' },
+  { voiceURI: 'nl-nl', name: 'Dutch NL', lang: 'nl-NL' },
+  { voiceURI: 'english', name: 'English', lang: 'en-GB' },
+  { voiceURI: 'french', name: 'French', lang: 'fr-FR' },
+  { voiceURI: 'dutch', name: 'Duplicate', lang: 'nl-BE' },
+];
 const synth = {
   getVoices: () => voices,
   addEventListener() {},
@@ -56,6 +66,24 @@ const ctx = {
 };
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
 (async () => {
+  assert.deepEqual(
+    el('local-voice').options.map((o) => o.value),
+    ['', 'dutch', 'nl-nl'],
+  );
+  el('local-voice').value = 'dutch';
+  el('local-language').value = 'en-GB';
+  el('local-language').onchange();
+  assert.deepEqual(
+    el('local-voice').options.map((o) => o.value),
+    ['', 'english'],
+  );
+  assert.equal(el('local-voice').value, '');
+  el('local-language').value = 'de-DE';
+  el('local-language').onchange();
+  assert.equal(el('local-voice').options.length, 1);
+  assert.match(el('local-voice').options[0].text, /no matching/);
+  el('local-language').value = 'nl-BE';
+  el('local-language').onchange();
   el('demo-text').value = 'Hallo Riva';
   el('local-voice').value = 'dutch';
   el('local-rate').value = '0.6';
@@ -77,6 +105,6 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   await failed;
   assert.match(el('voice-health').textContent, /attention/);
   console.log(
-    'PASS: actual app handlers select voice/speed, show speaking, stop without blocked error, repeat exact text, and report failed playback.',
+    'PASS: language filtering, regional ordering, deduplication, language switching and empty fallback; actual app handlers select voice/speed, show speaking, stop without blocked error, repeat exact text, and report failed playback.',
   );
 })();
