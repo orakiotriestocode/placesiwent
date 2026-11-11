@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy 0.9 Workshops & Construction</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.0</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -48,7 +48,18 @@
 .construction-meter{height:12px;border:2px inset #a88751;background:#1a1711;margin:8px 0}.construction-meter>div{height:100%;background:#caa04d}
 .colony-screen #buildChoice{width:100%;min-height:42px;margin:7px 0}.colony-screen #chooseBuild{min-height:44px;width:100%}
 @media(max-width:700px){.modal:has(.colony-screen){padding:10px;max-height:96dvh}.colony-columns{grid-template-columns:1fr;gap:8px}.colony-summary{grid-template-columns:repeat(2,1fr)}.city-grid{aspect-ratio:1.35}.city-tile>span{font-size:24px}.colony-screen h3{margin-top:12px}}
-.city-grid button.city-tile{font-family:system-ui;box-shadow:none;cursor:pointer;min-height:78px;padding:5px;border:2px ridge #b59b6c;color:#1b2716}.city-grid button.city-tile.water{color:#e9f3f2}.city-grid button.city-tile.occupied{outline:3px solid #f4ce77;outline-offset:-4px}.city-grid button.city-tile:disabled{opacity:.7;cursor:default}.worker-selected{outline:2px solid #f3cf76}.worker-icon{min-height:44px;min-width:42px;padding:3px}.worker-card [data-clear]{font:11px system-ui;margin-top:7px;padding:5px}.worker-card>div:last-child{min-width:0}</style></head><body><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Browser Prototype 0.9 · Workshops & Construction · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
+.city-grid button.city-tile{font-family:system-ui;box-shadow:none;cursor:pointer;min-height:78px;padding:5px;border:2px ridge #b59b6c;color:#1b2716}.city-grid button.city-tile.water{color:#e9f3f2}.city-grid button.city-tile.occupied{outline:3px solid #f4ce77;outline-offset:-4px}.city-grid button.city-tile:disabled{opacity:.7;cursor:default}.worker-selected{outline:2px solid #f3cf76}.worker-icon{min-height:44px;min-width:42px;padding:3px}.worker-card [data-clear]{font:11px system-ui;margin-top:7px;padding:5px}.worker-card>div:last-child{min-width:0}
+/* Alpha 1.0 — tappable indoor workplace assignments and readable forecasts */
+.workplace-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
+.workplace{display:flex;align-items:center;text-align:left;gap:9px;min-width:0;min-height:72px;padding:9px;background:#45311c;border:2px ridge #b58b52;color:#f4e3b9}
+.workplace.ready:hover{background:#654525}.workplace.locked{background:#242019;opacity:.62}
+.workplace-icon{font:27px Georgia;min-width:32px;text-align:center;color:#ffda8e}
+.workplace-detail{display:flex;flex-direction:column;min-width:0;gap:2px;flex:1}
+.workplace-detail b{font:700 13px system-ui;overflow-wrap:anywhere}
+.workplace-detail small{font:11px/1.3 system-ui;color:#dbbf91}
+.workplace-arrow{font-size:14px}.positive{color:#a5e2a5}.negative{color:#f2aaa1}
+@media(max-width:600px){.workplace-grid{grid-template-columns:1fr}.workplace{min-height:62px}}
+</style></head><body><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Alpha 1.0 · Colony Workshops · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
 <script>
 'use strict';
 // All rules and state are local; no network, libraries or installation required.
@@ -136,39 +147,54 @@ function assignStarterFarmer(c){
  let best=null;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const t=terrainAt(c.x+dx,c.y+dy);if(land(t)){const score=yieldFor(t,'farmer');if(!best||score>best.score)best={dx,dy,score}}}
  if(best)p.tile={dx:best.dx,dy:best.dy};
 }
-function processColony(c){
- const delta=stock();let bells=1,hammers=0;
- // Fields produce first, so newly harvested goods can be processed this turn.
- for(const p of c.people){
+function simulateColonyTurn(c){
+ const delta=stock();let bells=1,hammers=0;const activities=[];
+ for(const [i,p] of c.people.entries()){
   if(!FIELDJOB[p.job]||!p.tile)continue;
   const {dx,dy}=p.tile,t=terrainAt(c.x+dx,c.y+dy);
   if(!land(t)||(!dx&&!dy))continue;
   let amount=yieldFor(t,p.job);if(p.expert===p.job)amount=Math.round(amount*1.7);
   delta[FIELDJOB[p.job]]+=amount;
+  activities.push({worker:i+1,job:p.job,product:FIELDJOB[p.job],amount,status:amount?'producing':'no yield'});
  }
- for(const p of c.people){
-  if(FIELDJOB[p.job]||!hasWorkshop(c,p.job))continue;
+ for(const [i,p] of c.people.entries()){
+  if(FIELDJOB[p.job])continue;
+  if(!hasWorkshop(c,p.job)){
+   activities.push({worker:i+1,job:p.job,amount:0,status:'building needed'});
+   continue;
+  }
   if(WORKJOB[p.job]){
-   const product=WORKJOB[p.job], [raw,ratio]=RECIPES[product];
+   const product=WORKJOB[p.job],[raw,ratio]=RECIPES[product];
    const available=Math.max(0,(c.stock[raw]||0)+delta[raw]);
    const batches=Math.min(1,Math.floor(available/ratio));
-   if(batches){delta[raw]-=ratio*batches;delta[product]+=3*batches}
-  }else if(p.job==='statesman'){bells+=c.buildings.includes('printing press')?5:3}
-  else if(p.job==='carpenter'){const available=Math.max(0,c.stock.lumber+delta.lumber),take=Math.min(3,available);delta.lumber-=take;hammers+=take*2}
+   const made=batches*3;
+   if(batches){delta[raw]-=ratio*batches;delta[product]+=made}
+   activities.push({worker:i+1,job:p.job,product,amount:made,status:made?'producing':'needs '+raw});
+  }else if(p.job==='statesman'){
+   const amount=c.buildings.includes('printing press')?5:3;
+   bells+=amount;activities.push({worker:i+1,job:p.job,product:'liberty bells',amount,status:'producing'});
+  }else if(p.job==='carpenter'){
+   const available=Math.max(0,(c.stock.lumber||0)+delta.lumber),take=Math.min(3,available);
+   delta.lumber-=take;hammers+=take*2;
+   activities.push({worker:i+1,job:p.job,product:'hammers',amount:take*2,status:take?'producing':'needs lumber'});
+  }
  }
- for(const key of GOODS)c.stock[key]=Math.max(0,(c.stock[key]||0)+delta[key]);
- c.stock.food=Math.max(0,c.stock.food-c.people.length*2);
- c.bells+=bells;c.hammers+=hammers;
+ return {goods:delta,bells,hammers,foodConsumed:c.people.length*2,activities};
+}
+function processColony(c){
+ const production=simulateColonyTurn(c);
+ for(const key of GOODS)c.stock[key]=Math.max(0,(c.stock[key]||0)+production.goods[key]);
+ c.stock.food=Math.max(0,c.stock.food-production.foodConsumed);
+ c.bells+=production.bells;c.hammers+=production.hammers;
  c.rebel=Math.min(100,Math.floor(c.bells/(c.people.length*10+20)*10));
- c.lastProduction={goods:delta,bells,hammers,foodConsumed:c.people.length*2};
+ c.lastProduction=production;
  if(c.stock.food>=200){c.stock.food-=200;c.people.push({name:'Free Colonist',job:'farmer',expert:''});note(c.name+' has grown to '+c.people.length+' colonists. Assign the newcomer a field.')}
  if(c.building&&BUILDINGS[c.building]){
   const cost=buildCost(c.building);
   if(c.hammers>=cost.h&&c.stock.tools>=cost.t){
    c.hammers-=cost.h;c.stock.tools-=cost.t;
    if(!c.buildings.includes(c.building))c.buildings.push(c.building);
-   note(c.name+' has completed its '+c.building+'.');
-   c.building=null;
+   note(c.name+' has completed its '+c.building+'.');c.building=null;
   }
  }
 }
@@ -181,6 +207,8 @@ let colonyWorkerSelection=0;
 function colonyView(id){
  const c=st.colonies.find(c=>c.id===id)||st.colonies[0];
  if(!c)return dialog('Colonies','<p>No colony has been founded yet. Unload a colonist and establish your first settlement.</p>');
+ const existingColonyScreen=document.querySelector('.colony-screen');
+ const previousScroll=existingColonyScreen&&existingColonyScreen.dataset.colony===String(c.id)?$('shade').querySelector('.modal').scrollTop:0;
  const outdoors=Object.keys(FIELDJOB),selected=Math.max(0,Math.min(colonyWorkerSelection,c.people.length-1));
  colonyWorkerSelection=selected;
  const assigned=(dx,dy)=>c.people.findIndex(p=>p.tile&&p.tile.dx===dx&&p.tile.dy===dy&&FIELDJOB[p.job]);
@@ -200,11 +228,25 @@ function colonyView(id){
  const goods=GOODS.map(k=>'<div class="warehouse-item"><span>'+esc(LABEL[k])+'</span><b>'+(c.stock[k]||0)+'</b></div>').join('');
  const options=Object.keys(BUILDINGS).filter(k=>!c.buildings.includes(k));
  const buildingSelect=options.map(k=>'<option value="'+k+'" '+(c.building===k?'selected':'')+'>'+k.replace(/\b\w/g,m=>m.toUpperCase())+' ('+buildCost(k).h+'h / '+buildCost(k).t+'t)</option>').join('');
- const outputs=stock();let bells=1,hammers=0;const workshopInfo=[];
- for(const p of c.people){if(FIELDJOB[p.job]&&p.tile){const t=terrainAt(c.x+p.tile.dx,c.y+p.tile.dy);if(land(t))outputs[FIELDJOB[p.job]]+=yieldFor(t,p.job)*(p.expert===p.job?1.7:1)}else if(p.job==='statesman'&&hasWorkshop(c,p.job))bells+=c.buildings.includes('printing press')?5:3;else if(p.job==='carpenter'&&hasWorkshop(c,p.job))hammers+=6}
- for(const job of Object.keys(WORKPLACE)){const count=c.people.filter(p=>p.job===job).length;if(count)workshopInfo.push('<div class="smallrow"><span>'+esc(job)+'</span><b>'+(hasWorkshop(c,job)?'Active × '+count:'Build '+esc(WORKPLACE[job]))+'</b></div>')}
- const forecast=GOODS.filter(k=>outputs[k]>0).map(k=>'<div class="smallrow"><span>'+LABEL[k]+'</span><b>+'+Math.round(outputs[k])+'</b></div>').join('');
- dialog('⌂ '+esc(c.name),'<div class="colony-screen"><div class="colony-summary"><div><small>Population</small><b>'+c.people.length+'</b></div><div><small>Food stores</small><b>'+c.stock.food+'</b></div><div><small>Liberty bells</small><b>'+c.bells+'</b></div><div><small>Rebel sentiment</small><b>'+c.rebel+'%</b></div></div><div class="colony-columns"><section><h3>Colony lands</h3><p class="muted">Select a worker below, then tap an unoccupied land tile to assign them. Choose an outdoor occupation first.</p><div class="city-grid">'+fieldGrid+'</div><h3>Colonists & occupations</h3><div class="colwork">'+jobs+'</div></section><section><h3>Warehouse</h3><div class="warehouse-grid">'+goods+'</div><h3>Production per turn</h3>'+forecast+'<div class="smallrow"><span>Food consumption</span><b>−'+c.people.length*2+'</b></div><div class="smallrow"><span>Liberty bells</span><b>+'+bells+'</b></div><div class="smallrow"><span>Carpentry potential</span><b>+'+hammers+'</b></div><p class="muted">Unassigned outdoor workers produce nothing. Food growth occurs at 200 stores.</p><h3>Workshops</h3>'+workshopInfo.join('')+'<p class="muted">Workers require a completed building and enough raw materials to produce goods.</p><h3>Buildings & construction</h3><p>'+c.buildings.map(k=>'<span class="badge">⌂ '+esc(k)+'</span>').join(' ')+'</p><div class="smallrow"><span>Construction progress</span><b>'+c.hammers+'/'+(c.building?buildCost(c.building).h:'—')+' hammers</b></div><div class="construction-meter"><div style="width:'+Math.min(100,c.hammers/(c.building?buildCost(c.building).h:40)*100)+'%"></div></div><p class="muted">Building costs vary. Select a project below to view its requirements.</p><label for="buildChoice">Build next</label><select id="buildChoice"><option value="">None</option>'+buildingSelect+'</select><button id="chooseBuild">Set construction</button></section></div></div>');
+ const forecastTurn=simulateColonyTurn(c);const workshopInfo=[];
+ const workplaceItems=Object.keys(WORKPLACE).map(job=>{
+  const place=WORKPLACE[job],ready=hasWorkshop(c,job),workers=c.people.filter(p=>p.job===job).length;
+  const icons={'distiller':'⚗','tobacconist':'♨','weaver':'▦','fur trader':'♞','blacksmith':'⚒','gunsmith':'⚔','carpenter':'🪚','statesman':'⚜'};
+  const recipe=WORKJOB[job]?RECIPES[WORKJOB[job]]:null;
+  const desc=job==='carpenter'?'Lumber → hammers':job==='statesman'?'Liberty bells':recipe?LABEL[recipe[0]]+' → '+LABEL[WORKJOB[job]]:'';
+  return '<button type="button" class="workplace '+(ready?'ready':'locked')+'" data-workplace="'+esc(job)+'" '+(!ready?'disabled':'')+'><span class="workplace-icon">'+(icons[job]||'⌂')+'</span><span class="workplace-detail"><b>'+esc(place)+'</b><small>'+desc+'</small><small>'+workers+' worker'+(workers===1?'':'s')+(ready?'':' · Not built')+'</small></span><span class="workplace-arrow">'+(ready?'➜':'🔒')+'</span></button>';
+ }).join('');
+ const forecast=GOODS.filter(k=>forecastTurn.goods[k]!==0).map(k=>'<div class="smallrow"><span>'+LABEL[k]+'</span><b class="'+(forecastTurn.goods[k]>0?'positive':'negative')+'">'+(forecastTurn.goods[k]>0?'+':'')+forecastTurn.goods[k]+'</b></div>').join('');
+ const activityRows=forecastTurn.activities.map(a=>'<div class="smallrow"><span>Worker '+a.worker+' · '+esc(a.job)+'</span><b>'+esc(a.status==='producing'?(a.amount+' '+a.product):a.status)+'</b></div>').join('');
+ dialog('⌂ '+esc(c.name),'<div class="colony-screen"><div class="colony-summary"><div><small>Population</small><b>'+c.people.length+'</b></div><div><small>Food stores</small><b>'+c.stock.food+'</b></div><div><small>Liberty bells</small><b>'+c.bells+'</b></div><div><small>Rebel sentiment</small><b>'+c.rebel+'%</b></div></div><div class="colony-columns"><section><h3>Colony lands</h3><p class="muted">Select a worker below, then tap an unoccupied land tile to assign them. Choose an outdoor occupation first.</p><div class="city-grid">'+fieldGrid+'</div><h3>Colonists & occupations</h3><div class="colwork">'+jobs+'</div></section><section><h3>Warehouse</h3><div class="warehouse-grid">'+goods+'</div><h3>Next-turn forecast</h3>'+forecast+'<div class="smallrow"><span>Food consumed</span><b>−'+forecastTurn.foodConsumed+'</b></div><div class="smallrow"><span>Liberty bells</span><b>+'+forecastTurn.bells+'</b></div><div class="smallrow"><span>Hammers</span><b>+'+forecastTurn.hammers+'</b></div><h3>Worker activity</h3>'+activityRows<p class="muted">Unassigned outdoor workers produce nothing. Food growth occurs at 200 stores.</p><h3>Workplaces · Tap to assign</h3><p class="muted">Select a worker, then tap an available building to assign them inside.</p><div class="workplace-grid">'+workplaceItems+'</div>'+'<p class="muted">Workers require a completed building and enough raw materials to produce goods.</p><h3>Buildings & construction</h3><p>'+c.buildings.map(k=>'<span class="badge">⌂ '+esc(k)+'</span>').join(' ')+'</p><div class="smallrow"><span>Construction progress</span><b>'+c.hammers+'/'+(c.building?buildCost(c.building).h:'—')+' hammers</b></div><div class="construction-meter"><div style="width:'+Math.min(100,c.hammers/(c.building?buildCost(c.building).h:40)*100)+'%"></div></div><p class="muted">Building costs vary. Select a project below to view its requirements.</p><label for="buildChoice">Build next</label><select id="buildChoice"><option value="">None</option>'+buildingSelect+'</select><button id="chooseBuild">Set construction</button></section></div></div>');
+ $('shade').querySelector('.modal').scrollTop=previousScroll;
+ document.querySelectorAll('[data-workplace]').forEach(el=>el.onclick=()=>{
+  const job=el.dataset.workplace,p=c.people[colonyWorkerSelection];
+  if(!p||!hasWorkshop(c,job))return;
+  p.job=job;delete p.tile;
+  note(c.name+': worker '+(colonyWorkerSelection+1)+' assigned to '+WORKPLACE[job]+'.');
+  colonyView(c.id);draw();
+ });
  document.querySelectorAll('[data-worker]').forEach(el=>el.onclick=()=>{colonyWorkerSelection=Number(el.dataset.worker);colonyView(c.id)});
  document.querySelectorAll('[data-field]').forEach(el=>el.onclick=()=>{
   const [dx,dy]=el.dataset.field.split(',').map(Number),p=c.people[colonyWorkerSelection];
