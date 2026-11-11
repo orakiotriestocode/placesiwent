@@ -62,5 +62,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Check whether gated publishing is activated
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          publishing_source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.build_type')
+          if [ "$publishing_source" = workflow ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Quality checks passed. Activate gated publishing in Settings > Pages > Source > GitHub Actions."
+          fi
       - uses: actions/deploy-pages@v4
+        if: steps.source.outputs.ready == 'true'
         id: deployment
