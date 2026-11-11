@@ -9,6 +9,10 @@ with zipfile.ZipFile(archive) as z:
     if bad: raise RuntimeError(f'Invalid existing extension archive: {bad}')
     z.extractall(tmp)
 folder = tmp / 'quick-todo-extension'
+if json.loads((folder / 'manifest.json').read_text()).get('version') == '1.3.0':
+    shutil.rmtree(tmp)
+    print('Quick To-Do v1.3 already packaged; no changes')
+    raise SystemExit(0)
 f = folder / 'popup.js'
 s = f.read_text()
 s = s.replace("let lastRevision = '';", "let lastRevision = '';\nlet editingTaskId = null;\nlet savingInFlight = false;")
