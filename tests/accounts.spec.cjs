@@ -388,11 +388,6 @@ test('account dialog has accessible labels and does not send typed keys to the g
   await page.locator('#piw-password').press('ArrowRight');
   await expect(page.locator('#stats')).toContainText('1492');
   const AxeBuilder = require('@axe-core/playwright').default;
-  test.beforeEach(async ({ page }) => {
-    await page.route('https://*.ingest.de.sentry.io/**', (r) =>
-      r.fulfill({ status: 200, body: '{}' }),
-    );
-  });
   const report = await new AxeBuilder({ page })
     .include('#piw-account')
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
