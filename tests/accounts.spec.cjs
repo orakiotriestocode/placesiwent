@@ -332,6 +332,12 @@ test('Riva game score and game-specific settings can be saved and restored', asy
   expect(row.payload.save.settings.faces).toBe(true);
   row.payload.save.score = 17;
   await page
+    .getByRole('button', { name: 'Refresh cloud saves', exact: true })
+    .click();
+  await expect(page.locator('#piw-status')).toContainText(
+    'Cloud records refreshed',
+  );
+  await page
     .getByRole('button', { name: 'Load cloud save', exact: true })
     .click();
   await expect(page.locator('#score')).toHaveText('17');
@@ -377,6 +383,11 @@ test('account dialog has accessible labels and does not send typed keys to the g
   await page.locator('#piw-password').press('ArrowRight');
   await expect(page.locator('#stats')).toContainText('1492');
   const AxeBuilder = require('@axe-core/playwright').default;
+  test.beforeEach(async ({ page }) => {
+    await page.route('https://*.ingest.de.sentry.io/**', (r) =>
+      r.fulfill({ status: 200, body: '{}' }),
+    );
+  });
   const report = await new AxeBuilder({ page })
     .include('#piw-account')
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])

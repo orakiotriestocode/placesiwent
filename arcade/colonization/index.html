@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <script src="/assets/vendor/sentry-browser-11.12.0.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
 <script src="/assets/monitoring.js"></script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.2</title><style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.6</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -80,9 +80,9 @@
 .recruit-head b,.recruit-head small{display:block}.recruit-head small{font-size:12px;color:#c6b38d}
 .recruit-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}.recruit-footer strong{color:#f7d28b}
 @media(max-width:760px){.trade-columns{grid-template-columns:1fr}.trade-summary{grid-template-columns:repeat(2,1fr)}.market-grid{grid-template-columns:1fr}.workplace-icon{min-width:64px}.building-art{width:60px}}
-.native-encounter{font:15px/1.5 system-ui}.native-symbol{float:right;font-size:60px;color:#e3c58e;padding:0 15px}.encounter-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.encounter-actions button{min-height:44px}@media(max-width:600px){.encounter-actions{grid-template-columns:1fr}}</style><link rel="stylesheet" href="/assets/arcade/account.css">
+.native-encounter{font:15px/1.5 system-ui}.native-symbol{float:right;font-size:60px;color:#e3c58e;padding:0 15px}.encounter-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.encounter-actions button{min-height:44px}@media(max-width:600px){.encounter-actions{grid-template-columns:1fr}}.father-summary{display:flex;justify-content:space-between;gap:10px;padding:10px;border:2px ridge #ae8953;background:#251d16}.father-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.father-card{display:flex;flex-direction:column;justify-content:space-between;padding:12px;border:2px ridge #9e7745;background:#312419;min-height:155px}.father-card h3{margin:3px 0;color:#f3d49b}.father-card small{color:#cbb285}.father-card p{font:13px/1.5 system-ui}.father-card>div:last-child{display:flex;justify-content:space-between;align-items:center;gap:8px}.father-card b{color:#eac681}@media(max-width:680px){.father-list{grid-template-columns:1fr}} .independence-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.independence-summary>div{border:2px ridge #957448;padding:12px;background:#2b2117}.independence-summary small,.independence-summary strong{display:block}.independence-summary small{color:#cdb58b}.independence-summary strong{font:700 23px Georgia;color:#f5d38c}.independence-progress{height:15px;background:#3d3024;border:1px solid #b18a4b;margin:10px 0}.independence-progress>div{height:100%;background:#c4a05b}@media(max-width:650px){.independence-summary{grid-template-columns:repeat(2,1fr)}} </style><link rel="stylesheet" href="/assets/arcade/account.css">
 <script src="/assets/arcade/account.js" defer></script>
-</head><body data-arcade-game="colonization"><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Alpha 1.0 · Trade & Recruitment · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="orders">⚒ Unit Orders</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button type="button" data-arcade-account>☁ Optional account &amp; saves</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
+</head><body data-arcade-game="colonization"><header><div><h1>⚜ NEW WORLD</h1><small>Colonial Strategy · Alpha 1.0 · Trade & Recruitment · Inspired by classic 1994 turn-based strategy</small></div><div class="stat" id="stats"></div></header><main><section class="map-section"><div class="mobile-toolbar" aria-label="Mobile game controls"><button type="button" data-quick="next">Next unit</button><button type="button" data-quick="colony">Colony</button><button type="button" data-quick="end">End turn ↵</button></div><div class="mapframe" id="mapframe"><canvas id="map" width="1024" height="640" aria-label="World map"></canvas></div><div class="mobile-nav" aria-label="Map controls"><div class="zoom-controls"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLabel">150%</span><button type="button" id="zoomIn" aria-label="Zoom in">+</button><button type="button" id="centerUnit" aria-label="Center on selected unit">⌖</button></div><div class="dpad" aria-label="Pan map"><button type="button" data-pan="0,-4" aria-label="Pan up">▲</button><button type="button" data-pan="-4,0" aria-label="Pan left">◀</button><button type="button" data-pan="0,4" aria-label="Pan down">▼</button><button type="button" data-pan="4,0" aria-label="Pan right">▶</button></div></div><div class="footer"><div><div id="turnMsg">The voyage begins.</div><div class="help">Tap a revealed tile to inspect its resources. Select a unit, tap an adjacent square to move. Click a ship to embark or unload adjacent colonists. <kbd>Arrows</kbd> move · <kbd>WASD</kbd> pan · <kbd>Enter</kbd> end turn</div></div><canvas class="minimap" id="mini" width="160" height="120" aria-label="Minimap"></canvas></div></section><aside class="panel"><h2 id="selectionTitle">The Expedition</h2><div id="detail"></div><div class="actions"><button id="found">Found Colony</button><button id="fathers">Founding Fathers</button><button id="independence">⚑ Independence</button><button id="orders">⚒ Unit Orders</button><button id="colony">Colony View</button><button id="board">Embark / Unload</button><button id="europe">Europe / Trade</button><button id="next">Next Unit</button><button id="end">End Turn ↵</button><button id="save">Save Game</button><button id="load">Load Game</button><button type="button" data-arcade-account>☁ Optional account &amp; saves</button><button id="sound">♫ Music: Off</button><button id="new">New World</button></div><h2>Chronicle</h2><div class="log" id="log" role="log"></div><p class="tip">Designed as a mechanically evolving recreation. Music and sound here are newly composed/generated, not recordings from the 1994 release.</p></aside></main><div class="modalShade" id="shade"><div class="modal" role="dialog" aria-modal="true"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modalfoot"><button id="close">Return to map</button></div></div></div>
 <script>
 'use strict';
 // All rules and state are local; no network, libraries or installation required.
@@ -112,7 +112,7 @@ function generate(seed){let r=rnd(seed),out=[];for(let y=0;y<H;y++){let row=[];f
 function reveal(x,y,r=3){for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){let t=terrainAt(x+i,y+j);if(t&&i*i+j*j<=r*r)t.seen=true}}
 function create(seed=1492){let map=generate(seed),landing=17;for(let x=0;x<W;x++)if(land(map[18][x])){landing=x;break}
  let sx=landing-1;while(sx>=0&&land(map[18][sx]))sx--;if(sx<0)sx=0;
- st={version:2,seed,map,turn:1,year:1492,season:0,gold:1000,tax:0,nextId:4,units:[{id:1,type:'caravel',x:sx,y:18,moves:4,cargo:{},capacity:2},{id:2,type:'colonist',x:sx,y:18,moves:0,carrier:1,profession:'free colonist'},{id:3,type:'colonist',x:sx,y:18,moves:0,carrier:1,profession:'free colonist'}],colonies:[],logs:[],villages:[],immigration:0,political:0};
+ st={version:2,seed,map,turn:1,year:1492,season:0,gold:1000,tax:0,nextId:4,units:[{id:1,type:'caravel',x:sx,y:18,moves:4,cargo:{},capacity:2},{id:2,type:'colonist',x:sx,y:18,moves:0,carrier:1,profession:'free colonist'},{id:3,type:'colonist',x:sx,y:18,moves:0,carrier:1,profession:'free colonist'}],colonies:[],logs:[],villages:[],immigration:0,political:0,fathers:[],independence:{declared:false,royalThreat:0,turns:0,libertyCampaign:0,victory:false}};
  let r=rnd(seed+17);for(let i=0;i<12;i++){let x=16+Math.floor(r()*(W-18)),y=2+Math.floor(r()*(H-4));if(land(st.map[y][x])&&!st.villages.some(v=>Math.abs(v.x-x)+Math.abs(v.y-y)<6))st.villages.push({x,y,name:['Arawak','Cherokee','Iroquois','Sioux','Tupi','Inca','Aztec','Apache'][i%8],contact:false})}
  reveal(sx,18,5);sel=1;camera={x:Math.max(0,sx-12),y:8};note('1492: Your caravel has arrived off the shores of the New World. Unload a colonist to begin.');draw()}
 function active(){return st.units.filter(u=>!u.carrier&&!u.europe&&!u.atEurope)}
@@ -122,19 +122,69 @@ function chime(f=440,d=.09,wave='square',gain=.018){if(!music||!audio||window.Pi
 function soundtrack(){if(!music)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();audio.resume();const scale=[220,293.66,329.63,392,440,392,329.63,261.63,220,261.63,329.63,293.66,220,196,220,0];let i=0;clearInterval(musicTimer);musicTimer=setInterval(()=>{let f=scale[i++%scale.length];if(f)chime(f,.32,'triangle',.013)},420);$('sound').textContent='♫ Music: On'}catch(e){music=false;$('sound').textContent='♫ Audio unavailable'}}
 function toggleMusic(){music=!music;if(music)soundtrack();else{clearInterval(musicTimer);$('sound').textContent='♫ Music: Off'}}
 function adjacent(a,b){return Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y))===1}
-function move(dx,dy){let u=unit();if(!u)return message('Select a unit first.');if(u.moves<=0)return message('This unit has exhausted its movement points.');if(Math.abs(dx)>1||Math.abs(dy)>1||!dx&&!dy)return;
- let x=u.x+dx,y=u.y+dy,t=terrainAt(x,y);if(!t)return message('You cannot sail beyond the world.');if(u.type==='caravel'?land(t):!land(t))return message(u.type==='caravel'?'A caravel cannot sail over land.':'Colonists must travel over land.');
- if(unitAt(x,y))return message('Another unit is standing there.');u.x=x;u.y=y;u.moves--;st.units.filter(a=>a.carrier===u.id).forEach(a=>{a.x=x;a.y=y});reveal(x,y,u.type==='caravel'?3:u.role==='scout'?5:2);let native=st.villages.find(v=>v.x===x&&v.y===y);if(native&&u.type==='colonist'){note('You have reached a '+native.name+' village.');panTo(x,y);draw();return nativeVillage(native)}else note((u.type==='caravel'?'Caravel':u.role==='scout'?'Scout':u.role==='pioneer'?'Pioneer':'Colonist')+' explores '+t.kind+'.');chime(330,.05);panTo(x,y);draw()}
+function disembarkAt(sh,x,y){
+ if(!sh||sh.type!=='caravel'||sh.europe||sh.atEurope)return message('The ship must be in coastal waters to disembark.');
+ if(Math.max(Math.abs(x-sh.x),Math.abs(y-sh.y))!==1||!land(terrainAt(x,y)))return message('Choose an adjacent land tile for disembarkation.');
+ if(unitAt(x,y))return message('That landing tile is occupied. Choose another shore tile.');
+ const passenger=st.units.find(a=>a.carrier===sh.id&&a.type==='colonist');
+ if(!passenger)return message('No colonists aboard. Select a nearby colonist to embark.');
+ passenger.carrier=null;passenger.x=x;passenger.y=y;passenger.moves=passenger.role==='scout'?2:2;
+ sel=passenger.id;reveal(x,y,passenger.role==='scout'?(hasFather('deSoto')?7:5):3);exploreDiscovery(passenger,x,y);panTo(x,y);
+ note((passenger.profession||'Colonist')+' disembarked onto '+terrainAt(x,y).kind+' at '+x+', '+y+'.');
+ chime(440);draw();
+ const v=st.villages.find(v=>v.x===x&&v.y===y);if(v)nativeVillage(v);
+}
+function move(dx,dy){
+ const u=unit();if(!u)return message('Select a unit first.');
+ if(Math.abs(dx)>1||Math.abs(dy)>1||(!dx&&!dy))return;
+ const x=u.x+dx,y=u.y+dy,t=terrainAt(x,y);
+ if(!t)return message('You cannot travel beyond the world.');
+ // A loaded caravel acts on a land click by unloading its first passenger there.
+ if(u.type==='caravel'&&land(t))return disembarkAt(u,x,y);
+ if(u.type==='caravel'?!land(t):land(t)===false)return message(u.type==='caravel'?'Ships must remain at sea.':'Colonists must travel over land.');
+ if(unitAt(x,y))return message('Another unit is standing there.');
+ const roadMove=u.type==='colonist'&&t.improvement==='road'&&terrainAt(u.x,u.y)?.improvement==='road';
+ const cost=u.type==='caravel'?1:(roadMove?1:2);
+ if(u.moves<cost)return message(roadMove?'No movement points remaining.':'This unit has exhausted its movement points. End the turn to continue.');
+ u.x=x;u.y=y;u.moves-=cost;
+ st.units.filter(a=>a.carrier===u.id).forEach(a=>{a.x=x;a.y=y});
+ reveal(x,y,u.type==='caravel'?3:u.role==='scout'?(hasFather('deSoto')?7:5):2);
+ exploreDiscovery(u,x,y);
+ const native=st.villages.find(v=>v.x===x&&v.y===y);
+ note((u.type==='caravel'?'Caravel':u.role==='scout'?'Scout':u.role==='pioneer'?'Pioneer':'Colonist')+' explores '+t.kind+(roadMove?' along the road':'')+'.');
+ chime(330,.05);panTo(x,y);draw();if(native&&u.type==='colonist')nativeVillage(native);
+}
 // Native villages, scout expeditions, and pioneer improvements.
 function nativeVillage(v){
- v.relations??=0;v.visits??=0;v.contact=true;
- const gifts=v.visits===0?75:Math.max(10,35+v.relations*5);
- dialog('Village of the '+esc(v.name),'<div class="native-encounter"><div class="native-symbol">♜</div><p>You have encountered a settlement of the <b>'+esc(v.name)+'</b>. The elders welcome your expedition cautiously.</p><div class="smallrow"><span>Relations</span><b>'+(v.relations>0?'Friendly':v.relations<0?'Wary':'Neutral')+'</b></div><div class="smallrow"><span>Visits</span><b>'+v.visits+'</b></div><div class="encounter-actions"><button id="nativeGift">Offer gifts (25 gold)</button><button id="nativeTrade">Trade with villagers</button><button id="nativeLearn">Ask about the land</button><button id="nativeLeave">Leave peacefully</button></div><p class="muted">Friendly relations improve trade. Exploration and diplomacy have consequences for future encounters.</p></div>');
- $('nativeGift').disabled=st.gold<25;
- $('nativeGift').onclick=()=>{if(st.gold<25)return;st.gold-=25;v.relations=Math.min(5,v.relations+2);v.visits++;note('Gifts strengthen relations with the '+v.name+'.');nativeVillage(v);draw()};
- $('nativeTrade').onclick=()=>{const earned=Math.max(15,35+v.relations*10);st.gold+=earned;v.visits++;note('Traded local goods with the '+v.name+' for '+earned+' gold.');nativeVillage(v);draw()};
- $('nativeLearn').onclick=()=>{reveal(v.x,v.y,6);v.visits++;note('The '+v.name+' share knowledge of nearby terrain.');closeDialog();draw()};
+ v.relations??=0;v.visits??=0;v.contact=true;v.lastTrade??=0;v.tradeStock??=25;v.tradeGood??=nativeSpecialty(v);v.knowledgeShared??=false;
+ const near=st.colonies.find(c=>Math.max(Math.abs(c.x-v.x),Math.abs(c.y-v.y))<=4);
+ const available=st.turn>v.lastTrade&&v.tradeStock>=5;
+ const price=Math.max(10,5*(4+Math.max(0,v.relations)));
+ const tradeGood=v.tradeGood,atWar=v.relations<=-3;
+ const earned=near&&near.stock[tradeGood]||0;
+ dialog('Village of the '+esc(v.name),'<div class="native-encounter"><div class="native-symbol">♜</div><p>The <b>'+esc(v.name)+'</b> specialize in <b>'+esc(LABEL[tradeGood]||tradeGood)+'</b>. Relations, exchange and exploration can influence your colonial economy.</p><div class="smallrow"><span>Relations</span><b>'+(v.relations>=3?'Allied':v.relations>0?'Friendly':v.relations<0?'Wary':'Neutral')+' ('+v.relations+')</b></div><div class="smallrow"><span>Village stock</span><b>'+v.tradeStock+' '+esc(LABEL[tradeGood]||tradeGood)+'</b></div><div class="smallrow"><span>Nearby colony</span><b>'+(near?esc(near.name):'None within trading distance')+'</b></div><div class="encounter-actions"><button id="nativeGift" '+(st.gold<(hasFather('franklin')?15:25)?'disabled':'')+'>Offer gifts ('+(hasFather('franklin')?15:25)+' gold)</button><button id="nativeTrade" '+(!near||!available||atWar||st.gold<price?'disabled':'')+'>Buy 5 '+esc(LABEL[tradeGood]||tradeGood)+' ('+price+' gold)</button><button id="nativeSell" '+(!near||!available||v.tradeStock<10||atWar||(near.stock.tools||0)<5?'disabled':'')+'>Exchange 5 tools for 10 '+esc(LABEL[tradeGood]||tradeGood)+'</button><button id="nativeLearn" '+(v.knowledgeShared?'disabled':'')+'>Learn about the land</button><button id="nativeLeave">Leave peacefully</button></div><p class="muted">'+(available?'Trade is available this turn.':'Trading resumes after the next turn and stock replenishment.')+' '+(v.knowledgeShared?'This village has already shared its map.':'First-time geographic knowledge may reveal distant territory.')+'</p></div>');
+ $('nativeGift').onclick=()=>{if(st.gold<25)return;st.gold-=(hasFather('franklin')?15:25);v.relations=Math.min(5,v.relations+2);v.visits++;note('Gifts strengthen relations with the '+v.name+'.');nativeVillage(v);draw()};
+ $('nativeTrade').onclick=()=>{if(!near||st.turn<=v.lastTrade||v.tradeStock<5||v.relations<=-3||st.gold<price)return;st.gold-=price;v.tradeStock-=5;v.lastTrade=st.turn;v.visits++;near.stock[tradeGood]=(near.stock[tradeGood]||0)+5;v.relations=Math.min(5,v.relations+1);note('Bought 5 '+tradeGood+' from the '+v.name+' for '+price+' gold; delivered to '+near.name+'.');nativeVillage(v);draw()};
+ $('nativeSell').onclick=()=>{if(!near||st.turn<=v.lastTrade||v.tradeStock<10||(near.stock.tools||0)<5||v.relations<=-3)return;near.stock.tools-=5;near.stock[tradeGood]=(near.stock[tradeGood]||0)+10;v.tradeStock-=10;v.lastTrade=st.turn;v.visits++;v.relations=Math.min(5,v.relations+1);note('Exchanged 5 tools for 10 '+tradeGood+' with the '+v.name+'.');nativeVillage(v);draw()};
+ $('nativeLearn').onclick=()=>{if(v.knowledgeShared)return;v.knowledgeShared=true;v.visits++;v.relations=Math.min(5,v.relations+1);reveal(v.x,v.y,7);const sites=st.villages.filter(other=>other!==v&&!terrainAt(other.x,other.y)?.seen);if(sites.length){const nearest=sites.sort((a,b)=>(a.x-v.x)**2+(a.y-v.y)**2-(b.x-v.x)**2-(b.y-v.y)**2)[0];reveal(nearest.x,nearest.y,2);note('The '+v.name+' share their map and the location of a distant village.')}else note('The '+v.name+' reveal more of the surrounding territory.');closeDialog();draw()};
  $('nativeLeave').onclick=()=>{v.visits++;closeDialog();draw()};
+}
+function nativeSpecialty(v){
+ const goods=['furs','tobacco','cotton','sugar','ore','silver'];
+ const key=(v.x*7+v.y*11+v.name.length)%goods.length;
+ return goods[key];
+}
+function exploreDiscovery(u,x,y){
+ if(u.type!=='colonist'||u.carrier)return;
+ const t=terrainAt(x,y);if(!t||!land(t)||t.discovered)return;
+ // Stable map-generated discoveries, so reloads do not reroll rewards.
+ const chance=noise(x*7+13,y*11+29,st.seed+67);
+ if(chance<.965)return;
+ t.discovered=true;
+ const scout=u.role==='scout';
+ const reward=scout?(hasFather('deSoto')?200:125):75;
+ if(chance>.993){st.gold+=reward+100;note('Ancient ruins! '+(reward+100)+' gold recovered by your '+(scout?'scout':'expedition')+'.');}
+ else {st.gold+=reward;note('A forgotten burial ground yields '+reward+' gold in valuables.');}
 }
 function unitOrders(){
  const u=unit();
@@ -154,10 +204,22 @@ function unitOrders(){
  $('clearForest').onclick=()=>{c.stock.tools-=5;t.kind='plains';u.moves=0;c.stock.lumber=(c.stock.lumber||0)+10;note('Forest cleared; 10 lumber delivered to '+c.name+'.');closeDialog();draw()};
 }
 function message(s){note(s);draw()}
-function loadUnload(){let u=unit(),sh=ship();if(!sh||sh.europe||sh.atEurope)return message('The caravel is away in Europe.');if(u?.type==='caravel'){
- const aboard=st.units.filter(a=>a.carrier===sh.id);if(!aboard.length)return message('No colonists aboard the caravel. Select a nearby colonist to embark.');let opts=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){let x=sh.x+dx,y=sh.y+dy;if(land(terrainAt(x,y))&&!unitAt(x,y))opts.push({x,y})}if(!opts.length)return message('No unoccupied land tile next to the ship.');let z=aboard[0],dest=opts[0];z.carrier=null;z.x=dest.x;z.y=dest.y;z.moves=1;sel=z.id;reveal(z.x,z.y,3);note('A free colonist disembarks onto land.');chime(440);draw();return}
- if(u?.type==='colonist'&&adjacent(u,sh)&&Object.values(st.units.filter(a=>a.carrier===sh.id)).length<sh.capacity){u.carrier=sh.id;u.x=sh.x;u.y=sh.y;u.moves=0;sel=sh.id;note('A colonist boards the caravel.');draw();return}
- message('Select the caravel to unload or an adjacent colonist to embark.');}
+function loadUnload(){
+ const u=unit(),sh=ship();
+ if(!sh||sh.europe||sh.atEurope)return message('The caravel is away in Europe.');
+ if(u?.type==='caravel'){
+  if(!st.units.some(a=>a.carrier===sh.id))return message('No colonists aboard the caravel. Select a nearby colonist to embark.');
+  const sites=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const x=sh.x+dx,y=sh.y+dy;if(land(terrainAt(x,y))&&!unitAt(x,y))sites.push({x,y})}
+  if(!sites.length)return message('No free land tile next to the ship.');
+  // Toolbar unload picks a nearby free tile; clicking the map allows precise placement.
+  return disembarkAt(sh,sites[0].x,sites[0].y);
+ }
+ if(u?.type==='colonist'&&u.id!==sh.id&&adjacent(u,sh)&&st.units.filter(a=>a.carrier===sh.id).length<sh.capacity){
+  u.carrier=sh.id;u.x=sh.x;u.y=sh.y;u.moves=0;sel=sh.id;
+  note('A colonist boards the caravel.');draw();return;
+ }
+ message('Select the caravel and click an adjacent shore tile to unload, or select an adjacent colonist to embark.');
+}
 function found(){let u=unit();if(!u||u.type!=='colonist'||!land(terrainAt(u.x,u.y)))return message('Select a colonist standing on land.');if(colonyAt(u.x,u.y))return message('A colony already exists here.');if(st.colonies.some(c=>Math.max(Math.abs(c.x-u.x),Math.abs(c.y-u.y))<3))return message('Colonies cannot be founded this close to one another.');
  dialog('Found a New Colony',`<p>Choose a name for your new settlement.</p><input id="colonyName" maxlength="28" value="${esc(NAMES[st.colonies.length%NAMES.length])}"><p><button id="confirmFound">Establish Colony</button></p>`);
  $('confirmFound').onclick=()=>{let name=$('colonyName').value.trim()||'New Colony',c={id:st.nextId++,name,x:u.x,y:u.y,people:[{name:u.profession?u.profession.replace(/\b\w/g,m=>m.toUpperCase()):'Free Colonist',job:u.job||'farmer',expert:u.expert||''}],stock:stock(),bells:0,hammers:0,buildings:['town hall','carpenter shop'],building:'lumber mill',rebel:0};c.stock.food=30;c.stock.tools=20;if(c.people[0].job==='farmer')assignStarterFarmer(c);st.colonies.push(c);st.units=st.units.filter(a=>a.id!==u.id);sel=ship()?.id||active()[0]?.id||0;reveal(c.x,c.y,4);note(name+' founded. Assign your people to the fields and workshops.');closeDialog();chime(523,.19,'triangle');draw()}}
@@ -218,11 +280,11 @@ function simulateColonyTurn(c){
    const product=WORKJOB[p.job],[raw,ratio]=RECIPES[product];
    const available=Math.max(0,(c.stock[raw]||0)+delta[raw]);
    const batches=Math.min(1,Math.floor(available/ratio));
-   const made=batches*3;
+   const made=batches*(hasFather('smith')?4:3);
    if(batches){delta[raw]-=ratio*batches;delta[product]+=made}
    activities.push({worker:i+1,job:p.job,product,amount:made,status:made?'producing':'needs '+raw});
   }else if(p.job==='statesman'){
-   const amount=c.buildings.includes('printing press')?5:3;
+   const amount=(c.buildings.includes('printing press')?5:3)+(hasFather('jefferson')?2:0);
    bells+=amount;activities.push({worker:i+1,job:p.job,product:'liberty bells',amount,status:'producing'});
   }else if(p.job==='carpenter'){
    const available=Math.max(0,(c.stock.lumber||0)+delta.lumber),take=Math.min(3,available);
@@ -237,7 +299,7 @@ function processColony(c){
  for(const key of GOODS)c.stock[key]=Math.max(0,(c.stock[key]||0)+production.goods[key]);
  c.stock.food=Math.max(0,c.stock.food-production.foodConsumed);
  c.bells+=production.bells;c.hammers+=production.hammers;
- c.rebel=Math.min(100,Math.floor(c.bells/(c.people.length*10+20)*10));
+ c.rebel=Math.min(100,Math.max(c.rebel||0,Math.floor(c.bells/(c.people.length*10+20)*10)));
  c.lastProduction=production;
  if(c.stock.food>=200){c.stock.food-=200;c.people.push({name:'Free Colonist',job:'farmer',expert:''});note(c.name+' has grown to '+c.people.length+' colonists. Assign the newcomer a field.')}
  if(c.building&&BUILDINGS[c.building]){
@@ -249,10 +311,12 @@ function processColony(c){
   }
  }
 }
-function nextTurn(){st.turn++;st.year+=st.year<1600?1:1;for(let u of st.units){if(u.europe){u.europe--;if(!u.europe){if(u.type==='caravel'){if(u.returning){u.returning=false;u.atEurope=false;note('Your caravel has returned to the New World.')}else{u.atEurope=true;note('Your caravel has arrived at the European docks.')}}else{u.atEurope=false;note('A recruited colonist has reached the New World.')}}u.moves=0}else if(!u.carrier&&!u.atEurope)u.moves=u.type==='caravel'?4:1}
- for(let c of st.colonies)processColony(c);
+function nextTurn(){st.turn++;st.year+=st.year<1600?1:1;for(let u of st.units){if(u.europe){u.europe--;if(!u.europe){if(u.type==='caravel'){if(u.returning){u.returning=false;u.atEurope=false;note('Your caravel has returned to the New World.')}else{u.atEurope=true;note('Your caravel has arrived at the European docks.')}}else{u.atEurope=false;note('A recruited colonist has reached the New World.')}}u.moves=0}else if(!u.carrier&&!u.atEurope)u.moves=u.type==='caravel'?4:2}
+ for(let c of st.colonies){processColony(c);st.political=(st.political||0)+Math.max(1,c.lastProduction?.bells||1)}
+ for(let v of st.villages){v.tradeStock=Math.min(30,(v.tradeStock??25)+2);if(v.contact&&st.turn%12===0&&v.relations>0&&!hasFather('pocahontas'))v.relations--;if(v.contact&&v.relations>=3&&st.turn%8===0){const c=st.colonies.find(c=>Math.max(Math.abs(c.x-v.x),Math.abs(c.y-v.y))<=4);if(c){const good=v.tradeGood||nativeSpecialty(v);c.stock[good]=(c.stock[good]||0)+3;note('The '+v.name+' send 3 '+good+' to '+c.name+' as a gesture of friendship.')}}}
  if(st.turn%9===0){st.tax=Math.min(85,st.tax+1+st.turn%3);note('The Crown has raised your taxes to '+st.tax+'%.')}
- if(st.turn%6===0){st.immigration++;note('A new immigrant has arrived on the docks of Europe. Visit Europe to recruit.')}
+ if(st.turn%(hasFather('penn')?3:6)===0){st.immigration++;note('A new immigrant has arrived on the docks of Europe. Visit Europe to recruit.')}
+ advanceIndependence();
  if(st.logs[0]?.indexOf('The Crown')!==0)note('Year '+st.year+': The colonial administration awaits your orders.');draw()}
 function buildingArtwork(name){
  const styles={
@@ -372,16 +436,19 @@ function dialog(title,html){$('modalTitle').textContent=title;$('modalBody').inn
 function closeDialog(){$('shade').classList.remove('open')}
 function nextUnit(){let a=active(),idx=a.findIndex(u=>u.id===sel),u=a[(idx+1)%a.length];if(u)choose(u.id)}
 function save(){try{localStorage.setItem('newworld-save-v02',JSON.stringify({st,sel,camera}));message('Game saved in this browser.')}catch(e){dialog('Save Failed','<p>Storage is not available in this browser. '+esc(e.message)+'</p>')}}
-function load(){try{let s=JSON.parse(localStorage.getItem('newworld-save-v02'));if(!s||s.st.version!==2)throw Error('No compatible v0.2 save found.');st=s.st;sel=s.sel;camera=s.camera;for(const c of st.colonies){if(!c.buildings.includes('carpenter shop'))c.buildings.push('carpenter shop');if(c.people.length===1&&c.people[0].job==='farmer'&&!c.people[0].tile)assignStarterFarmer(c)}message('Saved game restored.')}catch(e){dialog('Load Game','<p>'+esc(e.message)+'</p>')}}
+function load(){try{let s=JSON.parse(localStorage.getItem('newworld-save-v02'));if(!s||s.st.version!==2)throw Error('No compatible v0.2 save found.');st=s.st;st.fathers??=[];st.political??=0;st.independence??={declared:false,royalThreat:0,turns:0,libertyCampaign:0,victory:false};sel=s.sel;camera=s.camera;for(const c of st.colonies){if(!c.buildings.includes('carpenter shop'))c.buildings.push('carpenter shop');if(c.people.length===1&&c.people[0].job==='farmer'&&!c.people[0].tile)assignStarterFarmer(c)}message('Saved game restored.')}catch(e){dialog('Load Game','<p>'+esc(e.message)+'</p>')}}
 // Programmatic 8-bit-look world rendering; no copyrighted sprites or recordings are packaged.
 function tileGraphics(t,x,y,px,py){let c=TERRAINS[t.kind];g.fillStyle=c;g.fillRect(px,py,S,S);let n=noise(x,y,st.seed),p=(x*19+y*31)%7;g.fillStyle=n>.5?'#ffffff18':'#00000019';g.fillRect(px+p+3,py+4,12,2);g.fillRect(px+21,py+24,5,2);
- if(t.kind==='ocean'||t.kind==='coast'){g.fillStyle='#bad6c040';g.fillRect(px+3+p,py+11,11,2);g.fillRect(px+19,py+25,8,2)}
+ if(t.kind==='ocean'||t.kind==='coast'){g.fillStyle='#bad6c040';g.fillRect(px+3+p,py+11,11,2);g.fillRect(px+19,py+25,8,2);g.fillStyle='#a6d2cc45';g.fillRect(px+5,py+6+(p%3),9,1);if(t.kind==='coast'){g.fillStyle='#d5bb8555';g.fillRect(px+0,py+28,32,4);g.fillRect(px+24,py+25,7,2)}}
  if(t.kind==='forest'){for(let k=0;k<3;k++){let a=px+7+k*9,b=py+11+(k%2)*8;g.fillStyle='#273e27';g.fillRect(a-1,b,3,10);g.fillStyle=k%2?'#285d34':'#326c38';g.beginPath();g.moveTo(a,b-10);g.lineTo(a-7,b+5);g.lineTo(a+7,b+5);g.fill()}}
  if(t.kind==='mountains'||t.kind==='hills'){g.fillStyle=t.kind==='hills'?'#685d42':'#5e6263';g.beginPath();g.moveTo(px+2,py+29);g.lineTo(px+17,py+3);g.lineTo(px+31,py+29);g.fill();g.fillStyle='#dfd6bc';g.beginPath();g.moveTo(px+17,py+3);g.lineTo(px+11,py+15);g.lineTo(px+17,py+12);g.lineTo(px+23,py+15);g.fill()}
+ if(t.kind==='grassland'||t.kind==='prairie'||t.kind==='plains'){g.fillStyle=t.kind==='grassland'?'#476d2a':t.kind==='prairie'?'#817638':'#967d4e';for(let i=0;i<3;i++){let ax=px+5+i*9+(p%3),ay=py+12+(i%2)*9;g.fillRect(ax,ay,2,5);g.fillRect(ax-2,ay+2,5,1)}}
+ if(t.kind==='forest'){g.fillStyle='#1b4828';g.fillRect(px+2,py+28,28,3)}
+ if(t.kind==='swamp'){g.fillStyle='#9cbf7666';g.fillRect(px+5,py+26,22,2);g.fillRect(px+14,py+16,13,1)}
  if(t.improvement==='road'&&land(t)){g.strokeStyle='#d9b88b';g.lineWidth=4;g.beginPath();g.moveTo(px,py+S/2);g.lineTo(px+S,py+S/2);g.stroke();g.lineWidth=1}
  if(t.kind==='swamp'){g.fillStyle='#223f35';for(let i=0;i<4;i++)g.fillRect(px+4+i*6,py+12+(i%2)*7,2,12)}
  if(t.river&&land(t)){g.strokeStyle='#5b9ab2';g.lineWidth=3;g.beginPath();g.moveTo(px+5,py);g.lineTo(px+16,py+16);g.lineTo(px+27,py+32);g.stroke();g.lineWidth=1}
- if(t.bonus){g.fillStyle='#ffe080';g.fillRect(px+26,py+4,3,3)}g.strokeStyle='#090f101e';g.strokeRect(px+.5,py+.5,S-1,S-1)}
+ if(t.discovered){g.fillStyle='#d4b56b';g.fillRect(px+11,py+13,10,8);g.fillStyle='#47371d';g.fillRect(px+14,py+16,4,5)}if(t.bonus){g.fillStyle='#ffe080';g.fillRect(px+26,py+4,3,3)}g.strokeStyle='#090f101e';g.strokeRect(px+.5,py+.5,S-1,S-1)}
 function unitGraphic(u,px,py){g.save();if(u.id===sel){g.strokeStyle='#ffe16b';g.lineWidth=3;g.strokeRect(px+2,py+2,28,28);g.lineWidth=1}if(u.type==='caravel'){
  g.fillStyle='#3b2419';g.fillRect(px+5,py+23,23,4);g.fillRect(px+9,py+27,17,2);g.fillStyle='#d8c5a2';g.beginPath();g.moveTo(px+17,py+4);g.lineTo(px+17,py+22);g.lineTo(px+5,py+20);g.fill();g.fillStyle='#bd885d';g.fillRect(px+17,py+4,2,19);g.fillStyle='#efe2bf';g.beginPath();g.moveTo(px+20,py+8);g.lineTo(px+27,py+21);g.lineTo(px+20,py+21);g.fill();
  }else{if(u.role==='scout'){g.fillStyle='#b59a55';g.fillRect(px+4,py+24,25,5);g.fillStyle='#754c2e';g.fillRect(px+7,py+17,19,8)}if(u.role==='pioneer'){g.fillStyle='#a6b6b7';g.fillRect(px+25,py+5,3,22);g.fillRect(px+22,py+7,9,3)}g.fillStyle='#eed8ac';g.fillRect(px+13,py+7,8,8);g.fillStyle='#432a1a';g.fillRect(px+11,py+5,12,4);g.fillStyle='#304a70';g.fillRect(px+11,py+16,12,11);g.fillStyle='#151c28';g.fillRect(px+11,py+27,4,3);g.fillRect(px+19,py+27,4,3)}if(u.moves===0){g.fillStyle='#b03525';g.fillRect(px+27,py+1,4,4)}g.restore()}
@@ -392,9 +459,63 @@ function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y
  if(hover&&inWorld(hover.x,hover.y)&&terrainAt(hover.x,hover.y).seen){g.strokeStyle='#fff6c9';g.strokeRect((hover.x-camera.x)*S+.5,(hover.y-camera.y)*S+.5,S-1,S-1)}
  mg.fillStyle='#0c1824';mg.fillRect(0,0,160,120);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let t=terrainAt(x,y);if(!t.seen)continue;mg.fillStyle=TERRAINS[t.kind];mg.fillRect(x*160/W,y*120/H,Math.ceil(160/W),Math.ceil(120/H))}for(let c of st.colonies){mg.fillStyle='#ffe2a0';mg.fillRect(c.x*160/W-2,c.y*120/H-2,5,5)}mg.strokeStyle='#fff2c0';mg.strokeRect(camera.x*160/W,camera.y*120/H,32*160/W,20*120/H);
  $('stats').innerHTML=`<span>Year <b>${st.year}</b></span><span>Turn <b>${st.turn}</b></span><span>Gold <b>${st.gold}</b></span><span>Tax <b>${st.tax}%</b></span><span>Colonies <b>${st.colonies.length}</b></span>`;
- let u=unit();$('selectionTitle').textContent=u?(u.type==='caravel'?'⚓ Caravel':u.role==='scout'?'♞ Scout':u.role==='pioneer'?'⚒ Pioneer':'♟ Free Colonist'):'Colonial Administration';$('detail').innerHTML=u?`<div class="smallrow"><span>Coordinates</span><b>${u.x}, ${u.y}</b></div><div class="smallrow"><span>Movement</span><b>${u.moves}/${u.type==='caravel'?4:1}</b></div><div class="smallrow"><span>Terrain</span><b>${terrainAt(u.x,u.y)?.kind||'—'}</b></div>${u.type==='caravel'?`<div class="smallrow"><span>Passengers</span><b>${st.units.filter(a=>a.carrier===u.id).length}/2</b></div><div class="smallrow"><span>Cargo</span><b>${Object.values(u.cargo).reduce((a,b)=>a+b,0)}/200</b></div>${u.europe?'<p>Voyaging to Europe</p>':''}`:'<p class="muted">This colonist can explore, embark or found a settlement.</p>'}`:`<p class="muted">All colonists are in settlements or aboard ships. Open Colony View to manage the economy.</p>`;
+ let u=unit();$('selectionTitle').textContent=u?(u.type==='caravel'?'⚓ Caravel':u.role==='scout'?'♞ Scout':u.role==='pioneer'?'⚒ Pioneer':'♟ Free Colonist'):'Colonial Administration';$('detail').innerHTML=u?`<div class="smallrow"><span>Coordinates</span><b>${u.x}, ${u.y}</b></div><div class="smallrow"><span>Movement</span><b>${u.moves}/${u.type==='caravel'?4:2}</b></div><div class="smallrow"><span>Terrain</span><b>${terrainAt(u.x,u.y)?.kind||'—'}</b></div>${u.type==='caravel'?`<div class="smallrow"><span>Passengers</span><b>${st.units.filter(a=>a.carrier===u.id).length}/2</b></div><div class="smallrow"><span>Cargo</span><b>${Object.values(u.cargo).reduce((a,b)=>a+b,0)}/200</b></div>${u.europe?'<p>Voyaging to Europe</p>':'<p class="muted">Select the ship and click an adjacent land tile to disembark a passenger.</p>'}`:'<p class="muted">Explore, embark or found a settlement. Connected roads allow two moves per turn.</p>'}`:`<p class="muted">All colonists are in settlements or aboard ships. Open Colony View to manage the economy.</p>`;
  $('found').disabled=!u||u.type!=='colonist';$('orders').disabled=!u||u.type!=='colonist'||!!u.carrier;$('board').disabled=!ship()||!!ship().europe;$('log').innerHTML=st.logs.map(s=>'<div>✦ '+esc(s)+'</div>').join('')}
 // Classic-inspired terrain inspection: tap any explored tile for its yields and settlement potential.
+
+const FATHERS=[
+ {id:'franklin',name:'Benjamin Franklin',field:'Politics',cost:70,desc:'Diplomacy improves; native gifts cost 15 gold.',bonus:'diplomacy'},
+ {id:'penn',name:'William Penn',field:'Religion',cost:100,desc:'Immigration arrives twice as often.',bonus:'immigration'},
+ {id:'smith',name:'Adam Smith',field:'Trade',cost:140,desc:'Workshop output increases by one finished good.',bonus:'industry'},
+ {id:'jefferson',name:'Thomas Jefferson',field:'Politics',cost:180,desc:'Statesmen generate two extra liberty bells.',bonus:'liberty'},
+ {id:'deSoto',name:'Hernando de Soto',field:'Exploration',cost:220,desc:'Scouts reveal wider territory and earn more from discoveries.',bonus:'scouting'},
+ {id:'pocahontas',name:'Pocahontas',field:'Diplomacy',cost:260,desc:'Native relations do not decay over time.',bonus:'peace'}
+];
+function hasFather(id){return (st.fathers||[]).includes(id)}
+
+function colonialPopulation(){return st.colonies.reduce((n,c)=>n+c.people.length,0)}
+function rebelSupport(){const population=colonialPopulation();return population?Math.round(st.colonies.reduce((n,c)=>n+c.people.length*(c.rebel||0),0)/population):0}
+function royalPressure(){return Math.min(100,Math.round((st.tax||0)*.65+Math.max(0,(st.independence?.royalThreat||0))))}
+function independenceStatus(){
+ st.independence??={declared:false,royalThreat:0,turns:0,libertyCampaign:0,victory:false};
+ const i=st.independence,support=rebelSupport(),population=colonialPopulation();
+ const eligible=st.colonies.length>=2&&population>=4&&support>=50&&(st.political||0)>=150;
+ const campaignCost=40;
+ const html='<div class="independence-summary"><div><small>Rebel sentiment</small><strong>'+support+'%</strong></div><div><small>Royal tax</small><strong>'+st.tax+'%</strong></div><div><small>Royal pressure</small><strong>'+royalPressure()+'%</strong></div><div><small>Political influence</small><strong>'+(st.political||0)+'</strong></div></div><h3>'+(i.victory?'An Independent Nation':i.declared?'The War for Independence':'The Road to Independence')+'</h3><p>'+(i.victory?'Your colonies have secured their independence from the Crown.':i.declared?'The Crown refuses to recognize your declaration. Maintain support and withstand royal pressure until diplomatic recognition becomes possible.':'Build liberty sentiment, expand your settlements, and gain the political influence required to challenge the Crown.')+'</p><div class="independence-progress"><div style="width:'+support+'%"></div></div><p>Colonies: '+st.colonies.length+' / 2 · Population: '+population+' / 4 · Rebel sentiment: '+support+'% / 50% · Political influence: '+(st.political||0)+' / 150</p><p>Colonial assemblies generate liberty bells. A liberty campaign increases local rebel sentiment but spends political influence.</p><div class="encounter-actions"><button id="libertyCampaign" '+(i.declared||i.victory||(st.political||0)<campaignCost||!st.colonies.length?'disabled':'')+'>Liberty campaign (40 influence)</button><button id="declareIndependence" '+(!eligible||i.declared||i.victory?'disabled':'')+'>Declare Independence</button></div>'+(i.declared&&!i.victory?'<p>Turns since declaration: '+i.turns+' · Royal threat: '+i.royalThreat+' · Required: survive 12 turns, maintain at least 50% rebel support and keep royal pressure below 75%.</p><button id="defendLiberty" '+((st.political||0)<35?'disabled':'')+'>Organize colonial defense (35 influence)</button>':'')+(i.victory?'<p><b>Victory!</b> The Crown has recognized your new nation. You can continue playing and developing your colonies.</p>':'');
+ dialog('Liberty & Independence',html);
+ $('libertyCampaign').onclick=()=>{if((st.political||0)<40||!st.colonies.length||i.declared)return;st.political-=40;i.libertyCampaign++;for(const c of st.colonies)c.rebel=Math.min(100,(c.rebel||0)+12);note('A liberty campaign rallies support across the colonies.');independenceStatus();draw()};
+ $('declareIndependence').onclick=()=>{if(!eligible||i.declared)return;i.declared=true;i.turns=0;i.royalThreat=25;st.political-=150;note('The colonies declare independence! The Crown prepares a response.');independenceStatus();draw()};
+ if(i.declared&&!i.victory)$('defendLiberty').onclick=()=>{if((st.political||0)<35)return;st.political-=35;i.royalThreat=Math.max(0,i.royalThreat-15);note('Colonial defenses reduce the immediate royal threat.');independenceStatus();draw()};
+}
+function advanceIndependence(){
+ const i=st.independence;if(!i?.declared||i.victory)return;
+ i.turns++;i.royalThreat=Math.min(100,i.royalThreat+3+(st.tax>=40?2:0));
+ const support=rebelSupport();
+ if(i.royalThreat>=85){i.royalThreat=65;for(const c of st.colonies){c.stock.tools=Math.max(0,(c.stock.tools||0)-5);c.stock.food=Math.max(0,(c.stock.food||0)-10)}note('Royal raids strike colonial supplies! Organize defenses to reduce the pressure.')}
+ if(i.turns>=12&&support>=50&&royalPressure()<75){i.victory=true;note('Victory! The Crown recognizes the independence of your colonies.')}
+ if(i.turns%3===0&&!i.victory)note('Independence campaign: '+i.turns+' turns. Rebel sentiment '+support+'%, royal pressure '+royalPressure()+'%.');
+}
+function foundingFathers(){
+ st.fathers??=[];st.political??=0;
+ const candidates=FATHERS.filter(f=>!hasFather(f.id));
+ const cards=candidates.map(f=>'<div class="father-card"><div><small>'+f.field+'</small><h3>'+f.name+'</h3><p>'+f.desc+'</p></div><div><b>'+f.cost+' influence</b><button data-father="'+f.id+'" '+(st.political<f.cost?'disabled':'')+'>Invite</button></div></div>').join('');
+ dialog('Founding Fathers','<div class="father-summary"><b>Political influence: '+st.political+'</b><span>Founding Fathers: '+st.fathers.length+' / '+FATHERS.length+'</span></div><p>Liberty bells generate political influence each turn. Invite historical figures to gain permanent advantages.</p><div class="father-list">'+(cards||'<p>Every Founding Father has joined your cause.</p>')+'</div><h3>Members of Congress</h3><p>'+(st.fathers.map(id=>FATHERS.find(f=>f.id===id)?.name).filter(Boolean).join(' · ')||'None yet')+'</p>');
+ document.querySelectorAll('[data-father]').forEach(b=>b.onclick=()=>{const f=FATHERS.find(f=>f.id===b.dataset.father);if(!f||hasFather(f.id)||st.political<f.cost)return;st.political-=f.cost;st.fathers.push(f.id);note(f.name+' joins the Continental Congress. '+f.desc);foundingFathers();draw()});
+}
+function settlementScore(x,y){
+ const t=terrainAt(x,y);if(!t||!land(t))return null;
+ let food=0,industry=0,trade=0,coast=false;
+ for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+  const tile=terrainAt(x+dx,y+dy);if(!tile)continue;
+  if(!land(tile)){coast=true;continue}
+  food=Math.max(food,yieldFor(tile,'farmer'));
+  industry=Math.max(industry,yieldFor(tile,'lumberjack'),yieldFor(tile,'ore miner'));
+  trade=Math.max(trade,yieldFor(tile,'tobacco planter'),yieldFor(tile,'cotton planter'),yieldFor(tile,'sugar planter'),yieldFor(tile,'fur trapper'));
+ }
+ const near=st.colonies.some(c=>Math.max(Math.abs(c.x-x),Math.abs(c.y-y))<3);
+ const score=food*3+industry*2+trade+(coast?4:0);
+ return {score,food,industry,trade,coast,near,grade:score>=29?'Excellent':score>=21?'Promising':score>=14?'Moderate':'Difficult'};
+}
 function inspectTile(x,y){
  const t=terrainAt(x,y);if(!t?.seen)return;
  const village=st.villages.find(v=>v.x===x&&v.y===y);
@@ -402,10 +523,11 @@ function inspectTile(x,y){
  const nearby=st.colonies.some(c=>Math.max(Math.abs(c.x-x),Math.abs(c.y-y))<3);
  const suitability=!land(t)?'Sea tile — suitable for ships, not settlements.':nearby?'Too close to an existing colony.':village?'Native settlement — explore and establish contact.':outputs[0]?.amount>=4?'Promising location for a settlement.':'A possible settlement location; examine nearby resources.';
  const tileName=t.kind.charAt(0).toUpperCase()+t.kind.slice(1);
- dialog('Explore: '+tileName,`<div class="smallrow"><span>Coordinates</span><b>${x}, ${y}</b></div><div class="smallrow"><span>Features</span><b>${[t.river?'River':null,t.bonus?'Resource bonus':null,village?'Native village':null].filter(Boolean).join(' · ')||'None'}</b></div><h3>Potential yields per worker</h3><div class="gridgoods">${outputs.length?outputs.map(a=>`<div class="goods"><b>${a.name}</b><div>${a.amount} per turn</div></div>`).join(''):'<p>No land production.</p>'}</div><h3>Settlement advisor</h3><p>${suitability}</p><p class="muted">Yields are estimates for a free colonist on this tile, before specialization. Tap a unit to select it, or an adjacent square to move.</p>`);
+ const site=settlementScore(x,y);
+ dialog('Explore: '+tileName,`<div class="smallrow"><span>Coordinates</span><b>${x}, ${y}</b></div><div class="smallrow"><span>Features</span><b>${[t.river?'River':null,t.bonus?'Resource bonus':null,t.improvement==='road'?'Road (reduced movement cost)':null,t.discovered?'Explored ruins':null,village?'Native village':null].filter(Boolean).join(' · ')||'None'}</b></div><h3>Potential yields per worker</h3><div class="gridgoods">${outputs.length?outputs.map(a=>`<div class="goods"><b>${a.name}</b><div>${a.amount} per turn</div></div>`).join(''):'<p>No land production.</p>'}</div><h3>Settlement advisor</h3><p>${suitability}</p>${site?`<div class="smallrow"><span>Site rating</span><b>${site.grade} (${site.score})</b></div><div class="smallrow"><span>Food / Industry / Trade</span><b>${site.food} / ${site.industry} / ${site.trade}</b></div><div class="smallrow"><span>Coastal access</span><b>${site.coast?'Yes':'No'}</b></div>`:''}<p class="muted">Yields are estimates for a free colonist on this tile, before specialization. Tap a unit to select it, or an adjacent square to move.</p>`);
 }
 C.addEventListener('mousemove',e=>{let rect=C.getBoundingClientRect(),x=Math.floor((e.clientX-rect.left)*C.width/rect.width/S+camera.x),y=Math.floor((e.clientY-rect.top)*C.height/rect.height/S+camera.y);if(!hover||hover.x!==x||hover.y!==y){hover={x,y};draw()}});
-C.addEventListener('mouseleave',()=>{hover=null;draw()});C.addEventListener('click',e=>{let b=C.getBoundingClientRect(),x=Math.floor((e.clientX-b.left)*C.width/b.width/S+camera.x),y=Math.floor((e.clientY-b.top)*C.height/b.height/S+camera.y),u=unitAt(x,y);if(u)return choose(u.id);let c=colonyAt(x,y);if(c)return colonyView(c.id);let v=st.villages.find(v=>v.x===x&&v.y===y);if(v&&terrainAt(x,y)?.seen)return nativeVillage(v);let a=unit();if(a&&Math.max(Math.abs(x-a.x),Math.abs(y-a.y))===1)return move(x-a.x,y-a.y);if(terrainAt(x,y)?.seen)return inspectTile(x,y)});
+C.addEventListener('mouseleave',()=>{hover=null;draw()});C.addEventListener('click',e=>{let b=C.getBoundingClientRect(),x=Math.floor((e.clientX-b.left)*C.width/b.width/S+camera.x),y=Math.floor((e.clientY-b.top)*C.height/b.height/S+camera.y),u=unitAt(x,y);if(u)return choose(u.id);let a=unit();if(a&&Math.max(Math.abs(x-a.x),Math.abs(y-a.y))===1){if(a.type==='caravel'&&land(terrainAt(x,y)))return disembarkAt(a,x,y);if(!unitAt(x,y)&&!colonyAt(x,y))return move(x-a.x,y-a.y)}let c=colonyAt(x,y);if(c)return colonyView(c.id);let v=st.villages.find(v=>v.x===x&&v.y===y);if(v&&terrainAt(x,y)?.seen)return nativeVillage(v);if(terrainAt(x,y)?.seen)return inspectTile(x,y)});
 mini.addEventListener('click',e=>{let b=mini.getBoundingClientRect(),x=Math.floor((e.clientX-b.left)/b.width*W),y=Math.floor((e.clientY-b.top)/b.height*H);camera.x=Math.max(0,Math.min(W-32,x-16));camera.y=Math.max(0,Math.min(H-20,y-10));draw()});
 window.addEventListener('keydown',e=>{if($('shade').classList.contains('open')){if(e.key==='Escape')closeDialog();return}if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;let k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright','enter','w','a','s','d'].includes(k))e.preventDefault();if(k==='arrowup')move(0,-1);if(k==='arrowdown')move(0,1);if(k==='arrowleft')move(-1,0);if(k==='arrowright')move(1,0);if(k==='enter')nextTurn();if(k==='w')camera.y=Math.max(0,camera.y-2);if(k==='s')camera.y=Math.min(H-20,camera.y+2);if(k==='a')camera.x=Math.max(0,camera.x-2);if(k==='d')camera.x=Math.min(W-32,camera.x+2);draw()});
 // Touch-friendly quick actions and explicit map panning.
@@ -455,5 +577,5 @@ window.PiwGameAdapters.colonization={
  validateSave:(data)=>{if(!data?.st||data.st.version!==2||!Array.isArray(data.st.map)||data.st.map.length!==H||!data.st.map.every(row=>Array.isArray(row)&&row.length===W)||!Array.isArray(data.st.units)||!Array.isArray(data.st.colonies)||!Number.isFinite(data.st.year)||!data.camera||!Number.isFinite(data.camera.x)||!Number.isFinite(data.camera.y))throw Error('This New World save is not compatible with this build.');},
  importSave:(data)=>{localStorage.setItem('newworld-save-v02',JSON.stringify(data));load();}
 };
-$('found').onclick=found;$('colony').onclick=()=>colonyView();$('board').onclick=loadUnload;$('europe').onclick=europe;$('next').onclick=nextUnit;$('end').onclick=nextTurn;$('save').onclick=save;$('load').onclick=load;$('sound').onclick=toggleMusic;$('new').onclick=()=>{if(confirm('Generate a new world? Unsaved progress will be lost.'))create(Math.floor(Math.random()*9999999))};$('close').onclick=closeDialog;$('shade').addEventListener('click',e=>{if(e.target===$('shade'))closeDialog()});create(1492);
+$('fathers').onclick=foundingFathers;$('independence').onclick=independenceStatus;$('found').onclick=found;$('colony').onclick=()=>colonyView();$('board').onclick=loadUnload;$('europe').onclick=europe;$('next').onclick=nextUnit;$('end').onclick=nextTurn;$('save').onclick=save;$('load').onclick=load;$('sound').onclick=toggleMusic;$('new').onclick=()=>{if(confirm('Generate a new world? Unsaved progress will be lost.'))create(Math.floor(Math.random()*9999999))};$('close').onclick=closeDialog;$('shade').addEventListener('click',e=>{if(e.target===$('shade'))closeDialog()});create(1492);
 </script></body></html>

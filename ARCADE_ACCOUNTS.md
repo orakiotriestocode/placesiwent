@@ -37,4 +37,4 @@ The hosted database was verified with rolled-back synthetic users: owner write/u
 - `assets/arcade/account.js` contains shared account UI and orchestration. SDK methods remain in the official client library.
 - Each active game registers a `window.PiwGameAdapters` entry with export/import/validation and its existing local key. Keep historic game versions untouched.
 - `tests/accounts.spec.cjs` exercises guest/offline behavior and uses a mocked Supabase Auth/Data API with the real bundled SDK for login/session and cloud-save flows. These mocks do not prove provider email delivery; the separate real database tests prove ownership policies.
-- The existing gated workflow tests the public site before publishing it. Account/login changes do not grant blog editing or Inspectorate access.
+- Pull requests run functional and accessibility checks; visual and performance reports are informational. Main-branch pushes publish using the existing fast-release workflow. Account/login changes do not grant blog editing or Inspectorate access.
