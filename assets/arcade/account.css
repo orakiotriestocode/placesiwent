@@ -1,0 +1,157 @@
+button[data-arcade-account],
+a[data-arcade-account] {
+  font: 600 14px system-ui;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid #6d9c99;
+  border-radius: 8px;
+  background: #183a42;
+  color: #e9fff4;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 40px;
+}
+.piw-account {
+  color-scheme: dark;
+  background: #10212b;
+  color: #edf6f2;
+  border: 1px solid #648d91;
+  border-radius: 15px;
+  padding: 22px;
+  width: min(620px, calc(100vw - 24px));
+  max-height: 90dvh;
+  overflow: auto;
+  font: 15px/1.5 system-ui;
+  box-shadow: 0 20px 100px #000b;
+}
+.piw-account::backdrop {
+  background: #02090ed9;
+}
+.piw-account * {
+  box-sizing: border-box;
+}
+.piw-account [hidden] {
+  display: none !important;
+}
+.piw-account h2 {
+  font: 700 24px/1.2 system-ui;
+  color: #b3f0d4;
+  margin: 0 0 10px;
+}
+.piw-account h3 {
+  font: 700 18px system-ui;
+  color: #d2f2e4;
+  margin: 20px 0 10px;
+}
+.piw-account p {
+  margin: 9px 0;
+}
+.piw-account .piw-muted {
+  color: #b5ccce;
+  font-size: 13px;
+}
+.piw-account button,
+.piw-account input {
+  font: inherit;
+}
+.piw-account button {
+  border: 1px solid #789e9f;
+  border-radius: 7px;
+  padding: 9px 12px;
+  margin: 3px 0;
+  min-height: 40px;
+  background: #214651;
+  color: #f0fff6;
+  cursor: pointer;
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.piw-account button:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+.piw-account button:hover:not(:disabled) {
+  background: #32606a;
+}
+.piw-account :focus-visible {
+  outline: 3px solid #b0e8b5;
+  outline-offset: 3px;
+}
+.piw-account label {
+  display: block;
+  margin: 12px 0 5px;
+}
+.piw-account input[type='email'],
+.piw-account input[type='password'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #85a4a3;
+  border-radius: 7px;
+  color: #f1fff8;
+  background: #0b1820;
+}
+.piw-account input[type='range'] {
+  width: 100%;
+  accent-color: #8fe4b5;
+}
+.piw-account input[type='checkbox'] {
+  accent-color: #8fe4b5;
+  margin-right: 8px;
+}
+.piw-account .piw-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.piw-account .piw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+.piw-account .piw-header button {
+  flex: none;
+}
+.piw-account .piw-box {
+  padding: 13px;
+  background: #172e38;
+  border: 1px solid #3d6069;
+  border-radius: 9px;
+  margin: 13px 0;
+}
+.piw-account .piw-status {
+  padding: 10px;
+  border-left: 3px solid #9ce3bd;
+  white-space: pre-wrap;
+  min-height: 40px;
+  background: #1b3540;
+  margin-top: 15px;
+}
+.piw-account .piw-status[data-error='true'] {
+  border-color: #ffb0a0;
+  color: #ffdcce;
+}
+.piw-account a {
+  color: #b1edcf;
+  text-decoration: underline;
+}
+.piw-account ul {
+  padding-left: 22px;
+}
+.piw-account footer {
+  display: block;
+  border-top: 1px solid #45616a;
+  padding-top: 12px;
+  margin-top: 18px;
+  color: #b5ccce;
+  font: 13px system-ui;
+}
+@media (prefers-reduced-motion: reduce) {
+  .piw-account * {
+    scroll-behavior: auto !important;
+  }
+}
