@@ -1,4 +1,9 @@
 const { test, expect } = require('@playwright/test');
+test.beforeEach(async ({ page }) => {
+  await page.route('https://*.ingest.de.sentry.io/**', (r) =>
+    r.fulfill({ status: 200, body: '{}' }),
+  );
+});
 const API = 'https://uabgxxbrjympqqwsryqj.supabase.co';
 const FIRST = '10000000-0000-4000-8000-000000000001';
 const SECOND = '10000000-0000-4000-8000-000000000002';
