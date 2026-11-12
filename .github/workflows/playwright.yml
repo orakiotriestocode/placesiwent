@@ -80,7 +80,7 @@ jobs:
           ! head -n 1 _site/index.html | grep -q '^---'
           ! head -n 1 _site/web-apps/index.html | grep -q '^---'
           grep -q 'href="/web-apps/downloads/quick-todo.zip"' _site/web-apps/index.html
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
