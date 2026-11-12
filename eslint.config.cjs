@@ -19,6 +19,7 @@ module.exports = [
       'scripts/**/*.cjs',
       '*.cjs',
       'assets/monitoring.js',
+      'assets/arcade/*.js',
     ],
     ...js.configs.recommended,
     languageOptions: { globals: { ...globals.node, ...globals.browser } },

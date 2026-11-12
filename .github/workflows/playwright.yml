@@ -61,6 +61,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
+      - run: npm ci
       - name: Release Quick To-Do v1.3
         if: ${{ hashFiles('scripts/release-todo-v13.py') != '' }}
         run: |
@@ -70,7 +71,7 @@ jobs:
           git add web-apps/downloads/quick-todo.zip web-apps/index.html
           git diff --cached --quiet || (git commit -m "Release Quick To-Do v1.3 [skip ci]" && git push)
       - name: Package static website
-        run: node scripts/build-static.cjs
+        run: npm run build
       - name: Quick release sanity checks
         run: |
           test -s _site/index.html
