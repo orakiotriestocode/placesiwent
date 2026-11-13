@@ -444,6 +444,11 @@ function tileGraphics(t,x,y,px,py){let c=TERRAINS[t.kind];g.fillStyle=c;g.fillRe
  if(t.kind==='mountains'||t.kind==='hills'){g.fillStyle=t.kind==='hills'?'#685d42':'#5e6263';g.beginPath();g.moveTo(px+2,py+29);g.lineTo(px+17,py+3);g.lineTo(px+31,py+29);g.fill();g.fillStyle='#dfd6bc';g.beginPath();g.moveTo(px+17,py+3);g.lineTo(px+11,py+15);g.lineTo(px+17,py+12);g.lineTo(px+23,py+15);g.fill()}
  if(t.kind==='grassland'||t.kind==='prairie'||t.kind==='plains'){g.fillStyle=t.kind==='grassland'?'#476d2a':t.kind==='prairie'?'#817638':'#967d4e';for(let i=0;i<3;i++){let ax=px+5+i*9+(p%3),ay=py+12+(i%2)*9;g.fillRect(ax,ay,2,5);g.fillRect(ax-2,ay+2,5,1)}}
  if(t.kind==='forest'){g.fillStyle='#1b4828';g.fillRect(px+2,py+28,28,3)}
+ if(t.kind==='grassland'||t.kind==='prairie'){g.fillStyle=t.kind==='grassland'?'#a5b76c':'#c8a66b';for(let i=0;i<4;i++){const bx=px+4+((x*11+y*7+i*13)%24),by=py+7+((x*5+y*3+i*9)%20);g.fillRect(bx,by,1,4);g.fillRect(bx-1,by+2,3,1)}}
+ if(t.kind==='forest'){g.fillStyle='#6c8b4c';g.fillRect(px+9,py+5,2,3);g.fillRect(px+22,py+13,3,2);g.fillStyle='#172f20';g.fillRect(px+6,py+24,7,2)}
+ if(t.kind==='hills'){g.fillStyle='#a29b7c';g.fillRect(px+3,py+24,9,2);g.fillRect(px+21,py+26,8,2)}
+ if(t.kind==='ocean'||t.kind==='coast'){g.fillStyle='#c4dfd488';g.fillRect(px+6+((x+y)%5),py+17,9,1);g.fillRect(px+21,py+8,6,1)}
+
  if(t.kind==='swamp'){g.fillStyle='#9cbf7666';g.fillRect(px+5,py+26,22,2);g.fillRect(px+14,py+16,13,1)}
  if(t.improvement==='road'&&land(t)){g.strokeStyle='#d9b88b';g.lineWidth=4;g.beginPath();g.moveTo(px,py+S/2);g.lineTo(px+S,py+S/2);g.stroke();g.lineWidth=1}
  if(t.kind==='swamp'){g.fillStyle='#223f35';for(let i=0;i<4;i++)g.fillRect(px+4+i*6,py+12+(i%2)*7,2,12)}
@@ -453,8 +458,25 @@ function unitGraphic(u,px,py){g.save();if(u.id===sel){g.strokeStyle='#ffe16b';g.
  g.fillStyle='#3b2419';g.fillRect(px+5,py+23,23,4);g.fillRect(px+9,py+27,17,2);g.fillStyle='#d8c5a2';g.beginPath();g.moveTo(px+17,py+4);g.lineTo(px+17,py+22);g.lineTo(px+5,py+20);g.fill();g.fillStyle='#bd885d';g.fillRect(px+17,py+4,2,19);g.fillStyle='#efe2bf';g.beginPath();g.moveTo(px+20,py+8);g.lineTo(px+27,py+21);g.lineTo(px+20,py+21);g.fill();
  }else{if(u.role==='scout'){g.fillStyle='#b59a55';g.fillRect(px+4,py+24,25,5);g.fillStyle='#754c2e';g.fillRect(px+7,py+17,19,8)}if(u.role==='pioneer'){g.fillStyle='#a6b6b7';g.fillRect(px+25,py+5,3,22);g.fillRect(px+22,py+7,9,3)}g.fillStyle='#eed8ac';g.fillRect(px+13,py+7,8,8);g.fillStyle='#432a1a';g.fillRect(px+11,py+5,12,4);g.fillStyle='#304a70';g.fillRect(px+11,py+16,12,11);g.fillStyle='#151c28';g.fillRect(px+11,py+27,4,3);g.fillRect(px+19,py+27,4,3)}if(u.moves===0){g.fillStyle='#b03525';g.fillRect(px+27,py+1,4,4)}g.restore()}
 function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let px=(x-camera.x)*S,py=(y-camera.y)*S;if(px<-S||px>C.width||py<-S||py>C.height)continue;let t=terrainAt(x,y);if(!t.seen){g.fillStyle='#1b1e1d';g.fillRect(px,py,S,S);g.fillStyle='#292a24';if((x+y)%4===0)g.fillRect(px+3,py+3,2,2);continue}tileGraphics(t,x,y,px,py)}
- for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;let x=(v.x-camera.x)*S,y=(v.y-camera.y)*S;g.fillStyle='#7f5a2d';g.fillRect(x+5,y+16,20,12);g.fillStyle='#e5c58d';g.beginPath();g.moveTo(x+4,y+16);g.lineTo(x+15,y+3);g.lineTo(x+27,y+16);g.fill();g.fillStyle=v.relations>0?'#a4d5a1':'#e5c58d';g.fillRect(x+12,y+20,6,8)}
- for(let c of st.colonies){let x=(c.x-camera.x)*S,y=(c.y-camera.y)*S;g.fillStyle='#f0d7a0';g.fillRect(x+4,y+14,24,14);g.fillStyle='#873923';g.beginPath();g.moveTo(x+2,y+15);g.lineTo(x+16,y+3);g.lineTo(x+29,y+15);g.fill();g.fillStyle='#382514';g.fillRect(x+13,y+19,6,9);g.fillStyle='#fff0c1';g.font='bold 12px Georgia';g.fillText(c.name,x-1,y-5)}
+
+ for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;let x=(v.x-camera.x)*S,y=(v.y-camera.y)*S;
+  g.fillStyle='#2b291b88';g.fillRect(x+3,y+27,27,4);
+  g.fillStyle='#8c6036';g.fillRect(x+5,y+17,22,11);g.fillStyle='#c9a16c';g.fillRect(x+7,y+18,18,8);
+  g.fillStyle='#64442a';g.beginPath();g.moveTo(x+3,y+18);g.lineTo(x+16,y+4);g.lineTo(x+29,y+18);g.fill();
+  g.fillStyle='#e2bc81';g.beginPath();g.moveTo(x+7,y+17);g.lineTo(x+16,y+7);g.lineTo(x+25,y+17);g.fill();
+  g.fillStyle='#4a3322';g.fillRect(x+13,y+21,6,7);
+  g.fillStyle=v.relations>=3?'#8fcb8a':v.relations<0?'#d78b69':'#e3c894';g.fillRect(x+25,y+5,3,12);g.fillRect(x+23,y+5,7,4);
+ }
+ for(let c of st.colonies){let x=(c.x-camera.x)*S,y=(c.y-camera.y)*S;
+  g.fillStyle='#1b1b1699';g.fillRect(x+1,y+28,31,3);
+  g.fillStyle='#b89c72';g.fillRect(x+3,y+14,26,14);g.fillStyle='#e2c69a';g.fillRect(x+5,y+16,22,10);
+  g.fillStyle='#743d29';g.beginPath();g.moveTo(x+2,y+15);g.lineTo(x+16,y+4);g.lineTo(x+30,y+15);g.fill();
+  g.fillStyle='#a85d3a';g.beginPath();g.moveTo(x+6,y+14);g.lineTo(x+16,y+7);g.lineTo(x+26,y+14);g.fill();
+  g.fillStyle='#533722';g.fillRect(x+13,y+19,6,9);g.fillStyle='#6a8f99';g.fillRect(x+7,y+18,4,4);g.fillRect(x+21,y+18,4,4);
+  g.fillStyle='#b7a17a';g.fillRect(x+23,y+4,2,11);g.fillStyle='#f1d18e';g.fillRect(x+25,y+4,6,4);
+  if(c.buildings.includes('fort')){g.fillStyle='#79736a';g.fillRect(x+1,y+21,5,8);g.fillRect(x+26,y+21,5,8);g.fillRect(x+1,y+19,5,3);g.fillRect(x+26,y+19,5,3)}
+  g.font='bold 12px Georgia';g.lineWidth=3;g.strokeStyle='#1b160f';g.strokeText(c.name,x-1,y-5);g.fillStyle='#fff0c1';g.fillText(c.name,x-1,y-5);g.lineWidth=1;
+ }
  for(const a of (st.military?.fieldUnits||[])){if(!terrainAt(a.x,a.y)?.seen)continue;drawFieldSprite(a,(a.x-camera.x)*S,(a.y-camera.y)*S)}
  for(const t of (st.military?.troops||[])){if(!terrainAt(t.x,t.y)?.seen)continue;drawFieldSprite(t,(t.x-camera.x)*S,(t.y-camera.y)*S,true)}
  for(let u of active()){if(u.europe||!terrainAt(u.x,u.y)?.seen)continue;unitGraphic(u,(u.x-camera.x)*S,(u.y-camera.y)*S)}
