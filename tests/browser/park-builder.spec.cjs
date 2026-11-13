@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const game = '/arcade/park-builder/';
-test.beforeEach(async ({page}) => { await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
+test.beforeEach(async ({page}) => { page.on('dialog',dialog=>dialog.accept()); await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await expect(page.locator('header .version')).toContainText('Alpha 0.13');
