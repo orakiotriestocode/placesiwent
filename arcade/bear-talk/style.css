@@ -1077,3 +1077,66 @@ header {
     top: 8px;
   }
 }
+
+.pairing {
+  margin: 20px 0;
+  padding: 24px;
+  background: #223b3f;
+}
+.pairing h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.pairing > p {
+  font-size: 0.85rem;
+  margin: 10px auto 20px;
+  max-width: 480px;
+}
+.pairing-methods {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.pair-qr {
+  width: 210px;
+  max-width: 65vw;
+  background: white;
+  border-radius: 14px;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.pair-qr svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.manual-pair {
+  max-width: 100%;
+}
+.manual-pair strong {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+.manual-pair small {
+  line-height: 1.6;
+}
+.pairing #pair-status {
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  .pairing {
+    padding: 20px 12px;
+  }
+  .pairing-methods {
+    gap: 18px;
+  }
+  .pair-qr {
+    width: 190px;
+  }
+  .manual-pair strong {
+    font-size: 1.4rem;
+  }
+}
