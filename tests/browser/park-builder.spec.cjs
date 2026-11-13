@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.12');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.13');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
@@ -50,9 +50,20 @@ test('land purchase starts from scratch and subtracts the land price',async ({pa
  await page.locator('.landCard').filter({hasText:'Whispering Woods'}).click();
  await page.locator('#buyLand').click();
  await expect(page.locator('#startScreen')).toBeHidden();
- await expect(page.locator('#cash')).toContainText('18,000');
+ await expect(page.locator('#cash')).toContainText('17,300');
  const save=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
  expect(save.landId).toBe('woodland');
  expect(save.tiles.filter(t=>t&&t.type==='carousel')).toHaveLength(0);
  expect(save.tiles.filter(t=>t&&t.type==='burger')).toHaveLength(0);
+});
+
+test('country selection changes land price and persists country',async ({page})=>{
+ await page.locator('#mainMenu').click();
+ await page.locator('.countryPin').filter({hasText:'Japan'}).click();
+ await expect(page.locator('#countryDetails')).toContainText('140% of base');
+ await page.locator('#buyLand').click();
+ await expect(page.locator('#cash')).toContainText('18,700');
+ const data=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
+ expect(data.countryId).toBe('japan');
+ expect(data.countryName).toBe('Japan');
 });
