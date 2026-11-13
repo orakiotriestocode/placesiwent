@@ -7,25 +7,35 @@
       content="width=device-width,initial-scale=1,viewport-fit=cover"
     />
     <meta name="theme-color" content="#182c32" />
-    <meta
-      name="description"
-      content="A little bear, with your words. Connect a bear screen and a remote control for a family conversation."
-    />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.3" />
+    <link rel="stylesheet" href="style.css?v=0.4" />
   </head>
   <body>
     <header>
-      <a href="/tiny-arcade/">✦ TINY ARCADE</a
-      ><span>BEAR & YOU <small>alpha 0.3</small></span>
+      <a href="/tiny-arcade/">✦ TINY ARCADE</a>
+      <div class="header-right">
+        <span>BEAR & YOU <small>alpha 0.4</small></span
+        ><label class="ui-picker"
+          >Interface language<select
+            id="ui-language"
+            aria-label="Interface language"
+          >
+            <option value="en">English</option>
+            <option value="nl">Nederlands</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="es">Español</option>
+          </select></label
+        >
+      </div>
     </header>
     <main>
       <section id="welcome" class="card welcome">
         <p class="eyebrow">A little bear. Your familiar words.</p>
-        <h1>A friend<br />with <em>your voice.</em></h1>
+        <h1>A little moment<br /><em>together.</em></h1>
         <p>
-          Choose a screen for Riva’s bear. Connect another device as the remote
-          control, type a little message, and watch it come to life.
+          Choose the bear screen or the remote control. You bring the words;
+          bear brings the smiles.
         </p>
         <div class="choices">
           <button id="start">🐻 Open the bear screen</button
@@ -33,21 +43,15 @@
             Open the remote control
           </button>
         </div>
-        <p class="fine">
-          No account needed · One parent per session · Voice comes from the bear
-          screen
-        </p>
-        <a class="text-link" href="?demo=1">Try the bear on this device →</a>
+        <a class="demo-link" href="?demo=1">Try everything on one device →</a>
+        <p class="fine">No account needed · Pair with a private code</p>
       </section>
       <section id="join" class="card" hidden>
-        <p class="eyebrow">The grown-up corner</p>
-        <h1>Hello,<br /><em>bear whisperer.</em></h1>
-        <p>
-          Enter the code shown on the bear screen. Keep it between your two
-          screens.
-        </p>
+        <p class="eyebrow">Remote control</p>
+        <h1>Let’s connect.</h1>
+        <p>Enter the code from the bear screen.</p>
         <form id="join-form">
-          <label for="code">Bear screen pairing code</label
+          <label for="code">Pairing code</label
           ><input
             id="code"
             placeholder="ABCDE FG234"
@@ -183,23 +187,23 @@
           <div class="bubble" id="bubble">Hello, little friend ♡</div>
           <p class="scene-label" id="scene-label">A little moment together</p>
         </div>
+
         <div class="tablet-tools">
           <span id="tablet-status" role="status">Getting ready…</span
           ><button id="sound" class="secondary">🔊 Test voice</button
           ><button id="fullscreen" class="secondary">⛶ Full screen</button
           ><button id="end-tablet" class="plain">End session</button>
         </div>
-        <details class="sound-settings" open>
-          <summary>Voice &amp; sound setup</summary>
+        <details class="sound-settings">
+          <summary>Voice & sound setup</summary>
           <p id="voice-health" role="status">
-            Tap Test voice here once before playing.
+            Tap Test voice here before playing
           </p>
           <p class="fine">
-            1. Turn up this device’s media volume and check its audio output.<br />2.
-            Choose a voice and tap Test voice.<br />3. Keep this screen open. If
-            silent, check silent mode or try another voice.
+            Turn up the volume, choose a voice, and tap Test voice. Keep the
+            bear screen open.
           </p>
-          <label for="local-language">Voice language</label
+          <label for="local-language">Bear’s spoken language</label
           ><select id="local-language">
             <option value="nl-BE">Nederlands · België</option>
             <option value="nl-NL">Nederlands · Nederland</option>
@@ -207,13 +211,11 @@
             <option value="en-US">English · US</option>
             <option value="fr-FR">Français</option>
             <option value="de-DE">Deutsch</option>
-            <option value="es-ES">Español</option>
-          </select>
-          <label for="local-voice">Voice on this device</label
+            <option value="es-ES">Español</option></select
+          ><label for="local-voice">Voice on this device</label
           ><select id="local-voice">
-            <option value="">Automatic for the message language</option>
-          </select>
-          <label for="local-rate"
+            <option value="">Automatic · selected language</option></select
+          ><label for="local-rate"
             >Speaking speed · <output id="local-rate-label">0.9×</output></label
           ><input
             id="local-rate"
@@ -225,7 +227,7 @@
           />
           <div class="playback">
             <button id="local-stop" class="secondary">
-              ■ Stop &amp; clear queue</button
+              ■ Stop & clear queue</button
             ><button id="local-repeat" class="secondary" disabled>
               ↻ Repeat last
             </button>
@@ -234,19 +236,13 @@
         </details>
         <div id="pairing" class="pairing">
           <span
-            >On another device, open this page → choose Remote control →
-            enter</span
+            >Open the remote control on another device and enter this
+            code.</span
           ><strong id="pair-code">…</strong
-          ><small
-            >Code works once, for 10 minutes. Session lasts 2 hours.</small
-          >
+          ><small>One use · 10 minutes to pair · 2-hour session</small>
         </div>
-        <div id="demo-controls" class="card" hidden>
-          <label for="demo-text">Try a message</label
-          ><input
-            id="demo-text"
-            value="Hallo Riva! Zullen we samen spelen?"
-          /><select id="demo-lang" aria-label="Demo voice language">
+        <div id="demo-controls" hidden>
+          <input id="demo-text" value="Hallo Riva!" /><select id="demo-lang">
             <option value="nl-BE">Nederlands · België</option>
             <option value="nl-NL">Nederlands · Nederland</option>
             <option value="en-GB">English · UK</option>
@@ -254,7 +250,7 @@
             <option value="fr-FR">Français</option>
             <option value="de-DE">Deutsch</option>
             <option value="es-ES">Español</option></select
-          ><button id="demo-speak">Let bear speak</button>
+          ><button id="demo-speak">Speak</button>
         </div>
       </section>
       <section id="remote" class="card" hidden>
@@ -262,29 +258,96 @@
           <span class="bear-icon">🐻</span>
           <div>
             <p class="eyebrow">Your words, a little magic</p>
-            <h1>The bear’s <em>voice.</em></h1>
+            <h1>Make bear <em>smile.</em></h1>
           </div>
         </div>
-        <p id="remote-status" role="status">Connecting…</p>
-        <p id="remote-voice-health" role="status" class="fine">
-          Waiting for the bear screen’s voice list…
-        </p>
+        <p id="remote-status" role="status" class="connection">Connecting…</p>
+        <form id="message-form">
+          <label for="language">Bear’s spoken language</label
+          ><select id="language">
+            <option value="nl-BE">Nederlands · België</option>
+            <option value="nl-NL">Nederlands · Nederland</option>
+            <option value="en-GB">English · UK</option>
+            <option value="en-US">English · US</option>
+            <option value="fr-FR">Français</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="es-ES">Español</option>
+          </select>
+          <p class="fine language-note">
+            Independent from the interface language. Bear reads your words; it
+            doesn’t translate.
+          </p>
+          <section class="phrase-section">
+            <div class="section-line">
+              <h2>A little inspiration</h2>
+              <span>20 phrases each</span>
+            </div>
+            <div class="quick">
+              <button type="button" data-phrase="hello">☺ Happy</button
+              ><button type="button" data-phrase="love">♡ Love you</button
+              ><button type="button" data-phrase="sleep">☾ Sleepy</button>
+            </div>
+            <p id="phrase-status" class="fine" role="status">
+              Tap again for another sentence. Edit it before sending.
+            </p>
+          </section>
+          <label for="message">What should bear say?</label
+          ><textarea
+            id="message"
+            maxlength="500"
+            rows="3"
+            placeholder="Type a little message…"
+            required
+          ></textarea>
+          <div class="compose-meta">
+            <span id="count">0 / 500</span
+            ><span>Only sent when you tap Speak</span>
+          </div>
+          <details class="voice-details">
+            <summary>Voice settings</summary>
+            <p id="remote-voice-health" role="status" class="fine">
+              Waiting for the bear screen’s voice list…
+            </p>
+            <label for="remote-voice">Voice from the bear screen</label
+            ><select id="remote-voice">
+              <option value="">Automatic · selected language</option></select
+            ><label for="remote-rate"
+              >Speaking speed ·
+              <output id="remote-rate-label">0.9×</output></label
+            ><input
+              id="remote-rate"
+              type="range"
+              min="0.5"
+              max="1.5"
+              step="0.1"
+              value="0.9"
+            />
+          </details>
+          <div class="send-row">
+            <div>
+              <label for="emotion">Expression with message</label
+              ><select id="emotion">
+                <option value="happy">☺ Happy</option>
+                <option value="wave">👋 Waving</option>
+                <option value="love">♡ With love</option>
+                <option value="sleepy">☾ Sleepy</option>
+                <option value="giggle">😄 Giggling</option>
+                <option value="tilt">？Curious</option>
+              </select>
+            </div>
+            <button id="send">Speak to Riva ✦</button>
+          </div>
+        </form>
         <div class="playback">
           <button id="remote-test" class="secondary" hidden>
-            🔊 Test voice
-          </button>
-          <button id="remote-stop" class="secondary">
-            ■ Stop &amp; clear queue</button
+            🔊 Test voice</button
+          ><button id="remote-stop" class="secondary">■ Stop</button
           ><button id="remote-repeat" class="secondary" disabled>
             ↻ Repeat last
           </button>
         </div>
-        <section class="reactions" aria-label="Live reactions">
-          <h2>A little personality</h2>
-          <p class="fine">
-            Tap a reaction—no sentence needed. A new tap replaces the previous
-            reaction.
-          </p>
+        <details class="reactions">
+          <summary>Play a reaction · no words needed</summary>
           <div class="expression-pad">
             <button type="button" data-reaction="happy">☺ Happy</button
             ><button type="button" data-reaction="wave">👋 Wave</button
@@ -295,76 +358,23 @@
             ><button type="button" data-reaction="neutral">↺ Rest</button>
           </div>
           <label class="sound-option"
-            ><input type="checkbox" id="giggle-sound" /> Add a little giggle
+            ><input type="checkbox" id="giggle-sound" />Add a little giggle
             voice when the bear is quiet</label
           >
           <p id="reaction-status" role="status" class="fine">
             Ready for a little reaction
           </p>
-        </section>
-        <form id="message-form">
-          <label for="language">Voice language</label
-          ><select id="language">
-            <option value="nl-BE">Nederlands · België</option>
-            <option value="nl-NL">Nederlands · Nederland</option>
-            <option value="en-GB">English · UK</option>
-            <option value="en-US">English · US</option>
-            <option value="fr-FR">Français</option>
-            <option value="de-DE">Deutsch</option>
-            <option value="es-ES">Español</option>
-          </select>
-          <p class="fine">
-            Type in the chosen language. The bear reads your words exactly; it
-            doesn’t translate.
-          </p>
-          <label for="remote-voice">Voice from the bear screen</label
-          ><select id="remote-voice">
-            <option value="">Use bear screen’s choice</option>
-          </select>
-          <label for="remote-rate"
-            >Speaking speed ·
-            <output id="remote-rate-label">0.9×</output></label
-          ><input
-            id="remote-rate"
-            type="range"
-            min="0.5"
-            max="1.5"
-            step="0.1"
-            value="0.9"
-          />
-          <label for="message">What should the bear say?</label
-          ><textarea
-            id="message"
-            maxlength="500"
-            rows="4"
-            placeholder="Hallo Riva! Ik ben zo blij om jou te zien!"
-            required
-          ></textarea>
-          <div class="compose-meta">
-            <span id="count">0 / 500</span
-            ><span>Only sent when you tap Speak</span>
-          </div>
-          <label for="emotion">A little expression</label
-          ><select id="emotion">
-            <option value="happy">☺ Happy</option>
-            <option value="wave">👋 Waving</option>
-            <option value="love">♡ With love</option>
-            <option value="sleepy">☾ Sleepy</option>
-            <option value="giggle">😄 Giggling</option>
-            <option value="tilt">？Curious</option></select
-          ><button id="send">Speak to Riva ✦</button>
-        </form>
-        <div class="quick">
-          <button type="button" data-phrase="hello">Hello</button
-          ><button type="button" data-phrase="love">Love you</button
-          ><button type="button" data-phrase="sleep">Sleepy time</button>
-        </div>
-        <h2>Recent messages</h2>
-        <ul id="history"></ul>
+        </details>
+        <details class="history-panel">
+          <summary>Recent messages</summary>
+          <ul id="history"></ul>
+        </details>
         <button id="end-remote" class="plain">End this session</button>
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="app.js?v=0.3"></script>
+    <script src="phrases.js?v=0.4"></script>
+    <script src="i18n.js?v=0.4"></script>
+    <script src="app.js?v=0.4"></script>
   </body>
 </html>

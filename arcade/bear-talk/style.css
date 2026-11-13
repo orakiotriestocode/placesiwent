@@ -836,3 +836,244 @@ output {
 .demo-mode #tablet:has(.sound-settings[open]) {
   position: relative;
 }
+
+/* Alpha 0.4: one clear composer, with secondary controls tucked away. */
+header {
+  padding: 18px 24px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.ui-picker {
+  font-size: 0.64rem;
+  letter-spacing: 0.03em;
+  margin: 0;
+  color: #bdcfc5;
+}
+.ui-picker select {
+  width: auto;
+  display: block;
+  padding: 6px 24px 6px 10px;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  border-radius: 9px;
+}
+#remote {
+  max-width: 680px;
+  padding: 30px;
+}
+.remote-head h1 {
+  font-size: 2.7rem;
+}
+.remote-head .eyebrow {
+  margin: 0 0 8px;
+}
+.connection {
+  background: #31534866;
+  border: 1px solid #73978844;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  margin: 20px 0;
+}
+.language-note {
+  font-size: 0.72rem;
+  margin: 7px 0 18px;
+}
+.section-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.section-line h2 {
+  font:
+    600 1.05rem 'DM Sans',
+    sans-serif;
+  margin: 0;
+}
+.section-line > span {
+  font-size: 0.68rem;
+  color: #b6c6bb;
+}
+.phrase-section {
+  background: #334b433d;
+  border: 1px solid #73978844;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 18px 0;
+}
+.phrase-section .quick {
+  margin: 12px 0 0;
+}
+.phrase-section .quick button {
+  background: #3c5850;
+  border: 1px solid #668b7966;
+  font-size: 0.82rem;
+  min-height: 46px;
+}
+.phrase-section .quick button:nth-child(2) {
+  background: #644d4b66;
+  border-color: #a17a6b55;
+}
+.phrase-section .quick button:nth-child(3) {
+  background: #4c4e6d66;
+  border-color: #8584a255;
+}
+.phrase-section p {
+  font-size: 0.7rem;
+  margin: 10px 0 0;
+}
+.voice-details,
+.history-panel,
+.reactions {
+  border: 1px solid #78938844;
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin: 16px 0;
+  background: #1b333644;
+}
+.voice-details summary,
+.history-panel summary,
+.reactions summary {
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #d8dfcc;
+}
+.voice-details[open] summary,
+.reactions[open] summary {
+  margin-bottom: 14px;
+}
+.send-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: end;
+  gap: 12px;
+}
+.send-row label {
+  margin-top: 12px;
+}
+.send-row button {
+  height: 51px;
+}
+.playback {
+  gap: 8px;
+}
+.playback button {
+  min-height: 40px;
+  padding: 9px;
+  font-size: 0.75rem;
+}
+.reactions .expression-pad button {
+  min-height: 42px;
+  font-size: 0.78rem;
+}
+.history-panel #history {
+  margin-bottom: 0;
+}
+.demo-link {
+  display: block;
+  border-top: 1px solid #73978844;
+  margin-top: 24px;
+  padding-top: 20px;
+  color: #eac493;
+  font-weight: 600;
+  text-decoration: none;
+}
+.welcome .fine {
+  font-size: 0.72rem;
+}
+#message {
+  background: #182e32;
+  font-size: 1rem;
+  border-color: #8f9b7e77;
+  min-height: 106px;
+}
+.demo-mode #tablet {
+  border-radius: 20px;
+  box-shadow: 0 12px 24px #10222a55;
+}
+.demo-mode .stage {
+  height: 25dvh;
+  min-height: 220px;
+}
+.demo-mode .bear {
+  width: min(180px, 32vw, 20dvh);
+}
+.demo-mode .tablet-tools .plain {
+  display: none;
+}
+.demo-mode .tablet-tools {
+  padding: 4px 8px;
+}
+.demo-mode .sound-settings {
+  font-size: 0.75rem;
+}
+.demo-mode #remote {
+  max-width: 760px;
+}
+.demo-mode .remote-head {
+  display: none;
+}
+@media (max-width: 600px) {
+  header {
+    padding: 14px 16px;
+  }
+  .header-right {
+    gap: 12px;
+  }
+  .header-right > span {
+    font-size: 0.58rem;
+  }
+  .ui-picker select {
+    max-width: 118px;
+  }
+  .ui-picker {
+    font-size: 0.6rem;
+  }
+  #remote {
+    padding: 20px;
+  }
+  .remote-head h1 {
+    font-size: 2.2rem;
+  }
+  .phrase-section {
+    padding: 13px;
+  }
+  .send-row {
+    grid-template-columns: 1fr;
+  }
+  .send-row button {
+    width: 100%;
+  }
+  .demo-mode .stage {
+    min-height: 190px;
+    height: 24dvh;
+  }
+  .demo-mode .bear {
+    width: min(165px, 34vw, 19dvh);
+  }
+  .demo-mode .tablet-tools #tablet-status {
+    flex-basis: 100%;
+    font-size: 0.68rem;
+  }
+  .demo-mode .tablet-tools {
+    gap: 4px;
+  }
+  .demo-mode .tablet-tools button {
+    min-height: 32px;
+    padding: 6px 10px;
+  }
+  .demo-mode .sound-settings {
+    display: none;
+  }
+  .demo-mode .bubble {
+    font-size: 0.92rem;
+    max-height: 64px;
+    padding: 9px 15px;
+    top: 8px;
+  }
+}

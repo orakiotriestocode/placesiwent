@@ -94,6 +94,7 @@ const ctx = {
   Number,
   crypto: require('node:crypto').webcrypto,
 };
+vm.runInNewContext(fs.readFileSync('arcade/bear-talk/phrases.js', 'utf8'), ctx);
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
 (async () => {
   assert.deepEqual(
@@ -184,7 +185,37 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   current.onend();
   await new Promise(setImmediate);
   assert.equal(el('history').children.length, entries);
+  for (const [lang, bank] of Object.entries(ctx.window.BearPhrases))
+    for (const [category, entries] of Object.entries(bank)) {
+      assert.equal(entries.length, 20);
+      assert.equal(new Set(entries).size, 20);
+    }
+  el('language').value = 'de-DE';
+  el('language').onchange();
+  const cycle = [];
+  for (let i = 0; i < 20; i++) {
+    el('phrase-hello').onclick();
+    cycle.push(el('message').value);
+  }
+  assert.equal(new Set(cycle).size, 20);
+  el('phrase-hello').onclick();
+  assert.equal(el('message').value, cycle[0]);
+  assert.equal(el('emotion').value, 'happy');
+  assert.match(el('phrase-status').textContent, /1 \/ 20/);
+  for (const lang of ['en-GB', 'nl-BE', 'fr-FR', 'de-DE', 'es-ES'])
+    for (const category of ['hello', 'love', 'sleep']) {
+      el('language').value = lang;
+      el('language').onchange();
+      const batch = [];
+      for (let i = 0; i < 20; i++) {
+        el('phrase-' + category).onclick();
+        batch.push(el('message').value);
+      }
+      assert.equal(new Set(batch).size, 20);
+      el('phrase-' + category).onclick();
+      assert.equal(el('message').value, batch[0]);
+    }
   console.log(
-    'PASS: independent reactions do not add speech messages or interrupt active speech; optional idle giggle, all seven expressions, demo controls, voice filtering, stop and repeat.',
+    'PASS: 300 distinct localized phrases, all 15 phrase cycles wrap after 20 entries; independent reactions do not add speech messages or interrupt active speech; optional idle giggle, all seven expressions, demo controls, voice filtering, stop and repeat.',
   );
 })();

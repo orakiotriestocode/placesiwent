@@ -23,6 +23,7 @@
     voiceSignature = '',
     stopping = false;
   let demoMessages = [];
+  let hasSpoken = false;
   let reactionTimer = null,
     lastReaction = null,
     isSpeaking = false;
@@ -274,7 +275,20 @@
     $('bear').classList.remove('talking');
     $('speech-progress').textContent = 'Stopped · Queue cleared';
   }
+  function showGreeting() {
+    if (hasSpoken) return;
+    const greetings = {
+      nl: 'Hallo, kleine vriend ♡',
+      en: 'Hello, little friend ♡',
+      fr: 'Bonjour, petit ami ♡',
+      de: 'Hallo, kleiner Freund ♡',
+      es: 'Hola, pequeño amigo ♡',
+    };
+    $('bubble').textContent =
+      greetings[baseLanguage($('language').value)] || greetings.en;
+  }
   function speak(m, test = false) {
+    hasSpoken = true;
     if (!synth) {
       health(
         'unavailable',
@@ -632,6 +646,12 @@
     updateVoices();
   };
   $('language').onchange = () => {
+    showGreeting();
+    try {
+      localStorage.setItem('bear-spoken-language', $('language').value);
+    } catch {}
+    $('phrase-status').textContent =
+      'Tap again for another sentence. Edit it before sending.';
     fillVoices('remote-voice', remoteVoices, $('language').value);
     if (demo) {
       $('local-language').value = $('language').value;
@@ -657,6 +677,19 @@
       localStorage.setItem('bear-local-voice', $('local-voice').value);
     } catch {}
   };
+  try {
+    const spoken = localStorage.getItem('bear-spoken-language');
+    if (
+      ['nl-BE', 'nl-NL', 'en-GB', 'en-US', 'fr-FR', 'de-DE', 'es-ES'].includes(
+        spoken,
+      )
+    ) {
+      $('language').value = spoken;
+      $('local-language').value = spoken;
+      $('demo-lang').value = spoken;
+    }
+  } catch {}
+  showGreeting();
   updateVoices();
   synth?.addEventListener('voiceschanged', updateVoices);
   $('fullscreen').onclick = async () => {
@@ -684,39 +717,27 @@
   }
   $('end-tablet').onclick = end;
   $('end-remote').onclick = end;
-  const phrases = {
-    nl: [
-      'Hallo Riva! Ik ben beer. Wat fijn om jou te zien!',
-      'Ik vind jou heel lief, Riva!',
-      'Slaap zacht, kleine Riva. Droom maar fijn.',
-    ],
-    en: [
-      'Hello Riva! I am Bear. It is lovely to see you!',
-      'I love you, Riva!',
-      'Sleep well, little Riva. Sweet dreams.',
-    ],
-    fr: [
-      'Bonjour Riva ! Je suis ton petit ours !',
-      'Je t’aime, Riva !',
-      'Bonne nuit, petite Riva. Fais de beaux rêves.',
-    ],
-    de: [
-      'Hallo Riva! Ich bin dein kleiner Bär!',
-      'Ich habe dich lieb, Riva!',
-      'Schlaf gut, kleine Riva.',
-    ],
-    es: [
-      '¡Hola Riva! ¡Soy tu osito!',
-      '¡Te quiero, Riva!',
-      'Duerme bien, pequeña Riva.',
-    ],
-  };
+  const phrases = Object.fromEntries(
+    Object.entries(window.BearPhrases).map(([lang, bank]) => [
+      lang,
+      [bank.hello[0], bank.love[0], bank.sleep[0]],
+    ]),
+  );
+  const phrasePositions = {};
   document.querySelectorAll('[data-phrase]').forEach(
     (btn) =>
       (btn.onclick = () => {
-        const a = phrases[$('language').value.slice(0, 2)] || phrases.en;
-        $('message').value =
-          a[['hello', 'love', 'sleep'].indexOf(btn.dataset.phrase)];
+        const lang = baseLanguage($('language').value),
+          category = btn.dataset.phrase;
+        const bank = window.BearPhrases[lang] || window.BearPhrases.en;
+        const key = lang + ':' + category,
+          index = phrasePositions[key] || 0;
+        $('message').value = bank[category][index];
+        phrasePositions[key] = (index + 1) % bank[category].length;
+        $('emotion').value = { hello: 'happy', love: 'love', sleep: 'sleepy' }[
+          category
+        ];
+        $('phrase-status').textContent = 'Phrase ' + (index + 1) + ' / 20';
         $('message').oninput();
         $('message').focus();
       }),
