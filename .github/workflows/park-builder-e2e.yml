@@ -23,6 +23,15 @@ jobs:
           node-version: '22'
       - run: npm install --no-save @playwright/test
       - run: npx playwright install --with-deps chromium
+      - name: Check inline game JavaScript syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('arcade/park-builder/index.html','utf8');
+          const js=html.slice(html.lastIndexOf('<script>')+8,html.lastIndexOf('</script>'));
+          new Function(js);
+          console.log('Game JavaScript syntax valid');
+          NODE
       - name: Serve site
         run: python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/park-server.log 2>&1 &
       - name: Run browser tests
