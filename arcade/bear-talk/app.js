@@ -27,7 +27,61 @@
   let reactionTimer = null,
     lastReaction = null,
     isSpeaking = false;
-  const demo = new URLSearchParams(location.search).has('demo');
+  const scanned = window.BearPairing.readHash(location.hash || '');
+  if (scanned) {
+    history.replaceState(null, '', location.pathname + location.search);
+    if (scanned.language) window.BearI18n?.setLanguage(scanned.language);
+  }
+  const demo = !scanned && new URLSearchParams(location.search).has('demo');
+  let renderedPairLink = '';
+  function renderPairing() {
+    if (!session?.code) return;
+    $('pair-code').textContent =
+      session.code.slice(0, 5) + ' ' + session.code.slice(5);
+    if (Date.now() >= window.BearPairing.deadline(session)) {
+      $('pair-qr').replaceChildren();
+      $('pair-qr').hidden = true;
+      $('pair-status').textContent =
+        'Pairing code expired. End this session and start a new one.';
+      renderedPairLink = '';
+      return;
+    }
+    try {
+      const url = window.BearPairing.link(
+        session.code,
+        location.href,
+        window.BearI18n?.language || 'en',
+      );
+      if (url === renderedPairLink) return;
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      $('pair-qr').innerHTML = qr.createSvgTag({
+        cellSize: 4,
+        margin: 16,
+        scalable: true,
+      });
+      $('pair-qr').hidden = false;
+      $('pair-status').textContent = '';
+      renderedPairLink = url;
+    } catch {
+      $('pair-qr').hidden = true;
+      $('pair-status').textContent =
+        'QR code unavailable. Use the manual code instead.';
+    }
+  }
+  async function connect(code) {
+    $('connect').disabled = true;
+    try {
+      const s = await api('join', { code });
+      activate(s, 'parent');
+    } catch (e) {
+      notice(e.message);
+    } finally {
+      $('connect').disabled = false;
+    }
+  }
+
   function notice(text = '') {
     $('notice').textContent = text;
   }
@@ -433,6 +487,7 @@
             : 'Remote control paired · Waiting for connection'
           : 'Waiting for the remote control';
         $('pairing').hidden = r.paired;
+        if (!r.paired) renderPairing();
         playReaction(r.reaction);
         for (const m of r.messages) {
           if (!seen.has(m.id)) {
@@ -483,7 +538,10 @@
     seen = new Set();
     save();
     show(r === 'tablet' ? 'tablet' : 'remote');
-    if (r === 'tablet') updateVoices();
+    if (r === 'tablet') {
+      updateVoices();
+      renderPairing();
+    }
     poll();
   }
   $('start').onclick = async () => {
@@ -511,16 +569,7 @@
   $('back').onclick = () => show('welcome');
   $('join-form').onsubmit = async (e) => {
     e.preventDefault();
-    const btn = e.submitter;
-    btn.disabled = true;
-    try {
-      const s = await api('join', { code: $('code').value });
-      activate(s, 'parent');
-    } catch (err) {
-      notice(err.message);
-    } finally {
-      btn.disabled = false;
-    }
+    await connect($('code').value);
   };
   $('message').oninput = () => {
     $('count').textContent = $('message').value.length + ' / 500';
@@ -771,6 +820,13 @@
     updateVoices();
     $('end-tablet').hidden = true;
     $('tablet-status').textContent = 'Single-device demo · No pairing';
+  } else if (scanned) {
+    show('join');
+    $('code').value = scanned.code || '';
+    if (scanned.code) {
+      notice('Connecting to the bear…');
+      connect(scanned.code);
+    } else notice('Invalid QR code. Enter the manual code instead.');
   } else {
     try {
       const saved = JSON.parse(sessionStorage.getItem('bear-talk-session'));

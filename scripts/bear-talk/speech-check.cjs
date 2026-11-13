@@ -94,6 +94,7 @@ const ctx = {
   Number,
   crypto: require('node:crypto').webcrypto,
 };
+vm.runInNewContext(fs.readFileSync('arcade/bear-talk/pairing.js', 'utf8'), ctx);
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/phrases.js', 'utf8'), ctx);
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
 (async () => {

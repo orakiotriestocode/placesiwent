@@ -1,5 +1,53 @@
 (() => {
   const strings = {
+    'Connect another device': {
+      nl: 'Verbind een ander toestel',
+      fr: 'Connecter un autre appareil',
+      de: 'Ein anderes Gerät verbinden',
+      es: 'Conectar otro dispositivo',
+    },
+    'Scan this QR code with the camera, or enter the code manually.': {
+      nl: 'Scan deze QR-code met de camera of voer de code handmatig in.',
+      fr: 'Scannez ce QR code avec la caméra ou saisissez le code manuellement.',
+      de: 'Scanne diesen QR-Code mit der Kamera oder gib den Code manuell ein.',
+      es: 'Escanea este código QR con la cámara o introduce el código manualmente.',
+    },
+    'Or type this code': {
+      nl: 'Of typ deze code',
+      fr: 'Ou saisissez ce code',
+      de: 'Oder gib diesen Code ein',
+      es: 'O introduce este código',
+    },
+    'Scan to connect the remote control': {
+      nl: 'Scan om de afstandsbediening te verbinden',
+      fr: 'Scanner pour connecter la télécommande',
+      de: 'Scannen, um die Fernbedienung zu verbinden',
+      es: 'Escanear para conectar el mando',
+    },
+    'Pairing code expired. End this session and start a new one.': {
+      nl: 'Koppelcode verlopen. Stop deze sessie en start een nieuwe.',
+      fr: 'Code expiré. Terminez cette session et démarrez-en une autre.',
+      de: 'Code abgelaufen. Beende diese Sitzung und starte eine neue.',
+      es: 'Código caducado. Termina esta sesión e inicia otra.',
+    },
+    'QR code unavailable. Use the manual code instead.': {
+      nl: 'QR-code niet beschikbaar. Gebruik de handmatige code.',
+      fr: 'QR code indisponible. Utilisez le code manuel.',
+      de: 'QR-Code nicht verfügbar. Verwende den manuellen Code.',
+      es: 'Código QR no disponible. Usa el código manual.',
+    },
+    'Connecting to the bear…': {
+      nl: 'Verbinden met beer…',
+      fr: 'Connexion à l’ours…',
+      de: 'Verbindung mit dem Bären…',
+      es: 'Conectando con osito…',
+    },
+    'Invalid QR code. Enter the manual code instead.': {
+      nl: 'Ongeldige QR-code. Voer de code handmatig in.',
+      fr: 'QR code invalide. Saisissez le code manuellement.',
+      de: 'Ungültiger QR-Code. Gib den Code manuell ein.',
+      es: 'Código QR inválido. Introduce el código manualmente.',
+    },
     'Interface language': {
       nl: 'Taal van de interface',
       fr: 'Langue de l’interface',

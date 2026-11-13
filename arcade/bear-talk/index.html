@@ -8,13 +8,13 @@
     />
     <meta name="theme-color" content="#182c32" />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.4" />
+    <link rel="stylesheet" href="style.css?v=0.4.1" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & YOU <small>alpha 0.4</small></span
+        <span>BEAR & YOU <small>alpha 0.4.1</small></span
         ><label class="ui-picker"
           >Interface language<select
             id="ui-language"
@@ -60,7 +60,7 @@
             autocapitalize="characters"
             spellcheck="false"
             required
-          /><button>Connect to the bear</button>
+          /><button id="connect">Connect to the bear</button>
         </form>
         <button class="plain" id="back">← Go back</button>
       </section>
@@ -234,13 +234,23 @@
           </div>
           <p id="speech-progress" role="status">Waiting for a message</p>
         </details>
-        <div id="pairing" class="pairing">
-          <span
-            >Open the remote control on another device and enter this
-            code.</span
-          ><strong id="pair-code">…</strong
-          ><small>One use · 10 minutes to pair · 2-hour session</small>
-        </div>
+        <section id="pairing" class="pairing">
+          <h2>Connect another device</h2>
+          <p>Scan this QR code with the camera, or enter the code manually.</p>
+          <div class="pairing-methods">
+            <div
+              id="pair-qr"
+              class="pair-qr"
+              role="img"
+              aria-label="Scan to connect the remote control"
+            ></div>
+            <div class="manual-pair">
+              <span>Or type this code</span><strong id="pair-code">…</strong
+              ><small>One use · 10 minutes to pair · 2-hour session</small>
+            </div>
+          </div>
+          <p id="pair-status" class="fine" role="status"></p>
+        </section>
         <div id="demo-controls" hidden>
           <input id="demo-text" value="Hallo Riva!" /><select id="demo-lang">
             <option value="nl-BE">Nederlands · België</option>
@@ -373,8 +383,10 @@
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="phrases.js?v=0.4"></script>
-    <script src="i18n.js?v=0.4"></script>
-    <script src="app.js?v=0.4"></script>
+    <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
+    <script src="pairing.js?v=0.4.1"></script>
+    <script src="phrases.js?v=0.4.1"></script>
+    <script src="i18n.js?v=0.4.1"></script>
+    <script src="app.js?v=0.4.1"></script>
   </body>
 </html>
