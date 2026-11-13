@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.10');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.11');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
@@ -35,4 +35,12 @@ test('park events appear as the simulation advances',async ({page})=>{
  await expect(page.locator('#eventStatus')).not.toHaveText('All quiet',{timeout:12000});
  await expect(page.locator('#eventHistory')).toContainText('Day 9');
  expect(errors).toEqual([]);
+});
+
+test('park canvas renders after switching effects', async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await expect(page.locator('#world')).toBeVisible();
+ await page.waitForTimeout(300);
+ const painted=await page.locator('#world').evaluate(c=>{const x=c.getContext('2d');return x.getImageData(Math.floor(c.width/2),Math.floor(c.height/2),1,1).data[3]>0});
+ expect(painted).toBeTruthy();expect(errors).toEqual([]);
 });
