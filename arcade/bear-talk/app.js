@@ -23,6 +23,9 @@
     voiceSignature = '',
     stopping = false;
   let demoMessages = [];
+  let reactionTimer = null,
+    lastReaction = null,
+    isSpeaking = false;
   const demo = new URLSearchParams(location.search).has('demo');
   function notice(text = '') {
     $('notice').textContent = text;
@@ -35,6 +38,14 @@
   }
   async function api(action, data = {}) {
     if (demo) {
+      if (action === 'react') {
+        playReaction({
+          ...data,
+          id: crypto.randomUUID(),
+          expires: Date.now() + 12000,
+        });
+        return { ok: true };
+      }
       if (action === 'send') {
         const m = { ...data, id: Date.now() + Math.random(), status: 'queued' };
         demoMessages.unshift(m);
@@ -170,7 +181,84 @@
     } catch {}
     reportVoices();
   }
+  const reactionNames = {
+    happy: 'Happy',
+    wave: 'Waving',
+    love: 'Sending love',
+    giggle: 'Giggling',
+    sleepy: 'Sleepy',
+    tilt: 'Curious',
+    neutral: 'Resting',
+  };
+  function setExpression(emotion = 'happy', duration = 6500) {
+    clearTimeout(reactionTimer);
+    $('bear').className = 'bear ' + emotion + (isSpeaking ? ' talking' : '');
+    $('bear').setAttribute(
+      'aria-label',
+      'A friendly bear · ' + (reactionNames[emotion] || 'Happy'),
+    );
+    $('scene-label').textContent =
+      reactionNames[emotion] || 'A little moment together';
+    if (emotion !== 'neutral')
+      reactionTimer = setTimeout(() => setExpression('neutral', 0), duration);
+  }
+  function playReaction(r) {
+    if (!r || r.id === lastReaction || r.expires < Date.now()) return;
+    lastReaction = r.id;
+    setExpression(r.emotion);
+    $('reaction-status').textContent =
+      reactionNames[r.emotion] + ' · Live reaction';
+    if (r.emotion === 'giggle' && r.sound && !busy && !isSpeaking && !blocked) {
+      const chuckles = {
+        nl: 'Hihi! Hahaha!',
+        en: 'Hee hee! Ha ha!',
+        fr: 'Hi hi ! Ha ha !',
+        de: 'Hihi! Haha!',
+        es: '¡Ji ji! ¡Ja ja!',
+      };
+      busy = true;
+      const epoch = playbackEpoch;
+      speak(
+        {
+          text: chuckles[baseLanguage(r.lang)] || chuckles.en,
+          lang: r.lang,
+          emotion: 'giggle',
+          rate: 1.1,
+        },
+        true,
+      ).finally(() => {
+        if (epoch === playbackEpoch) {
+          busy = false;
+          drain();
+        }
+      });
+    }
+  }
+  document.querySelectorAll('[data-reaction]').forEach(
+    (btn) =>
+      (btn.onclick = async () => {
+        btn.disabled = true;
+        try {
+          await api('react', {
+            emotion: btn.dataset.reaction,
+            lang: $('language').value,
+            sound: $('giggle-sound').checked,
+            requestId: crypto.randomUUID(),
+          });
+          if (!demo)
+            $('reaction-status').textContent =
+              reactionNames[btn.dataset.reaction] +
+              ' sent · Appears in a few seconds';
+        } catch (e) {
+          $('reaction-status').textContent = e.message;
+        } finally {
+          btn.disabled = false;
+        }
+      }),
+  );
   function abortSpeech() {
+    isSpeaking = false;
+    setExpression('neutral', 0);
     if (demo) {
       for (const m of demoMessages)
         if (['queued', 'speaking', 'blocked'].includes(m.status))
@@ -204,6 +292,7 @@
         clearTimeout(watchdog);
         clearTimeout(startWatchdog);
         cancelSpeech = null;
+        isSpeaking = false;
         $('bear').classList.remove('talking');
         if (status === 'blocked') {
           if (!test) blocked = m;
@@ -239,13 +328,14 @@
         ) || voiceFor(m.lang);
       if (voice) utterance.voice = voice;
       $('bubble').textContent = m.text;
-      $('bear').className = 'bear ' + (m.emotion || 'happy');
+      setExpression(m.emotion || 'happy');
       $('speech-progress').textContent = 'Starting voice…';
       if (!test) {
         lastMessage = m;
         $('local-repeat').disabled = false;
       }
       utterance.onstart = () => {
+        isSpeaking = true;
         clearTimeout(startWatchdog);
         $('bear').classList.add('talking');
         $('speech-progress').textContent = 'Speaking…';
@@ -329,6 +419,7 @@
             : 'Remote control paired · Waiting for connection'
           : 'Waiting for the remote control';
         $('pairing').hidden = r.paired;
+        playReaction(r.reaction);
         for (const m of r.messages) {
           if (!seen.has(m.id)) {
             seen.add(m.id);

@@ -12,12 +12,12 @@
       content="A little bear, with your words. Connect a bear screen and a remote control for a family conversation."
     />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.2.2" />
+    <link rel="stylesheet" href="style.css?v=0.3" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a
-      ><span>BEAR & YOU <small>alpha 0.2.2</small></span>
+      ><span>BEAR & YOU <small>alpha 0.3</small></span>
     </header>
     <main>
       <section id="welcome" class="card welcome">
@@ -149,6 +149,7 @@
                   fill="#49332b"
                 />
                 <path
+                  class="smile"
                   d="M210 216v9m-23 0q23 29 46 0"
                   fill="none"
                   stroke="#65412f"
@@ -162,6 +163,14 @@
                   rx="15"
                   ry="12"
                   fill="#63382f"
+                />
+                <ellipse
+                  class="tongue"
+                  cx="210"
+                  cy="243"
+                  rx="8"
+                  ry="4"
+                  fill="#d89389"
                 />
                 <path
                   d="M173 278l37 16-37 17zM247 278l-37 16 37 17z"
@@ -270,6 +279,29 @@
             ↻ Repeat last
           </button>
         </div>
+        <section class="reactions" aria-label="Live reactions">
+          <h2>A little personality</h2>
+          <p class="fine">
+            Tap a reaction—no sentence needed. A new tap replaces the previous
+            reaction.
+          </p>
+          <div class="expression-pad">
+            <button type="button" data-reaction="happy">☺ Happy</button
+            ><button type="button" data-reaction="wave">👋 Wave</button
+            ><button type="button" data-reaction="love">♡ Love</button
+            ><button type="button" data-reaction="giggle">😄 Giggle</button
+            ><button type="button" data-reaction="sleepy">☾ Sleepy</button
+            ><button type="button" data-reaction="tilt">？Curious</button
+            ><button type="button" data-reaction="neutral">↺ Rest</button>
+          </div>
+          <label class="sound-option"
+            ><input type="checkbox" id="giggle-sound" /> Add a little giggle
+            voice when the bear is quiet</label
+          >
+          <p id="reaction-status" role="status" class="fine">
+            Ready for a little reaction
+          </p>
+        </section>
         <form id="message-form">
           <label for="language">Voice language</label
           ><select id="language">
@@ -317,7 +349,9 @@
             <option value="happy">☺ Happy</option>
             <option value="wave">👋 Waving</option>
             <option value="love">♡ With love</option>
-            <option value="sleepy">☾ Sleepy</option></select
+            <option value="sleepy">☾ Sleepy</option>
+            <option value="giggle">😄 Giggling</option>
+            <option value="tilt">？Curious</option></select
           ><button id="send">Speak to Riva ✦</button>
         </form>
         <div class="quick">
@@ -331,6 +365,6 @@
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
-    <script src="app.js?v=0.2.2"></script>
+    <script src="app.js?v=0.3"></script>
   </body>
 </html>
