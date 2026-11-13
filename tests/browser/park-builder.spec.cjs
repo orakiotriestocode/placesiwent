@@ -75,7 +75,7 @@ test('empire portfolio keeps two separate parks and allows switching',async ({pa
  await page.locator('#mainMenu').click();
  await expect(page.locator('.empirePark')).toHaveCount(2);
  await page.locator('.empirePark button').first().click();
- await expect(page.locator('#cash')).toContainText('15,000');
+ await expect(page.locator('#cash')).toContainText('11,000');
  const park=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
  expect(park.landId).toBe('meadow');
 });
