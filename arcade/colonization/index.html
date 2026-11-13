@@ -461,7 +461,7 @@ function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y
  if(hover&&inWorld(hover.x,hover.y)&&terrainAt(hover.x,hover.y).seen){g.strokeStyle='#fff6c9';g.strokeRect((hover.x-camera.x)*S+.5,(hover.y-camera.y)*S+.5,S-1,S-1)}
  mg.fillStyle='#0c1824';mg.fillRect(0,0,160,120);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let t=terrainAt(x,y);if(!t.seen)continue;mg.fillStyle=TERRAINS[t.kind];mg.fillRect(x*160/W,y*120/H,Math.ceil(160/W),Math.ceil(120/H))}for(let c of st.colonies){mg.fillStyle='#ffe2a0';mg.fillRect(c.x*160/W-2,c.y*120/H-2,5,5)}mg.strokeStyle='#fff2c0';mg.strokeRect(camera.x*160/W,camera.y*120/H,32*160/W,20*120/H);
  $('stats').innerHTML=`<span>Year <b>${st.year}</b></span><span>Turn <b>${st.turn}</b></span><span>Gold <b>${st.gold}</b></span><span>Tax <b>${st.tax}%</b></span><span>Colonies <b>${st.colonies.length}</b></span>`;
- let u=unit();$('selectionTitle').textContent=u?(u.type==='caravel'?'⚓ Caravel':u.role==='scout'?'♞ Scout':u.role==='pioneer'?'⚒ Pioneer':'♟ Free Colonist'):'Colonial Administration';$('detail').innerHTML=u?`<div class="smallrow"><span>Coordinates</span><b>${u.x}, ${u.y}</b></div><div class="smallrow"><span>Movement</span><b>${u.moves}/${u.type==='caravel'?4:2}</b></div><div class="smallrow"><span>Terrain</span><b>${terrainAt(u.x,u.y)?.kind||'—'}</b></div>${u.type==='caravel'?`<div class="smallrow"><span>Passengers</span><b>${st.units.filter(a=>a.carrier===u.id).length}/2</b></div><div class="smallrow"><span>Cargo</span><b>${Object.values(u.cargo).reduce((a,b)=>a+b,0)}/200</b></div>${u.europe?'<p>Voyaging to Europe</p>':'<p class="muted">Select the ship and click an adjacent land tile to disembark a passenger.</p>'}`:'<p class="muted">Explore, embark or found a settlement. Connected roads allow two moves per turn.</p>'}`:`<p class="muted">All colonists are in settlements or aboard ships. Open Colony View to manage the economy.</p>`;
+ let u=unit();const selectedMilitia=sel<0?fieldArmy().find(a=>a.id===-sel):null;$('selectionTitle').textContent=selectedMilitia?'⚔ Field Militia':u?(u.type==='caravel'?'⚓ Caravel':u.role==='scout'?'♞ Scout':u.role==='pioneer'?'⚒ Pioneer':'♟ Free Colonist') :'Colonial Administration';$('detail').innerHTML=selectedMilitia?'<div class="smallrow"><span>Strength</span><b>'+selectedMilitia.strength+'</b></div><div class="smallrow"><span>Movement</span><b>'+selectedMilitia.moves+'/2</b></div><p class="muted">Click adjacent terrain to move or a royal regiment to attack.</p>':u?`<div class="smallrow"><span>Coordinates</span><b>${u.x}, ${u.y}</b></div><div class="smallrow"><span>Movement</span><b>${u.moves}/${u.type==='caravel'?4:2}</b></div><div class="smallrow"><span>Terrain</span><b>${terrainAt(u.x,u.y)?.kind||'—'}</b></div>${u.type==='caravel'?`<div class="smallrow"><span>Passengers</span><b>${st.units.filter(a=>a.carrier===u.id).length}/2</b></div><div class="smallrow"><span>Cargo</span><b>${Object.values(u.cargo).reduce((a,b)=>a+b,0)}/200</b></div>${u.europe?'<p>Voyaging to Europe</p>':'<p class="muted">Select the ship and click an adjacent land tile to disembark a passenger.</p>'}`:'<p class="muted">Explore, embark or found a settlement. Connected roads allow two moves per turn.</p>'}`:`<p class="muted">All colonists are in settlements or aboard ships. Open Colony View to manage the economy.</p>`;
  $('found').disabled=!u||u.type!=='colonist';$('orders').disabled=!u||u.type!=='colonist'||!!u.carrier;$('board').disabled=!ship()||!!ship().europe;$('log').innerHTML=st.logs.map(s=>'<div>✦ '+esc(s)+'</div>').join('')}
 // Classic-inspired terrain inspection: tap any explored tile for its yields and settlement potential.
 
@@ -519,7 +519,7 @@ function fieldAttack(a,enemy){
  const attack=fieldStrength(a)+((st.turn+a.id)%3),defense=enemy.strength+({forest:2,hills:3,mountains:4,swamp:2}[terrainAt(enemy.x,enemy.y)?.kind]||0);
  a.moves=0;
  if(attack>=defense){militaryState().troops=militaryState().troops.filter(t=>t.id!==enemy.id);a.strength=Math.min(8,a.strength+1);st.independence.royalThreat=Math.max(0,st.independence.royalThreat-8);note('Militia defeat a royal regiment ('+attack+' vs '+defense+').')}
- else {fieldArmy().splice(fieldArmy().indexOf(a),1);note('Militia are defeated in battle ('+attack+' vs '+defense+').')}
+ else {fieldArmy().splice(fieldArmy().indexOf(a),1);sel=st.units.find(u=>u.type==='caravel')?.id||0;note('Militia are defeated in battle ('+attack+' vs '+defense+').')}
  draw();
 }
 function fieldOrders(a){
@@ -531,7 +531,7 @@ function fieldOrders(a){
 function moveField(a,x,y){
  if(Math.max(Math.abs(x-a.x),Math.abs(y-a.y))!==1)return;
  const enemy=militaryState().troops.find(t=>t.x===x&&t.y===y);if(enemy)return fieldAttack(a,enemy);
- if(!land(terrainAt(x,y))||unitAt(x,y)||fieldUnitAt(x,y))return message('The militia cannot move onto this tile.');
+ if(!land(terrainAt(x,y))||unitAt(x,y)||fieldUnitAt(x,y)||militaryState().troops.some(t=>t.x===x&&t.y===y))return message('The militia cannot move onto this tile.');
  if(a.moves<2)return message('Militia have no movement points left.');
  a.x=x;a.y=y;a.moves-=2;reveal(x,y,2);note('Militia march to '+x+', '+y+'.');draw();
 }
@@ -574,7 +574,7 @@ function advanceMilitary(){
   }
   const dx=Math.sign(target.x-troop.x),dy=Math.sign(target.y-troop.y);
   const options=[[dx,dy],[dx,0],[0,dy],[-dx,dy],[dx,-dy]].filter(([x,y])=>x||y);
-  const next=options.map(([x,y])=>({x:troop.x+x,y:troop.y+y})).find(p=>land(terrainAt(p.x,p.y))&&!m.troops.some(t=>t!==troop&&t.x===p.x&&t.y===p.y));
+  const next=options.map(([x,y])=>({x:troop.x+x,y:troop.y+y})).find(p=>land(terrainAt(p.x,p.y))&&!m.troops.some(t=>t!==troop&&t.x===p.x&&t.y===p.y)&&!fieldArmy().some(a=>a.x===p.x&&a.y===p.y));
   if(next){troop.x=next.x;troop.y=next.y;reveal(troop.x,troop.y,1)}
  }
 }
