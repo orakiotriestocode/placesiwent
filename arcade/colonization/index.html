@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <script src="/assets/vendor/sentry-browser-11.12.0.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
 <script src="/assets/monitoring.js"></script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 2.0</title><style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 2.1</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -342,6 +342,26 @@ function buildingArtwork(name){
  return '<svg class="building-art" viewBox="0 0 72 58" aria-hidden="true" shape-rendering="crispEdges"><rect x="5" y="51" width="63" height="5" fill="#443e2e"/><rect x="10" y="25" width="52" height="27" fill="'+wall+'"/><rect x="13" y="28" width="46" height="21" fill="#ffffff18"/><path d="M5 26L20 11H52L67 26Z" fill="'+roof+'"/><path d="M13 23L22 14H50L59 23Z" fill="#ffffff24"/><rect x="29" y="36" width="14" height="16" fill="'+roof+'"/><rect x="15" y="33" width="9" height="10" fill="#f1d69b"/><rect x="48" y="33" width="9" height="10" fill="#f1d69b"/><path d="M19 33V43M52 33V43" stroke="#6c5134" stroke-width="2"/>'+tower+accent+'<rect x="4" y="53" width="64" height="2" fill="#c1a579"/><text x="36" y="27" font-size="12" text-anchor="middle" fill="#f6dba0">'+symbol+'</text></svg>';
 }
 let colonyWorkerSelection=0;
+
+let visualFrame=0,visualLast=0;
+function visualLoop(ts){if(ts-visualLast>480){visualLast=ts;visualFrame=(visualFrame+1)%12;if(st?.map&&document.visibilityState==='visible')draw()}requestAnimationFrame(visualLoop)}
+requestAnimationFrame(visualLoop);
+function villageArtwork(v,px,py){
+ g.fillStyle='#1a281d99';g.fillRect(px+2,py+28,28,3);
+ for(let i=0;i<3;i++){const a=px+1+i*10,b=py+11+(i%2)*5;
+  g.fillStyle='#68472d';g.fillRect(a+2,b+8,9,10);
+  g.fillStyle=i%2?'#d6b58b':'#b99b75';g.beginPath();g.moveTo(a,b+9);g.lineTo(a+7,b-3);g.lineTo(a+14,b+9);g.fill();
+  g.fillStyle='#745237';g.fillRect(a+6,b+11,3,7);
+ }
+ g.fillStyle=(v.relations||0)>=3?'#a6d891':'#e3c28a';g.fillRect(px+27,py+4,2,13);g.fillRect(px+24,py+4,7,4);
+}
+function colonyFieldArt(t,occupied){
+ const colors={forest:['#234b33','#56844d'],grassland:['#49703d','#90ad65'],prairie:['#857747','#c6b478'],plains:['#79694b','#b6a07a'],hills:['#686d5e','#aaa184'],mountains:['#667275','#c1c4b8'],swamp:['#375f54','#789486'],coast:['#316d83','#7fb2b2'],ocean:['#24546a','#659ba7']};
+ const [dark,light]=colors[t?.kind]||colors.plains;
+ const trees=t?.kind==='forest'?'<path d="M12 44L24 14L36 44Z" fill="#24513a"/><path d="M40 48L52 18L64 48Z" fill="#346b42"/>':t?.kind==='mountains'||t?.kind==='hills'?'<path d="M3 51L27 10L53 51Z" fill="#68736f"/><path d="M26 51L53 19L77 51Z" fill="#8b8e80"/>':'<path d="M10 49L14 33M22 55L25 38M49 49L52 33" stroke="#c6c27f" stroke-width="3"/>';
+ const worker=occupied?'<rect x="34" y="30" width="12" height="18" fill="#355d8a"/><rect x="36" y="20" width="9" height="12" fill="#f1d4a5"/><rect x="32" y="17" width="17" height="5" fill="#735038"/><rect x="34" y="48" width="4" height="9" fill="#302c29"/><rect x="43" y="48" width="4" height="9" fill="#302c29"/>':'';
+ return '<svg class="field-art" viewBox="0 0 80 62" aria-hidden="true" shape-rendering="crispEdges"><rect width="80" height="62" fill="'+dark+'"/><path d="M0 28L19 20L40 28L60 15L80 26V62H0Z" fill="'+light+'"/>'+trees+worker+'</svg>';
+}
 function colonyView(id){
  const c=st.colonies.find(c=>c.id===id)||st.colonies[0];
  if(!c)return dialog('Colonies','<p>No colony has been founded yet. Unload a colonist and establish your first settlement.</p>');
@@ -354,9 +374,9 @@ function colonyView(id){
  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)cityTiles.push({dx,dy,t:terrainAt(c.x+dx,c.y+dy)});
  const fieldGrid=cityTiles.map(({dx,dy,t})=>{
   if(!t)return '<div class="city-tile empty"></div>';
-  if(!dx&&!dy)return '<div class="city-tile center terrain-'+t.kind+'"><span class="city-art">🏘</span><b>'+esc(c.name)+'</b><small>Town centre</small></div>';
+  if(!dx&&!dy)return '<div class="city-tile center terrain-'+t.kind+'">'+colonyFieldArt(t,false)+'<span class="city-art">🏘</span><b>'+esc(c.name)+'</b><small>Town centre</small></div>';
   const occupant=assigned(dx,dy),top=outdoors.map(job=>({job,n:yieldFor(t,job)})).sort((a,b)=>b.n-a.n)[0];
-  return '<button type="button" class="city-tile terrain-'+t.kind+' '+(land(t)?'':'water')+(occupant>=0?' occupied':'')+'" data-field="'+dx+','+dy+'" '+(!land(t)?'disabled':'')+'><b>'+esc(t.kind)+'</b><span>'+(occupant>=0?'♟':t.kind==='forest'?'♠':t.kind==='mountains'?'▲':t.kind==='hills'?'△':'✿')+'</span><small>'+(occupant>=0?'Worker '+(occupant+1)+' · '+esc(c.people[occupant].job):top?.n?esc(top.job)+' '+top.n:'No crops')+'</small></button>';
+  return '<button type="button" class="city-tile terrain-'+t.kind+' '+(land(t)?'':'water')+(occupant>=0?' occupied':'')+'" data-field="'+dx+','+dy+'" '+(!land(t)?'disabled':'')+'>'+colonyFieldArt(t,occupant>=0)+'<b>'+esc(t.kind)+'</b><span>'+(occupant>=0?'♟':t.kind==='forest'?'🌲':t.kind==='mountains'?'⛰':t.kind==='hills'?'▲':'✿')+'</span><small>'+(occupant>=0?'Worker '+(occupant+1)+' · '+esc(c.people[occupant].job):top?.n?esc(top.job)+' '+top.n:'No crops')+'</small></button>';
  }).join('');
  const jobs=c.people.map((p,i)=>{
   const outdoorsJob=!!FIELDJOB[p.job],tile=p.tile,valid=outdoorsJob&&tile&&land(terrainAt(c.x+tile.dx,c.y+tile.dy));
@@ -450,10 +470,11 @@ function landscapeArt(t,x,y,px,py){
  fill(colors[0],0,0,32,32);fill(colors[1],0,0,32,27);
  for(let i=0;i<18;i++){const a=Math.floor(rnd(i*3)*31),b=Math.floor(rnd(i*3+1)*30);fill(colors[i%3],a,b,2+Math.floor(rnd(i*3+2)*4),1+Math.floor(rnd(i*3+7)*2))}
  if(water){
-  for(let i=0;i<5;i++){let a=Math.floor(rnd(i+61)*26),b=Math.floor(rnd(i+71)*26);fill(i%2?'#9dc9c47a':'#c6ded06b',a,b,5+Math.floor(rnd(i+80)*4),1)}
+  for(let i=0;i<5;i++){let a=(Math.floor(rnd(i+61)*26)+visualFrame*(i%2?1:-1)+36)%27,b=Math.floor(rnd(i+71)*26);fill(i%2?'#9dc9c47a':'#c6ded06b',a,b,5+Math.floor(rnd(i+80)*4),1)}
   const edges=[[0,-1],[1,0],[0,1],[-1,0]];
   for(let j=0;j<4;j++){const [dx,dy]=edges[j],n=terrainAt(x+dx,y+dy);if(n&&land(n)){g.fillStyle='#d7c69a';g.beginPath();if(j===0){g.moveTo(px,py);g.lineTo(px+32,py);g.lineTo(px+32,py+5);g.lineTo(px+18,py+3);g.lineTo(px,py+6)}else if(j===2){g.moveTo(px,py+32);g.lineTo(px+32,py+32);g.lineTo(px+32,py+27);g.lineTo(px+16,py+29);g.lineTo(px,py+26)}else if(j===1){g.moveTo(px+32,py);g.lineTo(px+32,py+32);g.lineTo(px+27,py+32);g.lineTo(px+29,py+16);g.lineTo(px+26,py)}else{g.moveTo(px,py);g.lineTo(px,py+32);g.lineTo(px+5,py+32);g.lineTo(px+3,py+16);g.lineTo(px+6,py)}g.closePath();g.fill()}}
  }else{
+  for(let edge=0;edge<4;edge++){const d=[[0,-1],[1,0],[0,1],[-1,0]][edge],adj=terrainAt(x+d[0],y+d[1]);if(!adj||adj.kind===kind||!land(adj))continue;if(edge===0)fill('#243c2e55',0,0,32,3);if(edge===1)fill('#243c2e55',29,0,3,32);if(edge===2)fill('#243c2e55',0,29,32,3);if(edge===3)fill('#243c2e55',0,0,3,32)}
   for(let i=0;i<5;i++){const a=Math.floor(rnd(i+110)*27),b=Math.floor(rnd(i+120)*26);fill('#283c2850',a+1,b+2,4,2)}
   if(kind==='forest'){for(let i=0;i<4;i++){const a=3+Math.floor(rnd(i+40)*23),b=8+Math.floor(rnd(i+50)*17);fill('#2a3525',a+3,b+7,3,7);fill('#244d35',a,b+2,11,8);fill(i%2?'#3c7945':'#508b50',a+2,b,7,6);fill('#8da86a',a+3,b+1,2,2)}}
   else if(kind==='mountains'||kind==='hills'){for(let i=0;i<(kind==='mountains'?2:3);i++){const a=i*12-4,b=7+(i%2)*7;g.fillStyle=i%2?'#656e6c':'#777b70';g.beginPath();g.moveTo(px+a,py+29);g.lineTo(px+a+11,py+b);g.lineTo(px+a+23,py+29);g.fill();g.fillStyle=kind==='mountains'?'#d3d7c8':'#c6b68b';g.beginPath();g.moveTo(px+a+11,py+b);g.lineTo(px+a+6,py+b+10);g.lineTo(px+a+11,py+b+7);g.lineTo(px+a+16,py+b+10);g.fill()}}
@@ -490,14 +511,7 @@ function unitGraphic(u,px,py){
 }
 function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let px=(x-camera.x)*S,py=(y-camera.y)*S;if(px<-S||px>C.width||py<-S||py>C.height)continue;let t=terrainAt(x,y);if(!t.seen){g.fillStyle='#1b1e1d';g.fillRect(px,py,S,S);g.fillStyle='#292a24';if((x+y)%4===0)g.fillRect(px+3,py+3,2,2);continue}tileGraphics(t,x,y,px,py)}
 
- for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;let x=(v.x-camera.x)*S,y=(v.y-camera.y)*S;
-  g.fillStyle='#2b291b88';g.fillRect(x+3,y+27,27,4);
-  g.fillStyle='#8c6036';g.fillRect(x+5,y+17,22,11);g.fillStyle='#c9a16c';g.fillRect(x+7,y+18,18,8);
-  g.fillStyle='#64442a';g.beginPath();g.moveTo(x+3,y+18);g.lineTo(x+16,y+4);g.lineTo(x+29,y+18);g.fill();
-  g.fillStyle='#e2bc81';g.beginPath();g.moveTo(x+7,y+17);g.lineTo(x+16,y+7);g.lineTo(x+25,y+17);g.fill();
-  g.fillStyle='#4a3322';g.fillRect(x+13,y+21,6,7);
-  g.fillStyle=v.relations>=3?'#8fcb8a':v.relations<0?'#d78b69':'#e3c894';g.fillRect(x+25,y+5,3,12);g.fillRect(x+23,y+5,7,4);
- }
+ for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;villageArtwork(v,(v.x-camera.x)*S,(v.y-camera.y)*S)}
  for(let c of st.colonies){let x=(c.x-camera.x)*S,y=(c.y-camera.y)*S;
   g.fillStyle='#1b1b1699';g.fillRect(x+1,y+28,31,3);
   g.fillStyle='#b89c72';g.fillRect(x+3,y+14,26,14);g.fillStyle='#e2c69a';g.fillRect(x+5,y+16,22,10);
