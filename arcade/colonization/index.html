@@ -337,7 +337,9 @@ function buildingArtwork(name){
  };
  const [wall,roof,symbol]=styles[name]||['#bca077','#6e4730','⌂'];
  // Inline, original pixel-styled building silhouette; no third-party game assets.
- return '<svg class="building-art" viewBox="0 0 72 58" aria-hidden="true" shape-rendering="crispEdges"><rect x="12" y="24" width="48" height="28" fill="'+wall+'"/><path d="M7 24L21 10H51L65 24Z" fill="'+roof+'"/><rect x="27" y="36" width="18" height="16" fill="'+roof+'"/><rect x="16" y="32" width="8" height="9" fill="#eac879"/><rect x="48" y="32" width="8" height="9" fill="#eac879"/><path d="M10 52H62" stroke="#3a2b1a" stroke-width="4"/><text x="36" y="25" font-size="14" text-anchor="middle" fill="#f6dba0">'+symbol+'</text></svg>';
+ const tower=name==='church'?'<rect x="31" y="3" width="10" height="24" fill="#e4d2a8"/><rect x="35" y="0" width="2" height="12" fill="#6d4930"/><rect x="32" y="5" width="8" height="2" fill="#6d4930"/>':name==='fort'?'<rect x="6" y="16" width="12" height="34" fill="#9a9689"/><rect x="54" y="16" width="12" height="34" fill="#9a9689"/><rect x="5" y="13" width="14" height="6" fill="#c1b8a3"/><rect x="53" y="13" width="14" height="6" fill="#c1b8a3"/>':name==='lumber mill'?'<rect x="54" y="5" width="6" height="30" fill="#6c4b30"/><rect x="49" y="2" width="16" height="4" fill="#8e6a43"/>':'';
+ const accent=name==='blacksmith shop'||name==='armory'?'<rect x="47" y="4" width="7" height="24" fill="#605d59"/><rect x="45" y="0" width="11" height="6" fill="#8a8681"/>':name==='warehouse'?'<rect x="24" y="32" width="24" height="20" fill="#6b4b34"/><path d="M26 34L46 50M46 34L26 50" stroke="#b99b69" stroke-width="2"/>':'';
+ return '<svg class="building-art" viewBox="0 0 72 58" aria-hidden="true" shape-rendering="crispEdges"><rect x="5" y="51" width="63" height="5" fill="#443e2e"/><rect x="10" y="25" width="52" height="27" fill="'+wall+'"/><rect x="13" y="28" width="46" height="21" fill="#ffffff18"/><path d="M5 26L20 11H52L67 26Z" fill="'+roof+'"/><path d="M13 23L22 14H50L59 23Z" fill="#ffffff24"/><rect x="29" y="36" width="14" height="16" fill="'+roof+'"/><rect x="15" y="33" width="9" height="10" fill="#f1d69b"/><rect x="48" y="33" width="9" height="10" fill="#f1d69b"/><path d="M19 33V43M52 33V43" stroke="#6c5134" stroke-width="2"/>'+tower+accent+'<rect x="4" y="53" width="64" height="2" fill="#c1a579"/><text x="36" y="27" font-size="12" text-anchor="middle" fill="#f6dba0">'+symbol+'</text></svg>';
 }
 let colonyWorkerSelection=0;
 function colonyView(id){
@@ -465,9 +467,27 @@ function landscapeArt(t,x,y,px,py){
  g.lineWidth=1;
 }
 function tileGraphics(t,x,y,px,py){landscapeArt(t,x,y,px,py)}
-function unitGraphic(u,px,py){g.save();if(u.id===sel){g.strokeStyle='#ffe16b';g.lineWidth=3;g.strokeRect(px+2,py+2,28,28);g.lineWidth=1}if(u.type==='caravel'){
- g.fillStyle='#3b2419';g.fillRect(px+5,py+23,23,4);g.fillRect(px+9,py+27,17,2);g.fillStyle='#d8c5a2';g.beginPath();g.moveTo(px+17,py+4);g.lineTo(px+17,py+22);g.lineTo(px+5,py+20);g.fill();g.fillStyle='#bd885d';g.fillRect(px+17,py+4,2,19);g.fillStyle='#efe2bf';g.beginPath();g.moveTo(px+20,py+8);g.lineTo(px+27,py+21);g.lineTo(px+20,py+21);g.fill();
- }else{if(u.role==='scout'){g.fillStyle='#b59a55';g.fillRect(px+4,py+24,25,5);g.fillStyle='#754c2e';g.fillRect(px+7,py+17,19,8)}if(u.role==='pioneer'){g.fillStyle='#a6b6b7';g.fillRect(px+25,py+5,3,22);g.fillRect(px+22,py+7,9,3)}g.fillStyle='#eed8ac';g.fillRect(px+13,py+7,8,8);g.fillStyle='#432a1a';g.fillRect(px+11,py+5,12,4);g.fillStyle='#304a70';g.fillRect(px+11,py+16,12,11);g.fillStyle='#151c28';g.fillRect(px+11,py+27,4,3);g.fillRect(px+19,py+27,4,3)}if(u.moves===0){g.fillStyle='#b03525';g.fillRect(px+27,py+1,4,4)}g.restore()}
+function unitGraphic(u,px,py){
+ g.save();
+ if(u.id===sel){g.strokeStyle='#f9d77c';g.lineWidth=2;g.strokeRect(px+1,py+1,30,30)}
+ if(u.type==='caravel'){
+  g.fillStyle='#1b3d4a';g.fillRect(px+3,py+26,28,3);
+  g.fillStyle='#3c2b22';g.beginPath();g.moveTo(px+2,py+20);g.lineTo(px+30,py+20);g.lineTo(px+25,py+28);g.lineTo(px+9,py+28);g.fill();
+  g.fillStyle='#986744';g.fillRect(px+6,py+21,21,3);g.fillStyle='#d2b68a';g.fillRect(px+15,py+3,2,20);
+  g.fillStyle='#f4e6c8';g.beginPath();g.moveTo(px+14,py+5);g.lineTo(px+14,py+19);g.lineTo(px+4,py+18);g.fill();
+  g.fillStyle='#e2cfab';g.beginPath();g.moveTo(px+18,py+7);g.lineTo(px+27,py+19);g.lineTo(px+18,py+19);g.fill();
+  g.fillStyle='#c9543a';g.fillRect(px+17,py+3,8,3);g.fillStyle='#f6d8a7';g.fillRect(px+8,py+24,3,2);g.fillRect(px+17,py+24,3,2);
+ }else{
+  g.fillStyle='#1e2729a0';g.fillRect(px+7,py+28,21,3);
+  if(u.role==='scout'){g.fillStyle='#775238';g.fillRect(px+3,py+20,26,8);g.fillRect(px+22,py+15,7,9);g.fillStyle='#3a2b21';g.fillRect(px+7,py+27,3,4);g.fillRect(px+21,py+27,3,4)}
+  if(u.role==='pioneer'){g.fillStyle='#9a9c8c';g.fillRect(px+26,py+5,2,24);g.fillRect(px+23,py+7,8,3)}
+  g.fillStyle='#35597a';g.fillRect(px+11,py+16,12,11);g.fillStyle='#a78353';g.fillRect(px+9,py+17,3,9);
+  g.fillStyle='#f0d5aa';g.fillRect(px+13,py+8,9,9);g.fillStyle='#5c3929';g.fillRect(px+11,py+5,13,5);
+  g.fillStyle='#b99564';g.fillRect(px+10,py+4,15,3);g.fillStyle='#263346';g.fillRect(px+12,py+27,4,4);g.fillRect(px+20,py+27,4,4);
+ }
+ if(u.moves===0){g.fillStyle='#c65c44';g.fillRect(px+27,py+1,4,4)}
+ g.restore();
+}
 function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let px=(x-camera.x)*S,py=(y-camera.y)*S;if(px<-S||px>C.width||py<-S||py>C.height)continue;let t=terrainAt(x,y);if(!t.seen){g.fillStyle='#1b1e1d';g.fillRect(px,py,S,S);g.fillStyle='#292a24';if((x+y)%4===0)g.fillRect(px+3,py+3,2,2);continue}tileGraphics(t,x,y,px,py)}
 
  for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;let x=(v.x-camera.x)*S,y=(v.y-camera.y)*S;
