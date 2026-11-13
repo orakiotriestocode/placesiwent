@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head>
 <script src="/assets/vendor/sentry-browser-11.12.0.min.js" integrity="sha384-fpjRzLWxkdRneAxDGo5pt5gKsjCWYV5ksPD+S1lx80QHBhs6Oe58hf8sKUKubCES" crossorigin="anonymous"></script>
 <script src="/assets/monitoring.js"></script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.8</title><style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New World — Colonial Strategy — Alpha 1.9</title><style>
 :root{font-family:Georgia,'Times New Roman',serif;background:#13100c;color:#e9d5a7}*{box-sizing:border-box}body{margin:0;background:repeating-linear-gradient(45deg,#19150e,#19150e 3px,#1c180f 3px,#1c180f 6px)}button,input,select{font:inherit}button{background:#6a4929;color:#fff0ca;border:3px outset #af8850;padding:8px 10px;cursor:pointer;box-shadow:1px 2px 0 #120e08}button:hover{background:#8b6035}button:disabled{opacity:.38;cursor:default}header{padding:9px 16px;background:linear-gradient(#46321c,#24190d);border-bottom:4px ridge #bf9a5e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header h1{font-size:24px;letter-spacing:3px;text-shadow:2px 2px #0c0a05;margin:0;color:#ffdf92}header small{font:12px system-ui;color:#d4bb87}.stat{display:flex;gap:16px;font:14px system-ui;flex-wrap:wrap}.stat b{color:#ffdb89}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:10px;padding:11px;max-width:1540px;margin:auto}.mapframe{border:6px ridge #9e7947;background:#051b29;box-shadow:inset 0 0 35px #0009;position:relative}.mapframe canvas{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none;cursor:crosshair}.panel,.footer{background:#34291b;border:4px ridge #9f7d4a;padding:13px}.panel h2{font-size:20px;color:#ffdb89;margin:0 0 10px}.panel p{margin:7px 0}.muted,.help{font:12px/1.55 system-ui;color:#c7ba94}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.actions button{min-height:40px}.span2{grid-column:span 2}.log{height:150px;overflow-y:auto;background:#201b15;border:2px inset #6e5638;padding:8px;font:12px/1.6 system-ui;color:#e5d4ad}.smallrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid #77614455}.footer{margin-top:9px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font:12px system-ui}.footer button{padding:6px 10px}.modalShade{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:14px;z-index:10}.modalShade.open{display:flex}.modal{background:#342719;border:7px ridge #b89458;max-height:92vh;overflow:auto;width:min(860px,100%);padding:17px;box-shadow:0 0 45px #000}.modal h2{margin:0 0 10px;color:#ffdc92}.modal h3{margin:12px 0 5px;color:#ffdc92;font-size:16px}.modal input,.modal select{background:#e9d6ad;color:#24180f;border:2px inset #a2855d;padding:7px;max-width:100%}.modal button{margin:3px}.modalfoot{border-top:1px solid #a4854e;padding-top:10px;margin-top:14px;display:flex;justify-content:flex-end}.gridgoods{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.goods{border:1px solid #8c6e40;padding:8px;background:#292115}.goods b{color:#ffe1a0}.colwork{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px}.work{border:1px solid #8b734e;background:#261f16;padding:8px}.work select{width:100%;margin-top:5px}.badge{display:inline-block;padding:2px 7px;background:#61492c;color:#ffe2ae;font:11px system-ui}.key{font:12px system-ui;color:#ddc89b}.minimap{border:2px inset #aa8750;width:160px;height:120px;image-rendering:pixelated;cursor:pointer}#turnMsg{font-style:italic;color:#e5cd99}.tip{font:12px/1.5 system-ui;color:#cfbd95}kbd{border:1px solid #bea16c;padding:1px 4px}@media(max-width:900px){main{grid-template-columns:1fr}.panel{min-height:auto}header h1{font-size:19px}}
 
 /* Mobile-first map layout: preserve readable map tiles instead of shrinking 32 columns to phone width. */
@@ -311,7 +311,7 @@ function processColony(c){
   }
  }
 }
-function nextTurn(){st.turn++;for(const a of fieldArmy())a.moves=2;st.year+=st.year<1600?1:1;for(let u of st.units){if(u.europe){u.europe--;if(!u.europe){if(u.type==='caravel'){if(u.returning){u.returning=false;u.atEurope=false;note('Your caravel has returned to the New World.')}else{u.atEurope=true;note('Your caravel has arrived at the European docks.')}}else{u.atEurope=false;note('A recruited colonist has reached the New World.')}}u.moves=0}else if(!u.carrier&&!u.atEurope)u.moves=u.type==='caravel'?4:2}
+function nextTurn(){st.turn++;for(const a of fieldArmy())a.moves=militaryMaxMoves(a);st.year+=st.year<1600?1:1;for(let u of st.units){if(u.europe){u.europe--;if(!u.europe){if(u.type==='caravel'){if(u.returning){u.returning=false;u.atEurope=false;note('Your caravel has returned to the New World.')}else{u.atEurope=true;note('Your caravel has arrived at the European docks.')}}else{u.atEurope=false;note('A recruited colonist has reached the New World.')}}u.moves=0}else if(!u.carrier&&!u.atEurope)u.moves=u.type==='caravel'?4:2}
  for(let c of st.colonies){processColony(c);st.political=(st.political||0)+Math.max(1,c.lastProduction?.bells||1)}
  for(let v of st.villages){v.tradeStock=Math.min(30,(v.tradeStock??25)+2);if(v.contact&&st.turn%12===0&&v.relations>0&&!hasFather('pocahontas'))v.relations--;if(v.contact&&v.relations>=3&&st.turn%8===0){const c=st.colonies.find(c=>Math.max(Math.abs(c.x-v.x),Math.abs(c.y-v.y))<=4);if(c){const good=v.tradeGood||nativeSpecialty(v);c.stock[good]=(c.stock[good]||0)+3;note('The '+v.name+' send 3 '+good+' to '+c.name+' as a gesture of friendship.')}}}
  if(st.turn%9===0){st.tax=Math.min(85,st.tax+1+st.turn%3);note('The Crown has raised your taxes to '+st.tax+'%.')}
@@ -455,8 +455,8 @@ function unitGraphic(u,px,py){g.save();if(u.id===sel){g.strokeStyle='#ffe16b';g.
 function draw(){g.fillStyle='#071724';g.fillRect(0,0,C.width,C.height);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let px=(x-camera.x)*S,py=(y-camera.y)*S;if(px<-S||px>C.width||py<-S||py>C.height)continue;let t=terrainAt(x,y);if(!t.seen){g.fillStyle='#1b1e1d';g.fillRect(px,py,S,S);g.fillStyle='#292a24';if((x+y)%4===0)g.fillRect(px+3,py+3,2,2);continue}tileGraphics(t,x,y,px,py)}
  for(let v of st.villages){if(!terrainAt(v.x,v.y).seen)continue;let x=(v.x-camera.x)*S,y=(v.y-camera.y)*S;g.fillStyle='#7f5a2d';g.fillRect(x+5,y+16,20,12);g.fillStyle='#e5c58d';g.beginPath();g.moveTo(x+4,y+16);g.lineTo(x+15,y+3);g.lineTo(x+27,y+16);g.fill();g.fillStyle=v.relations>0?'#a4d5a1':'#e5c58d';g.fillRect(x+12,y+20,6,8)}
  for(let c of st.colonies){let x=(c.x-camera.x)*S,y=(c.y-camera.y)*S;g.fillStyle='#f0d7a0';g.fillRect(x+4,y+14,24,14);g.fillStyle='#873923';g.beginPath();g.moveTo(x+2,y+15);g.lineTo(x+16,y+3);g.lineTo(x+29,y+15);g.fill();g.fillStyle='#382514';g.fillRect(x+13,y+19,6,9);g.fillStyle='#fff0c1';g.font='bold 12px Georgia';g.fillText(c.name,x-1,y-5)}
- for(const a of (st.military?.fieldUnits||[])){if(!terrainAt(a.x,a.y)?.seen)continue;const px=(a.x-camera.x)*S,py=(a.y-camera.y)*S;g.fillStyle='#3c6e9d';g.fillRect(px+7,py+11,18,16);g.fillStyle='#f4dab5';g.fillRect(px+12,py+5,9,7);g.fillStyle='#c7a269';g.fillRect(px+9,py+3,15,3);if(sel===-a.id){g.strokeStyle='#ffe16b';g.lineWidth=2;g.strokeRect(px+2,py+2,28,28);g.lineWidth=1}}
- for(const t of (st.military?.troops||[])){if(!terrainAt(t.x,t.y)?.seen)continue;const px=(t.x-camera.x)*S,py=(t.y-camera.y)*S;g.fillStyle='#c74337';g.fillRect(px+7,py+10,18,17);g.fillStyle='#f6d2a2';g.fillRect(px+12,py+5,9,7);g.fillStyle='#f5f0e5';g.fillRect(px+8,py+3,17,4);g.fillStyle='#4e1c19';g.fillRect(px+24,py+9,3,20)}
+ for(const a of (st.military?.fieldUnits||[])){if(!terrainAt(a.x,a.y)?.seen)continue;drawFieldSprite(a,(a.x-camera.x)*S,(a.y-camera.y)*S)}
+ for(const t of (st.military?.troops||[])){if(!terrainAt(t.x,t.y)?.seen)continue;drawFieldSprite(t,(t.x-camera.x)*S,(t.y-camera.y)*S,true)}
  for(let u of active()){if(u.europe||!terrainAt(u.x,u.y)?.seen)continue;unitGraphic(u,(u.x-camera.x)*S,(u.y-camera.y)*S)}
  if(hover&&inWorld(hover.x,hover.y)&&terrainAt(hover.x,hover.y).seen){g.strokeStyle='#fff6c9';g.strokeRect((hover.x-camera.x)*S+.5,(hover.y-camera.y)*S+.5,S-1,S-1)}
  mg.fillStyle='#0c1824';mg.fillRect(0,0,160,120);for(let y=0;y<H;y++)for(let x=0;x<W;x++){let t=terrainAt(x,y);if(!t.seen)continue;mg.fillStyle=TERRAINS[t.kind];mg.fillRect(x*160/W,y*120/H,Math.ceil(160/W),Math.ceil(120/H))}for(let c of st.colonies){mg.fillStyle='#ffe2a0';mg.fillRect(c.x*160/W-2,c.y*120/H-2,5,5)}mg.strokeStyle='#fff2c0';mg.strokeRect(camera.x*160/W,camera.y*120/H,32*160/W,20*120/H);
@@ -500,6 +500,37 @@ function trainSoldiers(c){
  note(c.name+' trains a militia soldier (10 muskets).');militaryView();draw();
 }
 
+
+const FIELD_TYPES={militia:{name:'Militia',strength:4,moves:2,cost:{muskets:10}},cavalry:{name:'Cavalry',strength:6,moves:4,cost:{muskets:15,horses:15}},artillery:{name:'Artillery',strength:8,moves:2,cost:{muskets:20,tools:15}}};
+function trainFieldUnit(c,kind){
+ const spec=FIELD_TYPES[kind],m=militaryState();if(!spec)return;
+ if(Object.entries(spec.cost).some(([good,n])=>(c.stock[good]||0)<n))return message('Insufficient supplies to recruit '+spec.name+'.');
+ const positions=[];for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const x=c.x+dx,y=c.y+dy;if(land(terrainAt(x,y))&&!unitAt(x,y)&&!fieldUnitAt(x,y)&&!m.troops.some(t=>t.x===x&&t.y===y))positions.push({x,y})}
+ if(!positions.length)return message('No free land adjacent to '+c.name+'.');
+ for(const [good,n] of Object.entries(spec.cost))c.stock[good]-=n;
+ const pos=positions[0];const a={id:m.nextFieldId++,x:pos.x,y:pos.y,kind,strength:spec.strength,moves:0,home:c.id};
+ fieldArmy().push(a);reveal(a.x,a.y,2);note(c.name+' recruits '+spec.name+' for field service.');militaryView();draw();
+}
+function militaryMaxMoves(a){return FIELD_TYPES[a.kind]?.moves||2}
+function militaryTerrainBonus(x,y){return {forest:2,hills:3,mountains:4,swamp:2}[terrainAt(x,y)?.kind]||0}
+function royalSkirmish(t,a){
+ const royalAttack=t.strength+(t.kind==='cavalry'?2:0),defense=fieldStrength(a,true)+(a.kind==='artillery'?1:0);
+ if(royalAttack>defense){fieldArmy().splice(fieldArmy().indexOf(a),1);if(sel===-a.id)sel=st.units.find(u=>u.type==='caravel')?.id||0;note('Royal regiment defeats '+a.kind+' in the field ('+royalAttack+' vs '+defense+').');}
+ else{militaryState().troops=militaryState().troops.filter(e=>e.id!==t.id);note(a.kind+' holds its ground against a royal attack ('+defense+' vs '+royalAttack+').');st.independence.royalThreat=Math.max(0,st.independence.royalThreat-5);}
+}
+function drawFieldSprite(a,px,py,royal=false){
+ const kind=a.kind||'militia';g.save();g.fillStyle='#00000055';g.fillRect(px+5,py+27,24,3);
+ if(kind==='cavalry'){
+  g.fillStyle=royal?'#82432f':'#8b6542';g.fillRect(px+4,py+16,23,10);g.fillRect(px+23,py+11,7,10);g.fillRect(px+7,py+25,3,5);g.fillRect(px+20,py+25,3,5);
+  g.fillStyle=royal?'#b83d36':'#326c9d';g.fillRect(px+11,py+9,11,10);g.fillStyle='#f0d5a8';g.fillRect(px+13,py+5,7,6);
+ }else if(kind==='artillery'){
+  g.fillStyle='#3d4142';g.fillRect(px+5,py+18,24,6);g.fillStyle='#9b9e9a';g.fillRect(px+17,py+13,14,5);g.fillStyle='#352c22';g.fillRect(px+7,py+22,8,8);g.fillRect(px+21,py+22,8,8);g.fillStyle='#b8a87a';g.fillRect(px+9,py+24,4,4);g.fillRect(px+23,py+24,4,4);
+ }else{
+  g.fillStyle=royal?'#b43e34':'#376a9c';g.fillRect(px+8,py+13,17,14);g.fillStyle='#f1d2a5';g.fillRect(px+12,py+7,9,8);g.fillStyle=royal?'#eee4d1':'#c9a66d';g.fillRect(px+9,py+4,16,5);g.fillStyle='#43382a';g.fillRect(px+25,py+7,2,22);g.fillStyle='#29313a';g.fillRect(px+10,py+27,4,4);g.fillRect(px+20,py+27,4,4);
+ }
+ if(sel===-a.id&&!royal){g.strokeStyle='#ffde70';g.lineWidth=2;g.strokeRect(px+1,py+1,30,30)}
+ g.restore();
+}
 function fieldArmy(){const m=militaryState();m.fieldUnits??=[];m.nextFieldId??=1;return m.fieldUnits}
 function fieldUnitAt(x,y){return fieldArmy().find(a=>a.x===x&&a.y===y)}
 function fieldStrength(a,defending=false){
@@ -516,15 +547,15 @@ function deployMilitia(c){
 function fieldAttack(a,enemy){
  if(a.moves<2)return message('This unit needs 2 movement points to attack.');
  if(Math.max(Math.abs(a.x-enemy.x),Math.abs(a.y-enemy.y))>1)return message('Enemy must be adjacent.');
- const attack=fieldStrength(a)+((st.turn+a.id)%3),defense=enemy.strength+({forest:2,hills:3,mountains:4,swamp:2}[terrainAt(enemy.x,enemy.y)?.kind]||0);
+ const attack=fieldStrength(a)+(a.kind==='cavalry'?2:0)+(a.kind==='artillery'?3:0)+((st.turn+a.id)%3),defense=enemy.strength+militaryTerrainBonus(enemy.x,enemy.y);
  a.moves=0;
- if(attack>=defense){militaryState().troops=militaryState().troops.filter(t=>t.id!==enemy.id);a.strength=Math.min(8,a.strength+1);st.independence.royalThreat=Math.max(0,st.independence.royalThreat-8);note('Militia defeat a royal regiment ('+attack+' vs '+defense+').')}
+ if(attack>=defense){militaryState().troops=militaryState().troops.filter(t=>t.id!==enemy.id);a.strength=Math.min((FIELD_TYPES[a.kind]?.strength||4)+3,a.strength+1);st.independence.royalThreat=Math.max(0,st.independence.royalThreat-8);note('Militia defeat a royal regiment ('+attack+' vs '+defense+').')}
  else {fieldArmy().splice(fieldArmy().indexOf(a),1);sel=st.units.find(u=>u.type==='caravel')?.id||0;note('Militia are defeated in battle ('+attack+' vs '+defense+').')}
  draw();
 }
 function fieldOrders(a){
  const c=st.colonies.find(c=>c.x===a.x&&c.y===a.y)||st.colonies.find(c=>Math.max(Math.abs(c.x-a.x),Math.abs(c.y-a.y))<=1);
- dialog('Militia Orders','<p>Strength: '+a.strength+' · Movement: '+a.moves+'/2</p><p>Click an adjacent land tile to march, or an adjacent royal regiment to attack. Forests and hills give defenders an advantage.</p><div class="encounter-actions"><button id="fieldGarrison" '+(!c?'disabled':'')+'>Return to '+(c?esc(c.name):'garrison')+'</button><button id="fieldDone">Close</button></div>');
+ dialog((FIELD_TYPES[a.kind]?.name||'Militia')+' Orders','<p>Strength: '+a.strength+' · Movement: '+a.moves+'/'+militaryMaxMoves(a)+'</p><p>Click an adjacent land tile to march, or an adjacent royal regiment to attack. Forests and hills give defenders an advantage.</p><div class="encounter-actions"><button id="fieldGarrison" '+(!c?'disabled':'')+'>Return to '+(c?esc(c.name):'garrison')+'</button><button id="fieldDone">Close</button></div>');
  $('fieldGarrison').onclick=()=>{if(!c)return;c.garrison=(c.garrison||0)+1;fieldArmy().splice(fieldArmy().indexOf(a),1);sel=st.units.find(u=>u.type==='caravel')?.id||0;note('Militia return to '+c.name+'.');closeDialog();draw()};
  $('fieldDone').onclick=closeDialog;
 }
@@ -532,15 +563,16 @@ function moveField(a,x,y){
  if(Math.max(Math.abs(x-a.x),Math.abs(y-a.y))!==1)return;
  const enemy=militaryState().troops.find(t=>t.x===x&&t.y===y);if(enemy)return fieldAttack(a,enemy);
  if(!land(terrainAt(x,y))||unitAt(x,y)||fieldUnitAt(x,y)||militaryState().troops.some(t=>t.x===x&&t.y===y))return message('The militia cannot move onto this tile.');
- if(a.moves<2)return message('Militia have no movement points left.');
- a.x=x;a.y=y;a.moves-=2;reveal(x,y,2);note('Militia march to '+x+', '+y+'.');draw();
+ const cost=a.kind==='cavalry'?1:2;if(a.moves<cost)return message('This unit has no movement points left.');
+ a.x=x;a.y=y;a.moves-=cost;reveal(x,y,2);note('Militia march to '+x+', '+y+'.');draw();
 }
 function militaryView(){
  const m=militaryState(),i=st.independence||{},troops=m.troops||[];
- const rows=st.colonies.map(c=>'<div class="father-card"><h3>'+esc(c.name)+'</h3><p>Militia: '+(c.garrison||0)+' · Defense: '+colonyDefense(c)+(c.buildings.includes('fort')?' · Fortified':'')+'</p><p>Muskets: '+(c.stock.muskets||0)+' · Colonists: '+c.people.length+'</p><button data-train="'+c.id+'" '+((c.stock.muskets||0)<10||(c.garrison||0)>=Math.max(1,c.people.length)?'disabled':'')+'>Train militia (10 muskets)</button><button data-deploy="'+c.id+'" '+(!(c.garrison>0)?'disabled':'')+'>Deploy militia</button></div>').join('');
+ const rows=st.colonies.map(c=>'<div class="father-card"><h3>'+esc(c.name)+'</h3><p>Militia: '+(c.garrison||0)+' · Defense: '+colonyDefense(c)+(c.buildings.includes('fort')?' · Fortified':'')+'</p><p>Muskets: '+(c.stock.muskets||0)+' · Colonists: '+c.people.length+'</p><button data-train="'+c.id+'" '+((c.stock.muskets||0)<10||(c.garrison||0)>=Math.max(1,c.people.length)?'disabled':'')+'>Train militia (10 muskets)</button><button data-deploy="'+c.id+'" '+(!(c.garrison>0)?'disabled':'')+'>Deploy militia</button><button data-cavalry="'+c.id+'" '+((c.stock.muskets||0)<15||(c.stock.horses||0)<15?'disabled':'')+'>Recruit cavalry (15 muskets, 15 horses)</button><button data-artillery="'+c.id+'" '+((c.stock.muskets||0)<20||(c.stock.tools||0)<15?'disabled':'')+'>Build artillery (20 muskets, 15 tools)</button></div>').join('');
  dialog('Colonial Defense','<p>Equip local militia with muskets and build forts to defend your settlements. Royal forces arrive after a declaration of independence.</p><div class="father-list">'+(rows||'<p>Found a colony to organize a militia.</p>')+'</div><h3>Royal Expeditionary Force</h3><p>'+(i.declared?troops.length+' royal regiment(s) advancing toward your colonies.':'No hostile regiments have landed.')+'</p><p>'+(m.lastBattle?esc(m.lastBattle):'No battles fought yet.')+'</p>');
  document.querySelectorAll('[data-train]').forEach(b=>b.onclick=()=>{const c=st.colonies.find(c=>c.id===Number(b.dataset.train));if(c)trainSoldiers(c)});
  document.querySelectorAll('[data-deploy]').forEach(b=>b.onclick=()=>{const c=st.colonies.find(c=>c.id===Number(b.dataset.deploy));if(c)deployMilitia(c)});
+ for(const kind of ['cavalry','artillery'])document.querySelectorAll('[data-'+kind+']').forEach(b=>b.onclick=()=>{const c=st.colonies.find(c=>c.id===Number(b.dataset[kind]));if(c)trainFieldUnit(c,kind)});
 }
 function spawnRoyalRegiment(){
  const m=militaryState(),c=st.colonies[(st.turn+m.nextId)%st.colonies.length];if(!c)return;
@@ -574,6 +606,7 @@ function advanceMilitary(){
   }
   const dx=Math.sign(target.x-troop.x),dy=Math.sign(target.y-troop.y);
   const options=[[dx,dy],[dx,0],[0,dy],[-dx,dy],[dx,-dy]].filter(([x,y])=>x||y);
+  const nearby=fieldArmy().filter(a=>Math.max(Math.abs(a.x-troop.x),Math.abs(a.y-troop.y))<=1);if(nearby.length){royalSkirmish(troop,nearby[0]);continue;}
   const next=options.map(([x,y])=>({x:troop.x+x,y:troop.y+y})).find(p=>land(terrainAt(p.x,p.y))&&!m.troops.some(t=>t!==troop&&t.x===p.x&&t.y===p.y)&&!fieldArmy().some(a=>a.x===p.x&&a.y===p.y));
   if(next){troop.x=next.x;troop.y=next.y;reveal(troop.x,troop.y,1)}
  }
