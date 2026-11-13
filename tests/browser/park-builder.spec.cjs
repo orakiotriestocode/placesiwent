@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.9');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.10');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
