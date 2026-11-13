@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { page.on('dialog',dialog=>dialog.accept()); await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.19');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.24');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
@@ -92,5 +92,12 @@ test('new graphical layers animate without runtime errors',async ({page})=>{
  await page.locator('#buyLand').click();
  await page.waitForTimeout(400);
  await expect(page.locator('#world')).toBeVisible();
+ expect(errors).toEqual([]);
+});
+
+test('pirate ship is available and park rendering remains stable',async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await expect(page.locator('[data-tool="pirate"]')).toBeVisible();
+ await page.waitForTimeout(350);
  expect(errors).toEqual([]);
 });
