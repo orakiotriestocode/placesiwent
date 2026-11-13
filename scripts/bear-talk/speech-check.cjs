@@ -22,6 +22,9 @@ function el(id) {
         this.options.push(o);
       },
       focus() {},
+      setAttribute(name, value) {
+        this[name] = value;
+      },
       append(node) {
         (this.children ||= []).push(node);
       },
@@ -53,10 +56,14 @@ const ctx = {
   window: { speechSynthesis: synth },
   document: {
     getElementById: el,
-    querySelectorAll: () =>
-      ['hello', 'love', 'sleep'].map((key) => {
-        const b = el('phrase-' + key);
-        b.dataset = { phrase: key };
+    querySelectorAll: (selector) =>
+      (selector === '[data-reaction]'
+        ? ['happy', 'wave', 'love', 'giggle', 'sleepy', 'tilt', 'neutral']
+        : ['hello', 'love', 'sleep']
+      ).map((key) => {
+        const reaction = selector === '[data-reaction]';
+        const b = el((reaction ? 'reaction-' : 'phrase-') + key);
+        b.dataset = reaction ? { reaction: key } : { phrase: key };
         return b;
       }),
     querySelector: () => el('settings'),
@@ -140,6 +147,15 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   assert.equal(current.voice.voiceURI, 'french');
   assert.equal(current.rate, 0.7);
   assert.equal(el('bear').className, 'bear love');
+  const speaking = current;
+  const oldHistory = el('history').children.length;
+  el('giggle-sound').checked = true;
+  await el('reaction-wave').onclick();
+  assert.equal(current, speaking);
+  assert.equal(el('bear').className, 'bear wave talking');
+  await el('reaction-giggle').onclick();
+  assert.equal(current, speaking);
+  assert.equal(el('history').children.length, oldHistory);
   current.onend();
   await new Promise(setImmediate);
   assert.match(el('history').children[0].children[0].textContent, /Spoken/);
@@ -148,7 +164,27 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   await el('remote-stop').onclick();
   await new Promise(setImmediate);
   assert.match(el('history').children[0].children[0].textContent, /Stopped/);
+  el('giggle-sound').checked = false;
+  for (const name of [
+    'happy',
+    'wave',
+    'love',
+    'giggle',
+    'sleepy',
+    'tilt',
+    'neutral',
+  ]) {
+    await el('reaction-' + name).onclick();
+    assert.equal(el('bear').className, 'bear ' + name);
+  }
+  const entries = el('history').children.length;
+  el('giggle-sound').checked = true;
+  await el('reaction-giggle').onclick();
+  assert.match(current.text, /Hi hi/);
+  current.onend();
+  await new Promise(setImmediate);
+  assert.equal(el('history').children.length, entries);
   console.log(
-    'PASS: full single-device remote composer, language-specific phrases, expression, selected voice and speed, history, repeat and stop; no network calls. Existing voice filtering/playback checks passed.',
+    'PASS: independent reactions do not add speech messages or interrupt active speech; optional idle giggle, all seven expressions, demo controls, voice filtering, stop and repeat.',
   );
 })();

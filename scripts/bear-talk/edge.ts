@@ -150,6 +150,7 @@ Deno.serve(async (req) => {
       );
       return reply({
         paired: !!s.controller_hash,
+        reaction: s.reaction,
         voiceState: s.voice_state,
         stopId: s.stop_id,
         online:
@@ -185,6 +186,41 @@ Deno.serve(async (req) => {
       );
       await db('bear_sessions?id=eq.' + b.id, 'PATCH', {
         stop_id: crypto.randomUUID(),
+        reaction: null,
+      });
+      return reply({ ok: true });
+    }
+    if (b.action === 'react' && parent) {
+      if (
+        ![
+          'happy',
+          'wave',
+          'love',
+          'giggle',
+          'sleepy',
+          'tilt',
+          'neutral',
+        ].includes(b.emotion) ||
+        !langs.includes(b.lang) ||
+        typeof b.sound !== 'boolean' ||
+        !/^[0-9a-f-]{36}$/.test(b.requestId || '')
+      )
+        return reply({ error: 'Check reaction' }, 400);
+      if (
+        !(await db('rpc/bear_rate_limit', 'POST', {
+          p_key: b.id + ':react',
+          p_max: 40,
+        }))
+      )
+        return reply({ error: 'Please slow down a little' }, 429);
+      await db('bear_sessions?id=eq.' + b.id, 'PATCH', {
+        reaction: {
+          id: b.requestId,
+          emotion: b.emotion,
+          lang: b.lang,
+          sound: b.sound,
+          expires: Date.now() + 12000,
+        },
       });
       return reply({ ok: true });
     }
@@ -198,7 +234,9 @@ Deno.serve(async (req) => {
             !Number.isFinite(b.rate) ||
             b.rate < 0.5 ||
             b.rate > 1.5)) ||
-        !['happy', 'wave', 'sleepy', 'love'].includes(b.emotion) ||
+        !['happy', 'wave', 'sleepy', 'love', 'giggle', 'tilt'].includes(
+          b.emotion,
+        ) ||
         typeof b.text !== 'string' ||
         !b.text.trim() ||
         b.text.length > 500 ||

@@ -541,3 +541,298 @@ output {
 .demo-mode .tablet-tools #tablet-status {
   font-size: 0.8rem;
 }
+/* Alpha 0.3: reactions work independently from the speech queue. */
+.reactions {
+  border-top: 1px solid #65837755;
+  border-bottom: 1px solid #65837755;
+  padding: 0 0 12px;
+  margin: 20px 0;
+}
+.reactions h2 {
+  margin: 18px 0 8px;
+}
+.expression-pad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.expression-pad button {
+  background: #34514e;
+  color: #f2dec0;
+  font-size: 0.83rem;
+  padding: 12px 8px;
+}
+.expression-pad button:hover {
+  background: #49675b;
+}
+.sound-option {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 400;
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+.sound-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: #eac493;
+  flex-shrink: 0;
+}
+.head,
+.wave-arm {
+  transform-box: view-box;
+  transform-origin: 210px 275px;
+  transition: transform 0.6s ease;
+}
+.wave-arm {
+  transform-origin: 290px 270px;
+}
+.head {
+  animation: curious-idle 12s ease-in-out infinite;
+}
+.smile {
+  transition: opacity 0.2s;
+}
+.tongue {
+  opacity: 0;
+}
+.talking .mouth {
+  animation: chatter 0.78s ease-in-out infinite;
+  opacity: 1;
+}
+.talking .tongue {
+  opacity: 0.8;
+}
+.talking .smile {
+  opacity: 0.35;
+}
+.talking .head {
+  animation: speech-nod 2.5s ease-in-out infinite;
+}
+.happy .head {
+  transform: rotate(-3deg);
+}
+.wave .wave-arm {
+  animation: friendly-wave 0.62s ease-in-out infinite alternate;
+}
+.wave .head {
+  animation: none;
+  transform: rotate(-6deg);
+}
+.tilt .head {
+  animation: head-tilt 3.5s ease-in-out infinite;
+}
+.giggle svg {
+  animation: giggle-bounce 0.38s ease-in-out infinite;
+}
+.giggle .head {
+  animation: giggle-head 0.38s ease-in-out infinite;
+}
+.giggle .eyes {
+  animation: none;
+  transform: scaleY(0.3);
+}
+.giggle .mouth {
+  opacity: 1;
+  animation: chatter 0.36s infinite;
+}
+.giggle .tongue {
+  opacity: 1;
+}
+.giggle .smile {
+  opacity: 0;
+}
+.sleepy .head {
+  animation: sleep-nod 5s ease-in-out infinite;
+}
+.sleepy .eyes {
+  animation: none;
+  transform: scaleY(0.12);
+}
+.sleepy:not(.talking) .mouth {
+  opacity: 0.75;
+  transform: scale(0.5, 0.9);
+}
+.sleepy::after {
+  content: 'z z z';
+  position: absolute;
+  right: -10px;
+  top: 8%;
+  font:
+    500 1.5rem Georgia,
+    serif;
+  color: #53685e;
+  animation: dream 3s ease-in-out infinite;
+}
+.love::after {
+  animation: heart-float 2s ease-in-out infinite;
+}
+.love .head {
+  animation: love-tilt 3s ease-in-out infinite;
+}
+.neutral .head {
+  animation: curious-idle 12s ease-in-out infinite;
+}
+@keyframes chatter {
+  0%,
+  100% {
+    transform: scale(0.65, 0.15);
+  }
+  15% {
+    transform: scale(0.85, 0.85);
+  }
+  28% {
+    transform: scale(1.1, 0.35);
+  }
+  43% {
+    transform: scale(0.75, 1);
+  }
+  56% {
+    transform: scale(0.9, 0.2);
+  }
+  74% {
+    transform: scale(1, 0.7);
+  }
+  88% {
+    transform: scale(0.8, 0.3);
+  }
+}
+@keyframes curious-idle {
+  0%,
+  45%,
+  100% {
+    transform: rotate(0);
+  }
+  55%,
+  65% {
+    transform: rotate(3deg);
+  }
+  80% {
+    transform: rotate(-2deg);
+  }
+}
+@keyframes speech-nod {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg) translateY(2px);
+  }
+}
+@keyframes friendly-wave {
+  from {
+    transform: rotate(-18deg);
+  }
+  to {
+    transform: rotate(-65deg);
+  }
+}
+@keyframes head-tilt {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  30%,
+  70% {
+    transform: rotate(12deg);
+  }
+}
+@keyframes giggle-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes giggle-head {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes sleep-nod {
+  0%,
+  100% {
+    transform: rotate(5deg) translateY(0);
+  }
+  55% {
+    transform: rotate(9deg) translateY(8px);
+  }
+}
+@keyframes dream {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+@keyframes heart-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.95);
+  }
+  50% {
+    transform: translateY(-12px) scale(1.1);
+  }
+}
+@keyframes love-tilt {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bear svg,
+  .bear .head,
+  .bear .wave-arm,
+  .bear .mouth,
+  .bear::after {
+    animation: none !important;
+    transition: none;
+  }
+  .talking .mouth {
+    transform: scaleY(0.6);
+  }
+}
+/* Keep the bear in view while trying reactions in the single-device demo. */
+.demo-mode #tablet {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: #182c32;
+  padding-bottom: 4px;
+}
+.demo-mode .stage {
+  height: 30dvh;
+  min-height: 260px;
+}
+.demo-mode .bear {
+  width: min(220px, 34vw, 24dvh);
+  bottom: 18px;
+}
+.demo-mode .tablet-tools {
+  margin: 6px 0;
+}
+.demo-mode .sound-settings {
+  margin: 6px 0;
+  padding: 10px;
+}
+.demo-mode #tablet:has(.sound-settings[open]) {
+  position: relative;
+}
