@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { page.on('dialog',dialog=>dialog.accept()); await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.14');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.15');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
@@ -78,4 +78,11 @@ test('empire portfolio keeps two separate parks and allows switching',async ({pa
  await expect(page.locator('#cash')).toContainText('11,000');
  const park=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
  expect(park.landId).toBe('meadow');
+});
+
+test('illustrated rides and shops render without canvas errors',async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.evaluate(()=>{const a=window.PiwGameAdapters['park-builder'];const s=a.exportSave();for(const [i,type] of ['wheel','coaster','haunted','logflume','balloons','drink','toilet'].entries()){s.tiles[(7+i)*22+8]={type,condition:100,price:5,stock:10}}a.importSave(s)});
+ await page.waitForTimeout(500);
+ expect(errors).toEqual([]);
 });
