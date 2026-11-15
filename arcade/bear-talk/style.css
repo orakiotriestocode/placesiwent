@@ -1155,3 +1155,337 @@ header {
 .local-voice-pack p {
   margin: 0.5rem 0;
 }
+
+/* Alpha 0.5.1: one settings sheet; the main surface is for play. */
+.settings-button {
+  padding: 9px 14px;
+  min-height: 42px;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+.header-right {
+  gap: 16px;
+}
+#settings-dialog {
+  width: min(520px, calc(100vw - 24px));
+  max-height: calc(100dvh - 40px);
+  padding: 0 24px 20px;
+  border: 1px solid #78938866;
+  border-radius: 24px;
+  background: #223b3f;
+  color: #f8f0de;
+  box-shadow: 0 24px 100px #061b25aa;
+}
+#settings-dialog::backdrop {
+  background: #081c25b8;
+  backdrop-filter: blur(5px);
+}
+.settings-heading {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #223b3f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid #78938844;
+}
+.settings-heading h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+.settings-heading button {
+  min-height: 42px;
+  color: #eac493;
+  padding: 8px 14px;
+}
+.settings-group {
+  padding: 18px 0;
+  border-bottom: 1px solid #78938833;
+}
+.settings-group h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+.settings-group label:first-child {
+  margin-top: 0;
+}
+#settings-dialog .ui-picker {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+#settings-dialog .ui-picker select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 9px;
+  font-size: 0.9rem;
+}
+#settings-dialog .fine {
+  margin: 10px 0 0;
+}
+#settings-dialog button.secondary {
+  margin-top: 16px;
+}
+#settings-dialog .session-settings {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+#settings-dialog .local-voice-pack {
+  margin: 18px 0 0;
+  padding: 14px;
+}
+.local-voice-pack summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.receiver-settings,
+.controller-settings,
+.session-settings {
+  display: none;
+}
+body[data-screen='tablet'] .receiver-settings,
+body[data-screen='remote'] .controller-settings,
+body[data-screen='tablet'] .session-settings,
+body[data-screen='remote'] .session-settings,
+.demo-mode .controller-settings {
+  display: block;
+}
+.receiver-end,
+.controller-end {
+  display: none;
+}
+body[data-screen='tablet'] .receiver-end,
+body[data-screen='remote'] .controller-end,
+.demo-mode .controller-end {
+  display: inline-block;
+}
+.demo-mode .receiver-settings.settings-group,
+.demo-mode .receiver-only-controls,
+.demo-mode .receiver-playback {
+  display: none;
+}
+.receiver-playback {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.receiver-playback > p {
+  margin: 0;
+}
+.spoken-language-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 4px;
+}
+.spoken-language-row label {
+  flex: 1;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #bdcfc5;
+}
+.spoken-language-row select {
+  width: auto;
+  max-width: 62%;
+  padding: 10px 30px 10px 12px;
+  font-size: 0.8rem;
+}
+.phrase-section {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 18px 0;
+}
+.section-line > span {
+  display: none;
+}
+.section-line h2 {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #bdcfc5;
+}
+.phrase-section .quick {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.phrase-section .quick button {
+  padding: 10px 8px;
+}
+.compose-meta > span:last-child {
+  display: none;
+}
+.compose-meta {
+  justify-content: flex-end;
+}
+#remote > .playback {
+  justify-content: flex-end;
+  margin: 10px 0 16px;
+}
+#remote > .playback button {
+  border-color: transparent;
+  color: #bdcfc5;
+}
+.history-panel,
+.reactions {
+  border-width: 0;
+  border-top-width: 1px;
+  border-radius: 0;
+  background: none;
+  padding: 14px 0;
+  margin: 0;
+}
+.connection {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0 0 18px;
+  color: #b4d3be;
+  font-size: 0.72rem;
+}
+.demo-mode #tablet .tablet-tools {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  margin: 0;
+  padding: 0;
+}
+.demo-mode #tablet-status {
+  display: none;
+}
+.demo-mode #tablet .tablet-tools button {
+  font-size: 0.68rem;
+  min-height: 34px;
+  padding: 6px 10px;
+  background: #26443d;
+}
+.demo-mode #tablet {
+  padding: 0;
+  box-shadow: none;
+}
+.demo-mode #remote {
+  margin: 18px auto 0;
+}
+@media (min-width: 900px) {
+  .demo-mode main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+    max-width: 1200px;
+    padding-top: 12px;
+  }
+  .demo-mode #tablet {
+    top: 24px;
+  }
+  .demo-mode .stage {
+    min-height: 460px;
+    height: min(73dvh, 660px);
+  }
+  .demo-mode .bear {
+    width: min(310px, 34vw, 42dvh);
+    bottom: 40px;
+  }
+  .demo-mode .bubble {
+    font-size: 1.25rem;
+  }
+  .demo-mode #remote {
+    margin: 0;
+    padding: 24px;
+    border-radius: 24px;
+  }
+  .demo-mode #notice {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  header a {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .header-right {
+    gap: 10px;
+  }
+  .header-right > span small {
+    display: block;
+    margin-left: 0;
+    margin-top: 3px;
+  }
+  .settings-button {
+    font-size: 0.73rem;
+    min-height: 42px;
+    padding: 8px 12px;
+  }
+  main {
+    padding: 12px;
+  }
+  .demo-mode #remote {
+    padding: 18px;
+    margin-top: 14px;
+    border-radius: 20px;
+  }
+  .demo-mode .stage {
+    height: 23dvh;
+    min-height: 165px;
+    border-radius: 22px;
+  }
+  .demo-mode .bear {
+    width: min(150px, 33vw, 18dvh);
+    bottom: 17px;
+  }
+  .demo-mode .scene-label {
+    display: none;
+  }
+  .demo-mode .bubble {
+    top: 8px;
+    padding: 7px 12px;
+    max-height: 50px;
+    font-size: 0.85rem;
+  }
+  .send-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 8px;
+  }
+  .send-row label {
+    font-size: 0.68rem;
+  }
+  .send-row select {
+    font-size: 0.78rem;
+    padding: 12px 8px;
+  }
+  .send-row button {
+    font-size: 0.82rem;
+    padding: 12px 10px;
+  }
+  .phrase-section .quick button {
+    font-size: 0.76rem;
+  }
+  .spoken-language-row {
+    gap: 8px;
+  }
+  .spoken-language-row label {
+    font-size: 0.68rem;
+  }
+  .spoken-language-row select {
+    font-size: 0.74rem;
+    padding-left: 8px;
+  }
+  #settings-dialog {
+    max-height: calc(100dvh - 20px);
+    padding-inline: 20px;
+    border-radius: 20px;
+  }
+  .receiver-playback {
+    flex-wrap: wrap;
+  }
+}

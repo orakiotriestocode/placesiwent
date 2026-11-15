@@ -8,25 +8,21 @@
     />
     <meta name="theme-color" content="#182c32" />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.5.0" />
+    <link rel="stylesheet" href="style.css?v=0.5.1" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & YOU <small>alpha 0.5.0</small></span
-        ><label class="ui-picker"
-          >Interface language<select
-            id="ui-language"
-            aria-label="Interface language"
-          >
-            <option value="en">English</option>
-            <option value="nl">Nederlands</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="es">Español</option>
-          </select></label
+        <span>BEAR & YOU <small>alpha 0.5.1</small></span
+        ><button
+          type="button"
+          id="open-settings"
+          class="secondary settings-button"
+          aria-haspopup="dialog"
         >
+          ⚙ Settings
+        </button>
       </div>
     </header>
     <main>
@@ -190,70 +186,20 @@
 
         <div class="tablet-tools">
           <span id="tablet-status" role="status">Getting ready…</span
-          ><button id="sound" class="secondary">🔊 Test voice</button
-          ><button id="fullscreen" class="secondary">⛶ Full screen</button
-          ><button id="end-tablet" class="plain">End session</button>
+          ><button id="fullscreen" class="secondary">⛶ Full screen</button>
         </div>
-        <details class="sound-settings">
-          <summary>Voice & sound setup</summary>
-          <p id="voice-health" role="status">
-            Tap Test voice here before playing
+        <div class="receiver-playback">
+          <p id="speech-progress" class="fine" role="status">
+            Waiting for a message
           </p>
-          <p class="fine">
-            Turn up the volume, choose a voice, and tap Test voice. Keep the
-            bear screen open.
-          </p>
-          <div class="local-voice-pack">
-            <h3>A new Belgian Dutch voice</h3>
-            <p class="fine">
-              Try Nathalie, a free voice generated on this device. Optional
-              download: about 100 MB. First setup can take a minute.
-            </p>
-            <button type="button" id="enable-local-voice" class="secondary">
-              Enable &amp; try Nathalie
-            </button>
-            <a
-              class="fine"
-              href="local-voice-notices.md"
-              target="_blank"
-              rel="noopener"
-              >Voice credits</a
-            >
-            <p id="local-pack-status" class="fine" role="status">
-              No account, subscription or speech limits.
-            </p>
-          </div>
-          <label for="local-language">Bear’s spoken language</label
-          ><select id="local-language">
-            <option value="nl-BE">Nederlands · België</option>
-            <option value="nl-NL">Nederlands · Nederland</option>
-            <option value="en-GB">English · UK</option>
-            <option value="en-US">English · US</option>
-            <option value="fr-FR">Français</option>
-            <option value="de-DE">Deutsch</option>
-            <option value="es-ES">Español</option></select
-          ><label for="local-voice">Voice on this device</label
-          ><select id="local-voice">
-            <option value="">Automatic · selected language</option></select
-          ><label for="local-rate"
-            >Speaking speed · <output id="local-rate-label">0.9×</output></label
-          ><input
-            id="local-rate"
-            type="range"
-            min="0.5"
-            max="1.5"
-            step="0.1"
-            value="0.9"
-          />
           <div class="playback">
             <button id="local-stop" class="secondary">
-              ■ Stop & clear queue</button
+              ■ Stop &amp; clear queue</button
             ><button id="local-repeat" class="secondary" disabled>
               ↻ Repeat last
             </button>
           </div>
-          <p id="speech-progress" role="status">Waiting for a message</p>
-        </details>
+        </div>
         <section id="pairing" class="pairing">
           <h2>Connect another device</h2>
           <p>Scan this QR code with the camera, or enter the code manually.</p>
@@ -293,20 +239,18 @@
         </div>
         <p id="remote-status" role="status" class="connection">Connecting…</p>
         <form id="message-form">
-          <label for="language">Bear’s spoken language</label
-          ><select id="language">
-            <option value="nl-BE">Nederlands · België</option>
-            <option value="nl-NL">Nederlands · Nederland</option>
-            <option value="en-GB">English · UK</option>
-            <option value="en-US">English · US</option>
-            <option value="fr-FR">Français</option>
-            <option value="de-DE">Deutsch</option>
-            <option value="es-ES">Español</option>
-          </select>
-          <p class="fine language-note">
-            Independent from the interface language. Bear reads your words; it
-            doesn’t translate.
-          </p>
+          <div class="spoken-language-row">
+            <label for="language">Bear’s spoken language</label
+            ><select id="language">
+              <option value="nl-BE">Nederlands · België</option>
+              <option value="nl-NL">Nederlands · Nederland</option>
+              <option value="en-GB">English · UK</option>
+              <option value="en-US">English · US</option>
+              <option value="fr-FR">Français</option>
+              <option value="de-DE">Deutsch</option>
+              <option value="es-ES">Español</option>
+            </select>
+          </div>
           <section class="phrase-section">
             <div class="section-line">
               <h2>A little inspiration</h2>
@@ -333,26 +277,6 @@
             <span id="count">0 / 500</span
             ><span>Only sent when you tap Speak</span>
           </div>
-          <details class="voice-details">
-            <summary>Voice settings</summary>
-            <p id="remote-voice-health" role="status" class="fine">
-              Waiting for the bear screen’s voice list…
-            </p>
-            <label for="remote-voice">Voice from the bear screen</label
-            ><select id="remote-voice">
-              <option value="">Automatic · selected language</option></select
-            ><label for="remote-rate"
-              >Speaking speed ·
-              <output id="remote-rate-label">0.9×</output></label
-            ><input
-              id="remote-rate"
-              type="range"
-              min="0.5"
-              max="1.5"
-              step="0.1"
-              value="0.9"
-            />
-          </details>
           <div class="send-row">
             <div>
               <label for="emotion">Expression with message</label
@@ -369,9 +293,7 @@
           </div>
         </form>
         <div class="playback">
-          <button id="remote-test" class="secondary" hidden>
-            🔊 Test voice</button
-          ><button id="remote-stop" class="secondary">■ Stop</button
+          <button id="remote-stop" class="secondary">■ Stop</button
           ><button id="remote-repeat" class="secondary" disabled>
             ↻ Repeat last
           </button>
@@ -399,15 +321,124 @@
           <summary>Recent messages</summary>
           <ul id="history"></ul>
         </details>
-        <button id="end-remote" class="plain">End this session</button>
       </section>
       <p id="notice" role="status" class="notice"></p>
     </main>
+
+    <dialog id="settings-dialog" aria-labelledby="settings-title">
+      <div class="settings-heading">
+        <h2 id="settings-title">Settings</h2>
+        <button type="button" id="close-settings" class="plain">Done</button>
+      </div>
+      <section class="settings-group interface-settings">
+        <label class="ui-picker"
+          >Interface language<select
+            id="ui-language"
+            aria-label="Interface language"
+          >
+            <option value="en">English</option>
+            <option value="nl">Nederlands</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="es">Español</option>
+          </select></label
+        >
+        <p class="fine">
+          Independent from the interface language. Bear reads your words; it
+          doesn’t translate.
+        </p>
+      </section>
+      <section class="settings-group receiver-settings">
+        <h3>Bear’s voice</h3>
+        <p id="voice-health" class="fine" role="status">
+          Tap Test voice here before playing
+        </p>
+        <div class="receiver-only-controls">
+          <label for="local-language">Bear’s spoken language</label
+          ><select id="local-language">
+            <option value="nl-BE">Nederlands · België</option>
+            <option value="nl-NL">Nederlands · Nederland</option>
+            <option value="en-GB">English · UK</option>
+            <option value="en-US">English · US</option>
+            <option value="fr-FR">Français</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="es-ES">Español</option></select
+          ><label for="local-voice">Voice on this device</label
+          ><select id="local-voice">
+            <option value="">Automatic · selected language</option></select
+          ><label for="local-rate"
+            >Speaking speed · <output id="local-rate-label">0.9×</output></label
+          ><input
+            id="local-rate"
+            type="range"
+            min="0.5"
+            max="1.5"
+            step="0.1"
+            value="0.9"
+          />
+        </div>
+        <button type="button" id="sound" class="secondary">
+          🔊 Test voice
+        </button>
+      </section>
+      <section class="settings-group controller-settings">
+        <h3>Bear’s voice</h3>
+        <p id="remote-voice-health" role="status" class="fine">
+          Waiting for the bear screen’s voice list…
+        </p>
+        <label for="remote-voice">Voice from the bear screen</label
+        ><select id="remote-voice">
+          <option value="">Automatic · selected language</option></select
+        ><label for="remote-rate"
+          >Speaking speed · <output id="remote-rate-label">0.9×</output></label
+        ><input
+          id="remote-rate"
+          type="range"
+          min="0.5"
+          max="1.5"
+          step="0.1"
+          value="0.9"
+        />
+
+        <button type="button" id="remote-test" class="secondary" hidden>
+          🔊 Test voice
+        </button>
+      </section>
+      <section class="receiver-settings">
+        <details class="local-voice-pack">
+          <summary>Add a free Belgian Dutch voice</summary>
+
+          <p class="fine">
+            Try Nathalie, a free voice generated on this device. Optional
+            download: about 100 MB. First setup can take a minute.
+          </p>
+          <button type="button" id="enable-local-voice" class="secondary">
+            Enable &amp; try Nathalie
+          </button>
+          <a
+            class="fine"
+            href="local-voice-notices.md"
+            target="_blank"
+            rel="noopener"
+            >Voice credits</a
+          >
+          <p id="local-pack-status" class="fine" role="status">
+            No account, subscription or speech limits.
+          </p>
+        </details>
+      </section>
+      <section class="settings-group session-settings">
+        <button id="end-tablet" class="plain receiver-end">End session</button>
+        <button id="end-remote" class="plain controller-end">
+          End this session
+        </button>
+      </section>
+    </dialog>
     <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
-    <script src="pairing.js?v=0.5.0"></script>
-    <script src="phrases.js?v=0.5.0"></script>
-    <script src="i18n.js?v=0.5.0"></script>
-    <script src="local-voice.js?v=0.5.0"></script>
-    <script src="app.js?v=0.5.0"></script>
+    <script src="pairing.js?v=0.5.1"></script>
+    <script src="phrases.js?v=0.5.1"></script>
+    <script src="i18n.js?v=0.5.1"></script>
+    <script src="local-voice.js?v=0.5.1"></script>
+    <script src="app.js?v=0.5.1"></script>
   </body>
 </html>
