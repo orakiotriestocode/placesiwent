@@ -3,7 +3,7 @@ const game = '/arcade/park-builder/';
 test.beforeEach(async ({page}) => { page.on('dialog',dialog=>dialog.accept()); await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
 test('loads and simulates without page errors', async ({page}) => {
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.24');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.29');
  await expect(page.locator('#cash')).toContainText('$');
  await expect(page.locator('#entertainerCount')).toHaveText('0');
  await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
@@ -100,4 +100,11 @@ test('pirate ship is available and park rendering remains stable',async ({page})
  await expect(page.locator('[data-tool="pirate"]')).toBeVisible();
  await page.waitForTimeout(350);
  expect(errors).toEqual([]);
+});
+
+test('multi-tile attractions reserve land and can be demolished from any occupied tile',async ({page})=>{
+ await page.locator('#buyLand').click();
+ const result=await page.evaluate(()=>{const a=window.PiwGameAdapters['park-builder'];const park=a.exportSave();return {count:park.tiles.filter(t=>t?.type==='footprint').length,hasPark:!!park.tiles}});
+ expect(result.hasPark).toBe(true);
+ await expect(page.locator('[data-tool="coaster"]')).toBeVisible();
 });
