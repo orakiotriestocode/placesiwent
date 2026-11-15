@@ -87,6 +87,7 @@
     $('notice').textContent = text;
   }
   function show(id) {
+    document.body?.setAttribute('data-screen', id);
     ['welcome', 'join', 'tablet', 'remote'].forEach(
       (x) => ($(x).hidden = x !== id),
     );
@@ -252,6 +253,7 @@
         $('local-voice').value = selected;
     } catch {}
     reportVoices();
+    if (demo) $('remote-voice').value = $('local-voice').value;
   }
   const reactionNames = {
     happy: 'Happy',
@@ -686,6 +688,8 @@
       $('start').disabled = false;
     }
   };
+  $('open-settings').onclick = () => $('settings-dialog').showModal();
+  $('close-settings').onclick = () => $('settings-dialog').close();
   $('parent').onclick = () => show('join');
   $('back').onclick = () => show('welcome');
   $('join-form').onsubmit = async (e) => {
@@ -840,6 +844,11 @@
       range.value = localStorage.getItem('bear-' + prefix + '-rate') || '0.9';
     } catch {}
     range.oninput = () => {
+      if (demo && prefix === 'remote') {
+        $('local-rate').value = range.value;
+        $('local-rate-label').textContent =
+          Number(range.value).toFixed(1) + '×';
+      }
       $(prefix + '-rate-label').textContent =
         Number(range.value).toFixed(1) + '×';
       try {
@@ -848,6 +857,12 @@
     };
     range.oninput();
   }
+  $('remote-voice').onchange = () => {
+    if (demo) {
+      $('local-voice').value = $('remote-voice').value;
+      $('local-voice').onchange();
+    }
+  };
   $('local-voice').onchange = () => {
     try {
       localStorage.setItem('bear-local-voice', $('local-voice').value);
@@ -865,6 +880,7 @@
       $('demo-lang').value = spoken;
     }
   } catch {}
+  if (!demo) document.body?.setAttribute('data-screen', 'welcome');
   showGreeting();
   updateVoices();
   synth?.addEventListener('voiceschanged', updateVoices);
@@ -885,6 +901,7 @@
     try {
       if (session) await api('end');
       stopLocal();
+      $('settings-dialog').close();
       show('welcome');
       notice('Session ended.');
     } catch {
@@ -938,7 +955,7 @@
     active = true;
     role = 'tablet';
     document.body.classList.add('demo-mode');
-    document.querySelector('.sound-settings').open = false;
+
     $('remote-status').textContent =
       '● Local demo · Remote and bear are on this device';
     $('remote-test').hidden = false;

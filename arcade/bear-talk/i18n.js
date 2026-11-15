@@ -1,5 +1,30 @@
 (() => {
   const strings = {
+    Settings: {
+      nl: 'Instellingen',
+      fr: 'Réglages',
+      de: 'Einstellungen',
+      es: 'Ajustes',
+    },
+    Done: { nl: 'Klaar', fr: 'Terminé', de: 'Fertig', es: 'Listo' },
+    'Bear’s voice': {
+      nl: 'De stem van beer',
+      fr: 'La voix de l’ours',
+      de: 'Bärenstimme',
+      es: 'La voz de osito',
+    },
+    'Add a free Belgian Dutch voice': {
+      nl: 'Een gratis Vlaams-Nederlandse stem toevoegen',
+      fr: 'Ajouter une voix néerlandaise belge gratuite',
+      de: 'Kostenlose belgisch-niederländische Stimme hinzufügen',
+      es: 'Añadir una voz gratuita de neerlandés belga',
+    },
+    'Speaking speed ·': {
+      nl: 'Spreeksnelheid ·',
+      fr: 'Vitesse de parole ·',
+      de: 'Sprechtempo ·',
+      es: 'Velocidad de voz ·',
+    },
     'Downloading Nathalie': {
       nl: 'Nathalie downloaden',
       fr: 'Téléchargement de Nathalie',
