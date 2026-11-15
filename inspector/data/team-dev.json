@@ -16,7 +16,7 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -1769
+      "layoutOffsetDown": -179
     },
     {
       "id": "p1",
@@ -32,7 +32,7 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -2962
+      "layoutOffsetDown": -1372
     },
     {
       "id": "p2",
@@ -48,7 +48,7 @@
       "type": "executive",
       "startDate": "2026-10-19",
       "endDate": "",
-      "layoutOffsetDown": -117
+      "layoutOffsetDown": 1580
     },
     {
       "id": "p3",
@@ -64,7 +64,7 @@
       "type": "engagement",
       "startDate": "2027-01-01",
       "endDate": "",
-      "layoutOffsetDown": -8067
+      "layoutOffsetDown": -6212
     },
     {
       "id": "p4",
@@ -80,7 +80,7 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3911
+      "layoutOffsetDown": -2138
     },
     {
       "id": "p5",
@@ -96,7 +96,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3911
+      "layoutOffsetDown": -2138
     },
     {
       "id": "p6",
@@ -112,7 +112,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -8067
+      "layoutOffsetDown": -6212
     },
     {
       "id": "p7",
@@ -128,7 +128,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -8067
+      "layoutOffsetDown": -6212
     },
     {
       "id": "p8",
@@ -144,7 +144,7 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7818
+      "layoutOffsetDown": -6189
     },
     {
       "id": "p9",
@@ -160,7 +160,7 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7816
+      "layoutOffsetDown": -6187
     },
     {
       "id": "p10",
@@ -176,7 +176,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7818
+      "layoutOffsetDown": -6189
     },
     {
       "id": "p11",
@@ -192,7 +192,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7819
+      "layoutOffsetDown": -6190
     },
     {
       "id": "p12",
@@ -208,7 +208,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1874
+      "layoutOffsetDown": -1336
     },
     {
       "id": "p13",
@@ -224,7 +224,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2032
+      "layoutOffsetDown": -886
     },
     {
       "id": "p14",
@@ -240,7 +240,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1700
+      "layoutOffsetDown": -554
     },
     {
       "id": "p15",
@@ -256,7 +256,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2373
+      "layoutOffsetDown": -1227
     },
     {
       "id": "p16",
@@ -272,7 +272,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2180
+      "layoutOffsetDown": -1034
     },
     {
       "id": "p17",
@@ -288,7 +288,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2276
+      "layoutOffsetDown": -1130
     },
     {
       "id": "p18",
@@ -304,7 +304,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1985
+      "layoutOffsetDown": -839
     },
     {
       "id": "p19",
@@ -320,7 +320,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2082
+      "layoutOffsetDown": -936
     },
     {
       "id": "p20",
@@ -336,7 +336,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2541
+      "layoutOffsetDown": -1395
     },
     {
       "id": "p21",
@@ -352,7 +352,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2475
+      "layoutOffsetDown": -1329
     },
     {
       "id": "p22",
@@ -368,7 +368,7 @@
       "type": "architecture",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 635
+      "layoutOffsetDown": 1198
     },
     {
       "id": "p23",
@@ -384,7 +384,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 683
+      "layoutOffsetDown": 1171
     },
     {
       "id": "p24",
@@ -400,7 +400,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 683
+      "layoutOffsetDown": 1171
     },
     {
       "id": "p25",
@@ -416,7 +416,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 679
+      "layoutOffsetDown": 1167
     },
     {
       "id": "p26",
@@ -432,7 +432,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 583
+      "layoutOffsetDown": 1146
     },
     {
       "id": "p28",
@@ -448,7 +448,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 590
+      "layoutOffsetDown": 1153
     },
     {
       "id": "p29",
@@ -464,7 +464,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 595
+      "layoutOffsetDown": 1158
     },
     {
       "id": "p31",
@@ -480,7 +480,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 577
+      "layoutOffsetDown": 1140
     },
     {
       "id": "p33",
@@ -496,7 +496,7 @@
       "type": "product",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p34",
@@ -512,7 +512,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p35",
@@ -528,7 +528,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p36",
@@ -544,7 +544,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p37",
@@ -560,7 +560,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p38",
@@ -576,7 +576,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p39",
@@ -592,7 +592,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1813
+      "layoutOffsetDown": -797
     },
     {
       "id": "p40",
@@ -608,7 +608,7 @@
       "type": "engineering",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -449
+      "layoutOffsetDown": 317
     },
     {
       "id": "p41",
@@ -624,7 +624,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p42",
@@ -640,7 +640,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p43",
@@ -656,7 +656,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1
+      "layoutOffsetDown": 765
     },
     {
       "id": "p44",
@@ -672,7 +672,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p45",
@@ -688,7 +688,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p46",
@@ -704,7 +704,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p47",
@@ -720,7 +720,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p48",
@@ -736,7 +736,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1
+      "layoutOffsetDown": 765
     },
     {
       "id": "p49",
@@ -752,7 +752,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p50",
@@ -768,7 +768,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1
+      "layoutOffsetDown": 765
     },
     {
       "id": "p51",
@@ -784,7 +784,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p52",
@@ -800,7 +800,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 67
+      "layoutOffsetDown": 833
     },
     {
       "id": "p53",
@@ -816,7 +816,7 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1818
+      "layoutOffsetDown": -802
     },
     {
       "id": "p54",
@@ -828,11 +828,11 @@
       "product": "",
       "manager": "",
       "functionalManager": "",
-      "hierarchyLevel": "",
+      "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -4009
+      "layoutOffsetDown": -5362
     },
     {
       "id": "p55",
@@ -848,7 +848,7 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1755
+      "layoutOffsetDown": 1924
     }
   ],
   "types": [
