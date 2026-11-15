@@ -8,13 +8,13 @@
     />
     <meta name="theme-color" content="#182c32" />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.4.1" />
+    <link rel="stylesheet" href="style.css?v=0.5.0" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & YOU <small>alpha 0.4.1</small></span
+        <span>BEAR & YOU <small>alpha 0.5.0</small></span
         ><label class="ui-picker"
           >Interface language<select
             id="ui-language"
@@ -203,6 +203,26 @@
             Turn up the volume, choose a voice, and tap Test voice. Keep the
             bear screen open.
           </p>
+          <div class="local-voice-pack">
+            <h3>A new Belgian Dutch voice</h3>
+            <p class="fine">
+              Try Nathalie, a free voice generated on this device. Optional
+              download: about 100 MB. First setup can take a minute.
+            </p>
+            <button type="button" id="enable-local-voice" class="secondary">
+              Enable &amp; try Nathalie
+            </button>
+            <a
+              class="fine"
+              href="local-voice-notices.md"
+              target="_blank"
+              rel="noopener"
+              >Voice credits</a
+            >
+            <p id="local-pack-status" class="fine" role="status">
+              No account, subscription or speech limits.
+            </p>
+          </div>
           <label for="local-language">Bear’s spoken language</label
           ><select id="local-language">
             <option value="nl-BE">Nederlands · België</option>
@@ -384,9 +404,10 @@
       <p id="notice" role="status" class="notice"></p>
     </main>
     <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
-    <script src="pairing.js?v=0.4.1"></script>
-    <script src="phrases.js?v=0.4.1"></script>
-    <script src="i18n.js?v=0.4.1"></script>
-    <script src="app.js?v=0.4.1"></script>
+    <script src="pairing.js?v=0.5.0"></script>
+    <script src="phrases.js?v=0.5.0"></script>
+    <script src="i18n.js?v=0.5.0"></script>
+    <script src="local-voice.js?v=0.5.0"></script>
+    <script src="app.js?v=0.5.0"></script>
   </body>
 </html>

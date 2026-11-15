@@ -1,5 +1,103 @@
 (() => {
   const strings = {
+    'Downloading Nathalie': {
+      nl: 'Nathalie downloaden',
+      fr: 'Téléchargement de Nathalie',
+      de: 'Nathalie wird heruntergeladen',
+      es: 'Descargando Nathalie',
+    },
+    'Voice credits': {
+      nl: 'Stemvermelding',
+      fr: 'Crédits vocaux',
+      de: 'Stimmennachweise',
+      es: 'Créditos de voz',
+    },
+    'Enable Nathalie again to continue after stopping preparation.': {
+      nl: 'Schakel Nathalie opnieuw in om verder te gaan na het stoppen van de voorbereiding.',
+      fr: 'Réactivez Nathalie pour continuer après l’arrêt de la préparation.',
+      de: 'Aktiviere Nathalie nach dem Abbruch erneut, um fortzufahren.',
+      es: 'Activa Nathalie de nuevo para continuar tras detener la preparación.',
+    },
+    'A new Belgian Dutch voice': {
+      nl: 'Een nieuwe Vlaams-Nederlandse stem',
+      fr: 'Une nouvelle voix néerlandaise belge',
+      de: 'Eine neue belgisch-niederländische Stimme',
+      es: 'Una nueva voz de neerlandés belga',
+    },
+    'Try Nathalie, a free voice generated on this device. Optional download: about 100 MB. First setup can take a minute.':
+      {
+        nl: 'Probeer Nathalie, een gratis stem die op dit toestel wordt gemaakt. Optionele download: ongeveer 100 MB. De eerste keer kan even duren.',
+        fr: 'Essayez Nathalie, une voix gratuite générée sur cet appareil. Téléchargement facultatif : environ 100 Mo. La première préparation peut prendre une minute.',
+        de: 'Probiere Nathalie, eine kostenlose Stimme direkt auf diesem Gerät. Optionaler Download: etwa 100 MB. Die erste Einrichtung kann eine Minute dauern.',
+        es: 'Prueba Nathalie, una voz gratuita generada en este dispositivo. Descarga opcional: unos 100 MB. La primera preparación puede tardar un minuto.',
+      },
+    'Enable & try Nathalie': {
+      nl: 'Nathalie inschakelen en proberen',
+      fr: 'Activer et essayer Nathalie',
+      de: 'Nathalie aktivieren und testen',
+      es: 'Activar y probar Nathalie',
+    },
+    'No account, subscription or speech limits.': {
+      nl: 'Geen account, abonnement of spraaklimieten.',
+      fr: 'Sans compte, abonnement ni limite de parole.',
+      de: 'Ohne Konto, Abo oder Sprachlimit.',
+      es: 'Sin cuenta, suscripción ni límites de voz.',
+    },
+    'Local voice is unavailable in this browser. Device voices still work.': {
+      nl: 'Deze browser ondersteunt de lokale stem niet. Toestelstemmen blijven werken.',
+      fr: 'La voix locale est indisponible dans ce navigateur. Les voix de l’appareil fonctionnent toujours.',
+      de: 'Die lokale Stimme ist hier nicht verfügbar. Gerätestimmen funktionieren weiterhin.',
+      es: 'La voz local no está disponible en este navegador. Las voces del dispositivo siguen funcionando.',
+    },
+    'Loading speech engine…': {
+      nl: 'Spraak laden…',
+      fr: 'Chargement du moteur vocal…',
+      de: 'Sprachmodul wird geladen…',
+      es: 'Cargando el motor de voz…',
+    },
+    'Loading saved voice…': {
+      nl: 'Opgeslagen stem laden…',
+      fr: 'Chargement de la voix enregistrée…',
+      de: 'Gespeicherte Stimme wird geladen…',
+      es: 'Cargando la voz guardada…',
+    },
+    'Preparing voice on this device…': {
+      nl: 'Stem voorbereiden op dit toestel…',
+      fr: 'Préparation de la voix sur cet appareil…',
+      de: 'Stimme auf diesem Gerät wird vorbereitet…',
+      es: 'Preparando la voz en este dispositivo…',
+    },
+    'Preparing speech…': {
+      nl: 'Spraak voorbereiden…',
+      fr: 'Préparation de la parole…',
+      de: 'Sprache wird vorbereitet…',
+      es: 'Preparando el mensaje de voz…',
+    },
+    'Nathalie is ready. Choose a device voice any time to switch back.': {
+      nl: 'Nathalie is klaar. Je kunt altijd terugschakelen naar een toestelstem.',
+      fr: 'Nathalie est prête. Choisissez une voix de l’appareil pour revenir en arrière.',
+      de: 'Nathalie ist bereit. Du kannst jederzeit zu einer Gerätestimme wechseln.',
+      es: 'Nathalie está lista. Puedes volver a una voz del dispositivo cuando quieras.',
+    },
+    'Could not load Nathalie. Try again, or use a device voice.': {
+      nl: 'Nathalie kon niet worden geladen. Probeer opnieuw of kies een toestelstem.',
+      fr: 'Impossible de charger Nathalie. Réessayez ou utilisez une voix de l’appareil.',
+      de: 'Nathalie konnte nicht geladen werden. Erneut versuchen oder eine Gerätestimme wählen.',
+      es: 'No se pudo cargar Nathalie. Inténtalo de nuevo o usa una voz del dispositivo.',
+    },
+    'Nathalie needs attention. Enable the voice again, or choose a device voice and tap Test voice.':
+      {
+        nl: 'Nathalie heeft aandacht nodig. Schakel de stem opnieuw in of kies een toestelstem en tik op Stem testen.',
+        fr: 'Nathalie nécessite votre attention. Réactivez la voix ou choisissez une voix de l’appareil et testez-la.',
+        de: 'Nathalie benötigt Aufmerksamkeit. Aktiviere sie erneut oder wähle und teste eine Gerätestimme.',
+        es: 'Nathalie necesita atención. Actívala otra vez o elige una voz del dispositivo y pruébala.',
+      },
+    'Nathalie · Free on-device voice': {
+      nl: 'Nathalie · Gratis stem op dit toestel',
+      fr: 'Nathalie · Voix locale gratuite',
+      de: 'Nathalie · Kostenlose lokale Stimme',
+      es: 'Nathalie · Voz local gratuita',
+    },
     'Connect another device': {
       nl: 'Verbind een ander toestel',
       fr: 'Connecter un autre appareil',
@@ -891,6 +989,9 @@
       /^(.+) (sent|verzonden|envoyé|gesendet|enviada)$/,
     );
     if (sent) return translate(sent[1]) + ' ' + translate('sent');
+    const download = original.match(/^Downloading Nathalie · (\d+) MB$/);
+    if (download)
+      return translate('Downloading Nathalie') + ' · ' + download[1] + ' MB';
     return original;
   }
   function skip(node) {
