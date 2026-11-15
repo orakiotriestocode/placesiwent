@@ -35,7 +35,7 @@ main{padding:12px 18px;min-height:70vh}.shared-data-status{padding:7px 10px;marg
 .draft-diff-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:9px;margin-top:14px}
 #draft-diff-adopt{border-color:#ad8959}
 @media(max-width:620px){.diff-values{grid-template-columns:1fr}}
-</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.27.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.28.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
 const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
 const fields=['name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
 const base=RAW.split('\n').map((r,i)=>{const a=r.split('|');return Object.fromEntries([['id','p'+i],...fields.map((k,j)=>[k,(k==='functionalManager'||k==='hierarchyLevel'||k==='startDate'||k==='endDate')?'':a[j>8?j-2:j]||''])])});
@@ -186,13 +186,13 @@ function card(p,showSeniority=true){let el=cache.get(p.id);if(!el){el=document.c
 
 
 const classicDirection='down'; // Classic org chart uses the top-down layout only.
- let classicDensity=localStorage.getItem('mesh-classic-density')==='standard'?'standard':'compact';
+ let classicDensity=['standard','compact','smart'].includes(localStorage.getItem('mesh-classic-density'))?localStorage.getItem('mesh-classic-density'):'smart';
 let classicAlign=localStorage.getItem('mesh-classic-align')||'center';
 let rearrangeEnabled=true;
 const chartZoomKey='mesh-classic-zoom-'+MODE;
 let chartZoom=Number(localStorage.getItem(chartZoomKey))||1;
 chartZoom=Math.min(2.5,Math.max(.25,Math.round(chartZoom*100)/100));
-function setClassicZoom(next){chartZoom=Math.min(2.5,Math.max(.1,Math.round(next*100)/100));localStorage.setItem(chartZoomKey,String(chartZoom));const stage=document.querySelector('.classic-stage-tree'),wrapper=document.querySelector('.classic-zoom-wrapper');if(stage&&wrapper){stage.style.transform='scale('+chartZoom+')';wrapper.style.width=Math.ceil(stage.offsetWidth*chartZoom)+'px';wrapper.style.height=Math.ceil(stage.offsetHeight*chartZoom)+'px'}const value=document.getElementById('classic-zoom-value');if(value)value.textContent=Math.round(chartZoom*100)+'%';const slider=document.getElementById('classic-zoom-range');if(slider)slider.value=String(Math.round(chartZoom*100));}
+function setClassicZoom(next){chartZoom=Math.min(2.5,Math.max(.1,Math.round(next*100)/100));localStorage.setItem(chartZoomKey,String(chartZoom));const stage=document.querySelector('.classic-stage-tree'),wrapper=document.querySelector('.classic-zoom-wrapper');if(stage&&wrapper){stage.style.transform='scale('+chartZoom+')';wrapper.style.width=Math.ceil(stage.offsetWidth*chartZoom)+'px';wrapper.style.height=Math.ceil(stage.offsetHeight*chartZoom)+'px';wrapper.style.marginTop=Math.max(0,Math.floor((wrapper.parentElement.clientHeight-stage.offsetHeight*chartZoom)/2))+'px';wrapper.style.marginInline='auto'}const value=document.getElementById('classic-zoom-value');if(value)value.textContent=Math.round(chartZoom*100)+'%';const slider=document.getElementById('classic-zoom-range');if(slider)slider.value=String(Math.round(chartZoom*100));}
 
 async function exportClassicImage(stage,format){
  if(!stage)throw Error('No org chart is visible');
@@ -290,7 +290,7 @@ function renderClassic(){
   for(const [value,caption] of options){const b=document.createElement('button');b.type='button';b.textContent=caption;b.className=value===selected?'active':'';b.setAttribute('aria-pressed',value===selected?'true':'false');b.onclick=()=>{change(value);renderClassic()};wrap.append(b)}
   advancedBody.append(wrap);
  }
- control('Layout density',[['compact','Compact'],['standard','Standard']],classicDensity,v=>{classicDensity=v;localStorage.setItem('mesh-classic-density',v)});
+ control('Layout density',[['smart','Smart Compact'],['compact','Compact'],['standard','Standard']],classicDensity,v=>{classicDensity=v;localStorage.setItem('mesh-classic-density',v)});
   control('Leader alignment',[['top','Top'],['center','Center'],['bottom','Bottom']],classicAlign,v=>{classicAlign=v;localStorage.setItem('mesh-classic-align',v)});
  const layoutControls=document.createElement('div');layoutControls.className='classic-control arrangement-control';
  const toggle=document.createElement('button');toggle.type='button';toggle.className=rearrangeEnabled?'active':'';toggle.setAttribute('aria-pressed',String(rearrangeEnabled));toggle.textContent=rearrangeEnabled?'Rearrange: On':'Rearrange: Off';
@@ -305,7 +305,8 @@ function renderClassic(){
  const zoomReadout=document.createElement('output');zoomReadout.id='classic-zoom-value';zoomReadout.setAttribute('for','classic-zoom-range');zoomReadout.textContent=Math.round(chartZoom*100)+'%';
  const zoomReset=document.createElement('button');zoomReset.type='button';zoomReset.textContent='Reset zoom';zoomReset.title='Reset chart zoom';zoomReset.onclick=()=>setClassicZoom(1);
  const zoomFit=document.createElement('button');zoomFit.type='button';zoomFit.textContent='Fit screen';zoomFit.title='Fit the entire chart into the workspace';zoomFit.onclick=()=>{const stage=root.querySelector('.classic-stage-tree');if(!stage)return;const fit=Math.min((root.clientWidth-18)/stage.offsetWidth,(root.clientHeight-18)/stage.offsetHeight,1);setClassicZoom(Math.max(.1,fit));root.scrollLeft=0;root.scrollTop=0};
-  zoomControls.append(zoomOut,zoomRange,zoomIn,zoomReadout,zoomReset,zoomFit);controls.append(zoomControls);
+  const fitWidth=document.createElement('button');fitWidth.type='button';fitWidth.textContent='Fit width';fitWidth.onclick=()=>{const stage=root.querySelector('.classic-stage-tree');if(!stage)return;setClassicZoom(Math.min(2.5,Math.max(.1,(root.clientWidth-18)/stage.offsetWidth)));root.scrollLeft=0};
+  zoomControls.append(zoomOut,zoomRange,zoomIn,zoomReadout,zoomReset,zoomFit,fitWidth);controls.append(zoomControls);
  const imageControls=document.createElement('div');imageControls.className='classic-control image-export-control';
  const imageLabel=document.createElement('span');imageLabel.textContent='Export chart';imageControls.append(imageLabel);
  const imageFormat=document.createElement('select');imageFormat.id='classic-image-format';imageFormat.setAttribute('aria-label','Image export format');
@@ -347,9 +348,62 @@ function renderClassic(){
   const depth=levelOf(p)-1;maxDepth=Math.max(maxDepth,depth);
   pos.set(p.id,{depth,slot:mySlot});return mySlot;
  }
- for(const p of roots){visit(p,new Set());slot+=classicDensity==='compact'?.16:.9}
- for(const p of people)if(!visited.has(p.id)){visit(p,new Set());slot+=classicDensity==='compact'?.16:.9}
- const compact=classicDensity==='compact';
+ if(classicDensity==='smart'){
+  // Pack subtrees using their contours at each explicit hierarchy level.
+  // This reuses whitespace at deeper levels instead of assigning each leaf
+  // a permanent column. Existing manual offsets remain untouched.
+  const placed=new Set(),trees=[],clearance=1.035;
+  function buildTree(p,trail=new Set()){
+   if(placed.has(p.id)||trail.has(p.id))return null;
+   trail.add(p.id);placed.add(p.id);
+   const branches=(children.get(p.id)||[]).map(ch=>buildTree(ch,trail)).filter(Boolean);
+   trail.delete(p.id);
+   const depth=levelOf(p)-1,nodes=new Map(),bounds=new Map(),centers=[];
+   for(const branch of branches){
+    let shift=0;
+    for(const [level,[left]] of branch.bounds){
+     const occupied=bounds.get(level);
+     if(occupied)shift=Math.max(shift,occupied[1]+clearance-left);
+    }
+    for(const [id,point] of branch.nodes)nodes.set(id,{depth:point.depth,slot:point.slot+shift});
+    for(const [level,[left,right]] of branch.bounds){
+     const prev=bounds.get(level);
+     bounds.set(level,prev?[Math.min(prev[0],left+shift),Math.max(prev[1],right+shift)]:[left+shift,right+shift]);
+    }
+    centers.push(branch.nodes.get(branch.rootId).slot+shift);
+   }
+   const center=centers.length?(classicAlign==='top'?centers[0]:classicAlign==='bottom'?centers.at(-1):(centers[0]+centers.at(-1))/2):0;
+   nodes.set(p.id,{depth,slot:center});
+   const prior=bounds.get(depth);
+   bounds.set(depth,prior?[Math.min(prior[0],center),Math.max(prior[1],center)]:[center,center]);
+   return {rootId:p.id,nodes,bounds};
+  }
+  for(const p of roots){const t=buildTree(p);if(t)trees.push(t)}
+  for(const p of people)if(!placed.has(p.id)){const t=buildTree(p);if(t)trees.push(t)}
+  const occupied=new Map();
+  for(const tree of trees){
+   let shift=0;
+   for(const [level,[left]] of tree.bounds){
+    const prior=occupied.get(level);
+    if(prior)shift=Math.max(shift,prior[1]+clearance-left);
+   }
+   for(const [id,point] of tree.nodes){
+    pos.set(id,{depth:point.depth,slot:point.slot+shift});
+    maxDepth=Math.max(maxDepth,point.depth);
+   }
+   for(const [level,[left,right]] of tree.bounds){
+    const prior=occupied.get(level);
+    occupied.set(level,prior?[Math.min(prior[0],left+shift),Math.max(prior[1],right+shift)]:[left+shift,right+shift]);
+   }
+  }
+  const minSlot=Math.min(0,...[...pos.values()].map(p=>p.slot));
+  if(minSlot<0)for(const point of pos.values())point.slot-=minSlot;
+  slot=Math.max(0,...[...pos.values()].map(p=>p.slot))+1;
+ }else{
+  for(const p of roots){visit(p,new Set());slot+=classicDensity==='compact'?.16:.9}
+  for(const p of people)if(!visited.has(p.id)){visit(p,new Set());slot+=classicDensity==='compact'?.16:.9}
+ }
+ const compact=classicDensity!=='standard';
   const vertical=classicDirection==='down',w=compact?174:190,h=compact?58:62,depthGap=vertical?(compact?65:116):112,slotGap=vertical?(compact?181:218):88,pad=compact?48:125;
  const offsetKey=vertical?'layoutOffsetDown':'layoutOffsetRight';
  const offsetOf=p=>{const n=Number(p[offsetKey]);return Number.isFinite(n)?n:0};
