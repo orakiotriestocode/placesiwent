@@ -3,6 +3,7 @@
   const API = 'https://uabgxxbrjympqqwsryqj.supabase.co/functions/v1/bear-talk';
   const $ = (id) => document.getElementById(id);
   const synth = window.speechSynthesis;
+  const localVoice = window.BearLocalVoice;
   let session = null,
     role = null,
     timer = null,
@@ -167,7 +168,18 @@
     if (session) await api('ack', { messageId: m.id, status });
   }
   function catalog() {
-    return (synth?.getVoices() || [])
+    return [
+      ...(localVoice?.ready
+        ? [
+            {
+              voiceURI: localVoice.URI,
+              name: 'Nathalie · Free on-device voice',
+              lang: 'nl-BE',
+            },
+          ]
+        : []),
+      ...(synth?.getVoices() || []),
+    ]
       .slice(0, 150)
       .map((v) => ({ uri: v.voiceURI, name: v.name, lang: v.lang }));
   }
@@ -198,8 +210,13 @@
         '',
       ),
     );
-    for (const v of matching)
-      select.add(new Option(v.name + ' · ' + v.lang, v.uri));
+    for (const v of matching) {
+      const name =
+        v.uri === localVoice?.URI
+          ? window.BearI18n?.translate(v.name) || v.name
+          : v.name;
+      select.add(new Option(name + ' · ' + v.lang, v.uri));
+    }
     if ([...select.options].some((o) => o.value === current))
       select.value = current;
   }
@@ -326,6 +343,11 @@
     blocked = null;
     if (cancelSpeech) cancelSpeech();
     synth?.cancel();
+    localVoice?.stop();
+    if (localVoice?.supported && !localVoice.ready)
+      $('local-pack-status').textContent =
+        'Enable Nathalie again to continue after stopping preparation.';
+    updateVoices();
     $('bear').classList.remove('talking');
     $('speech-progress').textContent = 'Stopped · Queue cleared';
   }
@@ -343,6 +365,16 @@
   }
   function speak(m, test = false) {
     hasSpoken = true;
+    if (!test && $('local-language').value !== m.lang) {
+      $('local-language').value = m.lang;
+      updateVoices();
+    }
+    if (
+      localVoice &&
+      (m.voice || $('local-voice').value) === localVoice.URI &&
+      baseLanguage(m.lang) === 'nl'
+    )
+      return speakLocal(m, test);
     if (!synth) {
       health(
         'unavailable',
@@ -436,6 +468,94 @@
       }
     });
   }
+  function speakLocal(m, test) {
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = (status) => {
+        if (settled) return;
+        settled = true;
+        cancelSpeech = null;
+        isSpeaking = false;
+        $('bear').classList.remove('talking');
+        if (status === 'spoken') {
+          health('ready', 'Voice playback tested ✓');
+          $('speech-progress').textContent = 'Finished speaking ✓';
+        } else if (status === 'blocked') {
+          if (!test) blocked = m;
+          health(
+            'blocked',
+            'Nathalie needs attention. Enable the voice again, or choose a device voice and tap Test voice.',
+          );
+          $('speech-progress').textContent =
+            'Could not play · Tap Test voice to retry';
+          updateVoices();
+        }
+        resolve(status);
+      };
+      cancelSpeech = () => finish('stopped');
+      $('bubble').textContent = m.text;
+      setExpression(m.emotion || 'happy');
+      $('speech-progress').textContent = 'Preparing speech…';
+      if (!test) {
+        lastMessage = m;
+        $('local-repeat').disabled = false;
+      }
+      localVoice
+        .speak(
+          m.text,
+          Number(m.rate) || Number($('local-rate').value),
+          () => {
+            if (settled) return;
+            isSpeaking = true;
+            $('bear').classList.add('talking');
+            $('speech-progress').textContent = 'Speaking…';
+            if (!test) ack(m, 'speaking').catch(() => {});
+          },
+          (text) => {
+            if (!settled) $('speech-progress').textContent = text;
+          },
+        )
+        .then(
+          () => finish('spoken'),
+          () => finish('blocked'),
+        );
+    });
+  }
+  $('enable-local-voice').disabled = !localVoice?.supported;
+  if (localVoice && !localVoice.supported)
+    $('local-pack-status').textContent =
+      'Local voice is unavailable in this browser. Device voices still work.';
+  $('enable-local-voice').onclick = async () => {
+    if (busy) {
+      notice('Stop the current message before testing another voice.');
+      return;
+    }
+    const button = $('enable-local-voice');
+    button.disabled = true;
+    localVoice.unlock()?.catch(() => {});
+    try {
+      await localVoice.enable((text) => {
+        $('local-pack-status').textContent = text;
+      });
+      $('local-language').value = 'nl-BE';
+      updateVoices();
+      $('local-voice').value = localVoice.URI;
+      $('local-voice').onchange();
+      if (demo) {
+        $('language').value = 'nl-BE';
+        fillVoices('remote-voice', catalog(), 'nl-BE');
+        $('remote-voice').value = localVoice.URI;
+      }
+      $('local-pack-status').textContent =
+        'Nathalie is ready. Choose a device voice any time to switch back.';
+      await $('sound').onclick();
+    } catch {
+      $('local-pack-status').textContent =
+        'Could not load Nathalie. Try again, or use a device voice.';
+    } finally {
+      button.disabled = false;
+    }
+  };
   async function drain() {
     if (busy || !active || blocked || stopping) return;
     busy = true;
@@ -549,6 +669,7 @@
       notice('Speech is not supported by this browser. Try Safari or Chrome.');
       return;
     }
+    localVoice?.unlock()?.catch(() => {});
     // Speech is invoked directly inside this tap to unlock mobile audio.
     speak({ text: 'Hallo Riva!', lang: 'nl-BE' }, true);
     $('start').disabled = true;
@@ -602,6 +723,7 @@
     }
   };
   $('sound').onclick = async () => {
+    localVoice?.unlock()?.catch(() => {});
     if (busy && !blocked) {
       notice('Stop the current message before testing another voice.');
       return;
@@ -611,11 +733,13 @@
     synth?.cancel();
     busy = true;
     const status = await speak(
-      m || {
-        text: (phrases[baseLanguage($('local-language').value)] ||
-          phrases.en)[0],
-        lang: $('local-language').value,
-      },
+      m
+        ? { ...m, voice: $('local-voice').value }
+        : {
+            text: (phrases[baseLanguage($('local-language').value)] ||
+              phrases.en)[0],
+            lang: $('local-language').value,
+          },
       !m,
     );
     if (m)
@@ -644,7 +768,10 @@
       stopping = false;
     }
   }
-  $('remote-test').onclick = () => $('sound').onclick();
+  $('remote-test').onclick = () => {
+    if (demo) $('local-voice').value = $('remote-voice').value;
+    return $('sound').onclick();
+  };
   $('local-stop').onclick = stopPlayback;
   $('remote-stop').onclick = stopPlayback;
   $('local-repeat').onclick = async () => {

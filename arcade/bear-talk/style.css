@@ -1140,3 +1140,18 @@ header {
     font-size: 1.4rem;
   }
 }
+
+.local-voice-pack {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #648d7c66;
+  border-radius: 14px;
+  background: #648d7c12;
+}
+.local-voice-pack h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+.local-voice-pack p {
+  margin: 0.5rem 0;
+}

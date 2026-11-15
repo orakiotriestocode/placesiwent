@@ -52,8 +52,29 @@ const synth = {
     current?.onerror?.();
   },
 };
+let finishLocal, failLocal;
+const localVoice = {
+  URI: 'bear-local:nathalie-nl-BE',
+  supported: true,
+  ready: false,
+  unlock: () => Promise.resolve(),
+  enable: async () => {
+    localVoice.ready = true;
+  },
+  stop() {
+    finishLocal?.();
+  },
+  speak(text, rate, start) {
+    localVoice.last = { text, rate };
+    start();
+    return new Promise((resolve, reject) => {
+      finishLocal = resolve;
+      failLocal = reject;
+    });
+  },
+};
 const ctx = {
-  window: { speechSynthesis: synth },
+  window: { speechSynthesis: synth, BearLocalVoice: localVoice },
   document: {
     getElementById: el,
     querySelectorAll: (selector) =>
@@ -216,6 +237,40 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
       el('phrase-' + category).onclick();
       assert.equal(el('message').value, batch[0]);
     }
+  // The actual app routes the receiver's advertised local URI through local
+  // synthesis, acknowledges playback, filters by language and can retry with a
+  // device voice after a failed local generation.
+  el('language').value = 'nl-BE';
+  el('language').onchange();
+  const enabling = el('enable-local-voice').onclick();
+  await new Promise(setImmediate);
+  assert.ok(el('local-voice').options.some((o) => o.value === localVoice.URI));
+  assert.equal(localVoice.last.rate, Number(el('local-rate').value));
+  finishLocal();
+  await enabling;
+  el('remote-voice').value = localVoice.URI;
+  el('message').value = 'Een lokale groet!';
+  await el('message-form').onsubmit({ preventDefault() {} });
+  assert.equal(localVoice.last.text, 'Een lokale groet!');
+  finishLocal();
+  await new Promise(setImmediate);
+  assert.match(el('history').children[0].children[0].textContent, /Spoken/);
+  el('message').value = 'Probeer opnieuw.';
+  await el('message-form').onsubmit({ preventDefault() {} });
+  failLocal(Error('failed'));
+  await new Promise(setImmediate);
+  assert.match(el('voice-health').textContent, /Nathalie needs attention/);
+  el('local-voice').value = 'dutch';
+  const fallback = el('sound').onclick();
+  assert.equal(current.voice.voiceURI, 'dutch');
+  current.onend();
+  await fallback;
+  assert.match(el('history').children[0].children[0].textContent, /Spoken/);
+  el('language').value = 'en-GB';
+  el('language').onchange();
+  assert.ok(
+    !el('remote-voice').options.some((o) => o.value === localVoice.URI),
+  );
   console.log(
     'PASS: 300 distinct localized phrases, all 15 phrase cycles wrap after 20 entries; independent reactions do not add speech messages or interrupt active speech; optional idle giggle, all seven expressions, demo controls, voice filtering, stop and repeat.',
   );
