@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 test('loads and simulates without page errors', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await expect(page.locator('header .version')).toContainText('Alpha 0.39');
+  await expect(page.locator('header .version')).toContainText('Alpha 0.49');
   await expect(page.locator('#cash')).toContainText('$');
   await expect(page.locator('#entertainerCount')).toHaveText('0');
   await page.locator('#hireEntertainer').click();
@@ -205,5 +205,13 @@ test('major attraction sprite layers load without script errors',async ({page})=
  await expect(page.locator('[data-tool="wheel"]')).toBeVisible();
  await expect(page.locator('[data-tool="logflume"]')).toBeVisible();
  await page.waitForTimeout(400);
+ expect(errors).toEqual([]);
+});
+
+test('music toggle is opt-in and terrain artwork renders without page errors',async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await expect(page.locator('#musicToggle')).toHaveText('♫ Music off');
+ await expect(page.locator('#musicToggle')).toHaveAttribute('aria-pressed','false');
+ await page.waitForTimeout(350);
  expect(errors).toEqual([]);
 });
