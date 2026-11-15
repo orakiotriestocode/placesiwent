@@ -1,117 +1,201 @@
 const { test, expect } = require('@playwright/test');
 const game = '/arcade/park-builder/';
-test.beforeEach(async ({page}) => { page.on('dialog',dialog=>dialog.accept()); await page.goto(game); await page.evaluate(() => localStorage.removeItem('placesiwent-parkbuilder-alpha01')); await page.reload(); await page.locator('#buyLand').click(); });
-test('loads and simulates without page errors', async ({page}) => {
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('header .version')).toContainText('Alpha 0.34');
- await expect(page.locator('#cash')).toContainText('$');
- await expect(page.locator('#entertainerCount')).toHaveText('0');
- await page.locator('#hireEntertainer').click();await expect(page.locator('#toggleBubbles')).toContainText('on');await page.locator('#toggleBubbles').click();await expect(page.locator('#toggleBubbles')).toContainText('off');
- await expect(page.locator('#entertainerCount')).toHaveText('1');
- await page.locator('#speed').click();await page.waitForTimeout(2200);
- await expect(page.locator('#day')).not.toHaveText('1');
- expect(errors).toEqual([]);
+test.beforeEach(async ({ page }) => {
+  page.on('dialog', (dialog) => dialog.accept());
+  await page.goto(game);
+  await page.evaluate(() =>
+    localStorage.removeItem('placesiwent-parkbuilder-alpha01'),
+  );
+  await page.reload();
+  await page.locator('#buyLand').click();
 });
-test('bank, advertising, saves and restores', async ({page}) => {
- await page.locator('#takeLoan').click();
- await expect(page.locator('#loanBalance')).toContainText('5,000');
- await page.locator('#advertise').click();
- await expect(page.locator('#campaignDays')).toContainText('7');
- await page.locator('#save').click();
- await page.reload();
- await expect(page.locator('#loanBalance')).toContainText('5,000');
- await expect(page.locator('#campaignDays')).toContainText('7');
+test('loads and simulates without page errors', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await expect(page.locator('header .version')).toContainText('Alpha 0.34');
+  await expect(page.locator('#cash')).toContainText('$');
+  await expect(page.locator('#entertainerCount')).toHaveText('0');
+  await page.locator('#hireEntertainer').click();
+  await expect(page.locator('#toggleBubbles')).toContainText('on');
+  await page.locator('#toggleBubbles').click();
+  await expect(page.locator('#toggleBubbles')).toContainText('off');
+  await expect(page.locator('#entertainerCount')).toHaveText('1');
+  await page.locator('#speed').click();
+  await page.waitForTimeout(2200);
+  await expect(page.locator('#day')).not.toHaveText('1');
+  expect(errors).toEqual([]);
 });
-test('research and supplier controls respond', async ({page}) => {
- await page.locator('#premiumSupplier').click();
- await expect(page.locator('#supplierName')).toContainText('Golden Goods');
- await page.locator('#researchBudget').evaluate(el=>{el.value='200';el.dispatchEvent(new Event('input',{bubbles:true}));});
- await expect(page.locator('#researchBudgetValue')).toContainText('200');
+test('bank, advertising, saves and restores', async ({ page }) => {
+  await page.locator('#takeLoan').click();
+  await expect(page.locator('#loanBalance')).toContainText('5,000');
+  await page.locator('#advertise').click();
+  await expect(page.locator('#campaignDays')).toContainText('7');
+  await page.locator('#save').click();
+  await page.reload();
+  await expect(page.locator('#loanBalance')).toContainText('5,000');
+  await expect(page.locator('#campaignDays')).toContainText('7');
 });
-
-test('park events appear as the simulation advances',async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.evaluate(()=>{const adapter=window.PiwGameAdapters['park-builder'];const save=adapter.exportSave();save.day=8;save.speed=4;adapter.importSave(save)});
- await expect(page.locator('#eventStatus')).not.toHaveText('All quiet',{timeout:12000});
- await expect(page.locator('#eventHistory')).toContainText('Day 9');
- expect(errors).toEqual([]);
-});
-
-test('park canvas renders after switching effects', async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('#world')).toBeVisible();
- await page.waitForTimeout(300);
- const painted=await page.locator('#world').evaluate(c=>{const x=c.getContext('2d');return x.getImageData(Math.floor(c.width/2),Math.floor(c.height/2),1,1).data[3]>0});
- expect(painted).toBeTruthy();expect(errors).toEqual([]);
-});
-
-test('land purchase starts from scratch and subtracts the land price',async ({page})=>{
- await page.locator('#mainMenu').click();
- await page.locator('.landCard').filter({hasText:'Whispering Woods'}).click();
- await page.locator('#buyLand').click();
- await expect(page.locator('#startScreen')).toBeHidden();
- await expect(page.locator('#cash')).toContainText('5,000');
- const save=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
- expect(save.landId).toBe('woodland');
- expect(save.tiles.filter(t=>t&&t.type==='carousel')).toHaveLength(0);
- expect(save.tiles.filter(t=>t&&t.type==='burger')).toHaveLength(0);
+test('research and supplier controls respond', async ({ page }) => {
+  await page.locator('#premiumSupplier').click();
+  await expect(page.locator('#supplierName')).toContainText('Golden Goods');
+  await page.locator('#researchBudget').evaluate((el) => {
+    el.value = '200';
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await expect(page.locator('#researchBudgetValue')).toContainText('200');
 });
 
-test('country selection changes land price and persists country',async ({page})=>{
- await page.locator('#mainMenu').click();
- await page.locator('.countryPin').filter({hasText:'Japan'}).click();
- await expect(page.locator('#countryDetails')).toContainText('140% of base');
- await page.locator('#buyLand').click();
- await expect(page.locator('#cash')).toContainText('5,000');
- const data=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
- expect(data.countryId).toBe('japan');
- expect(data.countryName).toBe('Japan');
+test('park events appear as the simulation advances', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.evaluate(() => {
+    const adapter = window.PiwGameAdapters['park-builder'];
+    const save = adapter.exportSave();
+    save.day = 8;
+    save.speed = 4;
+    adapter.importSave(save);
+  });
+  await expect(page.locator('#eventStatus')).not.toHaveText('All quiet', {
+    timeout: 12000,
+  });
+  await expect(page.locator('#eventHistory')).toContainText('Day 9');
+  expect(errors).toEqual([]);
 });
 
-test('empire portfolio keeps two separate parks and allows switching',async ({page})=>{
- await page.locator('#mainMenu').click();
- await page.locator('#buyLand').click();
- await expect(page.locator('#cash')).toContainText('5,000');
- await page.locator('#mainMenu').click();
- await expect(page.locator('.empirePark')).toHaveCount(2);
- await page.locator('.empirePark button').first().click();
- await expect(page.locator('#cash')).toContainText('11,000');
- const park=await page.evaluate(()=>window.PiwGameAdapters['park-builder'].exportSave());
- expect(park.landId).toBe('meadow');
+test('park canvas renders after switching effects', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await expect(page.locator('#world')).toBeVisible();
+  await page.waitForTimeout(300);
+  const painted = await page.locator('#world').evaluate((c) => {
+    const x = c.getContext('2d');
+    return (
+      x.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1)
+        .data[3] > 0
+    );
+  });
+  expect(painted).toBeTruthy();
+  expect(errors).toEqual([]);
 });
 
-test('illustrated rides and shops render without canvas errors',async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.evaluate(()=>{const a=window.PiwGameAdapters['park-builder'];const s=a.exportSave();for(const [i,type] of ['wheel','coaster','haunted','logflume','balloons','drink','toilet'].entries()){s.tiles[(7+i)*22+8]={type,condition:100,price:5,stock:10}}a.importSave(s)});
- await page.waitForTimeout(500);
- expect(errors).toEqual([]);
+test('land purchase starts from scratch and subtracts the land price', async ({
+  page,
+}) => {
+  await page.locator('#mainMenu').click();
+  await page
+    .locator('.landCard')
+    .filter({ hasText: 'Whispering Woods' })
+    .click();
+  await page.locator('#buyLand').click();
+  await expect(page.locator('#startScreen')).toBeHidden();
+  await expect(page.locator('#cash')).toContainText('5,000');
+  const save = await page.evaluate(() =>
+    window.PiwGameAdapters['park-builder'].exportSave(),
+  );
+  expect(save.landId).toBe('woodland');
+  expect(save.tiles.filter((t) => t && t.type === 'carousel')).toHaveLength(0);
+  expect(save.tiles.filter((t) => t && t.type === 'burger')).toHaveLength(0);
 });
 
-test('new graphical layers animate without runtime errors',async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.locator('#buyLand').click();
- await page.waitForTimeout(400);
- await expect(page.locator('#world')).toBeVisible();
- expect(errors).toEqual([]);
+test('country selection changes land price and persists country', async ({
+  page,
+}) => {
+  await page.locator('#mainMenu').click();
+  await page.locator('.countryPin').filter({ hasText: 'Japan' }).click();
+  await expect(page.locator('#countryDetails')).toContainText('140% of base');
+  await page.locator('#buyLand').click();
+  await expect(page.locator('#cash')).toContainText('5,000');
+  const data = await page.evaluate(() =>
+    window.PiwGameAdapters['park-builder'].exportSave(),
+  );
+  expect(data.countryId).toBe('japan');
+  expect(data.countryName).toBe('Japan');
 });
 
-test('pirate ship is available and park rendering remains stable',async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await expect(page.locator('[data-tool="pirate"]')).toBeVisible();
- await page.waitForTimeout(350);
- expect(errors).toEqual([]);
+test('empire portfolio keeps two separate parks and allows switching', async ({
+  page,
+}) => {
+  await page.locator('#mainMenu').click();
+  await page.locator('#buyLand').click();
+  await expect(page.locator('#cash')).toContainText('5,000');
+  await page.locator('#mainMenu').click();
+  await expect(page.locator('.empirePark')).toHaveCount(2);
+  await page.locator('.empirePark button').first().click();
+  await expect(page.locator('#cash')).toContainText('11,000');
+  const park = await page.evaluate(() =>
+    window.PiwGameAdapters['park-builder'].exportSave(),
+  );
+  expect(park.landId).toBe('meadow');
 });
 
-test('multi-tile attractions reserve land and can be demolished from any occupied tile',async ({page})=>{
- await page.locator('#buyLand').click();
- const result=await page.evaluate(()=>{const a=window.PiwGameAdapters['park-builder'];const park=a.exportSave();return {count:park.tiles.filter(t=>t?.type==='footprint').length,hasPark:!!park.tiles}});
- expect(result.hasPark).toBe(true);
- await expect(page.locator('[data-tool="coaster"]')).toBeVisible();
+test('illustrated rides and shops render without canvas errors', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.evaluate(() => {
+    const a = window.PiwGameAdapters['park-builder'];
+    const s = a.exportSave();
+    for (const [i, type] of [
+      'wheel',
+      'coaster',
+      'haunted',
+      'logflume',
+      'balloons',
+      'drink',
+      'toilet',
+    ].entries()) {
+      s.tiles[(7 + i) * 22 + 8] = { type, condition: 100, price: 5, stock: 10 };
+    }
+    a.importSave(s);
+  });
+  await page.waitForTimeout(500);
+  expect(errors).toEqual([]);
 });
 
-test('pixel sprite rendering is available without JavaScript errors',async ({page})=>{
- const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.waitForTimeout(400);
- await expect(page.locator('#world')).toBeVisible();
- expect(errors).toEqual([]);
+test('new graphical layers animate without runtime errors', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.locator('#buyLand').click();
+  await page.waitForTimeout(400);
+  await expect(page.locator('#world')).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('pirate ship is available and park rendering remains stable', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await expect(page.locator('[data-tool="pirate"]')).toBeVisible();
+  await page.waitForTimeout(350);
+  expect(errors).toEqual([]);
+});
+
+test('multi-tile attractions reserve land and can be demolished from any occupied tile', async ({
+  page,
+}) => {
+  await page.locator('#buyLand').click();
+  const result = await page.evaluate(() => {
+    const a = window.PiwGameAdapters['park-builder'];
+    const park = a.exportSave();
+    return {
+      count: park.tiles.filter((t) => t?.type === 'footprint').length,
+      hasPark: !!park.tiles,
+    };
+  });
+  expect(result.hasPark).toBe(true);
+  await expect(page.locator('[data-tool="coaster"]')).toBeVisible();
+});
+
+test('pixel sprite rendering is available without JavaScript errors', async ({
+  page,
+}) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  await page.waitForTimeout(400);
+  await expect(page.locator('#world')).toBeVisible();
+  expect(errors).toEqual([]);
 });
