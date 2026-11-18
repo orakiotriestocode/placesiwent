@@ -30,6 +30,7 @@ const hash = async (s: string) =>
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
 const token = () => crypto.randomUUID() + crypto.randomUUID();
+const animals = ['bear', 'goose', 'frog'];
 const langs = ['nl-BE', 'nl-NL', 'en-GB', 'en-US', 'fr-FR', 'de-DE', 'es-ES'];
 Deno.serve(async (req) => {
   const reply = (data: unknown, status = 200) =>
@@ -59,6 +60,8 @@ Deno.serve(async (req) => {
         );
     }
     if (b.action === 'create') {
+      if (b.animal !== undefined && !animals.includes(b.animal))
+        return reply({ error: 'Choose Bear, Goose or Frog' }, 400);
       await db('bear_sessions?expires_at=lt.' + now, 'DELETE');
       await db(
         'bear_limits?until_at=lt.' +
@@ -80,8 +83,15 @@ Deno.serve(async (req) => {
         pair_until: new Date(Date.now() + 600000).toISOString(),
         expires_at: expires,
         tablet_seen: now,
+        animal: b.animal || 'bear',
       });
-      return reply({ id, token: tablet, code, expires });
+      return reply({
+        id,
+        token: tablet,
+        code,
+        expires,
+        animal: b.animal || 'bear',
+      });
     }
     if (b.action === 'join') {
       const code = String(b.code || '')
@@ -112,6 +122,7 @@ Deno.serve(async (req) => {
         id: rows[0].id,
         token: controller,
         expires: rows[0].expires_at,
+        animal: rows[0].animal || 'bear',
       });
     }
     if (
@@ -150,6 +161,7 @@ Deno.serve(async (req) => {
       );
       return reply({
         paired: !!s.controller_hash,
+        animal: s.animal || 'bear',
         reaction: s.reaction,
         voiceState: s.voice_state,
         stopId: s.stop_id,
@@ -158,6 +170,19 @@ Deno.serve(async (req) => {
           20000,
         messages,
       });
+    }
+    if (b.action === 'animal') {
+      if (!animals.includes(b.animal))
+        return reply({ error: 'Choose Bear, Goose or Frog' }, 400);
+      if (
+        !(await db('rpc/bear_rate_limit', 'POST', {
+          p_key: b.id + ':animal',
+          p_max: 30,
+        }))
+      )
+        return reply({ error: 'Please slow down a little' }, 429);
+      await db('bear_sessions?id=eq.' + b.id, 'PATCH', { animal: b.animal });
+      return reply({ ok: true, animal: b.animal });
     }
     if (b.action === 'voices' && tablet) {
       if (
