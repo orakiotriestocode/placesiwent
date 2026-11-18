@@ -1,5 +1,60 @@
 (() => {
   const strings = {
+    'Tap my head, tummy or paws ♡': {
+      nl: 'Tik op mijn hoofdje, buik of pootjes ♡',
+      fr: 'Touche ma tête, mon ventre ou mes pattes ♡',
+      de: 'Tippe auf meinen Kopf, Bauch oder meine Pfoten ♡',
+      es: 'Toca mi cabeza, barriga o patitas ♡',
+    },
+    'Double-tap for a cuddle. Stroke my head gently, or hold to help me get sleepy. With a keyboard, press Enter or Space to play.':
+      {
+        nl: 'Tik twee keer voor een knuffel. Aai zachtjes over mijn hoofdje of houd me vast om me slaperig te maken. Druk op Enter of spatie om met het toetsenbord te spelen.',
+        fr: 'Touche deux fois pour un câlin. Caresse ma tête ou garde le doigt posé pour m’aider à m’endormir. Au clavier, appuie sur Entrée ou Espace pour jouer.',
+        de: 'Tippe zweimal für eine Umarmung. Streichle meinen Kopf oder halte mich sanft, damit ich müde werde. Mit der Tastatur: Eingabe oder Leertaste zum Spielen.',
+        es: 'Toca dos veces para un abrazo. Acaricia mi cabeza o mantén el dedo para ayudarme a dormir. Con el teclado, pulsa Intro o Espacio para jugar.',
+      },
+    'Hello there, little friend!': {
+      nl: 'Dag, kleine vriend!',
+      fr: 'Coucou, petit ami !',
+      de: 'Hallo, kleiner Freund!',
+      es: '¡Hola, amiguito!',
+    },
+    'That tickles!': {
+      nl: 'Dat kriebelt!',
+      fr: 'Ça chatouille !',
+      de: 'Das kitzelt!',
+      es: '¡Qué cosquillas!',
+    },
+    'A high five for you!': {
+      nl: 'Een high five voor jou!',
+      fr: 'Tape dans ma patte !',
+      de: 'Ein High Five für dich!',
+      es: '¡Choca esos cinco!',
+    },
+    'Happy little feet!': {
+      nl: 'Vrolijke pootjes!',
+      fr: 'Mes petites pattes dansent !',
+      de: 'Fröhliche kleine Füße!',
+      es: '¡Patitas contentas!',
+    },
+    'A big bear cuddle!': {
+      nl: 'Een dikke berenknuffel!',
+      fr: 'Un gros câlin d’ours !',
+      de: 'Eine dicke Bärenumarmung!',
+      es: '¡Un gran abrazo de oso!',
+    },
+    'Such gentle pats!': {
+      nl: 'Wat een lieve aaitjes!',
+      fr: 'Que de douces caresses !',
+      de: 'So sanfte Streicheleinheiten!',
+      es: '¡Qué caricias tan suaves!',
+    },
+    'Getting cosy…': {
+      nl: 'Lekker knus…',
+      fr: 'Bien au chaud…',
+      de: 'Ganz gemütlich…',
+      es: 'Qué a gustito…',
+    },
     Settings: {
       nl: 'Instellingen',
       fr: 'Réglages',

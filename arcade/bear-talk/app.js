@@ -276,6 +276,25 @@
     if (emotion !== 'neutral')
       reactionTimer = setTimeout(() => setExpression('neutral', 0), duration);
   }
+  let touchEffectTimer;
+  window.BearTouch?.bind({
+    element: $('bear'),
+    onReaction: (emotion, caption, action) => {
+      setExpression(emotion, 5000);
+      $('scene-label').textContent = caption;
+      const stage = $('stage');
+      stage.setAttribute('data-touch', action);
+      stage.classList.remove('touch-pop');
+      // Restart the same bounded animation without adding DOM nodes per tap.
+      void stage.offsetWidth;
+      stage.classList.add('touch-pop');
+      clearTimeout(touchEffectTimer);
+      touchEffectTimer = setTimeout(
+        () => stage.classList.remove('touch-pop'),
+        1400,
+      );
+    },
+  });
   function playReaction(r) {
     if (!r || r.id === lastReaction || r.expires < Date.now()) return;
     lastReaction = r.id;
