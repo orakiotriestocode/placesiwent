@@ -8,13 +8,13 @@
     />
     <meta name="theme-color" content="#182c32" />
     <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.5.1" />
+    <link rel="stylesheet" href="style.css?v=0.6.0" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & YOU <small>alpha 0.5.1</small></span
+        <span>BEAR & YOU <small>alpha 0.6.0</small></span
         ><button
           type="button"
           id="open-settings"
@@ -69,7 +69,9 @@
           <div
             class="bear"
             id="bear"
-            role="img"
+            role="button"
+            tabindex="0"
+            aria-describedby="touch-hint touch-help"
             aria-label="A friendly smiling teddy bear"
           >
             <svg viewBox="0 0 420 440" aria-hidden="true">
@@ -181,9 +183,17 @@
             </svg>
           </div>
           <div class="bubble" id="bubble">Hello, little friend ♡</div>
+          <div id="touch-feedback" aria-hidden="true">
+            <span>♡</span><span>✧</span><span>♡</span>
+          </div>
           <p class="scene-label" id="scene-label">A little moment together</p>
         </div>
 
+        <p id="touch-hint" class="touch-hint">Tap my head, tummy or paws ♡</p>
+        <span id="touch-help" class="sr-only"
+          >Double-tap for a cuddle. Stroke my head gently, or hold to help me
+          get sleepy. With a keyboard, press Enter or Space to play.</span
+        >
         <div class="tablet-tools">
           <span id="tablet-status" role="status">Getting ready…</span
           ><button id="fullscreen" class="secondary">⛶ Full screen</button>
@@ -435,10 +445,11 @@
       </section>
     </dialog>
     <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
-    <script src="pairing.js?v=0.5.1"></script>
-    <script src="phrases.js?v=0.5.1"></script>
-    <script src="i18n.js?v=0.5.1"></script>
-    <script src="local-voice.js?v=0.5.1"></script>
-    <script src="app.js?v=0.5.1"></script>
+    <script src="pairing.js?v=0.6.0"></script>
+    <script src="phrases.js?v=0.6.0"></script>
+    <script src="i18n.js?v=0.6.0"></script>
+    <script src="local-voice.js?v=0.6.0"></script>
+    <script src="touch.js?v=0.6.0"></script>
+    <script src="app.js?v=0.6.0"></script>
   </body>
 </html>

@@ -52,7 +52,7 @@ const synth = {
     current?.onerror?.();
   },
 };
-let finishLocal, failLocal;
+let finishLocal, failLocal, touchReaction;
 const localVoice = {
   URI: 'bear-local:nathalie-nl-BE',
   supported: true,
@@ -74,7 +74,15 @@ const localVoice = {
   },
 };
 const ctx = {
-  window: { speechSynthesis: synth, BearLocalVoice: localVoice },
+  window: {
+    speechSynthesis: synth,
+    BearLocalVoice: localVoice,
+    BearTouch: {
+      bind({ onReaction }) {
+        touchReaction = onReaction;
+      },
+    },
+  },
   document: {
     getElementById: el,
     querySelectorAll: (selector) =>
@@ -171,6 +179,18 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   assert.equal(current.rate, 0.7);
   assert.equal(el('bear').className, 'bear love');
   const speaking = current;
+  const touchBubble = el('bubble').textContent;
+  const touchHistoryCount = el('history').children.length;
+  touchReaction('giggle', 'That tickles!', 'tummy');
+  assert.equal(
+    current,
+    speaking,
+    'Touch must not replace the current utterance',
+  );
+  assert.equal(el('bubble').textContent, touchBubble);
+  assert.equal(el('history').children.length, touchHistoryCount);
+  assert.equal(el('bear').className, 'bear giggle talking');
+  assert.equal(el('scene-label').textContent, 'That tickles!');
   const oldHistory = el('history').children.length;
   el('giggle-sound').checked = true;
   await el('reaction-wave').onclick();
