@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   page.on('dialog', (dialog) => dialog.accept());
   await page.goto(game);
   await page.evaluate(() =>
-    localStorage.removeItem('placesiwent-parkbuilder-alpha01'),
+    (localStorage.removeItem('placesiwent-parkbuilder-alpha01'),localStorage.removeItem('placesiwent-parkbuilder-empire-v1')),
   );
   await page.reload();
   await page.locator('#buyLand').click();
@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 test('loads and simulates without page errors', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await expect(page.locator('header .version')).toContainText('Alpha 0.57');
+  await expect(page.locator('header .version')).toContainText('Alpha 0.63');
   await expect(page.locator('#cash')).toContainText('$');
   await expect(page.locator('#entertainerCount')).toHaveText('0');
   await page.locator('#hireEntertainer').click();
@@ -216,7 +216,7 @@ test('music toggle is opt-in and terrain artwork renders without page errors',as
  expect(errors).toEqual([]);
 });
 
-test('Alpha 0.57 audio and queue controls are present',async ({page})=>{
+test('Alpha 0.63 audio and queue controls are present',async ({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await expect(page.locator('#musicVolume')).toHaveAttribute('type','range');
  await expect(page.locator('#musicStyle')).toContainText('Carnival');
@@ -225,7 +225,16 @@ test('Alpha 0.57 audio and queue controls are present',async ({page})=>{
  expect(errors).toEqual([]);
 });
 
-test('Alpha 0.57 performance report is available',async ({page})=>{
+test('Alpha 0.63 performance report is available',async ({page})=>{
  await expect(page.locator('#performanceReport')).toContainText('Arrivals:');
  await expect(page.locator('#performanceReport')).toContainText('Queue walkouts:');
+});
+
+test('Alpha 0.63 saved finance history and ride categories', async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await expect(page.locator('#financeChart')).toHaveAttribute('width','300');
+ await page.evaluate(()=>{const a=window.PiwGameAdapters['park-builder'];const save=a.exportSave();save.financeHistory=[{day:2,income:600,costs:400,profit:200,cash:19000}];a.importSave(save)});
+ await expect(page.locator('#performanceReport')).toContainText('Gate revenue:');
+ await expect(page.locator('header .version')).toContainText('Alpha 0.63');
+ expect(errors).toEqual([]);
 });
