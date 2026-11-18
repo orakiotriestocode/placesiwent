@@ -70,9 +70,25 @@ main{padding:12px 18px;min-height:70vh}.shared-data-status{padding:7px 10px;marg
 .country-map-summary{z-index:5}
 .country-map-list{z-index:6}
 .country-map-status{top:53px;z-index:5}
-</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.34.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+
+.product-catalog-dialog{width:min(660px,96vw);max-height:85vh;overflow:auto}
+.product-catalog-rows{display:grid;gap:6px;max-height:49vh;overflow:auto;margin:12px 0}
+.product-catalog-row{display:flex;align-items:center;gap:7px;border:1px solid #45616b;border-radius:7px;padding:7px}
+.product-catalog-row strong{flex:1}.product-catalog-row small{color:#a7c4c8}.product-catalog-row button{font-size:11px;padding:6px}
+.product-catalog-new{display:flex;gap:8px;margin-bottom:12px}.product-catalog-new input{min-width:0;flex:1}
+.product-person-picker{margin:12px 0;padding:11px;border-radius:8px;border:1px solid #48616a;background:#122c36}
+.product-person-picker>.notice{margin:5px 0 10px}
+.product-person-toolbar{display:flex;gap:8px}.product-person-toolbar select{min-width:0;flex:1;background:#213c46;color:#fff;border:1px solid #536d74;border-radius:7px;padding:8px}
+.product-person-toolbar button{font-size:11px;padding:7px}
+.product-person-list{display:grid;gap:5px;margin:9px 0}
+.product-person-row{display:flex;gap:10px;align-items:center;border:1px solid #43626c;border-radius:6px;padding:6px 8px}
+.product-person-row strong{flex:1;font-size:12px}
+.product-person-row .product-owner-label{display:flex;align-items:center;gap:5px;margin:0}
+.product-person-row .product-owner-label input{min-width:16px;width:16px;margin:0;accent-color:#45b794}
+.product-person-row button{padding:3px 8px}
+</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.35.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
 const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
-const fields=['name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+const fields=['name','role','pillar','region','country','product','productOwners','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
 const base=RAW.split('\n').map((r,i)=>{const a=r.split('|');return Object.fromEntries([['id','p'+i],...fields.map((k,j)=>[k,(k==='functionalManager'||k==='hierarchyLevel'||k==='startDate'||k==='endDate')?'':a[j>8?j-2:j]||''])])});
 
 // Shared published data takes precedence over browser-local records.
@@ -101,6 +117,13 @@ let savedView;try{savedView=localStorage.getItem(viewStorageKey)}catch(e){}
 let view=availableViews.has(savedView)?savedView:'classic',filter='',editing=null;
 let seniorityOrder=localStorage.getItem('mesh-seniority-order-'+MODE)==='asc'?'asc':'desc';const root=document.getElementById('groups'),cache=new Map(),dialog=document.getElementById('editor');
 let lastRenderedView=null;
+const catalogKey='mesh-products-'+MODE+'-v1';
+const splitProducts=v=>[...new Set(String(v||'').split(',').map(x=>x.trim()).filter(Boolean))];
+function validatedProducts(values){if(!Array.isArray(values))throw Error('Invalid product list');const out=values.map(x=>String(x).trim());if(out.some(x=>!x||x.length>100||x.includes(',')))throw Error('Product names must be 1–100 characters without commas');if(new Set(out.map(x=>x.toLowerCase())).size!==out.length)throw Error('Duplicate product name');return out.sort((a,b)=>a.localeCompare(b))}
+function combinedProducts(list,rows=people){const raw=[...(list||[]),...rows.flatMap(p=>[...splitProducts(p.product),...splitProducts(p.productOwners)])];return validatedProducts(raw.filter((x,i)=>raw.findIndex(y=>String(y).toLowerCase()===String(x).toLowerCase())===i))}
+let products;try{products=combinedProducts(JSON.parse(localStorage.getItem(catalogKey)||'[]'))}catch(e){products=combinedProducts([])}
+function saveProducts(){localStorage.setItem(catalogKey,JSON.stringify(products));refreshDraftState()}
+
 let groupedZoom=Math.min(2.5,Math.max(.3,Number(localStorage.getItem('mesh-group-zoom-'+MODE))||1));
 let countryDisplayMode=localStorage.getItem('mesh-country-mode-'+MODE)==='map'?'map':'cards';
 let activeCountryMap=null;
@@ -219,7 +242,7 @@ function card(p,showSeniority=true){let el=cache.get(p.id);if(!el){el=document.c
  el.replaceChildren();const code=countryCode(p.country);if(code){const flag=document.createElement('span');flag.className='person-flag';flag.textContent=flagEmoji(code);flag.setAttribute('aria-label',countryLabel(code));flag.title=countryLabel(code);el.append(flag)}const n=document.createElement('strong');n.textContent=p.name;const r=document.createElement('span');r.textContent=p.role;el.append(n,r);
  if(showSeniority&&(p.startDate||p.endDate)){const status=document.createElement('span');status.className='tenure-card-detail';status.textContent=(p.startDate?tenureText(p):'')+(p.startDate&&p.endDate?' · ':'')+(p.endDate?'End: '+p.endDate:'');el.append(status)}
  el.title=p.name+(p.country?' · '+countryText(p.country):'')+(p.startDate?' · Started '+p.startDate:'')+(p.endDate?' · End '+p.endDate:'');
- el.classList.toggle('dim',!!filter&&![p.name,p.role,p.pillar,p.region,p.country,p.product,p.startDate,p.endDate].join(' ').toLowerCase().includes(filter));return el
+ el.classList.toggle('dim',!!filter&&![p.name,p.role,p.pillar,p.region,p.country,p.product,p.productOwners,p.startDate,p.endDate].join(' ').toLowerCase().includes(filter));return el
 }
 
 
@@ -921,7 +944,73 @@ root.addEventListener('wheel',event=>{if(view==='classic'||view==='seniority'||v
 document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view));b.addEventListener('click',()=>{view=b.dataset.view;try{localStorage.setItem(viewStorageKey,view)}catch(e){}document.querySelectorAll('[data-view]').forEach(c=>{c.classList.toggle('active',c.dataset.view===view);c.setAttribute('aria-pressed',String(c.dataset.view===view))});render()})});
 document.getElementById('search').addEventListener('input',e=>{filter=e.target.value.trim().toLowerCase();people.forEach(card)});
 const form=document.getElementById('form');
-function edit(id){editing=id;const p=people.find(p=>p.id===id)||{};document.getElementById('editTitle').textContent=id==='new'?'Add person':'Edit person';form.replaceChildren();for(const f of fields){const l=document.createElement('label');l.textContent=f==='product'?'Products (comma separated)':f==='manager'?'People manager (solid line)':f==='functionalManager'?'Functional manager (dotted line)':f==='hierarchyLevel'?'Hierarchy level (1 = top; blank = automatic)':f==='startDate'?'Start date (optional)':f==='endDate'?'End date (optional)':f[0].toUpperCase()+f.slice(1);l.htmlFor='f_'+f;let el;if(f==='country'){el=document.createElement('input');el.type='text';el.value=countryText(p.country);el.setAttribute('list','country-suggestions');el.setAttribute('autocomplete','off');el.placeholder='Type a country or choose from the list…'}
+
+const productManagerButton=document.createElement('button');productManagerButton.type='button';productManagerButton.textContent='Products';productManagerButton.title='Manage application/product catalogue';document.getElementById('add').after(productManagerButton);
+const productDialog=document.createElement('dialog');productDialog.className='product-catalog-dialog';
+const productHeading=document.createElement('h2');productHeading.textContent='Products / applications';
+const productHelp=document.createElement('p');productHelp.className='notice';productHelp.textContent='A shared catalogue of products. Rename updates existing assignments. Removing a product also removes its assignments and ownership.';
+const productRows=document.createElement('div');productRows.className='product-catalog-rows';
+const productNew=document.createElement('input');productNew.placeholder='New product name';productNew.setAttribute('aria-label','New product');
+const productAdd=document.createElement('button');productAdd.type='button';productAdd.textContent='+ Add';
+const productClose=document.createElement('button');productClose.type='button';productClose.textContent='Close';productClose.onclick=()=>productDialog.close();
+const productNewRow=document.createElement('div');productNewRow.className='product-catalog-new';productNewRow.append(productNew,productAdd);
+productDialog.append(productHeading,productHelp,productRows,productNewRow,productClose);document.body.append(productDialog);
+function displayProducts(){
+ productRows.replaceChildren();
+ for(const name of products){
+  const row=document.createElement('div');row.className='product-catalog-row';
+  const title=document.createElement('strong');title.textContent=name;
+  const count=document.createElement('small');count.textContent=people.filter(p=>splitProducts(p.product).includes(name)).length+' assigned · '+people.filter(p=>splitProducts(p.productOwners).includes(name)).length+' owners';
+  const rename=document.createElement('button');rename.textContent='Rename';rename.type='button';
+  rename.onclick=()=>{const next=prompt('Rename '+name,name);if(next===null||next.trim()===name)return;
+   try{const newName=next.trim(),updated=validatedProducts([...products.filter(x=>x!==name),newName]);
+    for(const p of people)for(const field of ['product','productOwners'])p[field]=splitProducts(p[field]).map(x=>x===name?newName:x).join(', ');
+    products=updated;saveProducts();persist();displayProducts();render(false);
+   }catch(err){alert(err.message)}
+  };
+  const remove=document.createElement('button');remove.type='button';remove.textContent='Remove';
+  remove.onclick=()=>{if(!confirm('Remove '+name+' from the catalogue and every person?'))return;
+   products=products.filter(x=>x!==name);
+   for(const p of people)for(const field of ['product','productOwners'])p[field]=splitProducts(p[field]).filter(x=>x!==name).join(', ');
+   saveProducts();persist();displayProducts();render(false);
+  };
+  row.append(title,count,rename,remove);productRows.append(row);
+ }
+ if(!products.length){const empty=document.createElement('p');empty.className='notice';empty.textContent='No products yet';productRows.append(empty)}
+}
+productAdd.onclick=()=>{try{products=validatedProducts([...products,productNew.value]);productNew.value='';saveProducts();displayProducts()}catch(err){alert(err.message)}};
+productNew.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();productAdd.click()}};
+productManagerButton.onclick=()=>{displayProducts();productDialog.showModal()};
+function productPicker(person){
+ const chosen=new Set(splitProducts(person.product)),owners=new Set(splitProducts(person.productOwners));
+ const block=document.createElement('div');block.className='product-person-picker';
+ const title=document.createElement('strong');title.textContent='Products / applications';
+ const hint=document.createElement('p');hint.className='notice';hint.textContent='Select any number of products and tick Owner for those this person is accountable for.';
+ const select=document.createElement('select');select.setAttribute('aria-label','Choose a product');
+ const manage=document.createElement('button');manage.type='button';manage.textContent='Manage catalogue';manage.onclick=()=>{displayProducts();productDialog.showModal()};
+ const list=document.createElement('div');list.className='product-person-list';
+ function draw(){
+  select.replaceChildren();const first=document.createElement('option');first.value='';first.textContent='Assign product…';select.append(first);
+  for(const name of products.filter(x=>!chosen.has(x))){const opt=document.createElement('option');opt.value=name;opt.textContent=name;select.append(opt)}
+  list.replaceChildren();
+  for(const name of [...chosen].sort()){
+   const row=document.createElement('div');row.className='product-person-row';
+   const label=document.createElement('strong');label.textContent=name;
+   const owns=document.createElement('label');owns.className='product-owner-label';owns.textContent='Owner';
+   const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=owners.has(name);checkbox.onchange=()=>checkbox.checked?owners.add(name):owners.delete(name);owns.prepend(checkbox);
+   const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.title='Unassign '+name;remove.onclick=()=>{chosen.delete(name);owners.delete(name);draw()};
+   row.append(label,owns,remove);list.append(row);
+  }
+ }
+ select.onchange=()=>{if(select.value){chosen.add(select.value);draw()}};
+ const toolbar=document.createElement('div');toolbar.className='product-person-toolbar';toolbar.append(select,manage);
+ const field=document.createElement('input');field.type='hidden';field.id='f_product';
+ const ownerField=document.createElement('input');ownerField.type='hidden';ownerField.id='f_productOwners';
+ block.capture=()=>{field.value=[...chosen].sort().join(', ');ownerField.value=[...owners].filter(x=>chosen.has(x)).sort().join(', ')};
+ block.append(title,hint,toolbar,list,field,ownerField);draw();return block;
+}
+
+function edit(id){editing=id;const p=people.find(p=>p.id===id)||{};document.getElementById('editTitle').textContent=id==='new'?'Add person':'Edit person';form.replaceChildren();for(const f of fields){if(f==='product'){form.append(productPicker(p));continue}if(f==='productOwners')continue;const l=document.createElement('label');l.textContent=f==='product'?'Products (comma separated)':f==='manager'?'People manager (solid line)':f==='functionalManager'?'Functional manager (dotted line)':f==='hierarchyLevel'?'Hierarchy level (1 = top; blank = automatic)':f==='startDate'?'Start date (optional)':f==='endDate'?'End date (optional)':f[0].toUpperCase()+f.slice(1);l.htmlFor='f_'+f;let el;if(f==='country'){el=document.createElement('input');el.type='text';el.value=countryText(p.country);el.setAttribute('list','country-suggestions');el.setAttribute('autocomplete','off');el.placeholder='Type a country or choose from the list…'}
 
 else if(['pillar','region','type'].includes(f)){el=document.createElement('select');const vals=f==='pillar'?['',...pillars]:f==='region'?['',...areas]:['',...typeDefinitions.map(t=>t.id)];if(p[f]&&!vals.includes(p[f]))vals.push(p[f]);for(const v of vals){const opt=document.createElement('option');opt.value=v;opt.textContent=f==='type'?(typeDefinition(v)?.name||v||'Unassigned'):(v||'Unassigned');el.append(opt)}}else{el=document.createElement('input');el.type=f==='hierarchyLevel'?'number':(f==='startDate'||f==='endDate')?'date':'text';if(f==='hierarchyLevel'){el.min='1';el.max='30';el.step='1';el.placeholder='Auto from people manager'}}el.id='f_'+f;if(f!=='country')el.value=p[f]||'';form.append(l,el);
 if(f==='country'){
@@ -941,7 +1030,7 @@ if(f==='manager'||f==='functionalManager'){
  el.addEventListener('change',()=>{const match=names.find(name=>name.toLocaleLowerCase()===el.value.trim().toLocaleLowerCase());if(match)el.value=match});
  }
 }const actions=document.createElement('div');actions.className='actions';const save=document.createElement('button');save.type='submit';save.textContent='Save changes';save.className='active';const close=document.createElement('button');close.type='button';close.textContent='Cancel';close.onclick=()=>dialog.close();actions.append(save,close);if(id!=='new'){const rm=document.createElement('button');rm.textContent='Remove';rm.type='button';rm.onclick=()=>{if(confirm('Remove this position?')){people=people.filter(p=>p.id!==id);cache.delete(id);persist();dialog.close();render(false)}};actions.append(rm)}form.append(actions);dialog.showModal()}
-form.addEventListener('submit',e=>{e.preventDefault();const v={};fields.forEach(f=>v[f]=document.getElementById('f_'+f).value.trim());if(v.country){const code=countryCode(v.country);if(code)v.country=code}if(!v.name)return;if(v.startDate&&!parseISODate(v.startDate)){alert('Enter a valid start date');return}if(v.endDate&&!parseISODate(v.endDate)){alert('Enter a valid end date');return}if(v.startDate&&v.endDate&&v.endDate<v.startDate){alert('End date cannot precede start date');return}const normalizeName=name=>String(name||'').trim().toLocaleLowerCase();
+form.addEventListener('submit',e=>{e.preventDefault();const v={};form.querySelector('.product-person-picker')?.capture();fields.forEach(f=>v[f]=document.getElementById('f_'+f).value.trim());if(v.country){const code=countryCode(v.country);if(code)v.country=code}if(!v.name)return;if(v.startDate&&!parseISODate(v.startDate)){alert('Enter a valid start date');return}if(v.endDate&&!parseISODate(v.endDate)){alert('Enter a valid end date');return}if(v.startDate&&v.endDate&&v.endDate<v.startDate){alert('End date cannot precede start date');return}const normalizeName=name=>String(name||'').trim().toLocaleLowerCase();
 const target=editing==='new'?null:people.find(person=>person.id===editing);
 if(editing!=='new'&&!target){alert('This person could not be found. Please reopen the editor.');return}
 if(people.some(person=>person.id!==editing&&normalizeName(person.name)===normalizeName(v.name))){alert('A person with this name already exists. Please use a unique name so reporting relationships remain unambiguous.');return}
@@ -969,7 +1058,7 @@ else{
 persist();dialog.close();render()});
 document.getElementById('add').onclick=()=>edit('new');
 
-const DATA_COLUMNS=['id','name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate','layoutOffsetDown','layoutOffsetRight'];
+const DATA_COLUMNS=['id','name','role','pillar','region','country','product','productOwners','manager','functionalManager','hierarchyLevel','type','startDate','endDate','layoutOffsetDown','layoutOffsetRight'];
 function csvEscape(value){const v=String(value??'');return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
 function createCSV(rows){return '\uFEFF'+[DATA_COLUMNS.join(','),...rows.map(p=>DATA_COLUMNS.map(key=>csvEscape(p[key])).join(','))].join('\r\n')+'\r\n'}
 function parseCSV(text){
@@ -998,7 +1087,7 @@ function normalizeImport(rows){
 }
 function downloadData(){
  const format=document.getElementById('exportFormat').value;
- const data=format==='csv'?createCSV(people):JSON.stringify({format:'mesh-v3',environment:MODE,people,types:typeDefinitions},null,2);
+ const data=format==='csv'?createCSV(people):JSON.stringify({format:'mesh-v4',environment:MODE,people,types:typeDefinitions,products},null,2);
  const blob=new Blob([data],{type:format==='csv'?'text/csv;charset=utf-8':'application/json;charset=utf-8'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mesh-'+MODE+'-team.'+format;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
 }
@@ -1009,12 +1098,12 @@ file.onchange=async()=>{
  try{
   if(!file.files||!file.files[0])return;
   const selected=file.files[0],format=document.getElementById('importFormat').value;
-  const text=await selected.text();let data;let importedTypes=null;
+  const text=await selected.text();let data;let importedTypes=null,importedProducts=null;
   if(format==='csv')data=parseCSV(text);
-  else{const obj=JSON.parse(text);data=Array.isArray(obj)?obj:(obj.people||obj.persons);if(!Array.isArray(obj)&&Array.isArray(obj.types))importedTypes=normalizedTypes(obj.types)}
+  else{const obj=JSON.parse(text);data=Array.isArray(obj)?obj:(obj.people||obj.persons);if(!Array.isArray(obj)&&Array.isArray(obj.types))importedTypes=normalizedTypes(obj.types);if(!Array.isArray(obj)&&Array.isArray(obj.products))importedProducts=validatedProducts(obj.products)}
   const incoming=normalizeImport(data);
   if(confirm('Replace all '+MODE.toUpperCase()+' team data with '+incoming.length+' imported records? This will overwrite browser-local changes in this environment.')){
-   people=incoming;if(importedTypes){typeDefinitions=importedTypes;persistTypes()}ensureLegacyTypes();cache.clear();persist();render(false);
+   people=incoming;if(importedTypes){typeDefinitions=importedTypes;persistTypes()}products=combinedProducts(importedProducts||[],people);saveProducts();ensureLegacyTypes();cache.clear();persist();render(false);
   }
  }catch(e){alert('Import failed: '+e.message)}finally{file.value=''}
 };
@@ -1022,7 +1111,7 @@ file.onchange=async()=>{
 // Compare the actual chart data, not the existence of an old localStorage flag.
 // Normalizing strips irrelevant object-key order and reconciles missing vs blank
 // fields and numeric offsets across JSON imports, browser data, and GitHub.
-function chartFingerprint(rows,types){
+function chartFingerprint(rows,types,productList=products){
  const normalized=normalizeImport(rows).map(p=>DATA_COLUMNS.map(key=>{
   if(key==='layoutOffsetDown'||key==='layoutOffsetRight'){
    const number=Number(p[key]);return p[key]===''?0:(Number.isFinite(number)?number:0);
@@ -1032,14 +1121,14 @@ function chartFingerprint(rows,types){
  normalized.sort((a,b)=>a[0].localeCompare(b[0]));
  const colors=normalizedTypes(types).map(t=>[t.id,t.name,t.color.toLowerCase()]);
  colors.sort((a,b)=>a[0].localeCompare(b[0]));
- return JSON.stringify([normalized,colors]);
+ return JSON.stringify([normalized,colors,validatedProducts(productList)]);
 }
 function compareWithPublished(){
  if(!publishedDocument)return {rows:[],fields:0,people:0,types:0};
  const current=new Map(people.map(p=>[String(p.id),p]));
  const remote=new Map(publishedDocument.people.map(p=>[String(p.id),p]));
  const rows=[],affected=new Set();
- const labels={name:'Name',role:'Role',pillar:'Pillar',region:'Region',country:'Country',product:'Product',manager:'People manager',functionalManager:'Functional manager',hierarchyLevel:'Hierarchy level',type:'Type',startDate:'Start date',endDate:'End date',layoutOffsetDown:'Chart position',layoutOffsetRight:'Legacy horizontal position'};
+ const labels={name:'Name',role:'Role',pillar:'Pillar',region:'Region',country:'Country',product:'Products',productOwners:'Product owners',manager:'People manager',functionalManager:'Functional manager',hierarchyLevel:'Hierarchy level',type:'Type',startDate:'Start date',endDate:'End date',layoutOffsetDown:'Chart position',layoutOffsetRight:'Legacy horizontal position'};
  function value(p,key){
   if(key==='layoutOffsetDown'||key==='layoutOffsetRight'){
    const n=Number(p?.[key]);return !p?.[key]||!Number.isFinite(n)?'0':String(n)
@@ -1093,12 +1182,13 @@ function usePublishedVersion(){
  try{
   const date=new Date().toISOString();
   const key='orgchart-dev-draft-backup-'+date;
-  localStorage.setItem(key,JSON.stringify({people,types:typeDefinitions}));
+  localStorage.setItem(key,JSON.stringify({people,types:typeDefinitions,products}));
   // Keep the existing plain local records up to date, but do not mark the
   // published data as a new unpublished edit.
   people=normalizeImport(publishedDocument.people);
   typeDefinitions=normalizedTypes(publishedDocument.types);
-  localStorage.setItem(storage,JSON.stringify(people));
+  products=combinedProducts(publishedDocument.products,publishedDocument.people);localStorage.setItem(catalogKey,JSON.stringify(products));
+   localStorage.setItem(storage,JSON.stringify(people));
   localStorage.setItem(typeStorage,JSON.stringify(typeDefinitions));
   localStorage.removeItem(DRAFT_MARKER);localStorage.removeItem(DRAFT_BASE_KEY);
   unpublishedDraft=false;headLoadError='';
@@ -1147,8 +1237,9 @@ async function loadPublishedTeam(){
   const data=await res.json();
   if(!Array.isArray(data.people)||!data.people.length||!Array.isArray(data.types))throw Error('Invalid shared data file');
   const publishedPeople=normalizeImport(data.people),publishedTypes=normalizedTypes(data.types);
-  publishedSnapshot=chartFingerprint(publishedPeople,publishedTypes);
-  publishedDocument={people:publishedPeople,types:publishedTypes};
+  const publishedProducts=combinedProducts(data.products||[],publishedPeople);
+   publishedSnapshot=chartFingerprint(publishedPeople,publishedTypes,publishedProducts);
+  publishedDocument={people:publishedPeople,types:publishedTypes,products:publishedProducts};
   // An explicit, post-release local draft is the only reason to override
   // the public dataset in this browser. Pre-existing DEV localStorage is retained as a draft.
   const hasDraft=['true','pending'].includes(localStorage.getItem(DRAFT_MARKER));
@@ -1159,14 +1250,14 @@ async function loadPublishedTeam(){
     people=normalizeImport(local);
     const savedTypes=JSON.parse(localStorage.getItem(typeStorage));
     typeDefinitions=Array.isArray(savedTypes)?normalizedTypes(savedTypes):publishedTypes;
-    unpublishedDraft=true;
+     products=combinedProducts(JSON.parse(localStorage.getItem(catalogKey)||'[]'),people);unpublishedDraft=true;
    }catch(err){
-    people=publishedPeople;typeDefinitions=publishedTypes;unpublishedDraft=false;
+    people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;unpublishedDraft=false;
     localStorage.removeItem(DRAFT_MARKER)
    }
   }else{people=publishedPeople;typeDefinitions=publishedTypes;unpublishedDraft=false}
   // Avoid treating the load itself as an edit.
-  dataLoadState='ready';cache.clear();ensureLegacyTypes();
+  dataLoadState='ready';cache.clear();ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));
   // A successful publication may leave an obsolete 'pending' flag in the
   // browser. Clear it as soon as the public data catches up with this draft.
   if(chartFingerprint(people,typeDefinitions)===publishedSnapshot){
@@ -1256,7 +1347,7 @@ document.getElementById('publish-now').onclick=async()=>{
  if(!confirm('Publish your current '+people.length+' positions and '+typeDefinitions.length+' types to the shared DEV chart? Everyone will see the updated data after GitHub Pages deploys.'))return;
  button.disabled=true;button.textContent='Publishing…';
  try{
-  const result=await api(API_NAMESPACE+'/publish','POST',{baseSha:baseline,people,types:typeDefinitions});
+  const result=await api(API_NAMESPACE+'/publish','POST',{baseSha:baseline,people,types:typeDefinitions,products});
   publishedSha=result.sha||'';
   localStorage.setItem(DRAFT_MARKER,'pending');
   localStorage.setItem(DRAFT_BASE_KEY,publishedSha);
