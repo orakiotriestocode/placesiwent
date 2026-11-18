@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 test('loads and simulates without page errors', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  await expect(page.locator('header .version')).toContainText('Alpha 0.49');
+  await expect(page.locator('header .version')).toContainText('Alpha 0.52');
   await expect(page.locator('#cash')).toContainText('$');
   await expect(page.locator('#entertainerCount')).toHaveText('0');
   await page.locator('#hireEntertainer').click();
@@ -213,5 +213,14 @@ test('music toggle is opt-in and terrain artwork renders without page errors',as
  await expect(page.locator('#musicToggle')).toHaveText('♫ Music off');
  await expect(page.locator('#musicToggle')).toHaveAttribute('aria-pressed','false');
  await page.waitForTimeout(350);
+ expect(errors).toEqual([]);
+});
+
+test('Alpha 0.52 audio and queue controls are present',async ({page})=>{
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await expect(page.locator('#musicVolume')).toHaveAttribute('type','range');
+ await expect(page.locator('#musicStyle')).toContainText('Carnival');
+ await page.locator('#musicStyle').click();
+ await expect(page.locator('#musicStyle')).toContainText('Promenade');
  expect(errors).toEqual([]);
 });
