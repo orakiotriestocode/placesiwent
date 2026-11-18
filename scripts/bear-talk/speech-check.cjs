@@ -25,6 +25,9 @@ function el(id) {
       setAttribute(name, value) {
         this[name] = value;
       },
+      getAttribute(name) {
+        return this[name] || null;
+      },
       append(node) {
         (this.children ||= []).push(node);
       },
@@ -85,16 +88,24 @@ const ctx = {
   },
   document: {
     getElementById: el,
-    querySelectorAll: (selector) =>
-      (selector === '[data-reaction]'
-        ? ['happy', 'wave', 'love', 'giggle', 'sleepy', 'tilt', 'neutral']
-        : ['hello', 'love', 'sleep']
+    querySelectorAll: (selector) => {
+      if (selector === '[data-animal-choice]')
+        return ['bear', 'goose', 'frog'].map((animal) => {
+          const b = el('animal-' + animal);
+          b.dataset = { animalChoice: animal };
+          return b;
+        });
+      return (
+        selector === '[data-reaction]'
+          ? ['happy', 'wave', 'love', 'giggle', 'sleepy', 'tilt', 'neutral']
+          : ['hello', 'love', 'sleep']
       ).map((key) => {
         const reaction = selector === '[data-reaction]';
         const b = el((reaction ? 'reaction-' : 'phrase-') + key);
         b.dataset = reaction ? { reaction: key } : { phrase: key };
         return b;
-      }),
+      });
+    },
     querySelector: () => el('settings'),
     body: el('body'),
     createElement: () => ({
@@ -125,6 +136,7 @@ const ctx = {
 };
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/pairing.js', 'utf8'), ctx);
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/phrases.js', 'utf8'), ctx);
+vm.runInNewContext(fs.readFileSync('arcade/bear-talk/animals.js', 'utf8'), ctx);
 vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
 (async () => {
   assert.deepEqual(
@@ -179,6 +191,10 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   assert.equal(current.rate, 0.7);
   assert.equal(el('bear').className, 'bear love');
   const speaking = current;
+  await el('animal-frog').onclick();
+  assert.equal(ctx.window.BearAnimals.selected, 'frog');
+  assert.equal(current, speaking, 'Switching animals must not replace speech');
+  await el('animal-bear').onclick();
   const touchBubble = el('bubble').textContent;
   const touchHistoryCount = el('history').children.length;
   touchReaction('giggle', 'That tickles!', 'tummy');
@@ -296,6 +312,13 @@ vm.runInNewContext(fs.readFileSync('arcade/bear-talk/app.js', 'utf8'), ctx);
   assert.ok(
     !el('remote-voice').options.some((o) => o.value === localVoice.URI),
   );
+  el('message').value = 'This is my own message about a bear.';
+  await el('animal-goose').onclick();
+  assert.equal(el('message').value, 'This is my own message about a bear.');
+  el('language').value = 'en-GB';
+  el('language').onchange();
+  el('phrase-hello').onclick();
+  assert.ok(!/bear/i.test(el('message').value));
   console.log(
     'PASS: 300 distinct localized phrases, all 15 phrase cycles wrap after 20 entries; independent reactions do not add speech messages or interrupt active speech; optional idle giggle, all seven expressions, demo controls, voice filtering, stop and repeat.',
   );

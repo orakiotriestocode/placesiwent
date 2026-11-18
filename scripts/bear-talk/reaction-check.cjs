@@ -14,6 +14,7 @@ const hash = async (s) =>
     allow = true;
   const row = {
     id,
+    animal: 'bear',
     tablet_hash: await hash('receiver'),
     controller_hash: await hash('sender'),
     expires_at: new Date(Date.now() + 100000).toISOString(),
@@ -92,7 +93,37 @@ const hash = async (s) =>
       (c) => c.path.endsWith('/bear_messages') && c.method === 'POST',
     ),
   );
+  assert.equal(
+    (await call('animal', 'sender', { animal: 'goose' })).status,
+    200,
+  );
+  assert.equal((await (await call('poll', 'receiver')).json()).animal, 'goose');
+  assert.equal(
+    (await call('animal', 'receiver', { animal: 'frog' })).status,
+    200,
+  );
+  assert.equal((await (await call('poll', 'sender')).json()).animal, 'frog');
+  assert.equal((await call('animal', 'wrong', { animal: 'bear' })).status, 403);
+  assert.equal(
+    (await call('animal', 'sender', { animal: '<script>' })).status,
+    400,
+  );
+  assert.equal(
+    (await call('create', 'sender', { animal: 'dragon' })).status,
+    400,
+  );
+  allow = false;
+  assert.equal(
+    (await call('animal', 'sender', { animal: 'bear' })).status,
+    429,
+  );
+  allow = true;
   await call('stop');
+  assert.equal(
+    row.animal,
+    'frog',
+    'Stop clears speech but preserves the animal',
+  );
   assert.equal(row.reaction, null);
   console.log(
     'PASS: real Edge handler validates reaction/token/role, rate limit, poll payload, no speech-message insert, and Stop clears reactions. No live services used.',

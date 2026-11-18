@@ -7,14 +7,14 @@
       content="width=device-width,initial-scale=1,viewport-fit=cover"
     />
     <meta name="theme-color" content="#182c32" />
-    <title>Bear & You · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.6.1" />
+    <title>Bear & Friends · Tiny Arcade</title>
+    <link rel="stylesheet" href="style.css?v=0.7.0" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & YOU <small>alpha 0.6.1</small></span
+        <span>BEAR & FRIENDS <small>alpha 0.7.0</small></span
         ><button
           type="button"
           id="open-settings"
@@ -27,14 +27,14 @@
     </header>
     <main>
       <section id="welcome" class="card welcome">
-        <p class="eyebrow">A little bear. Your familiar words.</p>
+        <p class="eyebrow">A little friend. Your familiar words.</p>
         <h1>A little moment<br /><em>together.</em></h1>
         <p>
-          Choose the bear screen or the remote control. You bring the words;
+          Choose the animal screen or the remote control. You bring the words;
           bear brings the smiles.
         </p>
         <div class="choices">
-          <button id="start">🐻 Open the bear screen</button
+          <button id="start">🐻 Open the animal screen</button
           ><button id="parent" class="secondary">
             Open the remote control
           </button>
@@ -45,7 +45,7 @@
       <section id="join" class="card" hidden>
         <p class="eyebrow">Remote control</p>
         <h1>Let’s connect.</h1>
-        <p>Enter the code from the bear screen.</p>
+        <p>Enter the code from the animal screen.</p>
         <form id="join-form">
           <label for="code">Pairing code</label
           ><input
@@ -56,7 +56,7 @@
             autocapitalize="characters"
             spellcheck="false"
             required
-          /><button id="connect">Connect to the bear</button>
+          /><button id="connect">Connect to your friend</button>
         </form>
         <button class="plain" id="back">← Go back</button>
       </section>
@@ -69,12 +69,17 @@
           <div
             class="bear"
             id="bear"
+            data-animal="bear"
             role="button"
             tabindex="0"
             aria-describedby="touch-hint touch-help"
             aria-label="A friendly smiling teddy bear"
           >
-            <svg viewBox="0 0 420 440" aria-hidden="true">
+            <svg
+              data-animal-art="bear"
+              viewBox="0 0 420 440"
+              aria-hidden="true"
+            >
               <defs>
                 <linearGradient id="fur" x2="0.3" y2="1">
                   <stop stop-color="#d39860" />
@@ -181,6 +186,286 @@
                 <circle cx="210" cy="294" r="10" fill="#648d7c" />
               </g>
             </svg>
+            <svg
+              data-animal-art="goose"
+              viewBox="0 0 420 440"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="feathers" x2=".4" y2="1">
+                  <stop stop-color="#fffdf2" />
+                  <stop offset="1" stop-color="#e2e6d5" />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="210"
+                cy="416"
+                rx="120"
+                ry="15"
+                fill="#253d36"
+                opacity=".18"
+              />
+              <path
+                d="M149 377l-10 22-40 10q28 19 63 5l29 2-28-21 1-18M264 377l11 22 44 10q-29 19-63 5l-28 2 27-21-5-18"
+                fill="#e8a044"
+                stroke="#bd7736"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+              <ellipse
+                cx="210"
+                cy="338"
+                rx="106"
+                ry="67"
+                fill="url(#feathers)"
+              />
+              <ellipse cx="210" cy="348" rx="70" ry="45" fill="#fffbee" />
+              <path
+                d="M173 285q-21-51-7-100l76-4q-13 52 10 110z"
+                fill="url(#feathers)"
+              />
+              <g>
+                <path
+                  d="M129 290q-39 5-34 64 32 9 65-24"
+                  fill="#e3e8d8"
+                  stroke="#ccd7bf"
+                  stroke-width="3"
+                />
+                <path
+                  d="M107 338l30-11M106 348l24-7"
+                  fill="none"
+                  stroke="#c3cfb7"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </g>
+              <g class="wave-arm">
+                <path
+                  d="M285 286q45-2 42 60-33 15-68-17"
+                  fill="#eef0e0"
+                  stroke="#ccd7bf"
+                  stroke-width="3"
+                />
+                <path
+                  d="M300 322l17 12M295 332l19 9"
+                  fill="none"
+                  stroke="#c3cfb7"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </g>
+              <g class="head">
+                <g transform="translate(21 -4) scale(.9)">
+                  <ellipse
+                    cx="210"
+                    cy="155"
+                    rx="86"
+                    ry="83"
+                    fill="url(#feathers)"
+                  />
+                  <path
+                    d="M184 78q10-30 24-13-2-23 16-17 15 15 4 33"
+                    fill="#fffbed"
+                  />
+                  <g class="eyes" fill="#30393b">
+                    <ellipse cx="178" cy="145" rx="8" ry="12" />
+                    <ellipse cx="242" cy="145" rx="8" ry="12" />
+                  </g>
+                  <g fill="#fff">
+                    <circle cx="181" cy="141" r="3" />
+                    <circle cx="245" cy="141" r="3" />
+                  </g>
+                  <ellipse
+                    cx="153"
+                    cy="175"
+                    rx="15"
+                    ry="10"
+                    fill="#efb3a0"
+                    opacity=".75"
+                  />
+                  <ellipse
+                    cx="267"
+                    cy="175"
+                    rx="15"
+                    ry="10"
+                    fill="#efb3a0"
+                    opacity=".75"
+                  />
+                  <path
+                    d="M175 185q35-25 70 0l-7 31q-28 21-56 0z"
+                    fill="#eca14b"
+                    stroke="#ce813a"
+                    stroke-width="3"
+                  />
+                  <path
+                    class="smile"
+                    d="M180 203q30 15 60 0"
+                    fill="none"
+                    stroke="#9e6337"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                  />
+                  <ellipse
+                    class="mouth"
+                    cx="210"
+                    cy="206"
+                    rx="19"
+                    ry="10"
+                    fill="#734a36"
+                  />
+                  <ellipse
+                    class="tongue"
+                    cx="210"
+                    cy="210"
+                    rx="11"
+                    ry="4"
+                    fill="#dc8f84"
+                  />
+                  <path
+                    d="M178 259l32 13-32 17zM242 259l-32 13 32 17z"
+                    fill="#658da0"
+                  />
+                  <circle cx="210" cy="272" r="9" fill="#8bafba" />
+                </g>
+              </g>
+            </svg>
+            <svg
+              data-animal-art="frog"
+              viewBox="0 0 420 440"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="frog-green" x2=".3" y2="1">
+                  <stop stop-color="#9acb75" />
+                  <stop offset="1" stop-color="#659d62" />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="210"
+                cy="416"
+                rx="127"
+                ry="15"
+                fill="#253d36"
+                opacity=".18"
+              />
+              <ellipse
+                cx="210"
+                cy="327"
+                rx="103"
+                ry="82"
+                fill="url(#frog-green)"
+              />
+              <ellipse cx="210" cy="331" rx="68" ry="62" fill="#d9e6a4" />
+              <ellipse
+                cx="126"
+                cy="363"
+                rx="45"
+                ry="39"
+                fill="#74a867"
+                transform="rotate(-18 126 363)"
+              />
+              <ellipse
+                cx="294"
+                cy="363"
+                rx="45"
+                ry="39"
+                fill="#74a867"
+                transform="rotate(18 294 363)"
+              />
+              <path
+                d="M137 383l-50 7 10 11-12 13q42 14 87-2l-4-15zM283 383l50 7-10 11 12 13q-42 14-87-2l4-15z"
+                fill="#9ac77a"
+                stroke="#63985d"
+                stroke-width="3"
+                stroke-linejoin="round"
+              />
+              <g>
+                <path
+                  d="M122 279q-31 25-23 64l-14 14 18 2 13 14 9-16 18-2-8-19 14-40"
+                  fill="#91c579"
+                  stroke="#699e62"
+                  stroke-width="3"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <g class="wave-arm">
+                <path
+                  d="M298 279q31 25 23 64l14 14-18 2-13 14-9-16-18-2 8-19-14-40"
+                  fill="#91c579"
+                  stroke="#699e62"
+                  stroke-width="3"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <g class="head">
+                <ellipse
+                  cx="210"
+                  cy="182"
+                  rx="124"
+                  ry="85"
+                  fill="url(#frog-green)"
+                />
+                <circle cx="151" cy="117" r="39" fill="#91c675" />
+                <circle cx="269" cy="117" r="39" fill="#91c675" />
+                <g class="eyes">
+                  <ellipse cx="151" cy="119" rx="25" ry="28" fill="#fff7dd" />
+                  <ellipse cx="269" cy="119" rx="25" ry="28" fill="#fff7dd" />
+                  <ellipse cx="155" cy="122" rx="10" ry="16" fill="#293a32" />
+                  <ellipse cx="265" cy="122" rx="10" ry="16" fill="#293a32" />
+                  <circle cx="158" cy="117" r="4" fill="#fff" />
+                  <circle cx="268" cy="117" r="4" fill="#fff" />
+                </g>
+                <ellipse
+                  cx="124"
+                  cy="192"
+                  rx="20"
+                  ry="12"
+                  fill="#ddb18a"
+                  opacity=".7"
+                />
+                <ellipse
+                  cx="296"
+                  cy="192"
+                  rx="20"
+                  ry="12"
+                  fill="#ddb18a"
+                  opacity=".7"
+                />
+                <g fill="#548a56">
+                  <ellipse cx="198" cy="178" rx="3" ry="4" />
+                  <ellipse cx="222" cy="178" rx="3" ry="4" />
+                </g>
+                <path
+                  class="smile"
+                  d="M152 204q58 47 116 0"
+                  fill="none"
+                  stroke="#416b43"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                />
+                <ellipse
+                  class="mouth"
+                  cx="210"
+                  cy="222"
+                  rx="26"
+                  ry="15"
+                  fill="#45603e"
+                />
+                <ellipse
+                  class="tongue"
+                  cx="210"
+                  cy="230"
+                  rx="15"
+                  ry="6"
+                  fill="#d69b92"
+                />
+                <path
+                  d="M179 266l31 13-31 16zM241 266l-31 13 31 16z"
+                  fill="#b68d58"
+                />
+                <circle cx="210" cy="279" r="9" fill="#dab675" />
+              </g>
+            </svg>
           </div>
           <div class="bubble" id="bubble">Hello, little friend ♡</div>
           <div id="touch-feedback" aria-hidden="true">
@@ -241,16 +526,18 @@
       </section>
       <section id="remote" class="card" hidden>
         <div class="remote-head">
-          <span class="bear-icon">🐻</span>
+          <span class="bear-icon" id="remote-animal-icon" aria-hidden="true"
+            >🐻</span
+          >
           <div>
             <p class="eyebrow">Your words, a little magic</p>
-            <h1>Make bear <em>smile.</em></h1>
+            <h1>Make your friend <em>smile.</em></h1>
           </div>
         </div>
         <p id="remote-status" role="status" class="connection">Connecting…</p>
         <form id="message-form">
           <div class="spoken-language-row">
-            <label for="language">Bear’s spoken language</label
+            <label for="language">Spoken language</label
             ><select id="language">
               <option value="nl-BE">Nederlands · België</option>
               <option value="nl-NL">Nederlands · Nederland</option>
@@ -275,7 +562,7 @@
               Tap again for another sentence. Edit it before sending.
             </p>
           </section>
-          <label for="message">What should bear say?</label
+          <label for="message">What should your friend say?</label
           ><textarea
             id="message"
             maxlength="500"
@@ -340,6 +627,23 @@
         <h2 id="settings-title">Settings</h2>
         <button type="button" id="close-settings" class="plain">Done</button>
       </div>
+      <section class="settings-group animal-settings">
+        <h3>Your animal</h3>
+        <div class="animal-choices" role="group" aria-label="Choose an animal">
+          <button type="button" data-animal-choice="bear" aria-pressed="true">
+            <span aria-hidden="true">🐻</span><span>Bear</span>
+          </button>
+          <button type="button" data-animal-choice="goose" aria-pressed="false">
+            <span aria-hidden="true">🪿</span><span>Goose</span>
+          </button>
+          <button type="button" data-animal-choice="frog" aria-pressed="false">
+            <span aria-hidden="true">🐸</span><span>Frog</span>
+          </button>
+        </div>
+        <p class="fine" id="animal-status" role="status">
+          Choose a little friend. You can switch any time.
+        </p>
+      </section>
       <section class="settings-group interface-settings">
         <label class="ui-picker"
           >Interface language<select
@@ -354,17 +658,17 @@
           </select></label
         >
         <p class="fine">
-          Independent from the interface language. Bear reads your words; it
-          doesn’t translate.
+          Independent from the interface language. Your friend reads your words;
+          it doesn’t translate.
         </p>
       </section>
       <section class="settings-group receiver-settings">
-        <h3>Bear’s voice</h3>
+        <h3>Your friend’s voice</h3>
         <p id="voice-health" class="fine" role="status">
           Tap Test voice here before playing
         </p>
         <div class="receiver-only-controls">
-          <label for="local-language">Bear’s spoken language</label
+          <label for="local-language">Spoken language</label
           ><select id="local-language">
             <option value="nl-BE">Nederlands · België</option>
             <option value="nl-NL">Nederlands · Nederland</option>
@@ -392,11 +696,11 @@
         </button>
       </section>
       <section class="settings-group controller-settings">
-        <h3>Bear’s voice</h3>
+        <h3>Your friend’s voice</h3>
         <p id="remote-voice-health" role="status" class="fine">
-          Waiting for the bear screen’s voice list…
+          Waiting for the animal screen’s voice list…
         </p>
-        <label for="remote-voice">Voice from the bear screen</label
+        <label for="remote-voice">Voice from the animal screen</label
         ><select id="remote-voice">
           <option value="">Automatic · selected language</option></select
         ><label for="remote-rate"
@@ -445,11 +749,12 @@
       </section>
     </dialog>
     <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
-    <script src="pairing.js?v=0.6.1"></script>
-    <script src="phrases.js?v=0.6.1"></script>
-    <script src="i18n.js?v=0.6.1"></script>
-    <script src="local-voice.js?v=0.6.1"></script>
-    <script src="touch.js?v=0.6.1"></script>
-    <script src="app.js?v=0.6.1"></script>
+    <script src="pairing.js?v=0.7.0"></script>
+    <script src="phrases.js?v=0.7.0"></script>
+    <script src="i18n.js?v=0.7.0"></script>
+    <script src="local-voice.js?v=0.7.0"></script>
+    <script src="animals.js?v=0.7.0"></script>
+    <script src="touch.js?v=0.7.0"></script>
+    <script src="app.js?v=0.7.0"></script>
   </body>
 </html>

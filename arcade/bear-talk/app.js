@@ -4,6 +4,10 @@
   const $ = (id) => document.getElementById(id);
   const synth = window.speechSynthesis;
   const localVoice = window.BearLocalVoice;
+  const animals = window.BearAnimals;
+  let animalEpoch = 0,
+    animalPending = false;
+  const preset = (text, lang) => animals?.phrase(text, lang) || text;
   let session = null,
     role = null,
     timer = null,
@@ -35,6 +39,29 @@
   }
   const demo = !scanned && new URLSearchParams(location.search).has('demo');
   let renderedPairLink = '';
+  animals?.bindPicker(async (value) => {
+    if (animalPending) return;
+    const previous = animals.selected;
+    ++animalEpoch;
+    animalPending = true;
+    animals.set(value);
+    $('animal-status').textContent = session
+      ? 'Changing your animal…'
+      : 'Choose a little friend. You can switch any time.';
+    try {
+      if (session) {
+        const result = await api('animal', { animal: value });
+        animals.set(result.animal);
+        $('animal-status').textContent = 'Animal changed on both devices.';
+      }
+    } catch (error) {
+      animals.set(previous);
+      $('animal-status').textContent = error.message;
+    } finally {
+      animalPending = false;
+      ++animalEpoch;
+    }
+  });
   function renderPairing() {
     if (!session?.code) return;
     $('pair-code').textContent =
@@ -128,7 +155,7 @@
       const e = new Error(
         (result.error || 'Connection problem').replace(
           /tablet/g,
-          'bear screen',
+          'animal screen',
         ),
       );
       e.status = response.status;
@@ -269,7 +296,8 @@
     $('bear').className = 'bear ' + emotion + (isSpeaking ? ' talking' : '');
     $('bear').setAttribute(
       'aria-label',
-      'A friendly bear · ' + (reactionNames[emotion] || 'Happy'),
+      animals?.label(reactionNames[emotion] || 'Happy') ||
+        'A friendly bear · ' + (reactionNames[emotion] || 'Happy'),
     );
     $('scene-label').textContent =
       reactionNames[emotion] || 'A little moment together';
@@ -281,7 +309,8 @@
     element: $('bear'),
     onReaction: (emotion, caption, action) => {
       setExpression(emotion, 5000);
-      $('scene-label').textContent = caption;
+      $('scene-label').textContent =
+        animals?.caption(action, caption) || caption;
       const stage = $('stage');
       stage.setAttribute('data-touch', action);
       stage.classList.remove('touch-pop');
@@ -602,11 +631,11 @@
       const status = document.createElement('small');
       status.textContent =
         {
-          queued: 'Queued for bear screen',
+          queued: 'Queued for animal screen',
           speaking: 'Speaking…',
           spoken: 'Spoken ✓',
           stopped: 'Stopped',
-          blocked: 'Needs a voice tap on the bear screen',
+          blocked: 'Needs a voice tap on the animal screen',
         }[m.status] || m.status;
       li.append(status);
       $('history').append(li);
@@ -615,8 +644,11 @@
   async function poll() {
     if (!session) return;
     try {
+      const epoch = animalEpoch;
       const r = await api('poll');
       if (!session) return;
+      if (animals && !animalPending && epoch === animalEpoch && r.animal)
+        animals.set(r.animal);
       if (role === 'tablet') {
         if (r.stopId && r.stopId !== lastStop) {
           lastStop = r.stopId;
@@ -639,8 +671,8 @@
         drain();
       } else {
         $('remote-status').textContent = r.online
-          ? '● Bear screen connected'
-          : '○ Bear screen not responding · Keep its screen open';
+          ? '● Animal screen connected'
+          : '○ Animal screen not responding · Keep its screen open';
         lastRemote = r.messages[0] || null;
         $('remote-repeat').disabled = !lastRemote;
         remoteVoices = r.voiceState?.voices || [];
@@ -652,10 +684,11 @@
         $('remote-voice-health').textContent =
           {
             ready: 'Voice playback tested ✓',
-            blocked: 'Sound needs attention on the bear screen',
-            unavailable: 'Speech unavailable on the bear screen',
-            untested: 'Tap Test voice on the bear screen first',
-          }[r.voiceState?.ready] || 'Waiting for the bear screen’s voice list…';
+            blocked: 'Sound needs attention on the animal screen',
+            unavailable: 'Speech unavailable on the animal screen',
+            untested: 'Tap Test voice on the animal screen first',
+          }[r.voiceState?.ready] ||
+          'Waiting for the animal screen’s voice list…';
         if (!remoteVoices.length)
           $('remote-voice-health').textContent +=
             ' · No installed voices reported yet';
@@ -673,6 +706,7 @@
     if (session) timer = setTimeout(poll, 3000);
   }
   function activate(s, r) {
+    if (s.animal) animals?.set(s.animal);
     session = s;
     role = r;
     active = true;
@@ -695,10 +729,16 @@
     speak({ text: 'Hallo Riva!', lang: 'nl-BE' }, true);
     $('start').disabled = true;
     try {
-      const s = await api('create');
+      const s = await api('create', { animal: animals?.selected || 'bear' });
       $('pair-code').textContent = s.code.slice(0, 5) + ' ' + s.code.slice(5);
       activate(
-        { id: s.id, token: s.token, expires: s.expires, code: s.code },
+        {
+          id: s.id,
+          token: s.token,
+          expires: s.expires,
+          code: s.code,
+          animal: s.animal,
+        },
         'tablet',
       );
     } catch (e) {
@@ -738,7 +778,7 @@
       $('message').value = '';
       $('count').textContent = '0 / 500';
       requestId = null;
-      notice('Sent to the bear screen.');
+      notice('Sent to the animal screen.');
     } catch (err) {
       notice(err.message + ' Your message is still here.');
     } finally {
@@ -759,8 +799,11 @@
       m
         ? { ...m, voice: $('local-voice').value }
         : {
-            text: (phrases[baseLanguage($('local-language').value)] ||
-              phrases.en)[0],
+            text: preset(
+              (phrases[baseLanguage($('local-language').value)] ||
+                phrases.en)[0],
+              $('local-language').value,
+            ),
             lang: $('local-language').value,
           },
       !m,
@@ -780,12 +823,12 @@
       if (session) await api('stop');
       notice(
         session
-          ? 'Stop sent · The remote may take a few seconds to reach the bear screen.'
+          ? 'Stop sent · The remote may take a few seconds to reach the animal screen.'
           : 'Stopped · Queue cleared',
       );
     } catch {
       notice(
-        'Could not reach the other screen. Stop directly on the bear screen.',
+        'Could not reach the other screen. Stop directly on the animal screen.',
       );
     } finally {
       stopping = false;
@@ -944,7 +987,7 @@
         const bank = window.BearPhrases[lang] || window.BearPhrases.en;
         const key = lang + ':' + category,
           index = phrasePositions[key] || 0;
-        $('message').value = bank[category][index];
+        $('message').value = preset(bank[category][index], lang);
         phrasePositions[key] = (index + 1) % bank[category].length;
         $('emotion').value = { hello: 'happy', love: 'love', sleep: 'sleepy' }[
           category
@@ -976,7 +1019,7 @@
     document.body.classList.add('demo-mode');
 
     $('remote-status').textContent =
-      '● Local demo · Remote and bear are on this device';
+      '● Local demo · Remote and your friend are on this device';
     $('remote-test').hidden = false;
     $('end-remote').textContent = 'Exit demo';
     $('end-remote').onclick = () => location.assign('./');
@@ -987,7 +1030,7 @@
     show('join');
     $('code').value = scanned.code || '';
     if (scanned.code) {
-      notice('Connecting to the bear…');
+      notice('Connecting to your friend…');
       connect(scanned.code);
     } else notice('Invalid QR code. Enter the manual code instead.');
   } else {
@@ -999,7 +1042,7 @@
           $('pair-code').textContent = saved.session.code
             ? saved.session.code.slice(0, 5) + ' ' + saved.session.code.slice(5)
             : 'Start a new session to pair';
-          notice('Tap Test voice after reloading the bear screen.');
+          notice('Tap Test voice after reloading the animal screen.');
         }
       } else sessionStorage.removeItem('bear-talk-session');
     } catch {

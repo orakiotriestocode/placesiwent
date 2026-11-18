@@ -1598,3 +1598,75 @@ body[data-screen='remote'] .controller-end,
     opacity: 0.75;
   }
 }
+
+/* Three friends share the same scene, gestures and speech controls. */
+#bear > [data-animal-art] {
+  display: none;
+}
+#bear[data-animal='bear'] > [data-animal-art='bear'],
+#bear[data-animal='goose'] > [data-animal-art='goose'],
+#bear[data-animal='frog'] > [data-animal-art='frog'] {
+  display: block;
+}
+#bear[data-animal='goose'] .mouth {
+  transform-origin: 210px 206px;
+}
+#bear[data-animal='frog'] .mouth {
+  transform-origin: 210px 222px;
+}
+.animal-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.animal-choices button {
+  display: grid;
+  gap: 6px;
+  place-items: center;
+  padding: 12px 6px;
+  background: #172f34;
+  color: #c2d1cb;
+  border: 1px solid #78938866;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.animal-choices button > span:first-child {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.animal-choices button[aria-pressed='true'] {
+  background: #eac493;
+  color: #243637;
+  border-color: #eac493;
+  box-shadow: inset 0 0 0 2px #24363733;
+}
+.touch-pop[data-touch='feet'] #bear[data-animal='goose'] svg {
+  animation: goose-waddle 0.4s ease-in-out 3;
+}
+.touch-pop[data-touch='feet'] #bear[data-animal='frog'] svg {
+  animation: frog-hop 0.55s ease-in-out 2;
+}
+@keyframes goose-waddle {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-3px);
+  }
+}
+@keyframes frog-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.03, 0.97);
+  }
+  45% {
+    transform: translateY(-22px) scale(0.98, 1.03);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .touch-pop[data-touch='feet'] #bear[data-animal] svg {
+    animation: none;
+  }
+}
