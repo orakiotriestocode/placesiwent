@@ -179,7 +179,7 @@ textarea:focus-visible {
   min-height: 410px;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: clip;
   border-radius: 32px;
   background: linear-gradient(#e5e4c8, #c6d7b0 65%, #9cb99a);
   color: #344e43;
