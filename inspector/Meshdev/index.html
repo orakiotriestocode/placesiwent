@@ -62,7 +62,15 @@ main{padding:12px 18px;min-height:70vh}.shared-data-status{padding:7px 10px;marg
 .country-map-list>button{float:right;padding:2px 7px;font-size:11px}
 .leaflet-container{background:#112937!important;font-family:Inter,Segoe UI,sans-serif}
 @media(max-width:700px){.grouped-controls .group-zoom-label{margin-left:0}.grouped-content{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}.country-map-summary{top:auto;bottom:12px;right:12px}}
-</style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.33.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+
+/* Keyless, self-hosted SVG atlas controls */
+.mesh-country-svg{position:absolute;inset:0}
+.mesh-map-controls{position:absolute;left:12px;top:12px;z-index:5;display:flex;gap:5px}
+.mesh-map-controls button{padding:7px 11px;font-size:12px;background:#1d3b44;border-color:#57757b}
+.country-map-summary{z-index:5}
+.country-map-list{z-index:6}
+.country-map-status{top:53px;z-index:5}
+</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.34.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
 const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
 const fields=['name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
 const base=RAW.split('\n').map((r,i)=>{const a=r.split('|');return Object.fromEntries([['id','p'+i],...fields.map((k,j)=>[k,(k==='functionalManager'||k==='hierarchyLevel'||k==='startDate'||k==='endDate')?'':a[j>8?j-2:j]||''])])});
@@ -769,70 +777,145 @@ async function renderCountryMap(){
  clearCountryMap();
  root.className='grouped-viewport';
  const shell=document.createElement('div');shell.className='country-map-shell';
- const mapEl=document.createElement('div');mapEl.className='country-map-canvas';
- const status=document.createElement('div');status.className='country-map-status';status.textContent='Loading world map…';
- shell.append(mapEl,status);root.replaceChildren(shell);
+ const status=document.createElement('div');status.className='country-map-status';
+ status.textContent='Loading country boundaries…';shell.append(status);
+ root.replaceChildren(shell);
  const records=countryMapRecords();
- document.getElementById('stats').textContent=people.length+' positions · '+records.size+' mapped countries · '+people.filter(p=>!countryCode(p.country)).length+' without mapped country';
+ document.getElementById('stats').textContent=people.length+' positions · '+records.size+' countries with assigned positions · '+people.filter(p=>!countryCode(p.country)).length+' without a country';
  try{
-  const L=await loadLeaflet();
-  if(!shell.isConnected||view!=='country'||countryDisplayMode!=='map')return;
-  const map=L.map(mapEl,{zoomControl:true,worldCopyJump:true,minZoom:2,maxZoom:9}).setView([18,8],2);
-  activeCountryMap=map;
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OpenStreetMap &copy; CARTO',maxZoom:19}).addTo(map);
-  const reply=await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson');
-  if(!reply.ok)throw Error('World borders could not be loaded');
-  const geo=await reply.json();
-  if(!shell.isConnected||activeCountryMap!==map)return;
-  const selection=L.featureGroup().addTo(map);
-  let mapped=0;
-  const list=document.createElement('div');list.className='country-map-list';list.hidden=true;shell.append(list);
-  const display=(code)=>{
-   const peopleHere=records.get(code)||[];
-   list.replaceChildren();
-   const close=document.createElement('button');close.type='button';close.textContent='Close';close.onclick=()=>{list.hidden=true};
-   const header=document.createElement('strong');header.textContent=flagEmoji(code)+' '+countryLabel(code)+' · '+peopleHere.length+' positions';
-   list.append(close,header);
-   for(const p of peopleHere)list.append(card(p,false));
-   list.hidden=false;
-  };
-  const selectedCodes=new Set();
-  L.geoJSON(geo,{
-   style:feature=>{
-    const code=String(feature.properties?.['ISO3166-1-Alpha-2']||feature.properties?.ISO_A2||'').toUpperCase();
-    return {color:records.has(code)?'#66bfa8':'#45636d',weight:records.has(code)?1.5:.5,fillColor:records.has(code)?'#1c7a67':'#29404b',fillOpacity:records.has(code)?.45:.16};
-   },
-   onEachFeature:(feature,layer)=>{
-    const code=String(feature.properties?.['ISO3166-1-Alpha-2']||feature.properties?.ISO_A2||'').toUpperCase();
-    if(!records.has(code))return;
-    selectedCodes.add(code);mapped++;
-    layer.bindTooltip(countryLabel(code)+' · '+records.get(code).length+' positions',{sticky:true});
-    layer.on('click',()=>display(code));
-    selection.addLayer(layer);
+  // Self-hosted Natural Earth topology: no tile provider, API key, watermark,
+  // third-party JavaScript, or geographical data transmitted to map services.
+  const response=await fetch('./world-countries-110m.json');
+  if(!response.ok)throw Error('Local country boundaries unavailable');
+  const topology=await response.json();
+  if(view!=='country'||countryDisplayMode!=='map'||!shell.isConnected)return;
+  const ns='http://www.w3.org/2000/svg';
+  const make=(tag,attrs={})=>{const el=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));return el};
+  const W=1000,H=510;
+  const project=([lon,lat])=>[(lon+180)*W/360,(90-lat)*H/180];
+  const transform=topology.transform;
+  const decoded=new Map();
+  function arc(index){
+   const key=index<0?~index:index;
+   if(!decoded.has(key)){
+    let x=0,y=0;
+    const pts=topology.arcs[key].map(([dx,dy])=>{
+     x+=dx;y+=dy;
+     return project([x*transform.scale[0]+transform.translate[0],y*transform.scale[1]+transform.translate[1]]);
+    });
+    decoded.set(key,pts);
    }
-  }).addTo(map);
-  // Show count markers at country centers. On click, show actual org cards.
-  selection.eachLayer(layer=>{
-   const code=String(layer.feature?.properties?.['ISO3166-1-Alpha-2']||layer.feature?.properties?.ISO_A2||'').toUpperCase();
-   if(!code||!records.has(code))return;
-   const center=layer.getBounds().getCenter();
-   L.circleMarker(center,{radius:Math.min(16,6+records.get(code).length*.7),color:'#9ce5c9',weight:2,fillColor:'#1a876f',fillOpacity:.86})
-    .addTo(map).bindTooltip(countryLabel(code)+' · '+records.get(code).length+' positions').on('click',()=>display(code));
+   const pts=decoded.get(key);
+   return index<0?pts.slice().reverse():pts;
+  }
+  function ring(ids){
+   const points=[];
+   for(const id of ids){
+    const segment=arc(id);
+    points.push(...(points.length?segment.slice(1):segment));
+   }
+   return points;
+  }
+  function pathFor(geometry){
+   const rings=geometry.type==='Polygon'?geometry.arcs:geometry.type==='MultiPolygon'?geometry.arcs.flat():[];
+   return rings.map(ids=>{
+    const pts=ring(ids);if(!pts.length)return '';
+    return 'M'+pts.map(pt=>pt.map(n=>n.toFixed(2)).join(',')).join('L')+'Z';
+   }).join(' ');
+  }
+  const svg=make('svg',{viewBox:'0 0 '+W+' '+H,'aria-label':'Interactive organizational country map',role:'img'});
+  svg.classList.add('mesh-country-svg');
+  svg.style.width='100%';svg.style.height='100%';svg.style.display='block';svg.style.touchAction='none';
+  svg.style.background='#112937';
+  const ocean=make('rect',{x:0,y:0,width:W,height:H,fill:'#112937'});svg.append(ocean);
+  const boundaries=make('g');svg.append(boundaries);
+  const list=document.createElement('div');list.className='country-map-list';list.hidden=true;
+  function display(code){
+   list.replaceChildren();
+   const items=records.get(code)||[];
+   const close=document.createElement('button');close.type='button';close.textContent='Close';close.onclick=()=>{list.hidden=true};
+   const title=document.createElement('strong');title.textContent=flagEmoji(code)+' '+countryLabel(code)+' · '+items.length+' positions';
+   list.append(close,title);
+   for(const p of items)list.append(card(p,false));
+   list.hidden=false;
+  }
+  let mapped=new Set();
+  for(const g of topology.objects.countries.geometries){
+   const code=String(g.properties?.isoA2||'').toUpperCase();
+   const available=records.has(code);
+   const p=make('path',{d:pathFor(g),fill:available?'#216d60':'#27444a',stroke:available?'#83d4b6':'#48656b','stroke-width':available?'1.05':'.55','vector-effect':'non-scaling-stroke','fill-rule':'evenodd'});
+   p.style.cursor=available?'pointer':'default';
+   if(available){
+    mapped.add(code);
+    p.setAttribute('tabindex','0');
+    p.setAttribute('role','button');
+    p.setAttribute('aria-label',countryLabel(code)+' '+records.get(code).length+' positions');
+    p.addEventListener('click',()=>display(code));
+    p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();display(code)}});
+    p.addEventListener('mouseenter',()=>p.setAttribute('fill','#348b77'));
+    p.addEventListener('mouseleave',()=>p.setAttribute('fill','#216d60'));
+    const title=make('title');title.textContent=countryLabel(code)+' · '+records.get(code).length+' positions';p.append(title);
+   }
+   boundaries.append(p);
+  }
+  shell.append(svg,list);
+  status.remove();
+  const control=document.createElement('div');control.className='mesh-map-controls';
+  const viewBox={x:0,y:0,w:W,h:H};
+  function update(){svg.setAttribute('viewBox',[viewBox.x,viewBox.y,viewBox.w,viewBox.h].join(' '))}
+  const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
+  function zoom(factor,pointerX=W/2,pointerY=H/2){
+   const nw=clamp(viewBox.w/factor,W/64,W),nh=nw*H/W;
+   const px=viewBox.x+pointerX*viewBox.w/W,py=viewBox.y+pointerY*viewBox.h/H;
+   viewBox.x=clamp(px-pointerX*nw/W,0,W-nw);
+   viewBox.y=clamp(py-pointerY*nh/H,0,H-nh);
+   viewBox.w=nw;viewBox.h=nh;update();
+  }
+  function addButton(label,title,fn){
+   const b=document.createElement('button');b.type='button';b.textContent=label;b.title=title;b.onclick=fn;control.append(b);
+  }
+  addButton('+','Zoom in',()=>zoom(1.6));
+  addButton('−','Zoom out',()=>zoom(1/1.6));
+  addButton('World','Show full world',()=>{Object.assign(viewBox,{x:0,y:0,w:W,h:H});update()});
+  shell.append(control);
+  svg.addEventListener('wheel',e=>{
+   e.preventDefault();const rect=svg.getBoundingClientRect();
+   if(!rect.width||!rect.height)return;
+   const px=clamp((e.clientX-rect.left)/rect.width*W,0,W);
+   const py=clamp((e.clientY-rect.top)/rect.height*H,0,H);
+   zoom(Math.exp(-e.deltaY*.0015),px,py);
+  },{passive:false});
+  let pan=null;
+  svg.addEventListener('pointerdown',e=>{
+   if(e.button!==0||e.target.closest('path[role="button"]'))return;
+   pan={id:e.pointerId,x:e.clientX,y:e.clientY,startX:viewBox.x,startY:viewBox.y};
+   try{svg.setPointerCapture(e.pointerId)}catch(err){}
   });
+  svg.addEventListener('pointermove',e=>{
+   if(!pan||e.pointerId!==pan.id)return;
+   const r=svg.getBoundingClientRect();
+   viewBox.x=clamp(pan.startX-(e.clientX-pan.x)*viewBox.w/r.width,0,W-viewBox.w);
+   viewBox.y=clamp(pan.startY-(e.clientY-pan.y)*viewBox.h/r.height,0,H-viewBox.h);
+   update();
+  });
+  function stopPan(e){if(pan&&e.pointerId===pan.id)pan=null}
+  svg.addEventListener('pointerup',stopPan);svg.addEventListener('pointercancel',stopPan);
   const summary=document.createElement('div');summary.className='country-map-summary';
   const heading=document.createElement('strong');heading.textContent=records.size+' countries with positions';
   const note=document.createElement('span');note.textContent='Select a highlighted country to see its people.';
-  const reset=document.createElement('button');reset.type='button';reset.textContent='Reset map';reset.onclick=()=>map.setView([18,8],2);
-  summary.append(heading,note,document.createElement('br'),reset);shell.append(summary);
-  status.remove();
-  if(!mapped){status.textContent='Country outlines loaded, but no matching ISO country codes found.';shell.append(status)}
-  setTimeout(()=>{if(activeCountryMap===map)map.invalidateSize()},60);
+  summary.append(heading,note);shell.append(summary);
+  if(mapped.size<records.size){
+   const missing=[...records.keys()].filter(code=>!mapped.has(code));
+   const note=document.createElement('div');note.className='country-map-status';
+   note.textContent=missing.length+' locations have no country outline at this map resolution. They remain available in Cards view.';
+   shell.append(note);
+  }
+  activeCountryMap={remove(){/* No external map instance to dispose. */}};
  }catch(err){
   if(!shell.isConnected)return;
-  status.textContent='Map unavailable: '+err.message+'. Switch back to Cards to continue.';
+  status.textContent='Map unavailable: '+err.message+'. Switch to Cards to continue.';
  }
 }
-
 function render(animate=true){renderTypeLegend();if(view!=='classic')root.onwheel=null;if(view==='classic'){clearCountryMap();document.getElementById('grouped-controls')?.remove();document.getElementById('seniority-help')?.remove();renderClassic();return;}if(view==='seniority'){clearCountryMap();document.getElementById('grouped-controls')?.remove();document.getElementById('classic-help')?.remove();document.getElementById('classic-controls')?.remove();renderSeniority();return;}prepareView(view);clearCountryMap();groupedToolbar();if(view==='country'&&countryDisplayMode==='map'){renderCountryMap();return;}root.className='grouped-viewport';document.getElementById('classic-help')?.remove();document.getElementById('classic-controls')?.remove();const before=new Map();if(animate)for(const [id,el] of cache)if(el.isConnected)before.set(id,el.getBoundingClientRect());const groups=new Map();for(const p of people){let k=key(p);if(!groups.has(k))groups.set(k,[]);groups.get(k).push(p)}const order=view==='pillar'?pillars:view==='region'?areas:[];const sorted=[...groups].sort((a,b)=>{let x=order.indexOf(a[0]),y=order.indexOf(b[0]);return (x<0?999:x)-(y<0?999:y)||a[0].localeCompare(b[0])});const frag=document.createDocumentFragment();for(const [name,items] of sorted){const section=document.createElement('section');section.className='group';const h=document.createElement('h2');const label=document.createElement('span');label.textContent=name;const count=document.createElement('small');count.textContent=items.length+' positions';h.append(label,count);const list=document.createElement('div');list.className='cards';items.forEach(p=>list.append(card(p)));section.append(h,list);frag.append(section)}const canvas=document.createElement('div');canvas.className='grouped-content';canvas.style.zoom=String(groupedZoom);canvas.append(frag);root.replaceChildren(canvas);document.getElementById('stats').textContent=people.length+' positions · '+people.filter(p=>p.type!=='vacancy').length+' named / existing · '+groups.size+' groups';if(!animate||matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(const [id,el] of cache){const a=before.get(id);if(!a||!el.isConnected)continue;const b=el.getBoundingClientRect(),dx=a.x-b.x,dy=a.y-b.y;if(Math.abs(dx)+Math.abs(dy)>2)el.animate([{transform:'translate('+dx+'px,'+dy+'px)',opacity:.7},{transform:'translate(0,0)',opacity:1}],{duration:800,easing:'cubic-bezier(.2,1,.3,1)'})}}
 root.addEventListener('wheel',event=>{if(view==='classic'||view==='seniority'||view==='country'&&countryDisplayMode==='map')return;if(event.target.closest('button,input,select,a'))return;event.preventDefault();const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?root.clientHeight:1);setGroupedZoom(groupedZoom*Math.exp(-delta*.0015))},{passive:false});
 document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view));b.addEventListener('click',()=>{view=b.dataset.view;try{localStorage.setItem(viewStorageKey,view)}catch(e){}document.querySelectorAll('[data-view]').forEach(c=>{c.classList.toggle('active',c.dataset.view===view);c.setAttribute('aria-pressed',String(c.dataset.view===view))});render()})});
