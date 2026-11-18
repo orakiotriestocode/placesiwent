@@ -84,7 +84,7 @@ function validate(doc,environment='live'){
  if(!doc||!Array.isArray(doc.people)||!Array.isArray(doc.types)||doc.people.length<1||doc.people.length>500||doc.types.length>80)throw Error('Invalid organization data');
  const ids=new Set(),names=new Set(),kinds=new Set();
  const str=(v,max=1024)=>{if(v===undefined||v===null)return '';if(typeof v!=='string'||v.length>max)throw Error('Invalid text field');return v};
- const columns=['id','name','role','pillar','region','country','product','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+ const columns=['id','name','role','pillar','region','country','product','productOwners','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
  const people=doc.people.map(p=>{
   if(!p||typeof p!=='object'||Array.isArray(p))throw Error('Invalid person');
   const o={};for(const k of columns)o[k]=str(p[k]);
@@ -99,7 +99,22 @@ function validate(doc,environment='live'){
   if(!id||!name||kinds.has(id)||!/^#[a-f0-9]{6}$/i.test(color))throw Error('Invalid or duplicate type');
   kinds.add(id);return {id,name,color:color.toLowerCase()}
  });
- return {format:'mesh-published-v1',environment,people,types};
+ const rawProducts=Array.isArray(doc.products)?doc.products:[];
+ const uniqueProducts=new Set();
+ const products=rawProducts.map(v=>{
+  const name=str(v,100).trim();
+  if(!name||name.includes(',')||uniqueProducts.has(name.toLowerCase()))throw Error('Invalid or duplicate product name');
+  uniqueProducts.add(name.toLowerCase());return name;
+ });
+ if(products.length>250)throw Error('Too many products');
+ // Older clients and imported charts still use comma-separated product fields.
+ // Retain catalog entries even if they are not currently assigned to anybody.
+ for(const p of people){
+  const assigned=String(p.product||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const owners=String(p.productOwners||'').split(',').map(x=>x.trim()).filter(Boolean);
+  if(owners.some(n=>!assigned.includes(n)))throw Error('Product owner must also be assigned: '+p.name);
+ }
+ return {format:'mesh-published-v2',environment,people,types,products};
 }
 function githubB64(text){const bytes=encode.encode(text);let output='';for(let i=0;i<bytes.length;i+=8192){output+=String.fromCharCode(...bytes.subarray(i,i+8192))}return btoa(output)}
 export default {
