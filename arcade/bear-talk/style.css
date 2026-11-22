@@ -1670,3 +1670,20 @@ body[data-screen='remote'] .controller-end,
     animation: none;
   }
 }
+
+.bear.singing {
+  animation: song-sway 1.1s ease-in-out infinite alternate;
+}
+@keyframes song-sway {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(4deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bear.singing {
+    animation: none;
+  }
+}

@@ -1,5 +1,53 @@
 (() => {
   const strings = {
+    '\u266b Sing a song': {
+      nl: '♫ Zing een liedje',
+      fr: '♫ Chante une chanson',
+      de: '♫ Sing ein Lied',
+      es: '♫ Canta una canción',
+    },
+    'Four little humming songs, one after another': {
+      nl: 'Vier kleine neurieliedjes, één na één',
+      fr: 'Quatre petites mélodies fredonnées, à tour de rôle',
+      de: 'Vier kleine Summlieder, nacheinander',
+      es: 'Cuatro melodías tarareadas, por turnos',
+    },
+    'Song queued \u266b': {
+      nl: 'Liedje staat klaar ♫',
+      fr: 'Chanson en attente ♫',
+      de: 'Lied eingereiht ♫',
+      es: 'Canción en cola ♫',
+    },
+    'Song finished \u266b': {
+      nl: 'Liedje afgelopen ♫',
+      fr: 'Chanson terminée ♫',
+      de: 'Lied beendet ♫',
+      es: 'Canción terminada ♫',
+    },
+    'A sunny hello': {
+      nl: 'Een zonnige groet',
+      fr: 'Un bonjour ensoleillé',
+      de: 'Ein sonniges Hallo',
+      es: 'Un saludo soleado',
+    },
+    'Little puddle dance': {
+      nl: 'Dansje in de plassen',
+      fr: 'Danse des flaques',
+      de: 'Kleiner Pfützentanz',
+      es: 'Baile en los charcos',
+    },
+    'Cuddle song': {
+      nl: 'Knuffelliedje',
+      fr: 'Chanson câline',
+      de: 'Kusche Lied',
+      es: 'Canción de abrazos',
+    },
+    'Sleepy stars': {
+      nl: 'Slaperige sterretjes',
+      fr: 'Étoiles endormies',
+      de: 'Schläfrige Sterne',
+      es: 'Estrellas dormilonas',
+    },
     'Remote and your friend are on this device': {
       nl: 'Afstandsbediening en dierenvriendje staan op dit toestel',
       fr: 'Télécommande et animal sur cet appareil',
