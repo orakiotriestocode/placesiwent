@@ -5,6 +5,8 @@
   const synth = window.speechSynthesis;
   const localVoice = window.BearLocalVoice;
   const animals = window.BearAnimals;
+  const songs = window.BearSongs;
+  let songPosition = 0;
   let animalEpoch = 0,
     animalPending = false;
   const preset = (text, lang) => animals?.phrase(text, lang) || text;
@@ -379,6 +381,8 @@
       }),
   );
   function abortSpeech() {
+    songs?.stop();
+    $('bear').classList.remove('singing');
     isSpeaking = false;
     setExpression('neutral', 0);
     if (demo) {
@@ -413,7 +417,46 @@
     $('bubble').textContent =
       greetings[baseLanguage($('language').value)] || greetings.en;
   }
+  async function sing(m, test) {
+    const index = songs.parse(m.text);
+    const epoch = playbackEpoch;
+    hasSpoken = true;
+    lastMessage = m;
+    $('local-repeat').disabled = false;
+    $('bubble').textContent =
+      '♫ ' +
+      (window.BearI18n?.translate(songs.songs[index].title) ||
+        songs.songs[index].title);
+    setExpression(index === 3 ? 'sleepy' : 'happy', 0);
+    isSpeaking = true;
+    $('bear').classList.add('singing', 'talking');
+    try {
+      await songs.unlock();
+      if (epoch !== playbackEpoch) return 'stopped';
+      if (!test) ack(m, 'speaking').catch(() => {});
+      const status = await songs.play(
+        index,
+        animals?.selected || 'bear',
+        (i) => {
+          $('bear').classList.toggle('talking', i % 3 !== 2);
+        },
+      );
+      $('speech-progress').textContent =
+        status === 'spoken' ? 'Song finished ♫' : 'Stopped · Queue cleared';
+      return status;
+    } catch {
+      if (!test) blocked = m;
+      $('speech-progress').textContent =
+        'Could not play · Tap Test voice to retry';
+      return 'blocked';
+    } finally {
+      isSpeaking = false;
+      $('bear').classList.remove('singing', 'talking');
+      setExpression('neutral', 0);
+    }
+  }
   function speak(m, test = false) {
+    if (songs && songs.parse(m.text) !== null) return sing(m, test);
     hasSpoken = true;
     if (!test && $('local-language').value !== m.lang) {
       $('local-language').value = m.lang;
@@ -612,11 +655,11 @@
     const epoch = playbackEpoch;
     while (queue.length && active && !blocked) {
       const m = queue.shift();
-      const ok = await speak(m);
+      const ok = await speak(m, !!m.localOnly);
       if (epoch !== playbackEpoch) return;
       if (!active) break;
       try {
-        await ack(m, ok);
+        if (!m.localOnly) await ack(m, ok);
       } catch {
         notice('Voice played, but delivery status could not be updated.');
       }
@@ -627,7 +670,10 @@
     $('history').replaceChildren();
     for (const m of messages) {
       const li = document.createElement('li');
-      li.textContent = m.text;
+      li.textContent =
+        songs && songs.parse(m.text) !== null
+          ? '♫ ' + songs.songs[songs.parse(m.text)].title
+          : m.text;
       const status = document.createElement('small');
       status.textContent =
         {
@@ -725,6 +771,7 @@
       return;
     }
     localVoice?.unlock()?.catch(() => {});
+    songs?.unlock().catch(() => {});
     // Speech is invoked directly inside this tap to unlock mobile audio.
     speak({ text: 'Hallo Riva!', lang: 'nl-BE' }, true);
     $('start').disabled = true;
@@ -787,6 +834,7 @@
   };
   $('sound').onclick = async () => {
     localVoice?.unlock()?.catch(() => {});
+    songs?.unlock().catch(() => {});
     if (busy && !blocked) {
       notice('Stop the current message before testing another voice.');
       return;
@@ -855,6 +903,41 @@
     busy = false;
     drain();
   };
+  async function requestSong(button, local) {
+    if (!songs) return;
+    button.disabled = true;
+    const text = songs.message(songPosition);
+    try {
+      if (local) {
+        songs.unlock().catch(() => {});
+        queue.push({
+          text,
+          lang: $('local-language').value,
+          emotion: 'happy',
+          localOnly: true,
+        });
+        drain();
+      } else {
+        if (demo) songs.unlock().catch(() => {});
+        await api('send', {
+          text,
+          lang: $('language').value,
+          emotion: 'happy',
+          requestId: crypto.randomUUID(),
+        });
+      }
+      songPosition = (songPosition + 1) % songs.songs.length;
+      notice('Song queued ♫');
+    } catch (e) {
+      notice(e.message);
+    } finally {
+      button.disabled = false;
+    }
+  }
+  if ($('local-sing'))
+    $('local-sing').onclick = () => requestSong($('local-sing'), true);
+  if ($('remote-sing'))
+    $('remote-sing').onclick = () => requestSong($('remote-sing'), false);
   $('remote-repeat').onclick = async () => {
     if (!lastRemote) return;
     const btn = $('remote-repeat');

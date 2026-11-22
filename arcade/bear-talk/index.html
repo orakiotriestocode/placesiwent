@@ -8,13 +8,13 @@
     />
     <meta name="theme-color" content="#182c32" />
     <title>Bear & Friends · Tiny Arcade</title>
-    <link rel="stylesheet" href="style.css?v=0.7.0" />
+    <link rel="stylesheet" href="style.css?v=0.8.0" />
   </head>
   <body>
     <header>
       <a href="/tiny-arcade/">✦ TINY ARCADE</a>
       <div class="header-right">
-        <span>BEAR & FRIENDS <small>alpha 0.7.0</small></span
+        <span>BEAR & FRIENDS <small>alpha 0.8.0</small></span
         ><button
           type="button"
           id="open-settings"
@@ -488,7 +488,13 @@
             Waiting for a message
           </p>
           <div class="playback">
-            <button id="local-stop" class="secondary">
+            <button
+              id="local-sing"
+              class="secondary"
+              title="Four little humming songs, one after another"
+            >
+              ♫ Sing a song</button
+            ><button id="local-stop" class="secondary">
               ■ Stop &amp; clear queue</button
             ><button id="local-repeat" class="secondary" disabled>
               ↻ Repeat last
@@ -590,7 +596,13 @@
           </div>
         </form>
         <div class="playback">
-          <button id="remote-stop" class="secondary">■ Stop</button
+          <button
+            id="remote-sing"
+            class="secondary"
+            title="Four little humming songs, one after another"
+          >
+            ♫ Sing a song</button
+          ><button id="remote-stop" class="secondary">■ Stop</button
           ><button id="remote-repeat" class="secondary" disabled>
             ↻ Repeat last
           </button>
@@ -749,12 +761,13 @@
       </section>
     </dialog>
     <script src="/assets/vendor/qrcode-generator-2.0.4.js"></script>
-    <script src="pairing.js?v=0.7.0"></script>
-    <script src="phrases.js?v=0.7.0"></script>
-    <script src="i18n.js?v=0.7.0"></script>
-    <script src="local-voice.js?v=0.7.0"></script>
-    <script src="animals.js?v=0.7.0"></script>
-    <script src="touch.js?v=0.7.0"></script>
-    <script src="app.js?v=0.7.0"></script>
+    <script src="pairing.js?v=0.8.0"></script>
+    <script src="phrases.js?v=0.8.0"></script>
+    <script src="i18n.js?v=0.8.0"></script>
+    <script src="local-voice.js?v=0.8.0"></script>
+    <script src="animals.js?v=0.8.0"></script>
+    <script src="touch.js?v=0.8.0"></script>
+    <script src="songs.js?v=0.8.0"></script>
+    <script src="app.js?v=0.8.0"></script>
   </body>
 </html>
