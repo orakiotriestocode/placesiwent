@@ -1,0 +1,2344 @@
+{
+  "meta": {
+    "title": "Inspectorate 2.0 • Transformation Timeline",
+    "subtitle": "Source: Excalidraw v2 proposal (updated 18 Oct 2026). Draft; not approved with BV, Avasant or Simon.",
+    "sourceFile": "Untitled-2026-11-16-1113.excalidraw",
+    "start": "2026-11",
+    "months": 26,
+    "notes": {
+      "Foundation": "Build before Day 1 so M1 starts executing.\nNetskope expires Nov-26.",
+      "Identity": "Our Entra = master identity. SSO trust to BV\nOneLogin, no directory trust. Fallback: two\nlogins.",
+      "Applications": "Hosting + identity only, no redesign. Users\nlog in with Inspectorate account from any\nlaptop. Web apps to Entra, Windows/LDAP apps\nto our Managed AD.",
+      "Devices": "Laptops wiped, rebuilt into our Intune\n(Autopilot; BV deregisters first). Phones\nre-enrolled. ~5,000 devices, ~60-80/day. BV\naccount disabled when region done.",
+      "Network": "345 sites, 52 shared. ~Half not working\ntoday, some on 4G. Site lever (EUR 6.78M/yr)\nonly released when a site is fully out.",
+      "Finance": "Finance TSA exits all-or-nothing per\ncountry. New SaaS ledger (Fusion lead, D365\nchallenger). Country goes live with or after\nits site exit.",
+      "TSA": "What we pay BV until each lever is exited."
+    }
+  },
+  "events": [
+    {
+      "id": "e001",
+      "title": "MSP signed + mobilising",
+      "workstream": "Foundation",
+      "start": 0,
+      "end": 1.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e002",
+      "title": "MSP ramp-up, runbooks",
+      "workstream": "Foundation",
+      "start": 2.0,
+      "end": 3.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e003",
+      "title": "Build our tenant, Entra, Intune baseline, AWS landing zone",
+      "workstream": "Foundation",
+      "start": 0,
+      "end": 1.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e004",
+      "title": "App inventory per site from BV, then package app catalogue per region (device critical path)",
+      "workstream": "Foundation",
+      "start": 0,
+      "end": 7.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e005",
+      "title": "TSA / SPA asks agreed (see box below)",
+      "workstream": "Foundation",
+      "start": 0,
+      "end": 1.96,
+      "status": "Risk / dependency",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e006",
+      "title": "1a Entra live (HR extract, our MFA)",
+      "workstream": "Identity",
+      "start": 2.0,
+      "end": 2.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e007",
+      "title": "1g M365 cutover (mail, Teams, OneDrive, SPO)",
+      "workstream": "Identity",
+      "start": 3.0,
+      "end": 3.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e008",
+      "title": "1b BV OneLogin trusts our Entra",
+      "workstream": "Identity",
+      "start": 2.0,
+      "end": 2.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e009",
+      "title": "1c Joiner/leaver feed to BV, disable < 24 h (runs until BV accounts gone)",
+      "workstream": "Identity",
+      "start": 3.0,
+      "end": 13.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e010",
+      "title": "1f OneDrive move on BV tenant",
+      "workstream": "Identity",
+      "start": 1.0,
+      "end": 2.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e011",
+      "title": "BV OneLogin + Saviynt account records for apps still on BV",
+      "workstream": "Identity",
+      "start": 3.0,
+      "end": 13.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e012",
+      "title": "1d AWS landing zone, interconnect, Managed AD",
+      "workstream": "Identity",
+      "start": 1.0,
+      "end": 2.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e013",
+      "title": "1h Read-only DWH outside BV",
+      "workstream": "Identity",
+      "start": 3.0,
+      "end": 4.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e014",
+      "title": "1e Security stack + SOC (MSP)",
+      "workstream": "Identity",
+      "start": 2.0,
+      "end": 2.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e015",
+      "title": "2a LabWare / LOAMS (fuels-only; Simplica, Castrol RDP)",
+      "workstream": "Applications",
+      "start": 4.0,
+      "end": 5.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e016",
+      "title": "2d AccessBV Trade (PHP, vendor novation)",
+      "workstream": "Applications",
+      "start": 7.0,
+      "end": 8.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e017",
+      "title": "2b MaxxLIMS + Plant LIMS: off BV legacy AD; reverse TSA Environmental",
+      "workstream": "Applications",
+      "start": 4.0,
+      "end": 6.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e018",
+      "title": "2e OneTrade clone, one global cutover, keep FLEX invoice API",
+      "workstream": "Applications",
+      "start": 8.0,
+      "end": 11.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e019",
+      "title": "2c VeriFuel portal + Petro Hub",
+      "workstream": "Applications",
+      "start": 5.0,
+      "end": 6.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e020",
+      "title": "2f Sorby clone by division: OCM M6-M7, VeriFuel M8-M9, O&P M10-M12; Coal with region",
+      "workstream": "Applications",
+      "start": 7.0,
+      "end": 13.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e021",
+      "title": "FLEX stays at BV; customer, sales item and invoice interfaces kept via interconnect until each country leaves FLEX",
+      "workstream": "Applications",
+      "start": 2.0,
+      "end": 19.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e022",
+      "title": "3.1 Pilot: EU office + one lab site",
+      "workstream": "Devices",
+      "start": 3.33,
+      "end": 3.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e023",
+      "title": "3.2 North America (Pasadena / Houston 24/7: per shift)",
+      "workstream": "Devices",
+      "start": 4.33,
+      "end": 6.96,
+      "status": "Planned",
+      "regions": [
+        "North America"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e024",
+      "title": "3.3 Europe / ARA (Rotterdam, Antwerp, Spain, Greece)",
+      "workstream": "Devices",
+      "start": 4.33,
+      "end": 6.96,
+      "status": "Planned",
+      "regions": [
+        "Western Europe"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e025",
+      "title": "3.4 Middle East (Dubai, Fujairah, KSA)",
+      "workstream": "Devices",
+      "start": 4.33,
+      "end": 6.96,
+      "status": "Planned",
+      "regions": [
+        "Middle East"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e026",
+      "title": "3.5 APAC + SSCs (estate unknown: +1 month risk)",
+      "workstream": "Devices",
+      "start": 4.33,
+      "end": 7.96,
+      "status": "Planned",
+      "regions": [
+        "Asia Pacific"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e027",
+      "title": "3.6 Long tail: Coal, remote, deferred close",
+      "workstream": "Devices",
+      "start": 8.0,
+      "end": 8.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e028",
+      "title": "Lab instrument PCs: separate track, no wipe, with lab IT on site",
+      "workstream": "Devices",
+      "start": 5.0,
+      "end": 13.96,
+      "status": "Planned",
+      "regions": [
+        "Western Europe"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e029",
+      "title": "Pilot site network",
+      "workstream": "Network",
+      "start": 3.0,
+      "end": 3.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e030",
+      "title": "Fuels-only sites, all regions in parallel: take over or replace switches / APs, SD- WAN breakout, interconnect",
+      "workstream": "Network",
+      "start": 6.13,
+      "end": 10.96,
+      "status": "Planned",
+      "regions": [
+        "Western Europe"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e031",
+      "title": "Interim: BV network login trusts our certificates; our laptops on restricted VLAN until site cutover",
+      "workstream": "Network",
+      "start": 3.0,
+      "end": 13.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e032",
+      "title": "Shared sites (52) last: own lines + own SSID / VLAN",
+      "workstream": "Network",
+      "start": 10.0,
+      "end": 13.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e033",
+      "title": "Ledger + EPM build, first wave design (fit check done pre-close)",
+      "workstream": "Finance",
+      "start": 2.0,
+      "end": 9.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e034",
+      "title": "Buffer to hard stop",
+      "workstream": "Finance",
+      "start": 20.0,
+      "end": 25.96,
+      "status": "Buffer",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e035",
+      "title": "F&A BPaaS on FLEX from ~M6 , then on new ledger per country",
+      "workstream": "Finance",
+      "start": 8.0,
+      "end": 19.96,
+      "status": "Planned",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e036",
+      "title": "GetPaid off",
+      "workstream": "Finance",
+      "start": 7.0,
+      "end": 7.96,
+      "status": "Risk / dependency",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e037",
+      "title": "Site lever EUR 6.78M/yr (service desk, cyber, devices, network): falls as regions and sites exit",
+      "workstream": "TSA",
+      "start": 2.0,
+      "end": 13.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e038",
+      "title": "App-bundle lever EUR 4.75M/yr: falls as each app moves",
+      "workstream": "TSA",
+      "start": 2.0,
+      "end": 13.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e039",
+      "title": "Finance TSA EUR 3.89M/yr: falls country by country",
+      "workstream": "TSA",
+      "start": 2.0,
+      "end": 19.96,
+      "status": "BV / TSA",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    },
+    {
+      "id": "e040",
+      "title": "Extension only if needed",
+      "workstream": "TSA",
+      "start": 20.0,
+      "end": 25.96,
+      "status": "Risk / dependency",
+      "regions": [
+        "Global"
+      ],
+      "locations": "",
+      "owner": "",
+      "description": "",
+      "impact": "",
+      "dependencies": "",
+      "progress": 0,
+      "source": "Excalidraw • 16 Nov 2026"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "m1",
+      "title": "Close 31-Dec / Day 1",
+      "at": 2.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m2",
+      "title": "G1: identity + M365 live",
+      "at": 4.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m3",
+      "title": "M6: consent cliff? brand grace ends, GetPaid off",
+      "at": 8.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m4",
+      "title": "Devices done (M7)",
+      "at": 9.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m5",
+      "title": "Base TSA end M12: sites + apps out",
+      "at": 14.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m6",
+      "title": "M18: finance done",
+      "at": 20.01,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    },
+    {
+      "id": "m7",
+      "title": "M24 hard stop",
+      "at": 25,
+      "description": "",
+      "source": "Original Excalidraw timeline"
+    }
+  ],
+  "apps": [
+    {
+      "id": "app001",
+      "name": "CUSTOMER INTERACTION, PORTALS, CLIENT INTEGRATIONS",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 0,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app002",
+      "name": "VeriLube",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 1,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app003",
+      "name": "AccessBV core (client portal)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 2,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app004",
+      "name": "AccessBV Trade",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 3,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app005",
+      "name": "Petro Hub",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 4,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app006",
+      "name": "MaxxLIMS Customer Portal (2006)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 5,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app007",
+      "name": "VeriFuel Portal",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 6,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app008",
+      "name": "LOAMS white-label domains",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 7,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app009",
+      "name": "P&G portal",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 8,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app010",
+      "name": "LOAMS (OCM portal)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 9,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app011",
+      "name": "OCM mobile apps (Xamarin)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 10,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app012",
+      "name": "oiltesting.com web store",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 11,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app013",
+      "name": "OCM kit order / fulfilment",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 12,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app014",
+      "name": "Valero email integration",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 13,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app015",
+      "name": "Navarik + Navarik API",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 14,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app016",
+      "name": "ProTrend / Muddy Boots / client FTP",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 15,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app017",
+      "name": "Pembina sampler app + PDF search widget",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 16,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app018",
+      "name": "WhatsApp / SMS",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 17,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app019",
+      "name": "Salesforce",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 18,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app020",
+      "name": "Altares (D&B)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 19,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app021",
+      "name": "Survey Monkey",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 20,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app022",
+      "name": "MARKET DATA, COMMERCIAL INTELLIGENCE",
+      "category": "Market data & commercial intelligence",
+      "order": 21,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app023",
+      "name": "Kpler",
+      "category": "Market data & commercial intelligence",
+      "order": 22,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app024",
+      "name": "Kpler scraper, Marine Intel",
+      "category": "Market data & commercial intelligence",
+      "order": 23,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app025",
+      "name": "Vessel Tracking dashboard",
+      "category": "Market data & commercial intelligence",
+      "order": 24,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app026",
+      "name": "VesselFinder",
+      "category": "Market data & commercial intelligence",
+      "order": 25,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app027",
+      "name": "MarineTraffic",
+      "category": "Market data & commercial intelligence",
+      "order": 26,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app028",
+      "name": "JOB MANAGEMENT, PRICING, OPS TOOLS",
+      "category": "Job management, pricing & operations",
+      "order": 27,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app029",
+      "name": "OneTrade",
+      "category": "Job management, pricing & operations",
+      "order": 28,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app030",
+      "name": "Knowledge Center",
+      "category": "Quality, standards & accreditation",
+      "order": 29,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app031",
+      "name": "Legacy POCN / UMS / TOCM",
+      "category": "Quality, standards & accreditation",
+      "order": 30,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app032",
+      "name": "Oliver Wyman leakage tool",
+      "category": "Job management, pricing & operations",
+      "order": 31,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app033",
+      "name": "Montreal billing Excel engine",
+      "category": "Job management, pricing & operations",
+      "order": 32,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app034",
+      "name": "Office billing sheets, job breakdown Excel",
+      "category": "Job management, pricing & operations",
+      "order": 33,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app035",
+      "name": "Local scheduling tools (Excel, Sheets)",
+      "category": "Job management, pricing & operations",
+      "order": 34,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app036",
+      "name": "Javier's pricing profile tool",
+      "category": "Job management, pricing & operations",
+      "order": 35,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app037",
+      "name": "TESTING AND PRODUCTION (LIMS, FIELD, INSTRUMENTS)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 36,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app038",
+      "name": "Sorby LIMS (core platform)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 37,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app039",
+      "name": "Sorby LIMS divisions (O&P, VF, OCM, Coal, Food)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 38,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app040",
+      "name": "Sorby Offline Coal + Beira, SA, Tete Vale, Nacala",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 39,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app041",
+      "name": "Sorby Field",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 40,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app042",
+      "name": "International Results Portal",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 41,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app043",
+      "name": "Sorby Flex Integrator",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 42,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app044",
+      "name": "Sorby SDR",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 43,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app045",
+      "name": "MaxxLIMS Fuels",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 44,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app046",
+      "name": "Maxxam Plant LIMS",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 45,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app047",
+      "name": "MaxxLIMS instrument chain (LIMSR, Nasuni)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 46,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app048",
+      "name": "LabVIEW sample- movement log",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 47,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app049",
+      "name": "Plant LIMS to client PI historian i/f",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 48,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app050",
+      "name": "LabWare LIMS (OCM)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 49,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app051",
+      "name": "Castrol automated DA (rules engine)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 50,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app052",
+      "name": "LIMS for Spain",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 51,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app053",
+      "name": "OCM instrument parsing scripts",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 52,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app054",
+      "name": "FIRM",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 53,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app055",
+      "name": "Field Spot",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 54,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app056",
+      "name": "SORS 2.0",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 55,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app057",
+      "name": "Sample Transport",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 56,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app058",
+      "name": "SalesBinder",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 57,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app059",
+      "name": "Cleargistix",
+      "category": "Job management, pricing & operations",
+      "order": 58,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app060",
+      "name": "Chromeleon",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 59,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app061",
+      "name": "Agilent OpenLab CDS",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 60,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app062",
+      "name": "Instrument vendor PCs (ICP, XRF, VISCPRO)",
+      "category": "Testing & production (LIMS, field, instruments)",
+      "order": 61,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app063",
+      "name": "QUALITY, STANDARDS, ACCREDITATION",
+      "category": "Quality, standards & accreditation",
+      "order": 62,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app064",
+      "name": "ASTM Compass + ISO / API",
+      "category": "Quality, standards & accreditation",
+      "order": 63,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app065",
+      "name": "iEvaluate",
+      "category": "Quality, standards & accreditation",
+      "order": 64,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app066",
+      "name": "Compliant Pro (Siemens, Canada)",
+      "category": "Quality, standards & accreditation",
+      "order": 65,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app067",
+      "name": "Nexus, Maia",
+      "category": "Quality, standards & accreditation",
+      "order": 66,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app068",
+      "name": "BV complaint / CAR tool",
+      "category": "Quality, standards & accreditation",
+      "order": 67,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app069",
+      "name": "Quality Excel tools (matrix, scorecard)",
+      "category": "Quality, standards & accreditation",
+      "order": 68,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app070",
+      "name": "ISNetworld",
+      "category": "Quality, standards & accreditation",
+      "order": 69,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app071",
+      "name": "BI, DATA, MASTER DATA",
+      "category": "BI, data & master data",
+      "order": 70,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app072",
+      "name": "Power BI",
+      "category": "BI, data & master data",
+      "order": 71,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app073",
+      "name": "Tableau (group)",
+      "category": "BI, data & master data",
+      "order": 72,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app074",
+      "name": "Data platform (S3, Glue, DWH)",
+      "category": "BI, data & master data",
+      "order": 73,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app075",
+      "name": "Monthly Landing & KPI workbook",
+      "category": "BI, data & master data",
+      "order": 74,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app076",
+      "name": "MDH (Master Data Hub)",
+      "category": "BI, data & master data",
+      "order": 75,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app077",
+      "name": "FINANCE AND ERP",
+      "category": "Finance & ERP",
+      "order": 76,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app078",
+      "name": "FLEX (Oracle JDE E1)",
+      "category": "Finance & ERP",
+      "order": 77,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app079",
+      "name": "PAC LW5-FLEX",
+      "category": "Finance & ERP",
+      "order": 78,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app080",
+      "name": "Vigilens / Vision",
+      "category": "Finance & ERP",
+      "order": 79,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app081",
+      "name": "Basware",
+      "category": "Finance & ERP",
+      "order": 80,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app082",
+      "name": "Archive Flex",
+      "category": "Finance & ERP",
+      "order": 81,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app083",
+      "name": "Ticketbai WS (ES e-invoicing)",
+      "category": "Finance & ERP",
+      "order": 82,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app084",
+      "name": "GAPEG",
+      "category": "Finance & ERP",
+      "order": 83,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app085",
+      "name": "FIS GetPaid",
+      "category": "Finance & ERP",
+      "order": 84,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app086",
+      "name": "MyDSO",
+      "category": "Finance & ERP",
+      "order": 85,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app087",
+      "name": "CreditSafe",
+      "category": "Finance & ERP",
+      "order": 86,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app088",
+      "name": "Sanctions screening (DowJones)",
+      "category": "Finance & ERP",
+      "order": 87,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app089",
+      "name": "Card payment on invoices",
+      "category": "Finance & ERP",
+      "order": 88,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app090",
+      "name": "Neofi / Nemo",
+      "category": "Finance & ERP",
+      "order": 89,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app091",
+      "name": "Diapason",
+      "category": "Finance & ERP",
+      "order": 90,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app092",
+      "name": "BMG (treasury)",
+      "category": "Finance & ERP",
+      "order": 91,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app093",
+      "name": "Swan",
+      "category": "Finance & ERP",
+      "order": 92,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app094",
+      "name": "SWIFT / MT940",
+      "category": "Finance & ERP",
+      "order": 93,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app095",
+      "name": "SAP BPC",
+      "category": "Finance & ERP",
+      "order": 94,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app096",
+      "name": "SAP BFC / Magnitude",
+      "category": "Finance & ERP",
+      "order": 95,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app097",
+      "name": "Tableau Finance",
+      "category": "Finance & ERP",
+      "order": 96,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app098",
+      "name": "Expensya + US expense tool",
+      "category": "Finance & ERP",
+      "order": 97,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app099",
+      "name": "Weekly LabWare CSV to FLEX",
+      "category": "Finance & ERP",
+      "order": 98,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app100",
+      "name": "OCM finance Excel (prepaid, Castrol)",
+      "category": "Finance & ERP",
+      "order": 99,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app101",
+      "name": "HR AND PAYROLL",
+      "category": "HR & payroll",
+      "order": 100,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app102",
+      "name": "SAP SuccessFactors",
+      "category": "HR & payroll",
+      "order": 101,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app103",
+      "name": "MyLearning",
+      "category": "HR & payroll",
+      "order": 102,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app104",
+      "name": "Ramco Payroll (ME)",
+      "category": "HR & payroll",
+      "order": 103,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app105",
+      "name": "Payspace",
+      "category": "HR & payroll",
+      "order": 104,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app106",
+      "name": "Payroll Lebanon",
+      "category": "HR & payroll",
+      "order": 105,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app107",
+      "name": "Payroll Excel",
+      "category": "HR & payroll",
+      "order": 106,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app108",
+      "name": "Malta Indigo Shireburn",
+      "category": "HR & payroll",
+      "order": 107,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app109",
+      "name": "ADP",
+      "category": "HR & payroll",
+      "order": 108,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app110",
+      "name": "PACE (Africa, ME)",
+      "category": "HR & payroll",
+      "order": 109,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app111",
+      "name": "XXIMO",
+      "category": "HR & payroll",
+      "order": 110,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app112",
+      "name": "TRACMAP",
+      "category": "Quality, standards & accreditation",
+      "order": 111,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app113",
+      "name": "IT, INFRASTRUCTURE, OT",
+      "category": "IT, infrastructure & OT",
+      "order": 112,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app114",
+      "name": "Microsoft 365",
+      "category": "IT, infrastructure & OT",
+      "order": 113,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app115",
+      "name": "AD / LDAP / Entra",
+      "category": "IT, infrastructure & OT",
+      "order": 114,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app116",
+      "name": "OneLogin",
+      "category": "IT, infrastructure & OT",
+      "order": 115,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app117",
+      "name": "Saviynt (IGA)",
+      "category": "IT, infrastructure & OT",
+      "order": 116,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app118",
+      "name": "Duo Mobile",
+      "category": "IT, infrastructure & OT",
+      "order": 117,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app119",
+      "name": "Intune",
+      "category": "IT, infrastructure & OT",
+      "order": 118,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app120",
+      "name": "OpenText SMAX",
+      "category": "IT, infrastructure & OT",
+      "order": 119,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app121",
+      "name": "Snow / Flexera",
+      "category": "IT, infrastructure & OT",
+      "order": 120,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app122",
+      "name": "Mantis",
+      "category": "IT, infrastructure & OT",
+      "order": 121,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app123",
+      "name": "Jira",
+      "category": "IT, infrastructure & OT",
+      "order": 122,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app124",
+      "name": "MS Project",
+      "category": "IT, infrastructure & OT",
+      "order": 123,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app125",
+      "name": "Talend",
+      "category": "IT, infrastructure & OT",
+      "order": 124,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app126",
+      "name": "PrinterLogic",
+      "category": "IT, infrastructure & OT",
+      "order": 125,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app127",
+      "name": "Axxerion",
+      "category": "IT, infrastructure & OT",
+      "order": 126,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app128",
+      "name": "Jules (BV GenAI)",
+      "category": "IT, infrastructure & OT",
+      "order": 127,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app129",
+      "name": "Terminal server / RDS farm",
+      "category": "IT, infrastructure & OT",
+      "order": 128,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app130",
+      "name": "PAC CCTV Mackay",
+      "category": "IT, infrastructure & OT",
+      "order": 129,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app131",
+      "name": "Cyber stack (Netskope, CrowdStrike, Tanium ...)",
+      "category": "IT, infrastructure & OT",
+      "order": 130,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app132",
+      "name": "Network (WAN, LAN, firewall)",
+      "category": "IT, infrastructure & OT",
+      "order": 131,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app133",
+      "name": "Field comms (SPOT, GPS, sat phones)",
+      "category": "IT, infrastructure & OT",
+      "order": 132,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app134",
+      "name": "BP CMOP, ~6 client portals",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 133,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app135",
+      "name": "CPMS",
+      "category": "Quality, standards & accreditation",
+      "order": 134,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app136",
+      "name": "PTPDMS (legacy, now CPMS)",
+      "category": "Quality, standards & accreditation",
+      "order": 135,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app137",
+      "name": "AccessBV IVP (on-site visitors)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 136,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app138",
+      "name": "IQP (quotations)",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 137,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app139",
+      "name": "Open Invoice + ~10 client inv. platforms",
+      "category": "Finance & ERP",
+      "order": 138,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app140",
+      "name": "TessWeb",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 139,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    },
+    {
+      "id": "app141",
+      "name": "VAKT API",
+      "category": "Customer interaction, portals & client integrations",
+      "order": 140,
+      "inAt": 0,
+      "outAt": null,
+      "links": [],
+      "notes": "",
+      "source": "Excalidraw Day-1 landscape"
+    }
+  ]
+}
