@@ -20,15 +20,15 @@
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
     "@eslint/js": "10.0.1",
-    "@playwright/test": "1.64.1",
+    "@playwright/test": "1.65.1",
     "acorn": "8.19.0",
     "chrome-launcher": "1.2.3",
     "esbuild": "0.28.2",
-    "eslint": "10.14.0",
+    "eslint": "10.15.0",
     "globals": "17.14.0",
     "leaflet": "1.9.4",
     "lighthouse": "13.6.0",
-    "prettier": "3.10.0"
+    "prettier": "3.10.1"
   },
   "overrides": {
     "@eslint/config-array": {
@@ -39,6 +39,6 @@
     }
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.119.0"
+    "@supabase/supabase-js": "2.119.2"
   }
 }
