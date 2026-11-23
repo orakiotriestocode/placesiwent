@@ -84,7 +84,7 @@ function validate(doc,environment='live'){
  if(!doc||!Array.isArray(doc.people)||!Array.isArray(doc.types)||doc.people.length<1||doc.people.length>500||doc.types.length>80)throw Error('Invalid organization data');
  const ids=new Set(),names=new Set(),kinds=new Set();
  const str=(v,max=1024)=>{if(v===undefined||v===null)return '';if(typeof v!=='string'||v.length>max)throw Error('Invalid text field');return v};
- const columns=['id','name','role','pillar','region','country','product','productOwners','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+ const columns=['id','name','role','pillar','region','country','product','productOwners','worksWith','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
  const people=doc.people.map(p=>{
   if(!p||typeof p!=='object'||Array.isArray(p))throw Error('Invalid person');
   const o={};for(const k of columns)o[k]=str(p[k]);
@@ -93,6 +93,12 @@ function validate(doc,environment='live'){
   for(const key of ['layoutOffsetDown','layoutOffsetRight'])if(p[key]!==undefined&&p[key]!==null&&p[key]!==''){const n=Number(p[key]);if(!Number.isFinite(n)||Math.abs(n)>100000)throw Error('Invalid position');o[key]=n}
   return o;
  });
+ // Collaboration relationships reference stable person IDs, never display names.
+ const knownIds=new Set(people.map(p=>p.id));
+ for(const person of people){
+  const links=String(person.worksWith||'').split(',').map(id=>id.trim()).filter(Boolean);
+  if(links.length!==new Set(links).size||links.some(id=>id===person.id||!knownIds.has(id)))throw Error('Invalid Works with contacts for '+person.name);
+ }
  const types=doc.types.map(t=>{
   if(!t||typeof t!=='object')throw Error('Invalid type');
   const id=str(t.id),name=str(t.name),color=str(t.color);
