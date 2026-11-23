@@ -1111,7 +1111,7 @@ else{
 persist();dialog.close();render()});
 document.getElementById('add').onclick=()=>edit('new');
 
-const DATA_COLUMNS=['id','name','role','pillar','region','country','product','productOwners','manager','functionalManager','hierarchyLevel','type','startDate','endDate','layoutOffsetDown','layoutOffsetRight'];
+const DATA_COLUMNS=['id','name','role','pillar','region','country','product','productOwners','worksWith','manager','functionalManager','hierarchyLevel','type','startDate','endDate','layoutOffsetDown','layoutOffsetRight'];
 function csvEscape(value){const v=String(value??'');return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
 function createCSV(rows){return '\uFEFF'+[DATA_COLUMNS.join(','),...rows.map(p=>DATA_COLUMNS.map(key=>csvEscape(p[key])).join(','))].join('\r\n')+'\r\n'}
 function parseCSV(text){
