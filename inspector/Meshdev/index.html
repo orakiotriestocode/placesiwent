@@ -499,7 +499,7 @@ function renderClassicCompact(){
    if(visited.has(person.id))return null;
    visited.add(person.id);
    const node=document.createElement('div');
-   const compact=stacked||depth(person)>=firstCompactDepth;
+   const compact=stacked||depth(person)>=Math.max(0,firstCompactDepth-1);
    node.className='mesh-compact-branch'+(compact?' mesh-compact-branch-stacked':' mesh-compact-branch-tree');
    node.append(personCard(person,(children.get(person.id)||[]).length>0));
    const subordinates=(children.get(person.id)||[]).filter(p=>!visited.has(p.id));
