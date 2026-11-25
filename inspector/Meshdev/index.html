@@ -220,7 +220,27 @@ main:fullscreen #groups.mesh-compact-scroll{height:auto!important;flex:1 1 auto;
   #classic-controls .mesh-compact-level-control{order:0!important;flex-basis:auto!important;flex-wrap:nowrap!important}
   #classic-controls .mesh-compact-level-control input{width:90px!important;flex-basis:90px!important}
 }
-</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.41.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
+
+/* v1.42: exact connector routing from measured cards, no CSS stubs. */
+.mesh-compact-tree-board{position:relative;isolation:isolate}
+.mesh-compact-layout{display:flex;align-items:flex-start;gap:18px;position:relative;z-index:1;width:max-content;min-width:100%}
+.mesh-compact-connected{display:flex;justify-content:flex-start;flex:0 0 auto}
+.mesh-compact-independent{box-sizing:border-box;flex:0 0 184px;width:184px;min-width:184px;padding:6px;background:#172b37;border:1px solid #3d5965;border-radius:7px;display:flex;flex-direction:column;gap:5px}
+.mesh-compact-independent>strong{font-size:11px;color:#d3e9e7}
+.mesh-compact-independent>small{font-size:10px;color:#a7c3c6}
+.mesh-compact-independent-stack{display:flex;flex-direction:column;gap:4px}
+.mesh-compact-independent-stack .mesh-compact-person{width:100%;box-sizing:border-box}
+.mesh-compact-connectors{position:absolute;top:0;left:0;overflow:visible;pointer-events:none;z-index:0}
+.mesh-compact-tree-board .mesh-compact-branch-tree>.mesh-compact-person:after,
+.mesh-compact-tree-board .mesh-compact-children-tree:before,
+.mesh-compact-tree-board .mesh-compact-children-tree>.mesh-compact-branch:before,
+.mesh-compact-tree-board .mesh-compact-children-tree>.mesh-compact-branch:after,
+.mesh-compact-tree-board .mesh-compact-children-stacked:before,
+.mesh-compact-tree-board .mesh-compact-children-stacked>.mesh-compact-branch:before,
+.mesh-compact-tree-board .mesh-compact-children-stacked>.mesh-compact-branch-stacked:before{content:none!important;display:none!important}
+.mesh-compact-tree-board .mesh-compact-children-stacked{border-left:0!important}
+@media(max-width:700px){.mesh-compact-layout{gap:9px}.mesh-compact-independent{flex-basis:174px;width:174px;min-width:174px}}
+</style></head><body><header><div><h1>TEAM STRUCTURE — Digital Platforms & Connected Labs</h1><span class="release-meta" id="release-meta" data-environment="dev" data-version="1.42.0" data-build-utc="2026-11-08T14:18:53.643Z"></span><p>THE MESH COLLECTIVE · Dynamic organizational map · Development environment</p></div><div class="logo"><i>◩</i> Inspectorate</div></header><nav class="top" aria-label="Views and environments"><div class="views"><button data-view="classic" class="active">Classic org chart</button><button data-view="pillar">Pillar / family</button><button data-view="region">Region</button><button data-view="country">Country</button><button data-view="product">Product</button><button data-view="hierarchy">Hierarchy</button><button data-view="seniority">Seniority</button></div><div class="env"><a class="switch single-switch dev" href="/inspector/Mesh/" title="Switch to LIVE environment" aria-label="Switch to LIVE environment">DEV <span aria-hidden="true">⇄</span></a></div><input id="search" type="search" placeholder="Search name or role…" aria-label="Search people"><button id="add">+ Add person</button><div class="publish-toolbar"><button id="publish-login" type="button">Sign in to publish</button><button id="publish-now" type="button" disabled>Publish changes</button><span id="publish-identity" aria-live="polite"></span></div><details class="tools-menu"><summary>Data &amp; files</summary><div class="data-actions"><label for="exportFormat">Export</label><select id="exportFormat" aria-label="Export format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="export">Download</button><span class="data-divider" aria-hidden="true"></span><label for="importFormat">Import</label><select id="importFormat" aria-label="Import format"><option value="json">JSON</option><option value="csv">CSV</option></select><button id="import">Choose file</button><input id="file" type="file" accept=".json,application/json,.csv,text/csv"></div></details></nav><main><dialog id="draft-diff-dialog" class="draft-diff-dialog"><h2>Local vs published DEV chart</h2><p id="draft-diff-summary"></p><div id="draft-diff-list" class="draft-diff-list"></div><div class="draft-diff-actions"><button type="button" id="draft-diff-keep">Keep my local draft</button><button type="button" id="draft-diff-adopt">Use published version</button></div></dialog><div id="shared-data-status" class="shared-data-status" role="status">Loading the shared published team dataset…</div><div id="stats" class="stats"></div><details class="legend-panel"><summary>Colours &amp; types</summary><section id="type-legend" class="type-legend" aria-label="Person type colours"></section></details><div id="groups" class="groups"></div></main><dialog id="editor"><h2 id="editTitle">Edit person</h2><p class="notice">Edits stay in this browser until you use Publish changes. Only the authorized GitHub account can publish updates for everyone. You can still export or import JSON/CSV.</p><form id="form" method="dialog"></form></dialog><dialog id="type-editor"><h2>Manage box types and colours</h2><p class="notice">Changes apply to every assigned person. Renaming a type updates their records; removing a type leaves its people in place as Unassigned.</p><div id="type-editor-rows"></div><div class="type-editor-actions"><button type="button" id="type-add">+ Add type</button><button type="button" id="type-save" class="active">Save type changes</button><button type="button" id="type-cancel">Cancel</button></div></dialog><footer>INSPECTORATE 2.0 · TECHNOLOGY SEPARATION & TRANSFORMATION · Unlisted working team structure; not access-controlled. · <a style="color:#93b8b8" href="/inspector/versions/">Version history</a> · <span id="footer-version"></span> · <span id="footer-release-date"></span></footer><script>const MODE="dev";'use strict';
 const RAW="Simon Hopkins|Chief Information Officer|Executive|||||executive\nPeter van Dinter|VP Digital Platforms & Connected Labs|Executive||||Simon Hopkins|executive\nGreg Bramhall|Global Director, Business Transformation|Business Transformation||||Simon Hopkins|executive\nSerena Van der Sluis|Global Engagement Lead|Engagement||||Peter van Dinter|engagement\nFelix Castonguay|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nMarianne Moscynski|Senior Technology Engagement Partner (NA)|Engagement|North America|||Serena Van der Sluis|engagement\nKim Truyts|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|engagement\nTBH - Engagement WE|Technology Engagement Partner (WE)|Engagement|Western Europe|||Serena Van der Sluis|vacancy\nShirley Scheipers|Technology Delivery Lead|Delivery||||Serena Van der Sluis|delivery\nBeata Juracsek|Technology Engagement Partner (MEA)|Engagement|Middle East|||Serena Van der Sluis|engagement\nTBH - Engagement APAC 1|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nTBH - Engagement APAC 2|Technology Engagement Partner (APAC)|Engagement|Asia Pacific|||Serena Van der Sluis|vacancy\nMaria Azuelo|Global Head of Assurance|Assurance||||Peter van Dinter|assurance\nSuzanne Kraaijeveld|Senior Support Coordinator|Assurance||||Maria Azuelo|existing\nNeha Rathore|Support Analyst|Assurance||||Maria Azuelo|existing\nTBH - Support APAC|Application Support APAC|Assurance|Asia Pacific|||Maria Azuelo|vacancy\nTBC - Support NASA|Application Support NASA|Assurance|North America|||Maria Azuelo|vacancy\nTBC - Support WEME|Application Support WEME|Assurance|Western Europe|||Maria Azuelo|vacancy\nTBC - IT/IS QA 1|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nTBC - IT/IS QA 2|IT/IS QA|Assurance||||Maria Azuelo|vacancy\nWillem Bosma|Master Data Support|Assurance||||Maria Azuelo|existing\nTBH - Support Developer|Support Developer|Assurance||||Maria Azuelo|vacancy\nDavy Cambre|Enterprise Architect|Architecture||||Peter van Dinter|architecture\nAysha Kadiri|Data Engineering Lead|Data & AI||||Davy Cambre|existing\nKishan Panchal|Data Engineer|Data & AI||||Davy Cambre|existing\nPratamesh Nakhawa|Data Engineer|Data & AI||||Davy Cambre|existing\nTBH - Architect 1|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Architect 2|Architect|Architecture||||Davy Cambre|vacancy\nTBH - Data Engineer 1|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - Data Scientist|Data Scientist|Data & AI||||Davy Cambre|vacancy\nTBH - Data Engineer 2|Data Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 1|AI Engineer|Data & AI||||Davy Cambre|vacancy\nTBH - AI Engineer 2|AI Engineer|Data & AI||||Davy Cambre|vacancy\nKamran Balouchestani|Global Head of Product|Product||||Peter van Dinter|product\nGopalkrishnan G|Lead Analyst|Product||||Kamran Balouchestani|existing\nAngel Moctezuma|LIMS Product Lead|Product|||LIMS|Kamran Balouchestani|existing\nRene Orozco-Perez|Senior Developer - Product Lead|Product||||Kamran Balouchestani|existing\nMarco Gil Calvo|Application / Product Lead|Product||||Kamran Balouchestani|existing\nMatthew Denny|Application / Product Lead|Product||||Kamran Balouchestani|existing\nTBH - Product Lead|Product Lead|Product||||Kamran Balouchestani|vacancy\nDominic La Pointe|Head of Software Engineering|Engineering||||Kamran Balouchestani|engineering\nPierre St Michel|Full Stack Developer|Engineering||||Dominic La Pointe|engineering\nDaniele Messina|Senior Developer|Engineering||||Dominic La Pointe|engineering\nZeeshan Zahid|OneTrade Lead Developer|Engineering|||OneTrade|Dominic La Pointe|existing\nVipul Kumar Vishnoi|Senior Developer|Engineering||||Dominic La Pointe|existing\nSharva Tripathi|Developer|Engineering||||Dominic La Pointe|existing\nRajat Bansal|Senior Developer|Engineering||||Dominic La Pointe|existing\nTimir Gantait|Associate Developer|Engineering||||Dominic La Pointe|existing\nAjit Thandra|Tech Lead|Engineering||||Dominic La Pointe|existing\nUjwal Verma|Developer|Engineering||||Dominic La Pointe|existing\nAman Ojha|Developer|Engineering||||Dominic La Pointe|existing\nIbon Zubicaray Prol|IT Tech|Engineering||||Dominic La Pointe|existing\nAsier Blazquez Garcia|IT Tech|Engineering||||Dominic La Pointe|existing\nJessica Rivera Pena|Functional Analyst|Product||||Kamran Balouchestani|existing\nTBD - Contractor Developers 3|Contractor Developers x3|Engineering||||Dominic La Pointe|vacancy\nIo - Contractor Developers 2|Contractor Developers x2|Engineering||||Dominic La Pointe|vacancy";
 const fields=['name','role','pillar','region','country','product','productOwners','worksWith','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
 const legacyFields=['name','role','pillar','region','country','product','manager','type'];
@@ -495,7 +515,9 @@ function renderClassicCompact(){
  const zoomBox=document.createElement('div');zoomBox.className='classic-control classic-zoom-control';
  const output=document.createElement('output');output.id='compact-zoom-value';
  const board=document.createElement('div');board.className='mesh-compact-board mesh-compact-tree-board';root.append(board);
- function zoom(value){compactZoom=Math.max(.2,Math.min(1.6,Math.round(value*100)/100));board.style.zoom=String(compactZoom);output.textContent=Math.round(compactZoom*100)+'%'}
+ let connectorFrame=0;
+ const renderConnectors=()=>{if(connectorFrame)cancelAnimationFrame(connectorFrame);connectorFrame=requestAnimationFrame(()=>{connectorFrame=0;drawCompactConnectors()})};
+ function zoom(value){compactZoom=Math.max(.2,Math.min(1.6,Math.round(value*100)/100));board.style.zoom=String(compactZoom);output.textContent=Math.round(compactZoom*100)+'%';renderConnectors()}
  function control(label,title,action){const b=document.createElement('button');b.type='button';b.textContent=label;b.title=title;b.onclick=action;zoomBox.append(b);return b}
  control('−','Zoom out',()=>zoom(compactZoom-.1));control('+','Zoom in',()=>zoom(compactZoom+.1));zoomBox.append(output);
  control('Fit screen','Fit the entire reporting tree onto the screen',()=>{
@@ -519,6 +541,8 @@ function renderClassicCompact(){
  }
  for(const group of children.values())group.sort((a,b)=>a.name.localeCompare(b.name));
  const byId=new Map(people.map(p=>[p.id,p])),depths=new Map();
+ const freePositions=people.filter(p=>!parents.has(p.id)&&!(children.get(p.id)||[]).length).sort((a,b)=>a.name.localeCompare(b.name));
+ const linkedRoots=people.filter(p=>!parents.has(p.id)&&(children.get(p.id)||[]).length).sort((a,b)=>a.name.localeCompare(b.name));
  function depth(person,seen=new Set()){
   if(depths.has(person.id))return depths.get(person.id);
   if(seen.has(person.id))return 0;
@@ -553,10 +577,69 @@ function renderClassicCompact(){
   const role=document.createElement('span');role.textContent=person.role||'';
   el.append(name,role);
   el.title=[person.name,person.role,person.country?countryText(person.country):''].filter(Boolean).join(' · ');
+  el.dataset.compactPersonId=person.id;
   if(ended(person))el.classList.add('mesh-compact-ended');
   if(filter&&![person.name,person.role,person.pillar,person.region,person.country,person.product].join(' ').toLowerCase().includes(filter))el.classList.add('dim');
   return el;
  }
+
+ function drawCompactConnectors(){
+  if(!board.isConnected||view!=='classic'||classicDisplayMode!=='compact')return;
+  board.querySelector('.mesh-compact-connectors')?.remove();
+  const bounds=board.getBoundingClientRect();
+  const factor=compactZoom||1;
+  const width=board.scrollWidth,height=board.scrollHeight;
+  if(!width||!height)return;
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.classList.add('mesh-compact-connectors');
+  svg.setAttribute('width',String(width));svg.setAttribute('height',String(height));
+  svg.setAttribute('viewBox','0 0 '+width+' '+height);
+  svg.setAttribute('aria-hidden','true');
+  const map=new Map([...board.querySelectorAll('[data-compact-person-id]')].map(el=>[el.dataset.compactPersonId,el]));
+  const geom=el=>{const r=el.getBoundingClientRect();return {x:(r.left-bounds.left)/factor,y:(r.top-bounds.top)/factor,w:r.width/factor,h:r.height/factor}};
+  function path(d){
+   const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+   p.setAttribute('d',d);p.setAttribute('fill','none');
+   p.setAttribute('stroke','#78b9ab');p.setAttribute('stroke-width','1.25');
+   p.setAttribute('stroke-linecap','square');p.setAttribute('stroke-linejoin','round');
+   svg.append(p);
+  }
+  const fmt=n=>Number(n.toFixed(2));
+  for(const parent of people){
+   const kids=(children.get(parent.id)||[]).filter(child=>map.has(child.id));
+   if(!kids.length||!map.has(parent.id))continue;
+   const owner=map.get(parent.id),node=owner.parentElement;
+   const a=geom(owner),targets=kids.map(child=>geom(map.get(child.id)));
+   const top=a.y+a.h,center=a.x+a.w/2;
+   const stacked=node.classList.contains('mesh-compact-branch-stacked');
+   if(stacked){
+    // All direct children share one left-hand trunk. The trunk terminates
+    // precisely at the last child's centerline, never beyond the final card.
+    const rail=Math.min(...targets.map(t=>t.x))-7;
+    const last=Math.max(...targets.map(t=>t.y+t.h/2));
+    const begin=Math.min(top+5,last);
+    path('M'+fmt(center)+' '+fmt(top)+' V'+fmt(begin)+' H'+fmt(rail)+' V'+fmt(last));
+    for(const t of targets)path('M'+fmt(rail)+' '+fmt(t.y+t.h/2)+' H'+fmt(t.x));
+   }else{
+    // The bus starts/ends at actual child centers, with no dummy half-width
+    // line beyond the first and last child. One child uses a single vertical.
+    const xs=targets.map(t=>t.x+t.w/2);
+    const entry=Math.min(...targets.map(t=>t.y));
+    if(targets.length===1){
+     const x=xs[0];
+     const mid=Math.min(entry-4,top+12);
+     path('M'+fmt(center)+' '+fmt(top)+' V'+fmt(mid)+' H'+fmt(x)+' V'+fmt(entry));
+    }else{
+     const bus=Math.min(entry-5,top+12);
+     path('M'+fmt(center)+' '+fmt(top)+' V'+fmt(bus));
+     path('M'+fmt(Math.min(...xs,center))+' '+fmt(bus)+' H'+fmt(Math.max(...xs,center)));
+     for(let i=0;i<targets.length;i++)path('M'+fmt(xs[i])+' '+fmt(bus)+' V'+fmt(targets[i].y));
+    }
+   }
+  }
+  board.append(svg);
+ }
+
  // Same person appears exactly once in the tree. No independent team panels,
  // duplicate managers, manual offsets, or assigned hierarchy-level overrides.
  function draw(levels){
@@ -581,14 +664,22 @@ function renderClassicCompact(){
    }
    return node;
   }
-  const roots=people.filter(p=>!parents.has(p.id)).sort((a,b)=>a.name.localeCompare(b.name));
-  const forest=document.createElement('div');forest.className='mesh-compact-forest';
-  for(const person of [...roots,...people]){
+  const layout=document.createElement('div');layout.className='mesh-compact-layout';
+  if(freePositions.length){
+   const aside=document.createElement('aside');aside.className='mesh-compact-independent';
+   const heading=document.createElement('strong');heading.textContent='Independent / unassigned';
+   const count=document.createElement('small');count.textContent=freePositions.length+' positions';
+   const stack=document.createElement('div');stack.className='mesh-compact-independent-stack';
+   for(const p of freePositions){visited.add(p.id);stack.append(personCard(p,false))}
+   aside.append(heading,count,stack);layout.append(aside);
+  }
+  const forest=document.createElement('div');forest.className='mesh-compact-forest mesh-compact-connected';
+  for(const person of [...linkedRoots,...people]){
    if(visited.has(person.id))continue;
    const tree=branch(person);
    if(tree)forest.append(tree);
   }
-  board.append(forest);
+  layout.append(forest);board.append(layout);
   const count=board.querySelectorAll('.mesh-compact-person').length;
   if(count!==people.length)console.warn('Compact chart integrity: expected '+people.length+' unique people; rendered '+count);
   // Constrain tree width by the read-only viewport but allow natural overflow
@@ -597,10 +688,13 @@ function renderClassicCompact(){
   board.style.width='max-content';
   board.style.minWidth='100%';
   zoom(compactZoom);
+  renderConnectors();
  }
  range.oninput=()=>{const count=Number(range.value);sessionStorage.setItem('mesh-compact-level-'+MODE,String(count));draw(count)};
  draw(Number(range.value));
  root.onwheel=event=>{if(!event.ctrlKey)return;event.preventDefault();zoom(compactZoom*Math.exp(-event.deltaY*.001))};
+ const resizeObserver=new ResizeObserver(()=>renderConnectors());resizeObserver.observe(board);
+ board.addEventListener('DOMNodeRemoved',()=>resizeObserver.disconnect(),{once:true});
  document.getElementById('stats').textContent=people.length+' positions · '+(maxDepth+1)+' reporting levels · Compact (read-only)';
 }
 function renderClassic(){
