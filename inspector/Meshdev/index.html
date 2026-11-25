@@ -411,6 +411,7 @@ const chartZoomKey='mesh-classic-zoom-'+MODE;
 const classicDisplayKey='mesh-classic-display-'+MODE;
 let classicDisplayMode=localStorage.getItem(classicDisplayKey)==='compact'?'compact':'build';
 let compactZoom=1;
+let compactConnectorResizeObserver=null;
 function makeClassicSwitch(){
  const group=document.createElement('div');group.className='classic-display-switch';group.setAttribute('role','group');group.setAttribute('aria-label','Classic chart mode');
  for(const [mode,label] of [['build','Build'],['compact','Compact']]){
@@ -506,6 +507,7 @@ async function exportClassicImage(stage,format){
 
 
 function renderClassicCompact(){
+ compactConnectorResizeObserver?.disconnect();compactConnectorResizeObserver=null;
  prepareView('classic-compact');cache.clear();root.onwheel=null;
  root.className='classic-scroll mesh-compact-scroll';root.replaceChildren();
  let controls=document.getElementById('classic-controls');
@@ -693,12 +695,15 @@ function renderClassicCompact(){
  range.oninput=()=>{const count=Number(range.value);sessionStorage.setItem('mesh-compact-level-'+MODE,String(count));draw(count)};
  draw(Number(range.value));
  root.onwheel=event=>{if(!event.ctrlKey)return;event.preventDefault();zoom(compactZoom*Math.exp(-event.deltaY*.001))};
- const resizeObserver=new ResizeObserver(()=>renderConnectors());resizeObserver.observe(board);
- board.addEventListener('DOMNodeRemoved',()=>resizeObserver.disconnect(),{once:true});
+ if(typeof ResizeObserver!=='undefined'){
+  compactConnectorResizeObserver=new ResizeObserver(()=>{if(board.isConnected&&classicDisplayMode==='compact')renderConnectors()});
+  compactConnectorResizeObserver.observe(board);
+ }
  document.getElementById('stats').textContent=people.length+' positions · '+(maxDepth+1)+' reporting levels · Compact (read-only)';
 }
 function renderClassic(){
  if(classicDisplayMode==='compact'){renderClassicCompact();return}
+ compactConnectorResizeObserver?.disconnect();compactConnectorResizeObserver=null;
  prepareView('classic');
  // New DOM nodes avoid accumulating drag handlers and stale pointer capture.
  cache.clear();
