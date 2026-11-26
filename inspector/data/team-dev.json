@@ -1,5 +1,5 @@
 {
-  "format": "mesh-published-v2",
+  "format": "mesh-published-v3",
   "environment": "dev",
   "people": [
     {
@@ -18,7 +18,9 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": 1397
+      "layoutOffsetDown": 1397,
+      "groups": "MESH, IT",
+      "allGroups": "true"
     },
     {
       "id": "p1",
@@ -36,7 +38,9 @@
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -333
+      "layoutOffsetDown": -333,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p2",
@@ -54,7 +58,9 @@
       "type": "executive",
       "startDate": "2026-10-19",
       "endDate": "",
-      "layoutOffsetDown": 1158
+      "layoutOffsetDown": 1158,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p3",
@@ -72,7 +78,9 @@
       "type": "engagement",
       "startDate": "2027-01-01",
       "endDate": "",
-      "layoutOffsetDown": -5748
+      "layoutOffsetDown": -5748,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p4",
@@ -90,7 +98,9 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3448
+      "layoutOffsetDown": -3448,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p5",
@@ -108,7 +118,9 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3487
+      "layoutOffsetDown": -3487,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p6",
@@ -126,7 +138,9 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -5748
+      "layoutOffsetDown": -5748,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p7",
@@ -144,7 +158,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -5748
+      "layoutOffsetDown": -5748,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p8",
@@ -162,7 +178,9 @@
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7105
+      "layoutOffsetDown": -7105,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p9",
@@ -180,7 +198,9 @@
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7103
+      "layoutOffsetDown": -7103,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p10",
@@ -198,7 +218,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7105
+      "layoutOffsetDown": -7105,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p11",
@@ -216,7 +238,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -7106
+      "layoutOffsetDown": -7106,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p12",
@@ -234,7 +258,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -876
+      "layoutOffsetDown": -876,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p13",
@@ -252,7 +278,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -426
+      "layoutOffsetDown": -426,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p14",
@@ -270,7 +298,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -94
+      "layoutOffsetDown": -94,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p15",
@@ -288,7 +318,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -767
+      "layoutOffsetDown": -767,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p16",
@@ -306,7 +338,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -574
+      "layoutOffsetDown": -574,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p17",
@@ -324,7 +358,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -670
+      "layoutOffsetDown": -670,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p18",
@@ -342,7 +378,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -379
+      "layoutOffsetDown": -379,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p19",
@@ -360,7 +398,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -476
+      "layoutOffsetDown": -476,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p20",
@@ -378,7 +418,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -935
+      "layoutOffsetDown": -935,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p21",
@@ -396,7 +438,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -869
+      "layoutOffsetDown": -869,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p22",
@@ -414,7 +458,9 @@
       "type": "architecture",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1627
+      "layoutOffsetDown": 1627,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p23",
@@ -432,7 +478,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1657
+      "layoutOffsetDown": 1657,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p24",
@@ -450,7 +498,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1657
+      "layoutOffsetDown": 1657,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p25",
@@ -468,7 +518,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1653
+      "layoutOffsetDown": 1653,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p26",
@@ -486,7 +538,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1575
+      "layoutOffsetDown": 1575,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p28",
@@ -504,7 +558,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1582
+      "layoutOffsetDown": 1582,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p29",
@@ -522,7 +578,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1395
+      "layoutOffsetDown": 1395,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p31",
@@ -540,7 +598,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1569
+      "layoutOffsetDown": 1569,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p33",
@@ -558,7 +618,9 @@
       "type": "product",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p34",
@@ -576,7 +638,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p35",
@@ -594,7 +658,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p36",
@@ -612,7 +678,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p37",
@@ -630,7 +698,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p38",
@@ -648,7 +718,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p39",
@@ -666,7 +738,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -247
+      "layoutOffsetDown": -247,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p40",
@@ -684,7 +758,9 @@
       "type": "engineering",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 911
+      "layoutOffsetDown": 911,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p41",
@@ -702,7 +778,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p42",
@@ -720,7 +798,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p43",
@@ -738,7 +818,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1337
+      "layoutOffsetDown": 1337,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p44",
@@ -756,7 +838,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p45",
@@ -774,7 +858,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p46",
@@ -792,7 +878,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p47",
@@ -810,7 +898,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p48",
@@ -828,7 +918,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1337
+      "layoutOffsetDown": 1337,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p49",
@@ -846,7 +938,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p50",
@@ -864,7 +958,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1337
+      "layoutOffsetDown": 1337,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p51",
@@ -882,7 +978,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p52",
@@ -900,7 +998,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1427
+      "layoutOffsetDown": 1427,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p53",
@@ -918,7 +1018,9 @@
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -252
+      "layoutOffsetDown": -252,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p54",
@@ -936,7 +1038,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -3193
+      "layoutOffsetDown": -3193,
+      "groups": "MESH",
+      "allGroups": "false"
     },
     {
       "id": "p55",
@@ -954,7 +1058,9 @@
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 2864
+      "layoutOffsetDown": 2864,
+      "groups": "MESH",
+      "allGroups": "false"
     }
   ],
   "types": [
@@ -1007,5 +1113,9 @@
   "products": [
     "OneTrade",
     "Sorby OP"
+  ],
+  "groups": [
+    "MESH",
+    "IT"
   ]
 }
