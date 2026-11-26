@@ -63,6 +63,25 @@ function groupPersonPicker(person){
 .mesh-person-groups label{display:inline-flex;align-items:center;gap:6px;margin:5px 12px 5px 0}
 .mesh-person-groups input[type=checkbox]{width:16px;min-width:16px;margin:0;accent-color:#42b794}
 </style></head>`);
+
+ patch("format:'mesh-v5',environment:MODE,people,types:typeDefinitions,products","format:'mesh-v6',environment:MODE,people,types:typeDefinitions,products,groups:groupCatalog");
+ patch("let data;let importedTypes=null,importedProducts=null;","let data;let importedTypes=null,importedProducts=null,importedGroups=null;");
+ patch("if(!Array.isArray(obj)&&Array.isArray(obj.products))importedProducts=validatedProducts(obj.products)","if(!Array.isArray(obj)&&Array.isArray(obj.products))importedProducts=validatedProducts(obj.products);if(!Array.isArray(obj)&&Array.isArray(obj.groups))importedGroups=validateGroups(obj.groups)");
+ patch("people=incoming;if(importedTypes){typeDefinitions=importedTypes;persistTypes()}products=combinedProducts(importedProducts||[],people);","people=incoming;if(importedTypes){typeDefinitions=importedTypes;persistTypes()}groupCatalog=importedGroups||validateGroups([...new Set([...groupDefaults,...people.flatMap(p=>splitGroups(p.groups))])]);localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set(groupCatalog);products=combinedProducts(importedProducts||[],people);");
+ patch("function chartFingerprint(rows,types,productList=products){","function chartFingerprint(rows,types,productList=products,groupsList=groupCatalog){");
+ patch("return JSON.stringify([normalized,colors,validatedProducts(productList)]);","return JSON.stringify([normalized,colors,validatedProducts(productList),validateGroups(groupsList).slice().sort()]);");
+ patch("worksWith:'Works with',manager:","worksWith:'Works with',groups:'Groups',allGroups:'All groups',manager:");
+ patch("return {rows,fields:rows.length,people:affected.size,types};","for(const name of new Set([...groupCatalog,...(publishedDocument.groups||groupDefaults)])){const local=groupCatalog.includes(name),remote=(publishedDocument.groups||groupDefaults).includes(name);if(local!==remote)rows.push({who:'Group catalogue',field:'Group',local:local?name:'—',published:remote?name:'—'})}return {rows,fields:rows.length,people:affected.size,types};");
+ patch("JSON.stringify({people,types:typeDefinitions,products})","JSON.stringify({people,types:typeDefinitions,products,groups:groupCatalog})");
+ patch("products=combinedProducts(publishedDocument.products,publishedDocument.people);localStorage.setItem(catalogKey,JSON.stringify(products));","products=combinedProducts(publishedDocument.products,publishedDocument.people);groupCatalog=validateGroups(publishedDocument.groups||groupDefaults);localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));localStorage.setItem(catalogKey,JSON.stringify(products));");
+ patch("const publishedProducts=combinedProducts(data.products||[],publishedPeople);","const publishedProducts=combinedProducts(data.products||[],publishedPeople);const publishedGroups=validateGroups(data.groups||groupDefaults);");
+ patch("publishedSnapshot=chartFingerprint(publishedPeople,publishedTypes,publishedProducts);","publishedSnapshot=chartFingerprint(publishedPeople,publishedTypes,publishedProducts,publishedGroups);");
+ patch("publishedDocument={people:publishedPeople,types:publishedTypes,products:publishedProducts};","publishedDocument={people:publishedPeople,types:publishedTypes,products:publishedProducts,groups:publishedGroups};");
+ patch("products=combinedProducts(JSON.parse(localStorage.getItem(catalogKey)||'[]'),people);unpublishedDraft=true;","products=combinedProducts(JSON.parse(localStorage.getItem(catalogKey)||'[]'),people);try{groupCatalog=validateGroups(JSON.parse(localStorage.getItem(groupCatalogKey)||'null'))}catch(e){groupCatalog=publishedGroups}unpublishedDraft=true;");
+ patch("people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;unpublishedDraft=false;","people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;groupCatalog=publishedGroups;unpublishedDraft=false;");
+ patch("}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;unpublishedDraft=false}","}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;groupCatalog=publishedGroups;unpublishedDraft=false}");
+ patch("ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));","ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set([...selectedGroups].filter(x=>groupCatalog.includes(x)));if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);");
+ patch("types:typeDefinitions,products});","types:typeDefinitions,products,groups:groupCatalog});");
  patch('data-version="1.44.0"','data-version="1.45.0"');
  return s;
 }
