@@ -17,6 +17,9 @@ function visiblePeople(){return people.filter(p=>memberGroups(p).some(g=>selecte
 function setGroupVisibility(){localStorage.setItem(groupSelectionKey,JSON.stringify([...selectedGroups]));render(false)}
 function groupSave(){groupCatalog=validateGroups(groupCatalog);localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set([...selectedGroups].filter(g=>groupCatalog.includes(g)));if(!selectedGroups.size)selectedGroups.add(groupCatalog[0]);localStorage.setItem(groupSelectionKey,JSON.stringify([...selectedGroups]));persist();render(false)}
 function renderGroupsToolbar(){
+ const readOnly=view==='classic'&&classicDisplayMode==='compact';
+ const addPerson=document.getElementById('add');if(addPerson){addPerson.disabled=readOnly;addPerson.title=readOnly?'Switch to Build to add people':'Add a person'}
+ const productManager=document.querySelector('button[title="Manage application/product catalogue"]');if(productManager)productManager.disabled=readOnly;
  selectedGroups=new Set([...selectedGroups].filter(g=>groupCatalog.includes(g)));if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);
  let bar=document.getElementById('mesh-group-toolbar');if(!bar){bar=document.createElement('div');bar.id='mesh-group-toolbar';document.querySelector('nav.top').after(bar)}
  bar.replaceChildren();const title=document.createElement('strong');title.textContent='Groups';bar.append(title);
@@ -45,6 +48,8 @@ function groupPersonPicker(person){
  patch("async function renderCountryMap(){","async function renderCountryMap(){\n const people=visiblePeople();");
  patch("function render(animate=true){renderTypeLegend();","function render(animate=true){renderGroupsToolbar();const people=visiblePeople();renderTypeLegend();");
  patch("filter=e.target.value.trim().toLowerCase();people.forEach(card)","filter=e.target.value.trim().toLowerCase();render(false)");
+ patch("function edit(id){editing=id;","function edit(id){if(view==='classic'&&classicDisplayMode==='compact')return;editing=id;");
+ patch("b.onclick=()=>{if(classicDisplayMode===mode)return;classicDisplayMode=mode;localStorage.setItem(classicDisplayKey,mode);renderClassic()}","b.onclick=()=>{if(classicDisplayMode===mode)return;classicDisplayMode=mode;localStorage.setItem(classicDisplayKey,mode);renderGroupsToolbar();renderClassic()}");
  patch("for(const f of fields){if(f==='product'){form.append(productPicker(p));continue}","for(const f of fields){if(f==='groups'){form.append(groupPersonPicker(p));continue}if(f==='allGroups')continue;if(f==='product'){form.append(productPicker(p));continue}");
  patch("form.querySelector('.mesh-works-with-picker')?.capture();fields.forEach","form.querySelector('.mesh-works-with-picker')?.capture();try{form.querySelector('.mesh-person-groups')?.capture()}catch(err){alert(err.message);return}fields.forEach");
  patch("</style></head>",`
@@ -83,6 +88,6 @@ function groupPersonPicker(person){
  patch("}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;unpublishedDraft=false}","}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;groupCatalog=publishedGroups;unpublishedDraft=false}");
  patch("ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));","ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set([...selectedGroups].filter(x=>groupCatalog.includes(x)));if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);");
  patch("types:typeDefinitions,products});","types:typeDefinitions,products,groups:groupCatalog});");
- patch('data-version="1.44.0"','data-version="1.45.1"');
+ patch('data-version="1.44.0"','data-version="1.45.2"');
  return s;
 }
