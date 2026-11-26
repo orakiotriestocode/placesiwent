@@ -84,10 +84,21 @@ function validate(doc,environment='live'){
  if(!doc||!Array.isArray(doc.people)||!Array.isArray(doc.types)||doc.people.length<1||doc.people.length>500||doc.types.length>80)throw Error('Invalid organization data');
  const ids=new Set(),names=new Set(),kinds=new Set();
  const str=(v,max=1024)=>{if(v===undefined||v===null)return '';if(typeof v!=='string'||v.length>max)throw Error('Invalid text field');return v};
- const columns=['id','name','role','pillar','region','country','product','productOwners','worksWith','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+ const columns=['id','name','role','pillar','region','country','product','productOwners','worksWith','groups','allGroups','manager','functionalManager','hierarchyLevel','type','startDate','endDate'];
+ const rawGroups=Array.isArray(doc.groups)?doc.groups:['MESH','IT'];
+ const groupNames=rawGroups.map(g=>str(g,60).trim());
+ if(!groupNames.length||groupNames.length>30||groupNames.some(g=>!g||g.includes(','))||new Set(groupNames.map(g=>g.toLowerCase())).size!==groupNames.length)throw Error('Invalid group catalogue');
  const people=doc.people.map(p=>{
   if(!p||typeof p!=='object'||Array.isArray(p))throw Error('Invalid person');
   const o={};for(const k of columns)o[k]=str(p[k]);
+  const simon=String(p.id)==='p0'&&String(p.name||'').trim().toLowerCase()==='simon hopkins';
+  if(p.groups===undefined)o.groups=simon?'MESH, IT':'MESH';
+  if(p.allGroups===undefined)o.allGroups=simon?'true':'false';
+  if(!['true','false'].includes(o.allGroups))throw Error('Invalid all-groups flag for '+o.name);
+  const memberList=o.groups.split(',').map(g=>g.trim()).filter(Boolean);
+  if(new Set(memberList).size!==memberList.length||memberList.some(g=>!groupNames.includes(g)))throw Error('Invalid group membership for '+o.name);
+  if(o.allGroups==='false'&&!memberList.length)throw Error('At least one group required for '+o.name);
+  o.groups=memberList.join(', ');
   if(!o.id||!o.name.trim()||ids.has(o.id)||names.has(o.name.trim().toLowerCase()))throw Error('Missing or duplicate name/ID: '+o.name);
   ids.add(o.id);names.add(o.name.trim().toLowerCase());
   for(const key of ['layoutOffsetDown','layoutOffsetRight'])if(p[key]!==undefined&&p[key]!==null&&p[key]!==''){const n=Number(p[key]);if(!Number.isFinite(n)||Math.abs(n)>100000)throw Error('Invalid position');o[key]=n}
@@ -120,7 +131,7 @@ function validate(doc,environment='live'){
   const owners=String(p.productOwners||'').split(',').map(x=>x.trim()).filter(Boolean);
   if(owners.some(n=>!assigned.includes(n)))throw Error('Product owner must also be assigned: '+p.name);
  }
- return {format:'mesh-published-v2',environment,people,types,products};
+ return {format:'mesh-published-v3',environment,people,types,products,groups:groupNames};
 }
 function githubB64(text){const bytes=encode.encode(text);let output='';for(let i=0;i<bytes.length;i+=8192){output+=String.fromCharCode(...bytes.subarray(i,i+8192))}return btoa(output)}
 export default {
