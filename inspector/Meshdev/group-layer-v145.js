@@ -9,20 +9,21 @@ const splitGroups=v=>[...new Set(String(v||'').split(',').map(x=>x.trim()).filte
 function validateGroups(g){if(!Array.isArray(g)||!g.length||g.length>30)throw Error('Need 1-30 groups');const names=g.map(x=>String(x||'').trim());if(names.some(x=>!x||x.length>60||x.includes(','))||new Set(names.map(x=>x.toLowerCase())).size!==names.length)throw Error('Invalid group name or duplicate');return names}
 let groupCatalog;try{groupCatalog=validateGroups(JSON.parse(localStorage.getItem(groupCatalogKey)||'null'))}catch(e){groupCatalog=[...groupDefaults]}
 function foundingSimon(p){return String(p.id)==='p0'&&String(p.name||'').toLowerCase()==='simon hopkins'}
-function normalizeGroupPerson(p){p={...p};if(p.groups===undefined)p.groups=foundingSimon(p)?'MESH, IT':'MESH';if(p.allGroups===undefined)p.allGroups=foundingSimon(p)?'true':'false';p.groups=splitGroups(p.groups).join(', ');p.allGroups=String(p.allGroups)==='true'?'true':'false';return p}
-function memberGroups(p){return String(p.allGroups===undefined&&foundingSimon(p)?'true':p.allGroups)==='true'?groupCatalog:splitGroups(p.groups===undefined?'MESH':p.groups).filter(g=>groupCatalog.includes(g))}
+function normalizeGroupPerson(p){p={...p};if(!p.groups)p.groups=foundingSimon(p)?'MESH, IT':'MESH';if(!p.allGroups)p.allGroups=foundingSimon(p)?'true':'false';p.groups=splitGroups(p.groups).join(', ');p.allGroups=String(p.allGroups)==='true'?'true':'false';return p}
+function memberGroups(p){return String(p.allGroups===undefined&&foundingSimon(p)?'true':p.allGroups)==='true'?groupCatalog:splitGroups(!p.groups?'MESH':p.groups).filter(g=>groupCatalog.includes(g))}
 let selectedGroups;try{const v=JSON.parse(localStorage.getItem(groupSelectionKey)||'null');selectedGroups=new Set(Array.isArray(v)?v.filter(x=>groupCatalog.includes(x)):groupCatalog)}catch(e){selectedGroups=new Set(groupCatalog)}
 if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);
 function visiblePeople(){return people.filter(p=>memberGroups(p).some(g=>selectedGroups.has(g)))}
 function setGroupVisibility(){localStorage.setItem(groupSelectionKey,JSON.stringify([...selectedGroups]));render(false)}
 function groupSave(){groupCatalog=validateGroups(groupCatalog);localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set([...selectedGroups].filter(g=>groupCatalog.includes(g)));if(!selectedGroups.size)selectedGroups.add(groupCatalog[0]);localStorage.setItem(groupSelectionKey,JSON.stringify([...selectedGroups]));persist();render(false)}
 function renderGroupsToolbar(){
+ selectedGroups=new Set([...selectedGroups].filter(g=>groupCatalog.includes(g)));if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);
  let bar=document.getElementById('mesh-group-toolbar');if(!bar){bar=document.createElement('div');bar.id='mesh-group-toolbar';document.querySelector('nav.top').after(bar)}
  bar.replaceChildren();const title=document.createElement('strong');title.textContent='Groups';bar.append(title);
  const all=document.createElement('button');all.type='button';all.textContent='All';all.classList.toggle('active',selectedGroups.size===groupCatalog.length);all.onclick=()=>{selectedGroups=new Set(groupCatalog);setGroupVisibility()};bar.append(all);
  for(const group of groupCatalog){const button=document.createElement('button');button.type='button';button.textContent=group+' · '+people.filter(p=>memberGroups(p).includes(group)).length;button.classList.toggle('active',selectedGroups.has(group));button.setAttribute('aria-pressed',String(selectedGroups.has(group)));button.onclick=()=>{if(selectedGroups.has(group)){if(selectedGroups.size===1)return;selectedGroups.delete(group)}else selectedGroups.add(group);setGroupVisibility()};bar.append(button)}
  const count=document.createElement('span');count.textContent=visiblePeople().length+' / '+people.length+' people';bar.append(count);
- const manage=document.createElement('button');manage.type='button';manage.textContent='Manage groups';manage.className='mesh-group-manage';manage.onclick=openGroupManager;bar.append(manage)
+ const manage=document.createElement('button');manage.type='button';manage.textContent='Manage groups';manage.className='mesh-group-manage';manage.disabled=view==='classic'&&classicDisplayMode==='compact';manage.title=manage.disabled?'Switch to Build to manage groups':'Add, rename or remove organizational groups';manage.onclick=openGroupManager;bar.append(manage)
 }
 const groupDialog=document.createElement('dialog');groupDialog.className='mesh-group-dialog';document.body.append(groupDialog);
 function openGroupManager(){
@@ -82,6 +83,6 @@ function groupPersonPicker(person){
  patch("}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;unpublishedDraft=false}","}else{people=publishedPeople;typeDefinitions=publishedTypes;products=publishedProducts;groupCatalog=publishedGroups;unpublishedDraft=false}");
  patch("ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));","ensureLegacyTypes();localStorage.setItem(catalogKey,JSON.stringify(products));localStorage.setItem(groupCatalogKey,JSON.stringify(groupCatalog));selectedGroups=new Set([...selectedGroups].filter(x=>groupCatalog.includes(x)));if(!selectedGroups.size)selectedGroups=new Set(groupCatalog);");
  patch("types:typeDefinitions,products});","types:typeDefinitions,products,groups:groupCatalog});");
- patch('data-version="1.44.0"','data-version="1.45.0"');
+ patch('data-version="1.44.0"','data-version="1.45.1"');
  return s;
 }
