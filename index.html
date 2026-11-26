@@ -19,7 +19,7 @@ a:focus-visible{outline:3px solid #81e2b3;outline-offset:5px}
 header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:12px;border-bottom:1px solid #30404a}
 .brand{display:inline-flex;align-items:center;gap:12px;font-size:.91rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
 .brand-mark{width:36px;height:36px;border-radius:9px;background:#7fe0b3;color:#112822;display:grid;place-items:center;font-size:1.15rem}
-header span.note{color:#91a9b0;font-size:.8rem}
+.header-side{display:flex;align-items:center;gap:16px}.quiet-link{font-size:.78rem;color:#91a9b0}.quiet-link:hover{color:#a2ebc6}header span.note{color:#91a9b0;font-size:.8rem}
 main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:25px 0 32px}
 h1{font-size:clamp(2.4rem,5vw,3.6rem);letter-spacing:-.065em;line-height:1.05;margin:0 0 8px}
 .intro{color:#b5c6ca;line-height:1.6;font-size:1.06rem;margin:0 0 20px;max-width:630px}
@@ -40,7 +40,7 @@ footer a:hover{color:#a2ebc6}
 <div class="shell">
 <header>
 <a href="/" class="brand" aria-label="Places I Went home"><span class="brand-mark">✦</span> Places I Went</a>
-<span class="note">A personal corner of the web</span>
+<div class="header-side"><span class="note">A personal corner of the web</span><a class="quiet-link" href="/transformorate/">Transformorate</a></div>
 </header>
 <main>
 <h1>Places I Went<span style="color:#7fe0b3">.</span></h1>
