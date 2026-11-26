@@ -1,5 +1,5 @@
 {
-  "format": "mesh-published-v1",
+  "format": "mesh-published-v2",
   "environment": "dev",
   "people": [
     {
@@ -10,13 +10,15 @@
       "region": "",
       "country": "GB",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "",
       "functionalManager": "",
       "hierarchyLevel": "1",
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -179
+      "layoutOffsetDown": 1397
     },
     {
       "id": "p1",
@@ -26,13 +28,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
       "hierarchyLevel": "2",
       "type": "executive",
       "startDate": "2026-11-02",
       "endDate": "",
-      "layoutOffsetDown": -1372
+      "layoutOffsetDown": -333
     },
     {
       "id": "p2",
@@ -42,13 +46,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Simon Hopkins",
       "functionalManager": "",
       "hierarchyLevel": "2",
       "type": "executive",
       "startDate": "2026-10-19",
       "endDate": "",
-      "layoutOffsetDown": 1580
+      "layoutOffsetDown": 1158
     },
     {
       "id": "p3",
@@ -58,13 +64,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter van Dinter",
       "functionalManager": "Greg Bramhall",
       "hierarchyLevel": "",
       "type": "engagement",
       "startDate": "2027-01-01",
       "endDate": "",
-      "layoutOffsetDown": -6212
+      "layoutOffsetDown": -5748
     },
     {
       "id": "p4",
@@ -74,13 +82,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter Van DInter",
       "functionalManager": "Greg Bramhall",
       "hierarchyLevel": "4",
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2138
+      "layoutOffsetDown": -3448
     },
     {
       "id": "p5",
@@ -90,13 +100,15 @@
       "region": "North America",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Felix Castonguay",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -2138
+      "layoutOffsetDown": -3487
     },
     {
       "id": "p6",
@@ -106,13 +118,15 @@
       "region": "Western Europe",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Serena Van der Sluis",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6212
+      "layoutOffsetDown": -5748
     },
     {
       "id": "p7",
@@ -122,13 +136,15 @@
       "region": "Western Europe",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Serena Van der Sluis",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6212
+      "layoutOffsetDown": -5748
     },
     {
       "id": "p8",
@@ -138,13 +154,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter Van Dinter",
       "functionalManager": "Greg Bramhall",
       "hierarchyLevel": "4",
       "type": "delivery",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6189
+      "layoutOffsetDown": -7105
     },
     {
       "id": "p9",
@@ -154,13 +172,15 @@
       "region": "Middle East",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "engagement",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6187
+      "layoutOffsetDown": -7103
     },
     {
       "id": "p10",
@@ -170,13 +190,15 @@
       "region": "Asia Pacific",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6189
+      "layoutOffsetDown": -7105
     },
     {
       "id": "p11",
@@ -186,13 +208,15 @@
       "region": "Asia Pacific",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Shirley Scheipers",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -6190
+      "layoutOffsetDown": -7106
     },
     {
       "id": "p12",
@@ -202,13 +226,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
       "hierarchyLevel": "3",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1336
+      "layoutOffsetDown": -876
     },
     {
       "id": "p13",
@@ -218,13 +244,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -886
+      "layoutOffsetDown": -426
     },
     {
       "id": "p14",
@@ -234,13 +262,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -554
+      "layoutOffsetDown": -94
     },
     {
       "id": "p15",
@@ -250,13 +280,15 @@
       "region": "Asia Pacific",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1227
+      "layoutOffsetDown": -767
     },
     {
       "id": "p16",
@@ -266,13 +298,15 @@
       "region": "North America",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1034
+      "layoutOffsetDown": -574
     },
     {
       "id": "p17",
@@ -282,13 +316,15 @@
       "region": "Western Europe",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1130
+      "layoutOffsetDown": -670
     },
     {
       "id": "p18",
@@ -298,13 +334,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "4",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -839
+      "layoutOffsetDown": -379
     },
     {
       "id": "p19",
@@ -314,13 +352,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -936
+      "layoutOffsetDown": -476
     },
     {
       "id": "p20",
@@ -330,13 +370,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1395
+      "layoutOffsetDown": -935
     },
     {
       "id": "p21",
@@ -346,13 +388,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Maria Azuelo",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -1329
+      "layoutOffsetDown": -869
     },
     {
       "id": "p22",
@@ -362,13 +406,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "architecture",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1198
+      "layoutOffsetDown": 1627
     },
     {
       "id": "p23",
@@ -378,13 +424,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1171
+      "layoutOffsetDown": 1657
     },
     {
       "id": "p24",
@@ -394,13 +442,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Aysha Kadiri",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1171
+      "layoutOffsetDown": 1657
     },
     {
       "id": "p25",
@@ -410,13 +460,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Aysha Kadiri",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1167
+      "layoutOffsetDown": 1653
     },
     {
       "id": "p26",
@@ -426,13 +478,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1146
+      "layoutOffsetDown": 1575
     },
     {
       "id": "p28",
@@ -442,13 +496,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1153
+      "layoutOffsetDown": 1582
     },
     {
       "id": "p29",
@@ -458,13 +514,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1158
+      "layoutOffsetDown": 1395
     },
     {
       "id": "p31",
@@ -474,13 +532,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1140
+      "layoutOffsetDown": 1569
     },
     {
       "id": "p33",
@@ -490,13 +550,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter van Dinter",
       "functionalManager": "",
       "hierarchyLevel": "3",
       "type": "product",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p34",
@@ -506,13 +568,15 @@
       "region": "",
       "country": "",
       "product": "OneTrade",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p35",
@@ -521,14 +585,16 @@
       "pillar": "Product",
       "region": "",
       "country": "",
-      "product": "LIMS",
+      "product": "Sorby OP",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p36",
@@ -538,13 +604,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p37",
@@ -554,13 +622,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p38",
@@ -570,13 +640,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p39",
@@ -586,13 +658,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -797
+      "layoutOffsetDown": -247
     },
     {
       "id": "p40",
@@ -602,13 +676,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Peter Van DInter",
       "functionalManager": "Kamran Balouchestani",
       "hierarchyLevel": "4",
       "type": "engineering",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 317
+      "layoutOffsetDown": 911
     },
     {
       "id": "p41",
@@ -618,13 +694,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p42",
@@ -634,13 +712,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p43",
@@ -650,13 +730,15 @@
       "region": "",
       "country": "",
       "product": "OneTrade",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 765
+      "layoutOffsetDown": 1337
     },
     {
       "id": "p44",
@@ -666,13 +748,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p45",
@@ -682,13 +766,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p46",
@@ -698,13 +784,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p47",
@@ -714,13 +802,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p48",
@@ -730,13 +820,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Zeeshan Zahid",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 765
+      "layoutOffsetDown": 1337
     },
     {
       "id": "p49",
@@ -746,13 +838,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p50",
@@ -762,13 +856,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Zeeshan Zahid",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 765
+      "layoutOffsetDown": 1337
     },
     {
       "id": "p51",
@@ -778,13 +874,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p52",
@@ -794,13 +892,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Dominic La Pointe",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 833
+      "layoutOffsetDown": 1427
     },
     {
       "id": "p53",
@@ -810,13 +910,15 @@
       "region": "",
       "country": "",
       "product": "",
+      "productOwners": "",
+      "worksWith": "",
       "manager": "Kamran Balouchestani",
       "functionalManager": "",
       "hierarchyLevel": "",
       "type": "existing",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -802
+      "layoutOffsetDown": -252
     },
     {
       "id": "p54",
@@ -826,13 +928,15 @@
       "region": "",
       "country": "",
       "product": "",
-      "manager": "",
+      "productOwners": "",
+      "worksWith": "",
+      "manager": "Peter van Dinter",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": -5362
+      "layoutOffsetDown": -3193
     },
     {
       "id": "p55",
@@ -842,13 +946,15 @@
       "region": "",
       "country": "",
       "product": "",
-      "manager": "",
+      "productOwners": "",
+      "worksWith": "",
+      "manager": "Davy Cambre",
       "functionalManager": "",
       "hierarchyLevel": "5",
       "type": "vacancy",
       "startDate": "",
       "endDate": "",
-      "layoutOffsetDown": 1924
+      "layoutOffsetDown": 2864
     }
   ],
   "types": [
@@ -897,5 +1003,9 @@
       "name": "Vacancy",
       "color": "#6d9dab"
     }
+  ],
+  "products": [
+    "OneTrade",
+    "Sorby OP"
   ]
 }
