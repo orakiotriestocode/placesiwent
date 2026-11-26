@@ -24,7 +24,7 @@ document.getElementById('unlock').addEventListener('submit',async e=>{
   if(markup.split("data-version=\"1.43.0\"").length!==2)throw Error('MESH Compact patch anchor mismatch');
   markup=markup.replace("data-version=\"1.43.0\"","data-version=\"1.44.0\"");
   // Apply post-decryption group UI/data migrations without exposing chart data.
-  const groupModule=await import('/inspector/Meshdev/group-layer-v145.js?v=1.45.1');
+  const groupModule=await import('/inspector/Meshdev/group-layer-v145.js?v=1.45.2');
   markup=groupModule.applyGroupLayer(markup);
   document.open();document.write(markup);document.close();
  }catch(err){msg.textContent='Invalid access code, or the encrypted document could not be opened.';b.disabled=false;}
